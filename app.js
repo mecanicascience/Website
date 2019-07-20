@@ -27,7 +27,8 @@ const SITE     = "mecanicascience.herokuapp.com";
 let isLocalHost = m.os.hostname().indexOf("local");
 const PORT      = process.env.PORT || 5000;
 const HOST      = isLocalHost > -1 ? SITE : "localhost:" + PORT;
-const HOST_NAME = isLocalHost > -1 ? (IS_HTTPS ? "https://" : "http://") + HOST : HOST;
+const HTTP_OR_S = IS_HTTPS ? "https://" : "http://";
+const HOST_NAME = isLocalHost > -1 ? HTTP_OR_S + HOST : HOST;
 
 
 
@@ -41,7 +42,7 @@ const sitemap = m.sitemap.createSitemap({
     hostname: HOST_NAME,
     cacheTime: 600000,
     urls: [
-        { url: isLocalHost ? HOST : HOST + HOST_NAME }
+        { url: HTTP_OR_S + SITE }
     ]
 });
 
@@ -54,7 +55,7 @@ const app = m.express();
 app
     .get("/robots.txt", function(req, res) {
         res.header("Content-Type", "text/html");
-        res.send("User-agent: *<br />Sitemap: " + HOST_NAME + "/sitemap.xml<br />Disallow :");
+        res.send("User-agent: *<br />Sitemap: " + HTTP_OR_S + SITE + "/sitemap.xml<br />Disallow :");
     })
 
     .get("/sitemap.xml", function(req, res) {
