@@ -4,10 +4,12 @@
 
 /* ====== DEPENDENCIES ====== */
 const m = {
-    express : require('express'),
-    routes  : require('./routes/index'),
-    sitemap : require('sitemap'),
-    os      : require('os')
+    express     : require('express'),
+    routes      : require('./routes/index'),
+    sitemap     : require('sitemap'),
+    os          : require('os'),
+    path        : require('path'),
+    body_parser : require('body-parser')
 };
 
 
@@ -62,6 +64,19 @@ app
         res.header("Content-Type", "application/xml");
         res.send(sitemap.toString());
     })
+
+
+
+
+    // == Render views engine ==
+    .use(m.express.static(m.path.join(__dirname, "public")))
+    .set("views", m.path.join(__dirname, "views"))
+    .set("view engine", "ejs")
+
+    .use(m.body_parser.json())
+    .use(m.body_parser.urlencoded({
+        extended: true
+    }))
 
 
 

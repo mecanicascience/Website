@@ -9,9 +9,7 @@ const router  = express.Router();
 
 
 /* ====== APP ====== */
-router.get('/', (req, res) => {
-    res.send('It works!');
-});
+router.get('/', (req, res) => res.render('pages/index', {}));
 
 
 
