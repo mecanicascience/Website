@@ -1,6 +1,8 @@
 /* ====== DEPENDANCIES ====== */
 const express = require('express');
+
 const router  = express.Router();
+
 
 
 /* ====== APP ====== */
@@ -13,4 +15,4 @@ router.get('/', (req, res) => {
 
 
 /* ====== SERVER ====== */
-module.exports = app;
+module.exports = router;
