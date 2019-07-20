@@ -1,8 +1,16 @@
+/*
+ *  MAIN STARTING FILE => Treats all dependencies and links
+ */
+
 /* ====== DEPENDANCIES ====== */
-const app = require('./app');
+const app     = require('./app');
+
+
+
+/* ======  VARIABLES   ====== */
+const PORT = process.env.PORT || 5000;
+
 
 
 /* ====== SERVER ====== */
-const server = app.listen(5000, () => {
-    console.log(`Express is running on port ${server.address().port}`);
-});
+const server = app.listen(PORT, () => console.log(`Express is running on port ${ PORT }`));

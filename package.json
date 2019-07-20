@@ -10,7 +10,8 @@
   "author": "xam4lor",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "sitemap": "^3.2.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
