@@ -1,0 +1,18 @@
+@font-face {
+    font-family: chaparral-pro;
+    src: url(https://use.typekit.net/af/17d530/00000000000000003b9aee4f/27/l?subset_id=2&fvd=n6&v=3) format("woff2"),url(https://use.typekit.net/af/17d530/00000000000000003b9aee4f/27/d?subset_id=2&fvd=n6&v=3) format("woff"),url(https://use.typekit.net/af/17d530/00000000000000003b9aee4f/27/a?subset_id=2&fvd=n6&v=3) format("opentype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: brandon-grotesque;
+    font-style: normal;
+    font-weight: 500;
+    src: url(https://use.typekit.net/af/d8f71f/0000000000000000000132e1/27/l?fvd=n5&primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&v=3) format("woff2"),url(https://use.typekit.net/af/d8f71f/0000000000000000000132e1/27/d?fvd=n5&primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&v=3) format("woff"),url(https://use.typekit.net/af/d8f71f/0000000000000000000132e1/27/a?fvd=n5&primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&v=3) format("opentype");
+}
+
+@font-face {
+    font-family: sofia-pro;
+    src: url(../fonts/sofiapro-light.otf) format("opentype");
+}

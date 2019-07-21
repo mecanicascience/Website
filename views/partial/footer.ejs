@@ -1,1 +1,75 @@
-<p class="text-center text-muted">© Copyright 2014 The Awesome People</p>
+<footer>
+    <div class="footer-span-bot" style="display: none;">
+        <span itemscope itemtype="http://schema.org/WebSite">
+            <title itemprop="name">MecanicaScience</title>
+            <link rel="canonical" href="https://mecanicascience.herokuapp.com/" itemprop="url" />
+        </span>
+
+        <span itemscope itemtype="http://schema.org/Organization">
+            <link itemprop="url" href="" />
+            <a itemprop="sameAs" href="https://www.youtube.com/c/MecanicaScience">Youtube</a>
+            <a itemprop="sameAs" href="https://twitter.com/MecanicaSci">Twitter</a>
+            <a itemprop="sameAs" href="https://github.com/xam4lor">Github</a>
+            <span itemprop="contactPoint">
+                <a itemprop="email" href="mailto:mecanicaytb@gmail.com">Email</a>
+            </span>
+        </span>
+    </div>
+
+
+    <div class="footer-container">
+        <ul class="f-item f-first-item" id="social-ic">
+            <li>
+                 <a href="https://www.youtube.com/c/MecanicaScience" title="Youtube">
+                     <img class="social-ic-img" src="/imgs/illustration/youtube-logo.png" alt="youtube" />
+                 </a>
+            </li>
+
+            <li>
+                 <a href="https://twitter.com/MecanicaSci" title="Twitter">
+                     <img class="social-ic-img" src="/imgs/illustration/twitter-logo.png" alt="twitter" />
+                 </a>
+            </li>
+
+            <li>
+                 <a href="https://github.com/xam4lor" title="Github">
+                     <img class="social-ic-img" src="/imgs/illustration/github-logo.png" alt="github" />
+                 </a>
+            </li>
+
+            <li>
+                 <a href="https://utip.io/MecanicaScience" title="Utip">
+                     <img class="social-ic-img" src="/imgs/illustration/utip-logo.png" alt="utip" />
+                 </a>
+            </li>
+
+
+         </ul>
+
+         <h2 class="f-item underline-eff-white" id="f-email">
+             <a href="mailto:mecanicaytb@gmail.com">
+                 mecanicaytb@gmail.com
+             </a>
+         </h2>
+
+         <ul class="f-item" id="f-links">
+             <li class="underline-eff-white"><a class="f-link-i" href="/">ACCUEIL</a></li>
+             <li class="underline-eff-white"><a class="f-link-i" href="#">TMP1</a></li>
+             <li class="underline-eff-white"><a class="f-link-i" href="#">TMP2</a></li>
+         </ul>
+
+         <div class="f-item" id="f-copyright">
+             &copy;<%= new Date().getFullYear(); %> Maxime Dherbécourt
+
+             <div class="rules">
+                 &nbsp;&nbsp;|&nbsp;&nbsp;
+                 <a href="mailto:mecanicaytb@gmail.com">Email</a>
+             </div>
+
+             &nbsp;&nbsp;|&nbsp;&nbsp;version <%= version %>
+         </div>
+     </div>
+</footer>
+
+
+<%- include('../partial/prebodyclose') %>

@@ -27,7 +27,7 @@ const SITE     = "mecanicascience.herokuapp.com";
 
 // == Server ==
 let isLocalHost = m.os.hostname().indexOf("local");
-const PORT      = process.env.PORT || 5000;
+const PORT      = process.env.PORT || 8080;
 const HOST      = isLocalHost > -1 ? SITE : "localhost:" + PORT;
 const HTTP_OR_S = IS_HTTPS ? "https://" : "http://";
 const HOST_NAME = isLocalHost > -1 ? HTTP_OR_S + HOST : HOST;
