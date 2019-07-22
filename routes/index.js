@@ -3,13 +3,14 @@
  */
 
 /* ====== DEPENDANCIES ====== */
-const express = require('express');
-const router  = express.Router();
+const express   = require('express');
+const router    = express.Router();
+const constants = require('./../constants');
 
 
 
 /* ====== APP ====== */
-router.get('/', (req, res) => res.render('pages/index', { version: '1.0.0' }));
+router.get('/', (req, res) => res.render('pages/index', { version: constants.version }));
 
 
 

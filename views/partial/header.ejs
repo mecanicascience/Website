@@ -12,17 +12,29 @@
 			<nav class="gn-menu-wrapper">
 				<div class="gn-scroller">
 					<ul class="gn-menu">
+						<li><a class="gn-icon d-main-dev" href="/"><i class="menu-icon fas fa-home"></i>Accueil</a></li>
+
 						<li>
-							<a class="gn-icon"><i class="menu-icon fas fa-search"></i> Downloads</a>
+							<a class="gn-icon d-main-dev"><i class="menu-icon fas fa-newspaper"></i>Articles</a>
 
 							<ul class="gn-submenu">
-								<li><a class="gn-icon"><i class="menu-icon fas fa-search"></i> Vector Illustrations</a></li>
-								<li><a class="gn-icon"><i class="menu-icon fas fa-search"></i> Photoshop files</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-desktop d-icon-dev"></i>Informatique</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=math">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-calculator d-icon-dev"></i>Mathématiques</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=youtube">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fab fa-youtube d-icon-dev"></i>Vidéos YouTube</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=phys">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-space-shuttle d-icon-dev"></i>Physique</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=other">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-folder d-icon-dev"></i>Autre</a></li>
 							</ul>
 						</li>
 
-						<li><a class="gn-icon"><i class="menu-icon fas fa-search"></i> Settings</a></li>
-						<li><a class="gn-icon"><i class="menu-icon fas fa-search"></i> Help</a></li>
+						<li>
+							<a class="gn-icon d-main-dev"><i class="menu-icon fas fa-map"></i>Plan du site</a>
+
+							<ul class="gn-submenu">
+								<li class="d-li-dev"><a class="gn-icon" href="/about">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-search d-icon-dev"></i>A propos</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/legal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-question-circle d-icon-dev"></i>Mentions légales</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/contact">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-address-card d-icon-dev"></i>Contact</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</nav>
@@ -31,9 +43,9 @@
 
 	<!-- ==== NAVBAR ==== -->
 	<div class="collapse navbar-no-collapse" id="navbarSupportedContent" style="padding: .5rem 1rem;">
-		<form class="search-form">
-			<input class="form-control search-bar" type="text" placeholder="Ecrivez-ici pour rechercher un post..." role="search">
-			<a class="search-button"><i class="fas fa-search fa-lighter"></i></a>
+		<form class="search-form" method="post" id="search-form" action="/">
+			<input class="form-control search-bar" type="text" placeholder="Ecrivez-ici pour rechercher un post..." role="search" id="q">
+			<a class="search-button" onclick="document.getElementById('search-form').submit();"><i class="fas fa-search fa-lighter"></i></a>
 		</form>
 
 		<ul class="navbar-nav mr-auto"></ul>
@@ -73,10 +85,10 @@
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="mailto:mecanicaytb@gmail.com">
+				<a class="nav-link" href="/contact">
 					<i class="fa">
 						<i class="im im-mail"></i>
-					</i>Email
+					</i>Contact
 				</a>
 			</li>
 		</ul>

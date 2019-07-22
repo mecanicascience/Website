@@ -206,3 +206,23 @@
 
 .gn-menu-main > li:last-child { border-left: none; }
 .gn-icon-menu { background-color: #f7f7f7; }
+
+
+
+.d-icon-dev { margin-right: 9px; }
+
+.d-li-dev {
+    box-shadow: none !important;
+    color: #5f6e7d !important;
+}
+
+.d-main-dev {
+    background-color: #f7f7f7;
+    box-shadow: inset 0 1px #c6d0da63;
+    color: #3c4957 !important;
+}
+
+.d-main-dev:hover, .d-li-dev:hover { color: #ececec !important; text-decoration: unset !important; }
+
+.gn-submenu > li > a { color: unset; }
+.gn-submenu > li > a:hover { text-decoration: unset; }

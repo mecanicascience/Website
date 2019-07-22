@@ -9,7 +9,8 @@ const m = {
     sitemap     : require('sitemap'),
     os          : require('os'),
     path        : require('path'),
-    body_parser : require('body-parser')
+    body_parser : require('body-parser'),
+    constants   : require('./constants')
 };
 
 
@@ -20,8 +21,9 @@ const m = {
 
 /* ======  VARIABLES   ====== */
 // == Configs constants ==
-const IS_HTTPS = true;
-const SITE     = "mecanicascience.herokuapp.com";
+const IS_HTTPS = m.constants.is_https;
+const SITE     = m.constants.site;
+const VERSION  = m.constants.version;
 
 
 
@@ -90,10 +92,12 @@ app
 
     // == Errors ==
 app
-    .use((req, res, next) => {
-        res.setHeader("Content-Type", "text/plain");
-        res.status(404).send("Error 404 : Page not found :/");
-    })
+    .use((req, res, next) => res.status(404).render('pages/error', {
+        errorCode     : 404,
+        errorMessage  : 'La page n\'a pas été trouvée',
+        link          : m.path.join(__dirname, "views/"),
+        version       : VERSION
+    }));
 
 
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <%- include(link + '/partial/head') %>
+    </head>
+
+    <body>
+        <header>
+            <%- include(link + '/partial/header') %>
+        </header>
+
+        <main>
+            <!-- Bandeau de présentation -->
+            <div class="section section-2" style="margin-top: -5px;">
+                <div class="m-title">
+                    <p class="m-t-title">Erreur <%= errorCode %></p>
+                    <hr class="m-t-hr" />
+                    <p class="m-t-subtitle"><%= errorMessage %></p>
+                </div>
+
+                <div class="m-content">
+                    <div class="container m-c-header">
+                        <div class="m-c-row">
+                        </div>
+
+                        <div class="m-c-row">
+                            <div class="m-c-col">
+                                <a href="/"><img class="m-c-image m-c-logo" src="/imgs/illustration/main_logo.png" /></a>
+                            </div>
+                        </div>
+
+                        <div class="m-c-row">
+                        </div>
+                    </div>
+
+                    <div class="m-c-button-yt">
+                        <button class="mdc-button mdc-button--outlined" onclick="window.location.href = '/';">Retourner à l'accueil</button>
+                    </div>
+                </div>
+            </div>
+
+        <%- include(link + '/partial/footer') %>
+
+        <style>
+            footer {
+                position: fixed;
+            }
+        </style>
+    </body>
+</html>

@@ -35,6 +35,7 @@
 
 
 
+
 /* === Post test === */
 .b-text {
     padding: 21px 22px 5px 22px;
@@ -138,7 +139,6 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    margin: 0 calc(10%);
 }
 
 
@@ -256,11 +256,12 @@ hr {
     margin-bottom: 36px;
 }
 
-.m-c-image {
+.m-c-icon {
     vertical-align: middle;
     border-style: none;
-    height: 105px;
-    margin-bottom: 7px;
+    height: 57px;
+    margin-top: 26px;
+    color: #484848;
 }
 
 .m-c-col > p {
@@ -274,4 +275,17 @@ hr {
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    margin-top: 2px;
+    text-align: center;
+}
+
+
+.m-c-logo {
+    height: 150px;
+    margin-top: -7px;
+    transition: height .3s;
+}
+
+.m-c-logo:hover {
+    height: 160px;
 }
