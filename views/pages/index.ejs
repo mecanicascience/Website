@@ -34,6 +34,14 @@
                             <div class="m-c-col">
                                 <a href="/"><img class="m-c-image m-c-logo" src="/imgs/illustration/main_logo.png" /></a>
                             </div>
+
+                            <div class="m-c-col m-c-cate">
+                                <p style="margin-top: 5px; line-height: 25px; font-size: 16px;">
+                                    <% for(let i = 0; i < query_message.length; i++) { %>
+                                        <%= query_message[i] %><br />
+                                    <% } %>
+                                </p>
+                            </div>
                         </div>
 
                         <div class="m-c-row">

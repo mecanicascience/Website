@@ -3,14 +3,35 @@
  */
 
 /* ====== DEPENDANCIES ====== */
-const express   = require('express');
-const router    = express.Router();
-const constants = require('./../constants');
+const m = {
+    express     : require('express'),
+    constants   : require('./../constants'),
+    body_parser : require('body-parser'),
+    articles    : require('./articles')
+};
+
+const router = m.express.Router();
+
 
 
 
 /* ====== APP ====== */
-router.get('/', (req, res) => res.render('pages/index', { version: constants.version }));
+router
+    .get('/', (req, res) => {
+        res.render('pages/index', {
+            version       : m.constants.version,
+            articles      : m.articles.getArticles(req.body.q, req.query.s),
+            query_message : m.articles.getLabel   (req.body.q, req.query.s)
+        });
+    })
+    .post("/", (req, res) => {
+        res.render('pages/index', {
+            version       : m.constants.version,
+            articles      : m.articles.getArticles(req.body.q, req.query.s),
+            query_message : m.articles.getLabel   (req.body.q, req.query.s)
+        });
+    });
+
 
 
 
