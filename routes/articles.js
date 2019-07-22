@@ -64,8 +64,18 @@ function getLabel(q, s, l) {
 
 
 
+// Lien d'action
+function getActionLink(q, s) {
+    if(s) return '/?s=' + s;
+    else  return '/';
+}
+
+
+
+
 /* ====== SERVER ====== */
 module.exports = {
-    getArticles : getArticles,
-    getLabel    : getLabel
+    getArticles   : getArticles,
+    getLabel      : getLabel,
+    getActionLink : getActionLink
 };
