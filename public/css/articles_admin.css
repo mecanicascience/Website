@@ -16,3 +16,23 @@
 .a-inter-b-p {
 
 }
+
+
+.m-b-cat {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.m-b-cat > span {
+    flex-grow: 1;
+}
+
+#categorie-select {
+    width: inherit;
+    margin: 0 5px;
+    height: 28px;
+    font-size: 13px;
+    flex-grow: 1;
+    color: #555350 !important;
+}

@@ -86,8 +86,22 @@ router
         res.redirect('/admin/edit?title=' + new_article.title + '&uuid=' + new_article.uuid);
     })
 
-    .get('/admin/edit', (req, res) => {
-        res.send('hello world');
+    .get('/admin/edit', async (req, res) => {
+        let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title);
+
+        if(!req.query.uuid || !req.query.title || !articleExists) {
+            res.render('pages/articles/article_not_found', {
+                version     : m.constants.version,
+                action_link : m.articles.getActionLink(req.body.q, req.query.s)
+            });
+        }
+        else {
+            res.render('pages/admin/edit_article', {
+                version     : m.constants.version,
+                action_link : m.articles.getActionLink(req.body.q, req.query.s),
+                datas       : m.articles.getArticleDatas(articleExists)
+            });
+        }
     });
 
 
