@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<%- include('../../partial/head') %>
+	</head>
+
+	<body>
+		<header>
+			<%- include('../../partial/header') %>
+		</header>
+
+		<main>
+			<!-- Bandeau de présentation -->
+			<div class="section section-2" style="margin-top: -5px;">
+				<div class="m-title">
+					<p class="m-t-title">Liste des <%= post_count %> derniers posts</p>
+					<hr class="m-t-hr" />
+					<p class="m-t-subtitle">Les posts sont listés par ordre décroissant dans une limite de <%= post_count %></p>
+				</div>
+
+				<div class="m-content">
+					<div class="container m-c-header">
+						<div class="m-c-row">
+						</div>
+
+						<div class="m-c-row">
+                            <div class="m-c-col">
+								<a href="/"><img class="m-c-image m-c-logo" src="/imgs/illustration/main_logo.png" /></a>
+							</div>
+						</div>
+
+						<div class="m-c-row">
+						</div>
+					</div>
+
+                    <div class="m-c-button-yt">
+                        <div class="a-inter-b-t">
+                            <p class="a-inter-b-p">Entrez le nombre de résultats à afficher :</p>
+                            <input id="i-val" type="text" class="a-inter-b-i mdc-button mdc-button--outlined" onkeypress="return isNumber(event)" />
+                            <button class="mdc-button mdc-button--outlined" onclick="window.location.href = '?l=' + document.getElementById('i-val').value;">Valider</button>
+                        </div>
+
+                        <div>
+                            <button class="mdc-button mdc-button--outlined" onclick="window.location.href = '/admin/create_article';">Créer un nouveau post</button>
+                        </div>
+                    </div>
+				</div>
+			</div>
+
+			<div style="margin-top: 60px">
+                <% while(articles.length != 0) { %>
+                    <%- articles.shift() %>
+                <% } %>
+			</div>
+
+
+            <script type="text/javascript">
+                function isNumber(ev) {
+                    let keyCode = event.keyCode;
+                    return keyCode > 47 && keyCode < 58;
+                }
+
+                document.getElementById('i-val').value = null;
+            </script>
+
+		<%- include('../../partial/footer') %>
+	</body>
+</html>

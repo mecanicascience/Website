@@ -1,0 +1,18 @@
+.a-inter-b-t { margin-bottom: 30px; }
+
+.a-inter-b-i {
+    cursor: initial !important;
+    padding: 5px !important;
+    letter-spacing: .03em;
+}
+
+.a-inter-b-i:hover {
+    background: none !important;
+    color: inherit !important;
+    cursor: initial;
+}
+
+
+.a-inter-b-p {
+
+}

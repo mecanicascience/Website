@@ -53,7 +53,7 @@ router
     }))
 
     .get('/article', async (req, res) => {
-        let articleExists = await m.articles.articleExists(req.query.uuid, req.query.title);
+        let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title);
 
         if(!req.query.uuid || !req.query.title || !articleExists) {
             res.render('pages/articles/article_not_found', {
@@ -64,10 +64,30 @@ router
         else {
             res.render('pages/articles/article', {
                 version     : m.constants.version,
-                action_link : m.articles.getActionLink  (req.body.q    , req.query.s),
+                action_link : m.articles.getActionLink(req.body.q, req.query.s),
                 datas       : m.articles.getArticleDatas(articleExists)
             });
         }
+    })
+
+
+    .get('/admin/', async (req, res) => {
+        let article = await m.articles.getArticles(undefined, undefined, parseInt(req.query.l), true);
+
+        res.render('pages/admin/articles_interface', {
+            version      : m.constants.version,
+            action_link  : m.articles.getActionLink(req.body.q, req.query.s),
+            articles     : article,
+            post_count   : (req.query.l ? req.query.l : 20)
+        });
+    })
+    .get('/admin/create_article', async (req, res) => {
+        let new_article = await m.articles.createNewArticle();
+        res.redirect('/admin/edit?title=' + new_article.title + '&uuid=' + new_article.uuid);
+    })
+
+    .get('/admin/edit', (req, res) => {
+        res.send('hello world');
     });
 
 

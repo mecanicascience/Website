@@ -14,11 +14,12 @@ const db = require('./db')
   * @param q Search query    [ string ]                           : default 'undefined'
   * @param s Search category [ info, math, youtube, phys, other ] : default 'undefined'
   * @param l Search limit    [ int n articles ]                   : default  20
+  * @param is_admin_link     true : lien vers la modification de billets / false : lien vers l'affichage de billets
   * @return array pour chaque ligne d'articles ['<div><div>Article 1</div><div>Article 2</div><div>Article 3</div></div>', ...]
   */
-async function getArticles(q, s, l) {
+async function getArticles(q, s, l, is_admin_link) {
     if(!l) l = 20;
-    let html_array = await db.getHTMLForAllPostsMAIN(q, s, l);
+    let html_array = await db.getHTMLForAllPostsMAIN(q, s, l, is_admin_link);
 
     if(html_array.length == 0) {
         let cHtml = [ '<div class="container category c-large-2" style="flex-direction: column;text-align: center;"><b>Aucun article</b> ' ];
@@ -86,20 +87,24 @@ function getActionLink(q, s) {
 
 
 
-
-
 /** ====== VISUALISATION D'UN ARTICLE ====== */
 /**
   * @param article L'article
   * @return un object représentant les datas à afficher
   */
 function getArticleDatas(article) {
+    article.formatted_category = getLabelLong(article.category_id);
+
+    if(!article.date) {
+        article.formatted_date = '\'pas de date spécifiée\'';
+        return article;
+    }
+
     let date = new Date(article.date.toDate());
     let d1   = date.getDate();
     let d2   = date.getMonth();
 
-    article.formatted_date     = ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + d2 : d2) + '/' + date.getFullYear();
-    article.formatted_category = getLabelLong(article.category_id);
+    article.formatted_date = ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + d2 : d2) + '/' + date.getFullYear();
 
     return article;
 }
@@ -108,18 +113,32 @@ function getArticleDatas(article) {
 /**
   * @param uuid  uuid de l'article recherché
   * @param title titre short de l'article
-  * @return false ou l'article
+  * @return false si l'article n'existe pas ou n'est pas visible ou l'article
   */
-async function articleExists(uuid, title) {
+async function articleExistsAndVisible(uuid, title) {
     let articleList = await db.getArticleByUUID(uuid);
 
     if(articleList.docs.length != 1) return false;
     else {
         let article = articleList.docs[0].data();
-        if(article.short_title == title) return article;
-        else                             return false;
+        if(article.short_title == title && article.visible) return article;
+        else                                                return false;
     }
 }
+
+
+
+
+
+
+
+
+/* ====== CREATION ET MODIFICATION DES ARTICLES ====== */
+async function createNewArticle() {
+    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null', 1, 'null', 'null', false);
+    return new_article;
+}
+
 
 
 
@@ -132,10 +151,11 @@ async function articleExists(uuid, title) {
 
 /* ====== SERVER ====== */
 module.exports = {
-    getArticles     : getArticles,
-    getLabel        : getLabel,
-    getActionLink   : getActionLink,
-    getLabelLong    : getLabelLong,
-    getArticleDatas : getArticleDatas,
-    articleExists   : articleExists
+    getArticles             : getArticles,
+    getLabel                : getLabel,
+    getActionLink           : getActionLink,
+    getLabelLong            : getLabelLong,
+    getArticleDatas         : getArticleDatas,
+    articleExistsAndVisible : articleExistsAndVisible,
+    createNewArticle        : createNewArticle
 };
