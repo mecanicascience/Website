@@ -10,8 +10,13 @@ const m = {
     os          : require('os'),
     path        : require('path'),
     body_parser : require('body-parser'),
-    constants   : require('./constants')
+    constants   : require('./constants'),
+    db          : require('./routes/db')
 };
+
+
+
+
 
 
 
@@ -51,6 +56,8 @@ const sitemap = m.sitemap.createSitemap({
 });
 
 const app = m.express();
+
+m.db.initializeDb();
 
 
 
@@ -96,7 +103,8 @@ app
         errorCode     : 404,
         errorMessage  : 'La page n\'a pas été trouvée',
         link          : m.path.join(__dirname, "views/"),
-        version       : VERSION
+        version       : VERSION,
+        action_link   : '/'
     }));
 
 

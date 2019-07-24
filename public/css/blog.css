@@ -76,6 +76,7 @@
     background-repeat: no-repeat;
     background-size: 0% 2px;
     transition: background-size .3s;
+    text-decoration: none !important;
 }
 
 .b-t-dec > a:hover, .b-t-dec > a:focus {

@@ -15,14 +15,14 @@
 						<li><a class="gn-icon d-main-dev" href="/"><i class="menu-icon fas fa-home"></i>Accueil</a></li>
 
 						<li>
-							<a class="gn-icon d-main-dev"><i class="menu-icon fas fa-newspaper"></i>Articles</a>
+							<a class="gn-icon d-main-dev" href="/"><i class="menu-icon fas fa-newspaper"></i>Articles</a>
 
 							<ul class="gn-submenu">
 								<li class="d-li-dev"><a class="gn-icon" href="/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-globe d-icon-dev"></i>Tous les articles</a></li>
-								<li class="d-li-dev"><a class="gn-icon" href="/?s=info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-desktop d-icon-dev"></i>Informatique</a></li>
-								<li class="d-li-dev"><a class="gn-icon" href="/?s=math">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-calculator d-icon-dev"></i>Mathématiques</a></li>
 								<li class="d-li-dev"><a class="gn-icon" href="/?s=youtube">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fab fa-youtube d-icon-dev"></i>Vidéos YouTube</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=math">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-calculator d-icon-dev"></i>Mathématiques</a></li>
 								<li class="d-li-dev"><a class="gn-icon" href="/?s=phys">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-space-shuttle d-icon-dev"></i>Physique</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-desktop d-icon-dev"></i>Informatique</a></li>
 								<li class="d-li-dev"><a class="gn-icon" href="/?s=other">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-folder d-icon-dev"></i>Autre</a></li>
 							</ul>
 						</li>
@@ -45,7 +45,7 @@
 	<!-- ==== NAVBAR ==== -->
 	<div class="collapse navbar-no-collapse" id="navbarSupportedContent" style="padding: .5rem 1rem;">
 		<form class="search-form" method="post" id="search-form" action=<%= action_link  %>>
-			<input class="form-control search-bar" type="text" placeholder="Ecrivez-ici pour rechercher un post..." role="search" name="q">
+			<input class="form-control search-bar" type="text" placeholder="Rechercher le titre d'un post..." role="search" name="q">
 			<a class="search-button" onclick="document.getElementById('search-form').submit();"><i class="fas fa-search fa-lighter"></i></a>
 		</form>
 

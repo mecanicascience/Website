@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<%- include('../../partial/head') %>
+	</head>
+
+	<body>
+		<header>
+			<%- include('../../partial/header') %>
+		</header>
+
+		<main>
+			<!-- Bandeau de présentation -->
+			<div class="section section-2" style="margin-top: -5px;">
+				<div class="m-title">
+					<p class="m-t-title"><%= datas.title %></p>
+					<hr class="m-t-hr" />
+					<p class="m-t-subtitle"><%= datas.description %></p>
+				</div>
+
+				<div class="m-content">
+					<div class="container m-c-header">
+						<div class="m-c-row">
+						</div>
+
+						<div class="m-c-row">
+							<div class="m-c-col">
+								<a><img class="m-b-image m-c-logo" src=<%= '/imgs/blog/' + datas.uuid + '_' + datas.image_name %>  /></a>
+							</div>
+
+                            <div class="m-c-col">
+								<p class="m-b-desc">Le <%= datas.formatted_date %></p>
+                                <p class="m-b-cat">- Catégorie <%= datas.formatted_category %> -</p>
+							</div>
+						</div>
+
+						<div class="m-c-row">
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div style="margin-top: 60px">
+				<div class="container" style="text-align: justify;">
+                    <%- datas.content %>
+
+                    <p style="margin-bottom: 70px;"></p>
+				</div>
+			</div>
+
+		<%- include('../../partial/footer') %>
+	</body>
+</html>

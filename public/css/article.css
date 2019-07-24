@@ -1,0 +1,26 @@
+.m-b-image {
+    box-shadow: 2px 2px 1.8px 1.2px rgba(0, 0, 0, 0.3);
+    border-radius: 4%;
+    height: 280px;
+    object-position: center;
+    width: 100%;
+    object-fit: cover;
+    margin: -24px 0 0 0;
+}
+
+.m-b-image:hover { height: 290px; }
+
+
+
+.m-b-cat {
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    margin-top: -13px !important;
+    text-transform: capitalize !important;
+}
+
+.m-b-desc {
+    font-size: 16px !important;
+    margin: 12px 0 14px 0 !important;
+    text-transform: capitalize !important;
+}

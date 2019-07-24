@@ -65,70 +65,8 @@
 
             <!-- Container category 1 -->
             <div class="section section-1">
-                <div class="container category">
-                    <div class="c-item">
-                        <div class="b-image-cont">
-                            <img class="b-img" src="/imgs/blog/lune.png" />
-                        </div>
-
-                        <div class="b-text">
-                            <p class="b-t-title">Science / Technique</p>
-                            <p class="b-t-dec"><a>Ceci est un test de description d'article qui est censé fonctionner plutôt bien</a></p>
-
-                            <p class="b-t-date">Le 01/01/1900</p>
-                        </div>
-                    </div>
-
-                    <div class="c-item">
-                        <div class="b-image-cont">
-                            <img class="b-img" src="/imgs/blog/lune.png" />
-                        </div>
-
-                        <div class="b-text">
-                            <p class="b-t-title">Science / Technique</p>
-                            <p class="b-t-dec"><a>Ceci est un second test de description d'article</a></p>
-                            <p class="b-t-date">Le 01/01/1900</p>
-                        </div>
-                    </div>
-
-                    <div class="c-item">
-                        <div class="b-image-cont">
-                            <img class="b-img" src="/imgs/blog/lune.png" />
-                        </div>
-
-                        <div class="b-text">
-                            <p class="b-t-title">Science / Technique</p>
-                            <p class="b-t-dec"><a>Ceci est un troisième test de description d'article</a></p>
-                            <p class="b-t-date">Le 01/01/1900</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container category">
-                    <div class="c-item">
-                        <div class="b-image-cont">
-                            <img class="b-img" src="/imgs/blog/lune.png" />
-                        </div>
-
-                        <div class="b-text">
-                            <p class="b-t-title">Science / Technique</p>
-                            <p class="b-t-dec"><a>Ceci est un troisième test de description d'article</a></p>
-                            <p class="b-t-date">Le 01/01/1900</p>
-                        </div>
-                    </div>
-
-                    <div class="c-item c-large-2">
-                        <div class="b-image-cont">
-                            <img class="b-img" src="/imgs/blog/lune.png" />
-                        </div>
-
-                        <div class="b-text">
-                            <p class="b-t-title">Science / Technique</p>
-                            <p class="b-t-dec"><a>Ceci est un troisième test de description d'article</a></p>
-                            <p class="b-t-date">Le 01/01/1900</p>
-                        </div>
-                    </div>
-                </div>
+                <%- articles.shift() %>
+                <%- articles.shift() %>
             </div>
 
 
@@ -169,31 +107,9 @@
 
             <!-- Container category 2 -->
             <div class="section section-1">
-                <div class="container category">
-                    <div class="c-item c-large-2">
-                        <div class="b-image-cont">
-                            <img class="b-img" src="/imgs/blog/lune.png" />
-                        </div>
-
-                        <div class="b-text">
-                            <p class="b-t-title">Science / Technique</p>
-                            <p class="b-t-dec"><a>Ceci est un 1er test de description d'article</a></p>
-                            <p class="b-t-date">Le 01/01/1900</p>
-                        </div>
-                    </div>
-
-                    <div class="c-item">
-                        <div class="b-image-cont">
-                            <img class="b-img" src="/imgs/blog/lune.png" />
-                        </div>
-
-                        <div class="b-text">
-                            <p class="b-t-title">Science / Technique</p>
-                            <p class="b-t-dec"><a>Ceci est un 2nd test de description d'article</a></p>
-                            <p class="b-t-date">Le 01/01/1900</p>
-                        </div>
-                    </div>
-                </div>
+                <% while(articles.length != 0) { %>
+                    <%- articles.shift() %>
+                <% } %>
             </div>
         </main>
 
