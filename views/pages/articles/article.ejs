@@ -7,6 +7,12 @@
 	<body>
 		<header>
 			<%- include('../../partial/header') %>
+
+			<script type="text/javascript">
+				window.onload = function() {
+					document.getElementById('container-text').innerHTML = computeText(convertFromCodeToHtml(<%- '"' + datas.content + '"' %>));
+				};
+			</script>
 		</header>
 
 		<main>
@@ -29,8 +35,8 @@
 							</div>
 
                             <div class="m-c-col">
-								<p class="m-b-desc">Le <%= datas.formatted_date %></p>
-                                <p class="m-b-cat">- Catégorie <%= datas.formatted_category %> -</p>
+								<p class="m-b-desc">Publié le <%= datas.formatted_date %></p>
+                                <p class="m-b-cat" style="flex-direction: column;">- Catégorie <%= datas.formatted_category %> -</p>
 							</div>
 						</div>
 
@@ -43,11 +49,41 @@
 
 			<div style="margin-top: 60px">
 				<div class="container" style="text-align: justify;">
-                    <%- datas.content %>
+					<div id="container-text">
+                    	Chargement en cours...
+					</div>
 
                     <p style="margin-bottom: 70px;"></p>
 				</div>
 			</div>
+
+
+			<!-- Container category breakimage -->
+            <div class="section section-2">
+                <p class="s-c-title">Sur le même thème</p>
+
+                <hr />
+
+				<div class="container category">
+					<%- articles.length > 0 ? articles.shift() : '' %>
+					<%- articles.length > 0 ? articles.shift() : '' %>
+					<%- articles.length > 0 ? articles.shift() : '' %>
+				</div>
+            </div>
+
+
+
+			<!-- <div class="section section-1">
+                <p class="s-c-title">Commentaires</p>
+
+                <hr />
+
+				<div class="container category">
+					Provisoire
+				</div>
+            </div> -->
+
+
 
 		<%- include('../../partial/footer') %>
 	</body>

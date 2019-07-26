@@ -2,20 +2,159 @@
 <html lang="fr">
 	<head>
 		<%- include('../../partial/head') %>
+
+		<script type="text/javascript">
+			window.onload = function() {
+				document.getElementById('gn-menu').onclick = () => window.location.href = '/admin';
+
+			    document.getElementById('categorie-select').value = <%- '"' + datas.category_id + '"' %>;
+			    document.getElementById('publish-status').checked = parseInt(<%- '"' + datas.published + '"' %>);
+
+			    // Bouton de visibilité
+			    let v = JSON.parse(<%- '"' + datas.visible + '"' %>);
+			    if(!v) document.getElementById('publish-status-text').val = "0";
+			    else   document.getElementById('publish-status-text').val = "1";
+			    document.getElementById('publish-status').checked = v;
+
+			    changeButtonText();
+
+
+			    // Affichage de la date
+			    let d =
+			    <% if(datas.date) { %>
+			        <%- "'" + datas.date.toDate() + "'" %>
+			    <% } else { %>
+			        <%= 'null' %>
+			    <% } %>
+			    ;
+
+			    if(d != 'null' && d) {
+			        let date = new Date(d);
+			        let d1 = date.getDate();
+			        let d2 = date.getMonth();
+
+			        document.getElementById('date-publi').value = date.getFullYear() + '-' + ((d2 + '').length == 1 ? '0' + d2 : d2) + '-' + ((d1 + '').length == 1 ? '0' + d1 : d1);
+			    }
+
+
+			    // Affichage de la taille de préférence
+			    document.getElementById('pref-size').value = 'size_' + <%- "'" + datas.pref_size + "'" %>;
+
+
+				// Affichage du contenu
+				document.getElementById('title-area').value = <%- "'" + datas.title + "'" %>;
+				document.getElementById('subtitle-area').value = <%- "'" + datas.description + "'" %>;
+				document.getElementById('content-area').value = convertFromCodeToHtml(<%- "'" + datas.content + "'" %>);
+
+
+				// Set le dernier titre
+				setLastTitle(document.getElementById('title-area').value);
+
+				textAreaAdjust(document.getElementById('content-area'));
+			};
+
+			function redirectDelete() { window.location.href = '/admin/delete?title=' + <%- '"' + datas.title + '"' %> + '&uuid=' + <%- '"' + datas.uuid + '"' %>; }
+
+
+
+			function publishModifs(button_id) {
+				checkSucess(
+					document.getElementById('categorie-select').value,
+					convertToHtmlCode(document.getElementById('content-area').value),
+					document.getElementById('date-publi').value,
+					document.getElementById('subtitle-area').value,
+					'test.png',
+					parseInt(document.getElementById('pref-size').value.split('size_')[1]),
+					<%- "'" + datas.short_title + "'" %>,
+					document.getElementById('title-area').value,
+					parseInt(<%- "'" + datas.uuid + "'" %>),
+					document.getElementById('publish-status').checked,
+					button_id
+				);
+			}
+		</script>
 	</head>
 
 	<body>
 		<header>
 			<%- include('../../partial/header') %>
+
+			<div class="toaster">
+				<div id="info-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="height: 91.5px;">
+					<div class="toast-header">
+						<svg class="bd-placeholder-img rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+							<rect width="100%" height="100%" fill="#007aff"></rect>
+						</svg>
+						<strong class="mr-auto">Information</strong>
+						<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onclick="document.getElementById('info-toast').style.opacity = 0">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="toast-body" id="toast-message">
+						Sauvegarde effectuée.
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="deleteModalTitle">Confirmation</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closePopup('deleteModal')">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Voulez-vous vraiment supprimer cet article ?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closePopup('deleteModal')">Annuler</button>
+							<button type="button" class="btn btn-danger" onclick="redirectDelete()">Supprimer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="preview-toaster" tabindex="-1" role="dialog" aria-labelledby="preview-toaster-t" aria-hidden="true">
+				<div class="modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" id="preview-toaster-sm" role="document" style="max-width: calc(100% - 10%) !important;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="preview-toaster-t">Rendu du contenu de l'article</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closePopup('preview-toaster')">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body" id="preview-toaster-content">
+							Chargement en cours...
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closePopup('preview-toaster')">Fermer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div id="balises_description" class="hint-desc" style="display: none;">
+				<p class="titre" style="margin-top: 0;">La balise &lt;b&gt; :</p>
+				<p>Ceci est un <b>test</b> de première partie qui va bientôt se terminer parceque là le texte commence à être, mais alors à être vachement long !!!! Et pourtant ben faut croire que ça ne suffit pas.</p>
+				<p>Ceci est un <b>test</b> de première partie qui va bientôt se terminer parceque là le texte commence à être, mais alors à être vachement long !!!! Et pourtant ben faut croire que ça ne suffit pas.</p>
+
+				<p class="titre">Example de code \$code\$ mathématique :</p>
+				<p>Voici une $\alpha équation \frac{3}{\int^5}$</p>
+			</div>
 		</header>
 
 		<main>
 			<!-- Bandeau de présentation -->
 			<div class="section section-2" style="margin-top: -5px;">
 				<div class="m-title">
-					<textarea class="m-t-title"><%= datas.title %></textarea>
+					<p class="m-t-title">Edition d'article</p>
 					<hr class="m-t-hr" />
-					<textarea class="m-t-subtitle"><%= datas.description %></textarea>
+					<p class="m-t-subtitle">L'UUID est de <%= datas.uuid %></p>
 				</div>
 
 				<div class="m-content">
@@ -28,17 +167,34 @@
 								<a><img class="m-b-image m-c-logo" src=<%= '/imgs/blog/' + datas.uuid + '_' + datas.image_name %>  /></a>
 							</div>
 
-                            <div class="m-c-col">
-								<p class="m-b-desc">Le <%= datas.formatted_date %></p>
-                                <p class="m-b-cat"><span style="text-align: right; margin: 0 5px;">- Catégorie</span>
+
+							<div class="m-c-col" style="display: flex; margin-top: 18px;">
+                                <p class="m-b-cat">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="pref-size-l">Taille de préférence :</span>
+									</div>
+									<select class="form-control" id="pref-size">
+										<option value="size_1">1</option>
+										<option value="size_2">2</option>
+									</select>
+								<span style="text-align: left; margin: 0 5px;"></span></p>
+							</div>
+
+
+                            <div class="m-c-col" style="display: flex; margin-top: 18px;">
+                                <p class="m-b-cat">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="date-publication">Catégorie :</span>
+									</div>
 									<select class="form-control" id="categorie-select">
-										<option value="youtube" <%= datas.category_id == "youtube" ? 'selected=selected' : '' %>>Vidéo YouTube</option>
+										<option value="null">Pas de catégorie spécifiée</option>
+										<option value="youtube">Vidéo YouTube</option>
 										<option value="math">Mathématiques</option>
 										<option value="phys">Physique</option>
-										<option value="info" <%= datas.category_id == "info" ? 'selected=selected' : '' %>>Informatique</option>
+										<option value="info">Informatique</option>
 										<option value="other">Autre</option>
 									</select>
-								<span style="text-align: left; margin: 0 5px;">-</span></p>
+								<span style="text-align: left; margin: 0 5px;"></span></p>
 							</div>
 						</div>
 
@@ -46,18 +202,90 @@
 						</div>
 					</div>
 
+					<div class="container m-c-header">
+						<div class="m-c-row">
+						</div>
+
+						<div class="m-c-row">
+							<div class="m-c-col">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="date-publication">Date de publication :</span>
+									</div>
+									<input style="color: #606060 !important;" type="date" class="form-control" placeholder="01/01/2001" aria-label="date-publication" aria-describedby="date-publication" id="date-publi">
+									<div class="input-group-append">
+										<button class="btn btn-outline-secondary" type="button" id="ajd-button" onclick="setAjdButton()">Aujourd'hui</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="m-c-col">
+								<div class="custom-control custom-switch">
+									<input type="checkbox" class="custom-control-input" id="publish-status" onchange="changeButtonText()" checked>
+									<label class="custom-control-label" for="publish-status" id="publish-status-text" val="0" style="padding-top: 1px;">Chargement...</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="m-c-row">
+						</div>
+					</div>
+
+					<div class="container m-c-header" style="padding-top: 23px; margin-bottom: 10px;">
+						<div class="m-c-row">
+						</div>
+
+						<div class="m-c-row" style="flex-direction: row;">
+							<div class="m-c-col" style="flex-grow: 1;">
+								<button type="button" id="publish-modifs" class="btn btn-outline-secondary" onclick="publishModifs(1)">Enregistrer les modifications</button>
+							</div>
+
+							<div class="m-c-col" style="flex-grow: 1;">
+								<button type="button" id="delete-article" class="btn btn-outline-danger" onclick="deleteArticle()">Supprimer l'article</button>
+							</div>
+						</div>
+
+						<div class="m-c-row">
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<div style="margin-top: 60px">
-				<div class="container" style="text-align: justify;">
-                    <textarea>
-                        <%= datas.content %>
-                    </textarea>
+			<div style="margin-top: 60px" class="main-contenu">
+				<div class="container">
+					<label class="cat-title">Titre de l'article :</label>
+					<textarea class="form-control" aria-label="title-area" id="title-area" placeholder="Titre de l'article" value="Chargement en cours..."></textarea>
 
-                    <p style="margin-bottom: 70px;"></p>
+					<label class="cat-title" style="margin-top: 23px;">Sous-titre de l'article :</label>
+					<textarea class="form-control" aria-label="subtitle-area" id="subtitle-area" placeholder="Sous-titre de l'article" value="Chargement en cours..."></textarea>
+				</div>
+
+
+				<div class="container" style="margin-top: 70px;">
+					<div class="m-c-col" style="flex-grow: 1;">
+						<label class="cat-title">Contenu du post :</label>
+						<a class="badge badge-secondary" onclick="showPostRender()" style="cursor: pointer; color: #fdf9f9;">Rendu du post</a>
+						<a class="badge badge-primary" onclick="showShortcuts()" style="cursor: pointer; color: #fdf9f9;">Voir les différents raccourcis</a>
+						<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" class="form-control" aria-label="content-area" id="content-area" placeholder="Contenu du post" value="Chargement en cours..."></textarea>
+					</div>
+
+
+					<div class="m-c-col" style="flex-grow: 1; display: flex;">
+						<div class="m-c-row"></div>
+
+						<div class="m-c-row" style="margin-top: 17px;">
+							<button type="button" id="publish-modifs-2" class="btn btn-outline-secondary" onclick="publishModifs(2)">Enregistrer les modifications</button>
+						</div>
+
+						<div class="m-c-row"></div>
+					</div>
+
+					<p style="margin-bottom: 70px;"></p>
 				</div>
 			</div>
+
+
+			<div class="modal-backdrop fade show" id="fade-in-dropper" style="display: none;"></div>
 
 		<%- include('../../partial/footer') %>
 	</body>

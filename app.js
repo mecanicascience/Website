@@ -4,14 +4,16 @@
 
 /* ====== DEPENDENCIES ====== */
 const m = {
-    express     : require('express'),
-    routes      : require('./routes/index'),
-    sitemap     : require('sitemap'),
-    os          : require('os'),
-    path        : require('path'),
-    body_parser : require('body-parser'),
-    constants   : require('./constants'),
-    db          : require('./routes/db')
+    express       : require('express'),
+    routes        : require('./routes/index'),
+    sitemap       : require('sitemap'),
+    os            : require('os'),
+    path          : require('path'),
+    body_parser   : require('body-parser'),
+    constants     : require('./constants'),
+    db            : require('./routes/db'),
+    cookie_parser : require('cookie-parser'),
+    users         : require('./routes/users')
 };
 
 
@@ -87,6 +89,8 @@ app
         extended: true
     }))
 
+    .use(m.cookie_parser())
+
 
 
 
@@ -104,7 +108,8 @@ app
         errorMessage  : 'La page n\'a pas été trouvée',
         link          : m.path.join(__dirname, "views/"),
         version       : VERSION,
-        action_link   : '/'
+        action_link   : '/',
+        connected     : m.users.isConnected(req.cookies)
     }));
 
 

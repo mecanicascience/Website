@@ -9,18 +9,3 @@
 }
 
 .m-b-image:hover { height: 290px; }
-
-
-
-.m-b-cat {
-    font-weight: 500 !important;
-    font-size: 13px !important;
-    margin-top: -13px !important;
-    text-transform: capitalize !important;
-}
-
-.m-b-desc {
-    font-size: 16px !important;
-    margin: 12px 0 14px 0 !important;
-    text-transform: capitalize !important;
-}

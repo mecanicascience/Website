@@ -13,8 +13,18 @@
 }
 
 
-.a-inter-b-p {
 
+.m-b-cat {
+    font-weight: 500 !important;
+    font-size: 15px !important;
+    margin-top: -13px !important;
+    text-transform: capitalize !important;
+}
+
+.m-b-desc {
+    font-size: 18px !important;
+    margin: 12px 0 20px 0 !important;
+    text-transform: none !important;
 }
 
 
@@ -31,8 +41,124 @@
 #categorie-select {
     width: inherit;
     margin: 0 5px;
-    height: 28px;
-    font-size: 13px;
+    height: 100%;
+    font-size: 15px;
     flex-grow: 1;
     color: #555350 !important;
+}
+
+label {
+    color: #555350;
+    line-height: 20px;
+    font-family: Rubik;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+label > b {
+    font-weight: 600;
+}
+
+#pref-size { color: #555350 !important; }
+
+.main-contenu, .main-contenu > div > textarea, .main-contenu > div > div > textarea {
+    color: #555350 !important;
+}
+
+
+
+.toaster {
+    position: relative;
+}
+
+.toast {
+    width: 234px;
+    height: 127.5px;
+    transition: opacity 1.2s ease;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    position: fixed;
+    margin: 100px 13px;
+}
+
+.toast-header {
+    background-color: rgba(0, 122, 255, 0.48);
+}
+
+.toast-body {
+    margin-top: 3px;
+}
+
+.mr-auto {
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    color: #484848;
+    letter-spacing: 0.5px;
+    margin: 0 0 2px 0px;
+}
+
+.toast-body {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #495057;
+    margin-left: 5px;
+}
+
+
+.btn-group {
+    width: 100%;
+}
+
+.btn-group > button {
+    flex-grow: 1 !important;
+}
+
+
+#deleteModal { transition: opacity 0.7s ease; }
+#preview-toaster { transition: opacity 0.7s ease; }
+.modal-backdrop { transition: opacity 0.7s ease; }
+
+.modal-dialog-centered::before { height: calc(35vh - 3.5rem) !important; }
+.modal-dialog-centered.modal-dialog-scrollable::before { content: close-quote !important; }
+
+
+.cat-title {
+    font-size: 18px;
+}
+
+
+.modal-body > p {
+    color: #000000e8 !important;
+    font-size: 15px;
+}
+
+.modal-body > .titre {
+    color: #000000d4;
+    line-height: 3px;
+    font-family: Rubik;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 16px;
+    letter-spacing: 0.7px;
+    text-decoration: underline;
+    margin: 40px 0 8px 11px;
+}
+
+
+
+élément {
+
+    font-size: 113%;
+    position: relative;
+
+}
+.MJXc-processed {
+    display: unset !important;
 }

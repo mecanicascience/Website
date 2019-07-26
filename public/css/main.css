@@ -467,3 +467,17 @@ main { margin-top: 40px; }
     .a-rocket > img { height: 220px; }
     .a-rocket > p { font-size: 21px; margin: -104px -34px; }
 }
+
+
+
+.little-text {
+    color: #555350;
+    line-height: 20px;
+    font-family: Rubik;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+}

@@ -15,11 +15,14 @@ const db = require('./db')
   * @param s Search category [ info, math, youtube, phys, other ] : default 'undefined'
   * @param l Search limit    [ int n articles ]                   : default  20
   * @param is_admin_link     true : lien vers la modification de billets / false : lien vers l'affichage de billets
+  * @param all_articles      true : affichage de tous les articles, même s'ils ne sont pas visibles
   * @return array pour chaque ligne d'articles ['<div><div>Article 1</div><div>Article 2</div><div>Article 3</div></div>', ...]
   */
-async function getArticles(q, s, l, is_admin_link) {
+async function getArticles(q, s, l, is_admin_link, all_articles) {
+    if(!all_articles) all_articles = false;
+
     if(!l) l = 20;
-    let html_array = await db.getHTMLForAllPostsMAIN(q, s, l, is_admin_link);
+    let html_array = await db.getHTMLForAllPostsMAIN(q, s, l, is_admin_link, all_articles);
 
     if(html_array.length == 0) {
         let cHtml = [ '<div class="container category c-large-2" style="flex-direction: column;text-align: center;"><b>Aucun article</b> ' ];
@@ -111,18 +114,19 @@ function getArticleDatas(article) {
 
 
 /**
-  * @param uuid  uuid de l'article recherché
-  * @param title titre short de l'article
+  * @param uuid     uuid de l'article recherché
+  * @param title    titre short de l'article
+  * @param is_admin true si l'utilisateur est administrateur
   * @return false si l'article n'existe pas ou n'est pas visible ou l'article
   */
-async function articleExistsAndVisible(uuid, title) {
+async function articleExistsAndVisible(uuid, title, is_admin) {
     let articleList = await db.getArticleByUUID(uuid);
 
     if(articleList.docs.length != 1) return false;
     else {
         let article = articleList.docs[0].data();
-        if(article.short_title == title && article.visible) return article;
-        else                                                return false;
+        if(article.short_title == title && ((article.visible && !is_admin) || is_admin)) return article;
+        else                                                                             return false;
     }
 }
 
@@ -134,11 +138,42 @@ async function articleExistsAndVisible(uuid, title) {
 
 
 /* ====== CREATION ET MODIFICATION DES ARTICLES ====== */
+/* Création d'un nouvel article */
 async function createNewArticle() {
-    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null', 1, 'null', 'null', false);
+    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null.png', 1, 'null', 'null', false);
     return new_article;
 }
 
+/* Modification d'un article */
+async function editArticle(category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible) {
+    if(
+        isNaN(pref_size) || isNaN(uuid) || (visible != 'true' && visible != 'false')
+    ) return false;
+
+    let answer = await db.editArticle(category_id, content, date, description, image_name, parseInt(pref_size), short_title, title, parseInt(uuid), (visible == 'true' ? true : false));
+    return answer;
+}
+
+/* Supprime l'article avec l'UUID */
+async function deleteArticle(uuid) {
+    try {
+        await db.deleteArticle(uuid);
+        return true;
+    }
+    catch(e) {
+        console.error('Erreur en essayant de supprimer l\'article à l\'uuid ' + uuid + ' :\n', e);
+        return false;
+    }
+}
+
+
+
+
+/** Retourne les articles de suggestion */
+async function getArticlesForSuggestions(s, l) {
+    let html_array = await db.getHTMLForSuggest(s, l);
+    return html_array;
+}
 
 
 
@@ -151,11 +186,14 @@ async function createNewArticle() {
 
 /* ====== SERVER ====== */
 module.exports = {
-    getArticles             : getArticles,
-    getLabel                : getLabel,
-    getActionLink           : getActionLink,
-    getLabelLong            : getLabelLong,
-    getArticleDatas         : getArticleDatas,
-    articleExistsAndVisible : articleExistsAndVisible,
-    createNewArticle        : createNewArticle
+    getArticles               : getArticles,
+    getLabel                  : getLabel,
+    getActionLink             : getActionLink,
+    getLabelLong              : getLabelLong,
+    getArticleDatas           : getArticleDatas,
+    articleExistsAndVisible   : articleExistsAndVisible,
+    createNewArticle          : createNewArticle,
+    editArticle               : editArticle,
+    deleteArticle             : deleteArticle,
+    getArticlesForSuggestions : getArticlesForSuggestions
 };
