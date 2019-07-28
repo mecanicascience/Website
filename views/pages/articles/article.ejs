@@ -67,6 +67,10 @@
                 <hr />
 
 				<div class="container category">
+					<% if(articles.length == 0) { %>
+						<p style="text-align: center; flex-grow: 1;">Pas d'article correspondant à la catégorie <b><%= datas.formatted_category %></b>.</p>
+					<% } %>
+
 					<%- articles.length > 0 ? articles.shift() : '' %>
 					<%- articles.length > 0 ? articles.shift() : '' %>
 					<%- articles.length > 0 ? articles.shift() : '' %>

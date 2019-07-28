@@ -8,6 +8,7 @@ const fs             = require("fs");
 const path           = require('path');
 const mime           = require('mime');
 const {Storage}      = require('@google-cloud/storage');
+const { promisify }  = require('util')
 
 let db;
 
@@ -373,6 +374,8 @@ async function getHTMLForSuggest(s, l, uuid) {
 
 
 /* ========== MISE A JOUR DE L'IMAGE PRINCIPALE ========== */
+const unlinkAsync = promisify(fs.unlink);
+
 /**
  * Update de l'image principale
  * @param image L'image à Uploader
@@ -395,6 +398,8 @@ async function updateMainImage(file, uuid, image_name) {
             },
             function(err, file) {
                 if(err) console.error('Une erreur est survenue lors de l\'upload de l\'image : \n', err);
+
+                unlinkAsync(filePath);
             }
         );
 

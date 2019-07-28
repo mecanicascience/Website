@@ -4,7 +4,7 @@
 		<%- include('../../partial/head') %>
 
 		<script type="text/javascript">
-			let imageName = <%- "'" + datas.image_name.split('.')[0] + "'" %>;
+			let imageName = <%- '"' + datas.image_name.split('.')[0] + '"' %>;
 			let imageExtension = <%- '"' + datas.image_name.split('.')[1] + '"' %>;
 
 
@@ -26,7 +26,7 @@
 			    // Affichage de la date
 			    let d =
 			    <% if(datas.date) { %>
-			        <%- "'" + datas.date.toDate() + "'" %>
+			        <%- '"' + datas.date.toDate() + '"' %>
 			    <% } else { %>
 			        <%= 'null' %>
 			    <% } %>
@@ -42,16 +42,16 @@
 
 
 			    // Affichage de la taille de préférence
-			    document.getElementById('pref-size').value = 'size_' + <%- "'" + datas.pref_size + "'" %>;
+			    document.getElementById('pref-size').value = 'size_' + <%- '"' + datas.pref_size + '"' %>;
 
 
 				// Affichage du contenu
-				document.getElementById('title-area').value = <%- "'" + datas.title + "'" %>;
-				document.getElementById('subtitle-area').value = <%- "'" + datas.description + "'" %>;
-				document.getElementById('content-area').value = convertFromCodeToHtml(<%- "'" + datas.content + "'" %>);
+				document.getElementById('title-area').value = <%- '"' + datas.title + '"' %>;
+				document.getElementById('subtitle-area').value = <%- '"' + datas.description + '"' %>;
+				document.getElementById('content-area').value = convertFromCodeToHtml(<%- '"' + datas.content + '"' %>);
 
 				// image main
-				document.getElementById('image-name').value = <%- "'" + datas.image_name.split('.')[0] + "'" %>;
+				document.getElementById('image-name').value = <%- '"' + datas.image_name.split('.')[0] + '"' %>;
 				document.getElementById('image-extension').value = <%- '"' + datas.image_name.split('.')[1] + '"' %>;
 
 
@@ -83,6 +83,21 @@
 					continueOperationMainImageDelete(<%- '"' + image_error + '"' %>, <%- '"' + datas.short_title + '"' %>, <%- '"' + datas.uuid + '"' %>);
 				<% } %>
 
+				// Set l'heure de dernière Sauvegarde
+				let date = new Date();
+		        document.getElementById('cat-title-span').innerHTML =
+					'(dernière sauvegarde à '
+					+ (date.getHours() > 9 ? date.getHours() : '0' + date.getHours())
+					+ 'h'
+					+ (date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes())
+					+ ')';
+
+
+				// Set le bouton d'auto sauvegarde
+				changeSaveButtonAuto(true); // sauvegarde auto activée par défault
+
+				// get balises_description.txt
+				getBalisesDescription();
 			};
 
 
@@ -108,13 +123,13 @@
 					document.getElementById('subtitle-area').value,
 					document.getElementById('image-name').value + '.' + document.getElementById('image-extension').value,
 					parseInt(document.getElementById('pref-size').value.split('size_')[1]),
-					<%- "'" + datas.short_title + "'" %>,
+					<%- '"' + datas.short_title + '"' %>,
 					document.getElementById('title-area').value,
-					parseInt(<%- "'" + datas.uuid + "'" %>),
+					parseInt(<%- '"' + datas.uuid + '"' %>),
 					document.getElementById('publish-status').checked,
 					button_id,
 					<%- datas.image_exists %>,
-					<%- "'" + datas.image_name + "'" %>
+					<%- '"' + datas.image_name + '"' %>
 				);
 			}
 		</script>
@@ -276,20 +291,7 @@
 			</div>
 
 
-
-
-
-
-
-
-			<div id="balises_description" class="hint-desc" style="display: none;">
-				<p class="titre" style="margin-top: 0;">La balise &lt;b&gt; :</p>
-				<p>Ceci est un <b>test</b> de première partie qui va bientôt se terminer parceque là le texte commence à être, mais alors à être vachement long !!!! Et pourtant ben faut croire que ça ne suffit pas.</p>
-				<p>Ceci est un <b>test</b> de première partie qui va bientôt se terminer parceque là le texte commence à être, mais alors à être vachement long !!!! Et pourtant ben faut croire que ça ne suffit pas.</p>
-
-				<p class="titre">Example de code \$code\$ mathématique :</p>
-				<p>Voici une $\alpha équation \frac{3}{\int^5}$</p>
-			</div>
+			<textarea id="balises_description" style="display: none;"></textarea>
 		</header>
 
 		<main>
@@ -416,7 +418,7 @@
 
 							<div class="m-c-row" style="display: flex;">
 								<div class="m-c-col" style="flex-grow: 1;">
-									<button type="button" id="add-other-images" class="btn btn-outline-primary" onclick="">Images secondaires</button>
+									<button type="button" id="add-other-images" class="btn btn-outline-primary" onclick="" disabled>Images secondaires</button>
 								</div>
 
 								<div class="m-c-col" style="flex-grow: 1; margin-top: 15px;">
@@ -443,10 +445,11 @@
 
 				<div class="container" style="margin-top: 70px;">
 					<div class="m-c-col" style="flex-grow: 1;">
-						<label class="cat-title">Contenu du post :</label>
+						<label class="cat-title">Contenu du post <span id="cat-title-span">(pas de dernière sauvegarde)</span> :</label>
 						<a class="badge badge-secondary" onclick="showPostRender()" style="cursor: pointer; color: #fdf9f9;">Rendu du post</a>
-						<a class="badge badge-primary" onclick="showShortcuts()" style="cursor: pointer; color: #fdf9f9;">Voir les différents raccourcis</a>
-						<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" class="form-control" aria-label="content-area" id="content-area" placeholder="Contenu du post" value="Chargement en cours..."></textarea>
+						<a class="badge badge-secondary" onclick="showShortcuts()" style="cursor: pointer; color: #fdf9f9;">Voir les différents raccourcis</a>
+						<a class="badge badge-secondary" onclick="changeSaveButtonAuto(!autosave)" style="cursor: pointer; color: #fdf9f9; margin-left: 15px;" id="auto-save-button">Chargement en cours...</a>
+						<textarea style="overflow:hidden" class="form-control" aria-label="content-area" id="content-area" placeholder="Contenu du post" value="Chargement en cours..."></textarea>
 					</div>
 
 

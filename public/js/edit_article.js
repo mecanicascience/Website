@@ -12,6 +12,27 @@ function changeButtonText() {
 }
 
 
+function getBalisesDescription() {
+    let xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            if(this.status == 200) {
+                document.getElementById('balises_description').value = this.responseText;
+            }
+        }
+    };
+
+    xhttp.open("GET", "/other/balises_description.txt", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send('');
+}
+
+
+
+
+
+
 function setAjdButton() {
     let ajd = new Date();
     let d1 = ajd.getDate();
@@ -25,7 +46,7 @@ function setAjdButton() {
 function showPostRender() {
     document.getElementById('preview-toaster-content').innerHTML = computeText(document.getElementById('content-area').value);
 
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
     document.getElementById('preview-toaster-content').style.maxHeight = document.body.clientHeight - 0.1 * document.body.clientHeight + 'px';
     document.getElementById('preview-toaster-sm').style.marginTop = 0.05 * document.body.clientHeight + 'px';
@@ -49,9 +70,9 @@ function showPostRender() {
 
 
 function showShortcuts() {
-    document.getElementById('preview-toaster-content').innerHTML = document.getElementById('balises_description').innerHTML;
+    document.getElementById('preview-toaster-content').innerHTML = computeText(document.getElementById('balises_description').value);
 
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
     document.getElementById('preview-toaster-content').style.maxHeight = document.body.clientHeight - 0.1 * document.body.clientHeight + 'px';
     document.getElementById('preview-toaster-sm').style.marginTop = 0.05 * document.body.clientHeight + 'px';
@@ -79,7 +100,7 @@ function showShortcuts() {
 
 function textAreaAdjust(o) {
     o.style.height = "1px";
-    o.style.height = (25 + o.scrollHeight) + "px";
+    o.style.height = (55 * 5 + o.scrollHeight) + "px";
 }
 
 
@@ -211,24 +232,28 @@ function onPublishModifsDone(success, button_id, uuid) {
 
         setTimeout(function() {
             document.getElementById(button_iden).className = 'btn btn-outline-secondary';
-        }, 2500);
+        }, 2000);
 
         setTimeout(function() {
-           document.getElementById('info-toast').style.opacity = 0;
-        }, 2500);
+            document.getElementById('info-toast').style.opacity = 0;
+        }, 2000);
 
         // update Images
         imageName = document.getElementById('image-name').value;
         imageExtension = document.getElementById('image-extension').value;
 
-        document.getElementById('main-image-upload-text').innerHTML =
-            'Nom du fichier uploadé : <b>' + document.getElementById('main-image-upload-input').files[0].name
-            + '</b><br /><br />Le fichier \''
-            + '<i>https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + uuid + '_<b>'
-            + imageName + '.' + imageExtension
-            + '</b>?alt=media</i>\' sera créé.';
+        if(document.getElementById('main-image-upload-input').files[0])
+            document.getElementById('main-image-upload-text').innerHTML =
+                'Nom du fichier uploadé : <b>' + document.getElementById('main-image-upload-input').files[0].name
+                + '</b><br /><br />Le fichier \''
+                + '<i>https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + uuid + '_<b>'
+                + imageName + '.' + imageExtension
+                + '</b>?alt=media</i>\' sera créé.';
 
         document.getElementById('image_name-input').value = imageName + '.' + imageExtension;
+
+        let date = new Date();
+        document.getElementById('cat-title-span').innerHTML = '(dernière sauvegarde à ' + date.getHours() + 'h' + date.getMinutes() + ')';
     }
     else {
         document.getElementById('info-toast').style.height = '110.5px';
@@ -321,6 +346,123 @@ function continueOperationMainImageDelete(success, short_title, uuid) {
 
 
 
+let autosave = true;
+let save_speed = 60 * 5; // in seconds
+let saveLoop;
+
+function changeSaveButtonAuto(shouldSave) {
+    if(!shouldSave) {
+        document.getElementById('auto-save-button').className = 'badge badge-danger';
+        document.getElementById('auto-save-button').innerHTML = 'Sauvegarde automatique désactivée';
+
+        clearInterval(saveLoop);
+    }
+    else {
+        document.getElementById('auto-save-button').className = 'badge badge-success';
+        document.getElementById('auto-save-button').innerHTML = 'Sauvegarde automatique activée';
+
+        saveLoop = setInterval(function() {
+            publishModifs('');
+        }, save_speed * 1000);
+    }
+
+    autosave = shouldSave;
+}
+
+
+
+
+
+window.addEventListener('keydown', function(event) {
+    if ((event.ctrlKey || event.metaKey) && event.shiftKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+            case 'k':
+                event.preventDefault();
+                addCustomBaliseToContent('```', true, true);
+                break;
+        }
+    }
+
+    else if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+            case 's':
+                event.preventDefault();
+                publishModifs('');
+                break;
+
+            case 'b':
+                event.preventDefault();
+                addCustomBaliseToContent('**', true);
+                break;
+
+            case 'i':
+                event.preventDefault();
+                addCustomBaliseToContent('*', true);
+                break;
+
+            case 'k':
+                event.preventDefault();
+                addCustomBaliseToContent('``', true);
+                break;
+        }
+    }
+});
+
+
+
+function addCustomBaliseToContent(elToAdd, replaceBeforeAndAfterSpaces, addLineEspaceBeforeAndAfter) {
+    let el = document.getElementById('content-area');
+    if(document.activeElement == el) {
+        // replace all next spaces
+        let cB = 0;
+        let cN = 0;
+        let toRemplacer = el.value.substring(el.selectionStart, el.selectionEnd);
+        if(replaceBeforeAndAfterSpaces) {
+            let foundFirstChar = false;
+            for (let i = 0; i < toRemplacer.length; i++) {
+                if(!foundFirstChar) {
+                    if(el.value[el.selectionStart + i] == ' ') cB++;
+                    else                                       foundFirstChar = true;
+                }
+            }
+            toRemplacer = toRemplacer.substring(cB, toRemplacer.length);
+
+            foundFirstChar = false;
+            for (let i = el.selectionEnd - 1; i > 0; i--) {
+                if(!foundFirstChar) {
+                    if(el.value[i] == ' ') cN++;
+                    else                   foundFirstChar = true;
+                }
+            }
+            toRemplacer = toRemplacer.substring(0, toRemplacer.length - cN);
+        }
+
+
+        // compute with balises
+        let val = el.value.substring(0, el.selectionStart);
+
+        if(addLineEspaceBeforeAndAfter) val += '\n';
+        for (let i = 0; i < cB; i++) val += ' ';
+
+        val += elToAdd;
+        if(addLineEspaceBeforeAndAfter) val += '\n';
+
+        val += toRemplacer;
+
+        if(addLineEspaceBeforeAndAfter) val += '\n';
+        val += elToAdd;
+
+        for (let i = 0; i < cN; i++) val += ' ';
+
+        if(addLineEspaceBeforeAndAfter) val += '\n';
+
+        val += el.value.substring(el.selectionEnd, el.length);
+
+
+        // return
+        el.value = val;
+    }
+}
 
 
 

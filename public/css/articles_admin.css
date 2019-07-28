@@ -135,7 +135,7 @@ label > b {
 
 .modal-body > p {
     color: #000000e8 !important;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .modal-body > .titre {
@@ -153,12 +153,13 @@ label > b {
 
 
 
-élément {
-
-    font-size: 113%;
-    position: relative;
-
-}
 .MJXc-processed {
     display: unset !important;
+}
+
+.cat-title > span {
+    letter-spacing: 0.2px;
+    font-size: 14px;
+    font-style: italic;
+    color: #555350e8 !important;
 }

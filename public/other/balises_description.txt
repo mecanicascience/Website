@@ -1,0 +1,24 @@
+<p style="margin-top: -49px;"></p>
+# Insertion de code
+Pour insérer du code, il faut tout d'abord le sélectionner. Puis, il existe deux raccourcis :
+ - <kbd>CTRL</kbd>+<kbd>K</kbd> pour insérer du code linéaire, à travers la balise ``` `` [code] `` ```
+ - <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>K</kbd> pour insérer du code en plusieurs lignes, via la balise :
+````
+```
+[code]
+```
+````
+<br />Pour insérer des apostophes `` ` ``, vous devez entrer la structure ``` `` ` `` ```.
+
+
+# Sauts de ligne
+Pour sauter une ligne, finir la précédente avec deux espaces, ou ajouter la balise ``<br />`` de retour à la ligne :
+<br /> ``Voici un exemple.``<span class="show_hover">&nbsp;&nbsp;</span><br />``
+De saut de ligne.``
+
+
+# Italique et gras
+Pour obtenir un texte en *italique*, vous pouvez utiliser la structure *`` *italique* ``* ou le raccourcis <kbd>CTRL</kbd>+<kbd>I</kbd>.
+<br />Pour obtenir un texte en **gras**, vous pouvez utiliser la structure **`` **gras** ``** ou le raccourcis <kbd>CTRL</kbd>+<kbd>G</kbd>.
+<br />
+<br />Si jamais vous souhaitez un texte en gras *ET* en italique, utilisez la formule avec trois `*` comme ***`` ***gras et italique*** ``***.

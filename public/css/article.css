@@ -9,3 +9,34 @@
 }
 
 .m-b-image:hover { height: 290px; }
+
+
+
+/** CUSTOM MARKDOWN */
+.show_hover {
+    background-color: #94eaf7;
+    letter-spacing: 3px;
+}
+
+h1 {
+    line-height: 2px !important;
+    font-weight: 600 !important;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 22px !important;
+    letter-spacing: 0.7px;
+    margin-left: 10px !important;
+    padding: 70px 0 10px 0;
+    color: #0096b5 !important;
+}
+
+
+pre {
+    background-color: #0000000b !important;
+    margin: 0 12px !important;
+}
+
+code {
+    background-color: rgba(29, 31, 32, 0.03) !important;
+    color: #000c !important;
+}
