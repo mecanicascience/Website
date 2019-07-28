@@ -31,7 +31,9 @@
 
 						<div class="m-c-row">
 							<div class="m-c-col">
-								<a><img class="m-b-image m-c-logo" src=<%= '/imgs/blog/' + datas.uuid + '_' + datas.image_name %>  /></a>
+								<% if(datas.image_exists) { %>
+									<a><img class="m-b-image m-c-logo" src=<%= 'https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + datas.uuid + '_' + datas.image_name + '?alt=media' %>  /></a>
+								<% } %>
 							</div>
 
                             <div class="m-c-col">

@@ -103,6 +103,30 @@ function deleteArticle() {
     }, 100);
 }
 
+
+function addMainImagePopup() {
+    document.getElementById('main-image-toaster').style.opacity = 0;
+    document.getElementById('main-image-toaster').style.display = 'unset';
+
+    setTimeout(function() {
+        document.getElementById('main-image-toaster').style.opacity = 1;
+    }, 100);
+
+
+
+    document.getElementById('fade-in-dropper').style.opacity = 0;
+    document.getElementById('fade-in-dropper').style.display = 'unset';
+
+    setTimeout(function() {
+        document.getElementById('fade-in-dropper').style.opacity = 0.5;
+    }, 100);
+}
+
+
+
+
+
+
 function closePopup(id) {
     document.getElementById(id).style.opacity = 0;
     document.getElementById(id).style.opacity = 0;
@@ -128,7 +152,7 @@ const MAX_SHORT_TITLE_LENGTH = 130;
 let lastTitle = '';
 function setLastTitle(title) { lastTitle = title; }
 
-function checkSucess(category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible, button_id) {
+function checkSucess(category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible, button_id, image_exists, lastImageName) {
     let shouldRedirect = false;
     if(title != lastTitle) {
         shouldRedirect = true;
@@ -136,11 +160,11 @@ function checkSucess(category_id, content, date, description, image_name, pref_s
         if(short_title[short_title.length - 1] == '_') short_title = short_title.substring(0, short_title.length - 1);
     }
 
-    postNewDatas(category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible, lastTitle, shouldRedirect, button_id);
+    postNewDatas(category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible, lastTitle, shouldRedirect, button_id, image_exists, lastImageName);
 }
 
 
-function postNewDatas(category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible, lastTitle, shouldRedirect, button_id) {
+function postNewDatas(category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible, lastTitle, shouldRedirect, button_id, image_exists, lastImageName) {
     let xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
@@ -160,7 +184,7 @@ function postNewDatas(category_id, content, date, description, image_name, pref_
 
     xhttp.open("POST", "/admin/update", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`category_id=${category_id}&content=${content}&date=${date}&description=${description}&image_name=${image_name}&pref_size=${pref_size}&short_title=${short_title}&title=${title}&uuid=${uuid}&visible=${visible}`);
+    xhttp.send(`category_id=${category_id}&content=${content}&date=${date}&description=${description}&image_name=${image_name}&pref_size=${pref_size}&short_title=${short_title}&title=${title}&uuid=${uuid}&visible=${visible}&image_exists=${image_exists}&lastImageName=${lastImageName}`);
 }
 
 
@@ -171,11 +195,11 @@ function continueOperation(success, shouldRedirect, short_title, uuid, button_id
         }, 1000);
     }
 
-    onPublishModifsDone(success, button_id);
+    onPublishModifsDone(success, button_id, uuid);
 }
 
 
-function onPublishModifsDone(success, button_id) {
+function onPublishModifsDone(success, button_id, uuid) {
     let button_iden = button_id == 1 ? 'publish-modifs' : 'publish-modifs-2';
 
     if(success) {
@@ -192,6 +216,19 @@ function onPublishModifsDone(success, button_id) {
         setTimeout(function() {
            document.getElementById('info-toast').style.opacity = 0;
         }, 2500);
+
+        // update Images
+        imageName = document.getElementById('image-name').value;
+        imageExtension = document.getElementById('image-extension').value;
+
+        document.getElementById('main-image-upload-text').innerHTML =
+            'Nom du fichier uploadé : <b>' + document.getElementById('main-image-upload-input').files[0].name
+            + '</b><br /><br />Le fichier \''
+            + '<i>https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + uuid + '_<b>'
+            + imageName + '.' + imageExtension
+            + '</b>?alt=media</i>\' sera créé.';
+
+        document.getElementById('image_name-input').value = imageName + '.' + imageExtension;
     }
     else {
         document.getElementById('info-toast').style.height = '110.5px';
@@ -219,6 +256,87 @@ function onPublishModifsDone(success, button_id) {
 
 
 
+
+
+
+function uploadMainImage(short_title, uuid, image_name) {}
+
+
+function continueOperationMainImage(success, short_title, uuid) {
+    if(!parseInt(success)) {
+        document.getElementById('info-toast').style.height = '110.5px';
+
+        document.getElementById('toast-message').innerHTML = 'Upload de l\'image effectuée.';
+        document.getElementById('info-toast').style.opacity = 1;
+
+        setTimeout(function() {
+           document.getElementById('info-toast').style.opacity = 0;
+        }, 2500);
+    }
+    else {
+        document.getElementById('info-toast').style.height = '110.5px';
+
+        document.getElementById('toast-message').innerHTML = 'Erreur lors de l\'upload de l\'image. Veuillez réessayer.';
+        document.getElementById('info-toast').style.opacity = 1;
+
+        setTimeout(function() {
+           document.getElementById('info-toast').style.height = '110.5px';
+       }, 10);
+
+        setTimeout(function() {
+           document.getElementById('info-toast').style.opacity = 0;
+        }, 2500);
+    }
+}
+
+
+function continueOperationMainImageDelete(success, short_title, uuid) {
+    if(!parseInt(success)) {
+        document.getElementById('info-toast').style.height = '110.5px';
+
+        document.getElementById('toast-message').innerHTML = 'Suppression de l\'image effectuée.';
+        document.getElementById('info-toast').style.opacity = 1;
+
+        setTimeout(function() {
+           document.getElementById('info-toast').style.opacity = 0;
+        }, 2500);
+    }
+    else {
+        document.getElementById('info-toast').style.height = '110.5px';
+
+        document.getElementById('toast-message').innerHTML = 'Erreur lors de la suppression de l\'image. Veuillez réessayer.';
+        document.getElementById('info-toast').style.opacity = 1;
+
+        setTimeout(function() {
+           document.getElementById('info-toast').style.height = '110.5px';
+       }, 10);
+
+        setTimeout(function() {
+           document.getElementById('info-toast').style.opacity = 0;
+        }, 2500);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONVERSION DU CODE EN STOCKABLE
 function convertToHtmlCode(text) {
     let output = '';
     for (let i = 0; i < text.length; i++) {
@@ -241,19 +359,4 @@ function convertFromCodeToHtml(nb) {
     }
 
     return renderVal;
-}
-
-
-
-
-
-
-
-
-
-function computeText(rawText) {
-    let computedText = '';
-
-
-    return rawText;
 }

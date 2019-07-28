@@ -1,4 +1,5 @@
 const passFile = require('./../datas/pass.json');
+const config   = require('./../datas/config.json');
 const crypto   = require('crypto');
 
 
@@ -21,8 +22,8 @@ function connectUser(username, password, res) {
            username && username       == passFile.username
         && password && encrypted_pass == passFile.password
     ) {
-        res.cookie('admin_username', username      , { maxAge: 900000, httpOnly: false });
-        res.cookie('admin_password', encrypted_pass, { maxAge: 900000, httpOnly: false });
+        res.cookie('admin_username', username      , { maxAge: config.session_max_age, httpOnly: false });
+        res.cookie('admin_password', encrypted_pass, { maxAge: config.session_max_age, httpOnly: false });
 
         return true;
     }
@@ -34,8 +35,8 @@ function connectUser(username, password, res) {
 /** Retourne true si l'utilisateur est déconnecté */
 function deconnectUser(req, res) {
     if(req.cookies.admin_username && req.cookies.admin_password) {
-        res.cookie('admin_username', '', { maxAge: 900000, httpOnly: false });
-        res.cookie('admin_password', '', { maxAge: 900000, httpOnly: false });
+        res.cookie('admin_username', '', { maxAge: config.session_max_age, httpOnly: false });
+        res.cookie('admin_password', '', { maxAge: config.session_max_age, httpOnly: false });
 
         return true;
     }

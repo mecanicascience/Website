@@ -4,6 +4,10 @@
 		<%- include('../../partial/head') %>
 
 		<script type="text/javascript">
+			let imageName = <%- "'" + datas.image_name.split('.')[0] + "'" %>;
+			let imageExtension = <%- '"' + datas.image_name.split('.')[1] + '"' %>;
+
+
 			window.onload = function() {
 				document.getElementById('gn-menu').onclick = () => window.location.href = '/admin';
 
@@ -46,12 +50,51 @@
 				document.getElementById('subtitle-area').value = <%- "'" + datas.description + "'" %>;
 				document.getElementById('content-area').value = convertFromCodeToHtml(<%- "'" + datas.content + "'" %>);
 
+				// image main
+				document.getElementById('image-name').value = <%- "'" + datas.image_name.split('.')[0] + "'" %>;
+				document.getElementById('image-extension').value = <%- '"' + datas.image_name.split('.')[1] + '"' %>;
+
 
 				// Set le dernier titre
 				setLastTitle(document.getElementById('title-area').value);
 
 				textAreaAdjust(document.getElementById('content-area'));
+
+
+				// Upload de l'image principale
+				if(document.getElementById('main-image-upload-input')) {
+					document.getElementById('main-image-upload-input').value = '';
+					document.getElementById('main-image-upload-input').addEventListener('change', () => {
+						document.getElementById('main-image-upload-text').innerHTML =
+							'Nom du fichier uploadé : <b>' + document.getElementById('main-image-upload-input').files[0].name
+							+ '</b><br /><br />Le fichier \''
+							+ '<i>https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + <%- '"' + datas.uuid + '"' %> + '_<b>'
+							+ imageName + '.' + imageExtension
+							+ '</b>?alt=media</i>\' sera créé.';
+					});
+				}
+
+				<% if(action_function == '1') { %>
+					addMainImagePopup();
+					continueOperationMainImage(<%- '"' + image_error + '"' %>, <%- '"' + datas.short_title + '"' %>, <%- '"' + datas.uuid + '"' %>);
+				<% } %>
+				<% if(action_function == '2') { %>
+					addMainImagePopup();
+					continueOperationMainImageDelete(<%- '"' + image_error + '"' %>, <%- '"' + datas.short_title + '"' %>, <%- '"' + datas.uuid + '"' %>);
+				<% } %>
+
 			};
+
+
+
+			let image_name_raw = <%- '"' + datas.image_name + '"' %>;
+			function getImageName() {
+			    return image_name_raw;
+			}
+
+
+
+
 
 			function redirectDelete() { window.location.href = '/admin/delete?title=' + <%- '"' + datas.title + '"' %> + '&uuid=' + <%- '"' + datas.uuid + '"' %>; }
 
@@ -63,13 +106,15 @@
 					convertToHtmlCode(document.getElementById('content-area').value),
 					document.getElementById('date-publi').value,
 					document.getElementById('subtitle-area').value,
-					'test.png',
+					document.getElementById('image-name').value + '.' + document.getElementById('image-extension').value,
 					parseInt(document.getElementById('pref-size').value.split('size_')[1]),
 					<%- "'" + datas.short_title + "'" %>,
 					document.getElementById('title-area').value,
 					parseInt(<%- "'" + datas.uuid + "'" %>),
 					document.getElementById('publish-status').checked,
-					button_id
+					button_id,
+					<%- datas.image_exists %>,
+					<%- "'" + datas.image_name + "'" %>
 				);
 			}
 		</script>
@@ -80,7 +125,7 @@
 			<%- include('../../partial/header') %>
 
 			<div class="toaster">
-				<div id="info-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="height: 91.5px;">
+				<div id="info-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="height: 91.5px; z-index: 100000;">
 					<div class="toast-header">
 						<svg class="bd-placeholder-img rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
 							<rect width="100%" height="100%" fill="#007aff"></rect>
@@ -118,6 +163,7 @@
 				</div>
 			</div>
 
+
 			<div class="modal fade" id="preview-toaster" tabindex="-1" role="dialog" aria-labelledby="preview-toaster-t" aria-hidden="true">
 				<div class="modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" id="preview-toaster-sm" role="document" style="max-width: calc(100% - 10%) !important;">
 					<div class="modal-content">
@@ -136,6 +182,104 @@
 					</div>
 				</div>
 			</div>
+
+
+			<div class="modal fade" id="main-image-toaster" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" id="preview-toaster-sm" role="document" style="max-width: calc(100% - 10%) !important;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Modification de l'image de profil de l'article</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closePopup('main-image-toaster')">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<% if(datas.image_exists) { %>
+							<form enctype="multipart/form-data" action="/admin/delete/main_image" method="post" id="main-image-delete-form">
+								<div class="modal-body" id="main-image-toaster-content">
+									<div class="m-content">
+										<div class="container m-c-header">
+												<div class="m-c-row">
+												</div>
+
+												<div class="m-c-row" style="max-width: 32%;">
+													<div class="card">
+														<img style="max-height: 212px;" src=<%= 'https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + datas.uuid + '_' + datas.image_name + '?alt=media' %> class="card-img-top">
+														<div class="card-body">
+															<h5 class="card-title">Image de l'article</h5>
+															<p class="card-text">
+																Cliquez sur <a href=<%= 'https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + datas.uuid + '_' + datas.image_name + '?alt=media' %>>ce lien</a> pour consulter l'image.
+																<br />Pour pouvoir modifier l'image, vous devez tout d'abord supprimer celle actuelle.
+															</p>
+														</div>
+
+														<input type="text" id="image_name-input" name="image_name" style="display: none;" value=<%- '"' + datas.image_name + '"' %>>
+														<input type="text" id="uuid-input" name="uuid" style="display: none;" value=<%- '"' + datas.uuid + '"' %>>
+														<input type="text" id="title-input" name="title" style="display: none;" value=<%- '"' + datas.short_title + '"' %>>
+													</div>
+												</div>
+
+												<div class="m-c-row">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-danger" id="upload-main-file-button" type="submit">Supprimer l'image</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closePopup('main-image-toaster')">Annuler</button>
+									</div>
+								</div>
+							</form>
+						<% } else { %>
+							<form enctype="multipart/form-data" action="/admin/update/main_image" method="post" id="main-image-upload-form">
+								<div class="modal-body" id="main-image-toaster-content">
+									<div class="m-content">
+										<div class="container m-c-header">
+											<div class="m-c-row">
+											</div>
+
+											<div class="m-c-row">
+												<p>
+													Aucune image n'est uploadée.
+													<br /><b>Renommez</b> l'image de la même manière que sur le groupe de bouttons de l'accueil de la page, puis cliquez sur 'Browse' et sélectionnez la photo à uploader.
+													<br />Puis, appuyez sur le bouton 'Uploader'.
+												</p>
+
+												<div style="margin-top: 20px;">
+													<div>
+														<label for="main-image-upload-input" class="btn btn-info">Sélectionner des images à uploader (PNG, JPG)</label>
+														<input type="file" id="main-image-upload-input" name="image" accept=".jpg, .png" style="opacity: 0;">
+
+														<input type="text" id="image_name-input" name="image_name" style="display: none;" value=<%- '"' + datas.image_name + '"' %>>
+														<input type="text" id="uuid-input" name="uuid" style="display: none;" value=<%- '"' + datas.uuid + '"' %>>
+														<input type="text" id="title-input" name="title" style="display: none;" value=<%- '"' + datas.short_title + '"' %>>
+													</div>
+													<div class="preview">
+														<p style="color: #000000b0; margin-left: 15px;" id="main-image-upload-text">Pas de fichier sélectionné.</p>
+													</div>
+												</div>
+											</div>
+
+											<div class="m-c-row">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button class="btn btn-outline-secondary" id="upload-main-file-button" type="submit">Uploader le fichier</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closePopup('main-image-toaster')">Annuler</button>
+								</div>
+							</form>
+						<% } %>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
 
 
 			<div id="balises_description" class="hint-desc" style="display: none;">
@@ -164,7 +308,30 @@
 
 						<div class="m-c-row">
 							<div class="m-c-col">
-								<a><img class="m-b-image m-c-logo" src=<%= '/imgs/blog/' + datas.uuid + '_' + datas.image_name %>  /></a>
+								<% if(datas.image_exists) { %>
+									<a><img class="m-b-image m-c-logo" src=<%= 'https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + datas.uuid + '_' + datas.image_name + '?alt=media' %>  /></a>
+								<% } %>
+							</div>
+
+
+							<div class="m-c-col" style="display: flex; margin-top: 18px;">
+                                <p class="m-b-cat">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Image :</span>
+
+										<select class="form-control" style="text-align: left; border-radius: 0 !important; color: #0000007a !important; width: 57px !important;">
+											<option value="">...</option>
+											<option value="">https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F<%= datas.uuid %>_</option>
+										</select>
+									</div>
+
+									<input style="color: #606060 !important; border-radius: 0 !important;" type="text" class="form-control" placeholder="image_name" id="image-name">
+
+									<select class="form-control" id="image-extension" style="text-align: left; border-radius: 0 !important; color: #0000007a !important;">
+										<option value="png">.png</option>
+										<option value="jpg">.jpg</option>
+									</select>
+								<span style="text-align: left; margin: 0 5px;"></span></p>
 							</div>
 
 
@@ -231,17 +398,30 @@
 						</div>
 					</div>
 
+
 					<div class="container m-c-header" style="padding-top: 23px; margin-bottom: 10px;">
 						<div class="m-c-row">
 						</div>
 
 						<div class="m-c-row" style="flex-direction: row;">
-							<div class="m-c-col" style="flex-grow: 1;">
-								<button type="button" id="publish-modifs" class="btn btn-outline-secondary" onclick="publishModifs(1)">Enregistrer les modifications</button>
+							<div class="m-c-row" style="display: flex;">
+								<div class="m-c-col" style="flex-grow: 1;">
+									<button type="button" id="add-main-image" class="btn btn-outline-primary" onclick="addMainImagePopup()">Image principale</button>
+								</div>
+
+								<div class="m-c-col" style="flex-grow: 1; margin-top: 15px;">
+									<button type="button" id="publish-modifs" class="btn btn-outline-secondary" onclick="publishModifs(1)">Enregistrer les modifications</button>
+								</div>
 							</div>
 
-							<div class="m-c-col" style="flex-grow: 1;">
-								<button type="button" id="delete-article" class="btn btn-outline-danger" onclick="deleteArticle()">Supprimer l'article</button>
+							<div class="m-c-row" style="display: flex;">
+								<div class="m-c-col" style="flex-grow: 1;">
+									<button type="button" id="add-other-images" class="btn btn-outline-primary" onclick="">Images secondaires</button>
+								</div>
+
+								<div class="m-c-col" style="flex-grow: 1; margin-top: 15px;">
+									<button type="button" id="delete-article" class="btn btn-outline-danger" onclick="deleteArticle()">Supprimer l'article</button>
+								</div>
 							</div>
 						</div>
 

@@ -10,7 +10,7 @@ const m = {
     os            : require('os'),
     path          : require('path'),
     body_parser   : require('body-parser'),
-    constants     : require('./constants'),
+    config        : require('./datas/config.json'),
     db            : require('./routes/db'),
     cookie_parser : require('cookie-parser'),
     users         : require('./routes/users')
@@ -28,15 +28,15 @@ const m = {
 
 /* ======  VARIABLES   ====== */
 // == Configs constants ==
-const IS_HTTPS = m.constants.is_https;
-const SITE     = m.constants.site;
-const VERSION  = m.constants.version;
+const IS_HTTPS = m.config.is_https;
+const SITE     = m.config.site;
+const VERSION  = m.config.version;
 
 
 
 // == Server ==
 let isLocalHost = m.os.hostname().indexOf("local");
-const PORT      = process.env.PORT || 8080;
+const PORT      = process.env.PORT || m.config.local_port;
 const HOST      = isLocalHost > -1 ? SITE : "localhost:" + PORT;
 const HTTP_OR_S = IS_HTTPS ? "https://" : "http://";
 const HOST_NAME = isLocalHost > -1 ? HTTP_OR_S + HOST : HOST;
@@ -51,7 +51,7 @@ const HOST_NAME = isLocalHost > -1 ? HTTP_OR_S + HOST : HOST;
     // == Server config dependencies ==
 const sitemap = m.sitemap.createSitemap({
     hostname: HOST_NAME,
-    cacheTime: 600000,
+    cacheTime: m.config.cache_time,
     urls: [
         { url: HTTP_OR_S + SITE }
     ]
