@@ -410,7 +410,14 @@ window.addEventListener('keydown', function(event) {
 
 
 
-function addCustomBaliseToContent(elToAdd, replaceBeforeAndAfterSpaces, addLineEspaceBeforeAndAfter) {
+/**
+ * Ajout d'une balise autour du contenu sélectionné
+ * @param elToAdd                     Balise à ajouter
+ * @param replaceBeforeAndAfterSpaces true : la balise s'intègre entre les espaces
+ * @param addLineEspaceBeforeAndAfter true : ajout d'un saut de ligne avant et après la balise
+ * @param secondChar                  Si valeur existe, constitue la balise droite à ajouter
+ */
+function addCustomBaliseToContent(elToAdd, replaceBeforeAndAfterSpaces, addLineEspaceBeforeAndAfter, secondChar) {
     let el = document.getElementById('content-area');
     if(document.activeElement == el) {
         // replace all next spaces
@@ -450,7 +457,10 @@ function addCustomBaliseToContent(elToAdd, replaceBeforeAndAfterSpaces, addLineE
         val += toRemplacer;
 
         if(addLineEspaceBeforeAndAfter) val += '\n';
-        val += elToAdd;
+
+        if(secondChar) { val += secondChar; }
+        else           { val += elToAdd; }
+
 
         for (let i = 0; i < cN; i++) val += ' ';
 
