@@ -208,6 +208,9 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
         html += post.uuid + '_' + post.image_name + '?alt=media';
         html += '" />';
     }
+    else {
+        html += '<div style="margin-top: 95px"></div>';
+    }
 
     html += '</div><div class="b-text"><p class="b-t-title">';
     html += articles.getLabelLong(post.category_id);
