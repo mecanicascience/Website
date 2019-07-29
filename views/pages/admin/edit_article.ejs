@@ -24,21 +24,15 @@
 
 
 			    // Affichage de la date
-			    let d =
-			    <% if(datas.date) { %>
-			        <%- '"' + datas.date.toDate() + '"' %>
-			    <% } else { %>
-			        <%= 'null' %>
-			    <% } %>
-			    ;
+			    let d = <% if(datas.date) { %> <%- '"' + datas.date.toDate() + '"' %> <% } else { %> <%= 'null' %> <% } %>;
 
 			    if(d != 'null' && d) {
 			        let date = new Date(d);
 			        let d1 = date.getDate();
 			        let d2 = date.getMonth();
 
-			        document.getElementById('date-publi').value = date.getFullYear() + '-' + ((d2 + '').length == 1 ? '0' + d2 : d2) + '-' + ((d1 + '').length == 1 ? '0' + d1 : d1);
-			    }
+			        document.getElementById('date-publi').value = date.getFullYear() + '-' + ((d2 + '').length == 1 ? '0' + (d2 + 1) : (d2 + 1)) + '-' + ((d1 + '').length == 1 ? '0' + d1 : d1);
+				}
 
 
 			    // Affichage de la taille de préférence

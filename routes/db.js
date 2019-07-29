@@ -219,7 +219,7 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
     html += '">';
     html += post.title;
     html += '</a></p><p class="b-t-date">';
-    html += 'Le ' + ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + d2 : d2) + '/' + (date ? date.getFullYear() : '0000');
+    html += 'Le ' + ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + (d2 + 1) : (d2 + 1)) + '/' + (date ? date.getFullYear() : '0000');
     html += '</p></div></div>';
 
 
