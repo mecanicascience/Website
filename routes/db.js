@@ -68,6 +68,13 @@ async function getArticleByUUID(uuid) {
 
 
 /* ========== LISTE LES POSTS A LA RACINE DU SITE ========== */
+/** Retourne la liste de tous les tableaux visibles */
+async function getAllPostsMAIN() {
+    let posts = await getPosts(undefined, undefined, 9999999);
+    return posts;
+}
+
+
 
 /**
  * Affichage de tous les posts à l'accueil du site
@@ -516,5 +523,6 @@ module.exports = {
     updateMainImage        : updateMainImage,
     setIsMainImage         : setIsMainImage,
     deleteMainImage        : deleteMainImage,
-    editMainImageName      : editMainImageName
+    editMainImageName      : editMainImageName,
+    getAllPostsMAIN        : getAllPostsMAIN
 };

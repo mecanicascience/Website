@@ -13,7 +13,8 @@ const m = {
     config        : require('./datas/config.json'),
     db            : require('./routes/db'),
     cookie_parser : require('cookie-parser'),
-    users         : require('./routes/users')
+    users         : require('./routes/users'),
+    articles      : require('./routes/articles')
 };
 
 
@@ -49,14 +50,6 @@ const HOST_NAME = isLocalHost > -1 ? HTTP_OR_S + HOST : HOST;
 
 /* ====== APP ====== */
     // == Server config dependencies ==
-const sitemap = m.sitemap.createSitemap({
-    hostname: HOST_NAME,
-    cacheTime: m.config.cache_time,
-    urls: [
-        { url: HTTP_OR_S + SITE }
-    ]
-});
-
 const app = m.express();
 
 m.db.initializeDb();
@@ -69,9 +62,22 @@ app
     .get("/robots.txt", function(req, res) {
         res.header("Content-Type", "text/html");
         res.send("User-agent: *<br />Sitemap: " + HTTP_OR_S + SITE + "/sitemap.xml<br />Disallow :");
-    })
+    });
 
-    .get("/sitemap.xml", function(req, res) {
+
+let sitemap;
+app
+    .get("/sitemap.xml",async  function(req, res) {
+        if(!sitemap) {
+            let sitemap_url = await m.articles.getArticlesUrl(HTTP_OR_S + SITE);
+            sitemap_url.unshift({ url: HTTP_OR_S + SITE });
+
+            sitemap = m.sitemap.createSitemap({
+                hostname: HOST_NAME,
+                cacheTime: m.config.cache_time,
+                urls: sitemap_url
+            });
+        }
         res.header("Content-Type", "application/xml");
         res.send(sitemap.toString());
     })

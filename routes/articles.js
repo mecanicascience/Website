@@ -42,7 +42,20 @@ async function getArticles(q, s, l, is_admin_link, all_articles) {
 
 
 
-// Retourne le label à afficher à l'accueil du site pour chaque query
+/** Retourne l'url de tous les articles pour le sitemap */
+async function getArticlesUrl(main_url) {
+    let html_array = await db.getAllPostsMAIN();
+    let arr = [];
+
+    for (let i = 0; i < html_array.length; i++)
+        arr.push({ url: main_url + '/article?title=' + html_array[i].post.short_title + '&uuid=' + html_array[i].post.uuid });
+
+    return arr;
+}
+
+
+
+/** Retourne le label à afficher à l'accueil du site pour chaque query */
 function getLabel(q, s, l, articlesLen) {
     let text = [];
     let cat = '';
@@ -224,5 +237,6 @@ module.exports = {
     deleteArticle             : deleteArticle,
     getArticlesForSuggestions : getArticlesForSuggestions,
     updateMainImage           : updateMainImage,
-    deleteMainImage           : deleteMainImage
+    deleteMainImage           : deleteMainImage,
+    getArticlesUrl            : getArticlesUrl
 };
