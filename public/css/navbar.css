@@ -226,3 +226,13 @@
 
 .gn-submenu > li > a { color: unset; }
 .gn-submenu > li > a:hover { text-decoration: unset; }
+
+@media (max-width: 1000px) {
+    #navbarSupportedContent { height: 86px; }
+    #navbar-items-right { display: none; }
+}
+
+@media (max-width: 420px) {
+    #search-form { width: 223px; }
+    #navbarSupportedContent { padding-left: 0 !important; }
+}
