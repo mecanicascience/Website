@@ -227,12 +227,29 @@
 .gn-submenu > li > a { color: unset; }
 .gn-submenu > li > a:hover { text-decoration: unset; }
 
+
+
 @media (max-width: 1000px) {
     #navbarSupportedContent { height: 86px; }
     #navbar-items-right { display: none; }
 }
 
+@media (max-width: 750px) {
+    .s-c-category { flex-direction: column !important; }
+}
+
+@media (max-width: 500px) {
+    .section { padding: 21px 14px !important; }
+}
+
 @media (max-width: 420px) {
+    .mdc-button { height: auto !important; }
+    .m-t-title { font-size: 31px !important; }
     #search-form { width: 223px; }
     #navbarSupportedContent { padding-left: 0 !important; }
+}
+
+@media (max-width: 300px) {
+    #navbarSupportedContent { display: none !important; }
+    #m-c-row-cat { display: none; }
 }
