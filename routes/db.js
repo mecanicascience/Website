@@ -271,7 +271,7 @@ async function addNewPost(category_id, content, date, description, image_credits
         content       : content,
         date          : date,
         description   : description,
-        image_credits : credits,
+        image_credits : image_credits,
         image_name    : image_name,
         pref_size     : pref_size,
         short_title   : short_title,
