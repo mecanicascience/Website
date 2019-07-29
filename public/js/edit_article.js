@@ -404,6 +404,11 @@ window.addEventListener('keydown', function(event) {
                 event.preventDefault();
                 addCustomBaliseToContent('``', true);
                 break;
+
+            case 'l':
+                event.preventDefault();
+                addCustomBaliseToContent('[', true, false, '](lien)');
+                break;
         }
     }
 });
@@ -419,6 +424,7 @@ window.addEventListener('keydown', function(event) {
  */
 function addCustomBaliseToContent(elToAdd, replaceBeforeAndAfterSpaces, addLineEspaceBeforeAndAfter, secondChar) {
     let el = document.getElementById('content-area');
+
     if(document.activeElement == el) {
         // replace all next spaces
         let cB = 0;
@@ -454,7 +460,8 @@ function addCustomBaliseToContent(elToAdd, replaceBeforeAndAfterSpaces, addLineE
         val += elToAdd;
         if(addLineEspaceBeforeAndAfter) val += '\n';
 
-        val += toRemplacer;
+        if(toRemplacer) val += toRemplacer;
+        else            val += '_contenu_';
 
         if(addLineEspaceBeforeAndAfter) val += '\n';
 

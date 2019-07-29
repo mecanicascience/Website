@@ -458,7 +458,8 @@
 					<div class="m-c-col" style="flex-grow: 1;">
 						<label class="cat-title">Contenu du post <span id="cat-title-span">(pas de dernière sauvegarde)</span> :</label>
 						<a class="badge badge-secondary" onclick="showPostRender()" style="cursor: pointer; color: #fdf9f9;">Rendu du post</a>
-						<a class="badge badge-secondary" onclick="showShortcuts()" style="cursor: pointer; color: #fdf9f9;">Voir les différents raccourcis</a>
+						<a class="badge badge-secondary" onclick="showShortcuts()" style="cursor: pointer; color: #fdf9f9;">Différents raccourcis</a>
+						<a class="badge badge-secondary" onclick="document.location.href = '/article?title=<%= datas.short_title %>&uuid=<%= datas.uuid %>'" style="cursor: pointer; color: #fdf9f9;">Consulter la page de l'article</a>
 						<a class="badge badge-secondary" onclick="changeSaveButtonAuto(!autosave)" style="cursor: pointer; color: #fdf9f9; margin-left: 15px;" id="auto-save-button">Chargement en cours...</a>
 						<textarea style="overflow:hidden" class="form-control" aria-label="content-area" id="content-area" placeholder="Contenu du post" value="Chargement en cours..."></textarea>
 					</div>
@@ -468,6 +469,8 @@
 						<div class="m-c-row"></div>
 
 						<div class="m-c-row" style="margin-top: 17px;">
+							<button style="margin-bottom: 10px;" type="button" id="see-edits-bottom" class="btn btn-outline-secondary" onclick="showPostRender()">Rendu du post</button>
+
 							<button type="button" id="publish-modifs-2" class="btn btn-outline-secondary" onclick="publishModifs(2)">Enregistrer les modifications</button>
 						</div>
 
