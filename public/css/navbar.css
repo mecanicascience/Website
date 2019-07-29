@@ -253,3 +253,12 @@
     #navbarSupportedContent { display: none !important; }
     #m-c-row-cat { display: none; }
 }
+
+
+@media (min-height: 800px) {
+    footer { margin-top: 8%; }
+}
+
+@media (max-height: 850px) {
+    .gn-menu-wrapper.gn-open-all .gn-submenu li { height: 47px; }
+}

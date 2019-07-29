@@ -196,6 +196,7 @@ router
             req.body.content,
             req.body.date,
             req.body.description,
+            req.body.image_credits,
             req.body.image_name,
             req.body.pref_size,
             req.body.short_title,

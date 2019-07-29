@@ -51,6 +51,8 @@
 				document.getElementById('content-area').value = convertFromCodeToHtml(<%- '"' + datas.content + '"' %>);
 
 				// image main
+				document.getElementById('image-credits').value = <%- '"' + datas.image_credits + '"' %>;
+
 				document.getElementById('image-name').value = <%- '"' + datas.image_name.split('.')[0] + '"' %>;
 				document.getElementById('image-extension').value = <%- '"' + datas.image_name.split('.')[1] + '"' %>;
 
@@ -121,6 +123,7 @@
 					convertToHtmlCode(document.getElementById('content-area').value),
 					document.getElementById('date-publi').value,
 					document.getElementById('subtitle-area').value,
+					document.getElementById('image-credits').value,
 					document.getElementById('image-name').value + '.' + document.getElementById('image-extension').value,
 					parseInt(document.getElementById('pref-size').value.split('size_')[1]),
 					<%- '"' + datas.short_title + '"' %>,
@@ -335,6 +338,20 @@
 									</select>
 								<span style="text-align: left; margin: 0 5px;"></span></p>
 							</div>
+
+							<div class="m-c-col" style="display: flex; margin-top: 18px;">
+                                <p class="m-b-cat">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Crédits de l'image :</span>
+										<span class="input-group-text" style="color: #0000006b; background-color: #00000008;">&#64;</span>
+									</div>
+
+									<input style="color: #606060 !important; border-radius: 0 !important;" type="text" class="form-control" placeholder="Crédits" id="image-credits">
+								<span style="text-align: left; margin: 0 5px;"></span></p>
+							</div>
+
+
+							<hr style="margin: 21px 0 2px 0 !important; width: 120%; align-self: center; border-color: #0000000f !important;" />
 
 
 							<div class="m-c-col" style="display: flex; margin-top: 18px;">

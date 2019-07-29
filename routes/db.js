@@ -256,21 +256,22 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
  * @param uuid         int       : identifiant unique du post (il est conseillé de n'entrer aucune valeur)
  * @return le nouveau post généré
  */
-async function addNewPost(category_id, content, date, description, image_name, pref_size, short_title, title, visible, image_exists, uuid) {
+async function addNewPost(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, visible, image_exists, uuid) {
     if(!uuid) uuid = await generateNewUUID();
 
     let data = {
-        category_id  : category_id,
-        content      : content,
-        date         : date,
-        description  : description,
-        image_name   : image_name,
-        pref_size    : pref_size,
-        short_title  : short_title,
-        title        : title,
-        uuid         : uuid,
-        visible      : visible,
-        image_exists : image_exists
+        category_id   : category_id,
+        content       : content,
+        date          : date,
+        description   : description,
+        image_credits : credits,
+        image_name    : image_name,
+        pref_size     : pref_size,
+        short_title   : short_title,
+        title         : title,
+        uuid          : uuid,
+        visible       : visible,
+        image_exists  : image_exists
     };
 
     let addDoc = await db.collection('posts').add(data);
@@ -301,8 +302,8 @@ async function generateNewUUID() {
  * Edition d'un nouvel article
  * @return true si l'article a bien été édité
  */
-async function editArticle(category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible, image_exists) {
-    let datas = { category_id, content, date, description, image_name, pref_size, short_title, title, uuid, visible, image_exists };
+async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists) {
+    let datas = { category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists };
     let dateFormatted;
 
 

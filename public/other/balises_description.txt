@@ -1,4 +1,4 @@
-<p style="margin-top: -49px;"></p>
+<p style="margin-top: -60px;"></p>
 # Insertion de code
 Pour insérer du code, il faut tout d'abord le sélectionner. Puis, il existe deux raccourcis :
  - <kbd>CTRL</kbd>+<kbd>K</kbd> pour insérer du code linéaire, à travers la balise ``` `` [code] `` ```

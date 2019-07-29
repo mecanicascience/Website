@@ -10,6 +10,35 @@
 
 .m-b-image:hover { height: 290px; }
 
+.figure-caption { margin-right: 15px; }
+
+.figure-caption > p > a {
+    position: relative;
+    text-decoration: none;
+    color: #4899b0;
+    align-content: center;
+}
+
+.figure-caption > p > a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: -1.3px;
+    background-color: #4899b0;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.figure-caption > p > a:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+
+
 
 
 /** CUSTOM MARKDOWN */

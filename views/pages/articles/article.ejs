@@ -32,7 +32,18 @@
 						<div class="m-c-row">
 							<div class="m-c-col">
 								<% if(datas.image_exists) { %>
-									<a><img class="m-b-image m-c-logo" src=<%= 'https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + datas.uuid + '_' + datas.image_name + '?alt=media' %>  /></a>
+									<% if(datas.image_credits != 'null') { %>
+										<figure class="figure">
+									<% } %>
+											<a><img class="m-b-image m-c-logo" src=<%= 'https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/blog%2F' + datas.uuid + '_' + datas.image_name + '?alt=media' %>  /></a>
+									<% if(datas.image_credits != 'null') { %>
+											<figcaption class="figure-caption text-right" id="figcaption"></figcaption>
+										</figure>
+
+										<script>
+											document.getElementById('figcaption').innerHTML = computeText('&copy; <%= datas.image_credits %>');
+										</script>
+									<% } %>
 								<% } %>
 							</div>
 
