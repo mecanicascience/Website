@@ -11,6 +11,7 @@
 			<script type="text/javascript">
 				window.onload = function() {
 					document.getElementById('container-text').innerHTML = computeText(convertFromCodeToHtml(<%- '"' + datas.content + '"' %>));
+					MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 				};
 			</script>
 		</header>
