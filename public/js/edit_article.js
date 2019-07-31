@@ -72,6 +72,8 @@ function showPostRender() {
 function showShortcuts() {
     document.getElementById('preview-toaster-content').innerHTML = computeText(document.getElementById('balises_description').value);
 
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
     document.getElementById('preview-toaster-content').style.maxHeight = document.body.clientHeight - 0.1 * document.body.clientHeight + 'px';
     document.getElementById('preview-toaster-sm').style.marginTop = 0.05 * document.body.clientHeight + 'px';
 
