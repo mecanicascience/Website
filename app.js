@@ -4,22 +4,42 @@
 
 /* ====== DEPENDENCIES ====== */
 const m = {
-    express       : require('express'),
-    routes        : require('./routes/index'),
-    sitemap       : require('sitemap'),
-    os            : require('os'),
-    path          : require('path'),
-    body_parser   : require('body-parser'),
-    config        : require('./datas/config.json'),
-    db            : require('./routes/db'),
-    cookie_parser : require('cookie-parser'),
-    users         : require('./routes/users'),
-    articles      : require('./routes/articles')
+    express        : require('express'),
+    routes         : require('./routes/index'),
+    sitemap        : require('sitemap'),
+    os             : require('os'),
+    path           : require('path'),
+    body_parser    : require('body-parser'),
+    config         : require('./datas/config.json'),
+    private_db_key : require('./datas/private-db-key.json'),
+    pass           : require('./datas/pass.json'),
+    db             : require('./routes/db'),
+    cookie_parser  : require('cookie-parser'),
+    users          : require('./routes/users'),
+    articles       : require('./routes/articles')
 };
 
 
 
 
+
+
+
+
+
+/* ====== UPDATE CONFIG FILES FROM LOCAL ENVIRONMENT VARIABLES ====== */
+m.config.main_image_link    = process.env.FIREBASE_MAIN_IMAGE_LINK;
+m.config.bucket_name        = process.env.FIREBASE_BUCKET_NAME;
+
+m.pass.username = process.env.MAIN_PASS;
+m.pass.password = process.env.MAIN_PASSWORD;
+
+m.private_db_key.project_id             = process.env.CREDENTIAL_PROJECT_ID;
+m.private_db_key.private_key_id         = process.env.CREDENTIAL_PRIVATE_KEY_ID;
+m.private_db_key.private_key            = (process.env.CREDENTIAL_PRIVATE_KEY + "").replace(/&_&/g, '-').replace(/\\\\n/g, '\n');
+m.private_db_key.client_email           = (process.env.CREDENTIAL_CLIENT_EMAIL + "").replace(/&_&/g, '-');
+m.private_db_key.client_id              = process.env.CREDENTIAL_CLIENT_ID;
+m.private_db_key.client_x509_cert_url   = (process.env.CLIENT_CERT_URL + "").replace(/&_&/g, '-');
 
 
 

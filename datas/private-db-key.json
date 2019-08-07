@@ -1,12 +1,12 @@
 {
     "type": "service_account",
-    "project_id": "mecanicascience",
-    "private_key_id": "8ff3350aa6e354211f67913c839593dfd6403fc1",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCi/W7WNW/pLhig\nO5tJcoevqjZWLO9tvjRLvGTMN2pytNAeILfbLr+c/sHaxcauR03tfvGtGaQ+8ZWF\nsTjrYTHewwNNIEQzDVxeBcB95/lQy9sIf1YbjfFx2UIQBC3+nExmD04PDpe8PBha\n8oC4z0vdtvBJiZKOir3DYs55kSRVWgPma1Z/k8bI88x0xJ0VU9CIWw3L4MSGxYcT\nyzOsrhNcYZJhNjp6mFDmh946qwYoJn+PykLf4/pclWrUyYoNukvk6YxNh1u5BbNS\nHomfSlbTJvc8SbWp1uePC4Zm/8c9wSD49/1EEO/4iggj/6iS+6LxnD4IL1/R3mar\n+XHZXQN7AgMBAAECggEABDAm7PIqkf9ROqzNbLG4stbY1pYJAPTmOxv4KxcxcQkc\nX+nPT55/5fTV3l0+obPLWNLuOthx0/w5L1pCcCnrMiIor46osfch7HiRXarcSSsz\n0aAUAlk/XwGKJQc2d1hkziqOguyJEZkptwyMKjOJa4UL35fdYDRIdADR9WW5XUgM\nWZEyFlNqlWcVYMAfuD8ap+klVNprCz564QmpSAUyUOr33ZAPyS8udy1AuJqlHP5w\neN0SvMAOckMg1jLgZUHZEtKc2rGXx4HKYpLcvLhS48C3u63f75wdOJ8ARuAt4yms\nwZlwjUecDgIatqktTqk/XJqwtsJRF2o6H5GO2zOqoQKBgQDQxOA7/z+S3Xswr9/k\ny+RR15/mjPW1oVl64pSdyHSA6Ptzji4LEtKqiYymXvsUocJdceMEmpvjxBluGqMx\ncyud2xwWEN9++BUd/Moy8WRe11h5FMfmRS9WTtur0ASDZR2WwZoWMNKv/8QGq1px\npFTNLp3WVqjYt1X2yezQCWdf7QKBgQDH3TQzgVEGMInR6cH88XF8aGZxII1uHIZ6\n73V5Dmnc7DX2nFDzBDRfd8eMGTMG3M5S3m2wT81hCVjbFMv02+N0xvZAhxO5UWxX\n3L2j9+wb2TS6SyOd6dDKTFCNr9fhcB3GhrDhzBLfplrf6Sf0rTL+OKYInP+OvtEs\nHRTGyhp0BwKBgHdFo15jq6x6gOEF+gI7QoxHhoEvU0mbjwWX4ZRra7QiZ1ZTipal\nAFqSDxsV9JiK+gJtCGge9KUh6e1vpoCf7fFXtyocJbPihB4HyHVmWBOfMFqstrAm\nIq9KilIUnB99a3Qv05qN9jC7DQFKcHewjQpUcbR8+iYmSCSgpH0OglLZAoGBAMEg\nnzCl5QV2IbcVir5BEMiGmXb3XbLpHYntmjZAF0vDdOG4awBpL7KQq+JU91nKRBUP\nmi6k7nC194a7sdoKIODW4V25KPYKGAdO5nFrQFwopyrdMK2HIppY4/4FzTWqgRs1\nS/bkm9hBh86WHmXwdzXwx3/LNadZ/AYEk+8DnExBAoGANHReE1cgw8mpxrs19GXg\nMwCe6UpKos3faXqHTkbTF6lFY3F7RKgMz0dH2ejQG+ioRnPN7Y/9MKtZmuMIDn3o\nQPCu7LxMZfsRa+j3L9smPGuI0LiMgSnMDxsHjTtKMslvKWYBmfXyjJqwKd+iPB6I\nZRyP8y/6x6zi3BTZDjQaxAs=\n-----END PRIVATE KEY-----\n",
-    "client_email": "firebase-adminsdk-n0qgx@mecanicascience.iam.gserviceaccount.com",
-    "client_id": "115545505610293332772",
+    "project_id": "SET AS ENVIRONMENT VARIABLE",
+    "private_key_id": "SET AS ENVIRONMENT VARIABLE",
+    "private_key": "SET AS ENVIRONMENT VARIABLE",
+    "client_email": "SET AS ENVIRONMENT VARIABLE",
+    "client_id": "SET AS ENVIRONMENT VARIABLE",
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
     "token_uri": "https://oauth2.googleapis.com/token",
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-n0qgx%40mecanicascience.iam.gserviceaccount.com"
+    "client_x509_cert_url": "SET AS ENVIRONMENT VARIABLE"
 }
