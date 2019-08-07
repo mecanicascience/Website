@@ -41,6 +41,8 @@ m.private_db_key.client_email           = (process.env.CREDENTIAL_CLIENT_EMAIL +
 m.private_db_key.client_id              = process.env.CREDENTIAL_CLIENT_ID;
 m.private_db_key.client_x509_cert_url   = (process.env.CLIENT_CERT_URL + "").replace(/&_&/g, '-');
 
+console.log(process.env);
+
 
 
 
