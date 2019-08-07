@@ -2,7 +2,7 @@
  *  MAIN STARTING FILE => Treats all dependencies and links
  */
 /* ====== DEPENDANCIES ====== */
-const app     = require('./app');
+const app     = require('./app'); 
 
 
 /* ======  VARIABLES   ====== */
