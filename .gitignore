@@ -13,5 +13,5 @@ docker-compose.yml
 
 # Custom
 plan.txt
-articles_local/
+/articles_local
 config-vars.md
