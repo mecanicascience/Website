@@ -4,7 +4,7 @@
   "description": "The MecanicaScience website",
   "main": "index.js",
   "scripts": {
-    "watch": "nodemon ./start.js"
+    "watch": "nodemon ./index.js"
   },
   "keywords": [],
   "author": "xam4lor",
