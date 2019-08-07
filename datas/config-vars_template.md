@@ -11,6 +11,7 @@ Pour voir toutes les variables de configuration, executer la commande `heroku co
 ## Liste :
  - FIREBASE_MAIN_IMAGE_LINK = xxxx
  - FIREBASE_BUCKET_NAME = xxxx
+ - FIREBASE_BLOG_LINK = xxxx
 
  - MAIN_PASS = xxxx
  - PASSWORD = xxxx

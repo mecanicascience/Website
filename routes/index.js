@@ -102,11 +102,11 @@ router
             let article = await m.articles.getArticlesForSuggestions(datas.category_id, 3, datas.uuid);
 
             res.render('pages/articles/article', {
-                version     : m.constants.version,
-                action_link : m.articles.getActionLink(req.body.q, req.query.s),
-                datas       : datas,
-                connected   : m.users.isConnected(req.cookies),
-                articles    : article
+                version       : m.constants.version,
+                action_link   : m.articles.getActionLink(req.body.q, req.query.s),
+                datas         : datas,
+                connected     : m.users.isConnected(req.cookies),
+                articles      : article
             });
         }
     })
@@ -177,7 +177,8 @@ router
                 datas           : m.articles.getArticleDatas(articleExists),
                 connected       : m.users.isConnected(req.cookies),
                 action_function : req.query.action_function,
-                image_error     : req.query.image_error
+                image_error     : req.query.image_error,
+                firebase_link : process.env.FIREBASE_BLOG_LINK
             });
         }
     })

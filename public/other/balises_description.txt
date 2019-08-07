@@ -1,13 +1,4 @@
 <p style="margin-top: -100px;"></p>
-# Introduction #
-Bienvenue dans ce premier *réel* article de blog.
-<br /><br />Cet post est destiné à présenter le principe de la rédaction en utilisant Markdown ainsi que $\LaTeX$, languages que j'utilise sur ce site afin de rédiger et de présenter mes articles.
-<br />Tout d'abord, j'utilise la bibliothèque JavaScript [ShowDownJS](http://showdownjs.com/) afin de convertir automatiquement le contenu écrit en Markdown en language HTML.
-<br />Pour ce qui est des équations, j'utilise un interpréteur $\LaTeX$ pour présenter les équations et formules mathématiques. Cet interpréteur s'appelle [MathJax](https://www.mathjax.org/).
-
-
-
-
 # Les différents raccourcis Markdown #
 <p style="margin-top: -55px;"></p>
 ## Insertion de code ##
