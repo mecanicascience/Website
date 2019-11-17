@@ -48,6 +48,9 @@ function showPostRender() {
 
     // MathJax
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    // highlightJs
+    hljs.initHighlighting.called = false;
+    hljs.initHighlighting();
 
     document.getElementById('preview-toaster-content').style.maxHeight = document.body.clientHeight - 0.1 * document.body.clientHeight + 'px';
     document.getElementById('preview-toaster-sm').style.marginTop = 0.05 * document.body.clientHeight + 'px';
