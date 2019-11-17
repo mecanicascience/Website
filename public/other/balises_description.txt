@@ -1,4 +1,13 @@
 <p style="margin-top: -100px;"></p>
+# Introduction #
+Bienvenue dans ce premier *réel* article de blog.
+<br /><br />Ce post est destiné à présenter le principe de la rédaction en utilisant Markdown ainsi que $\LaTeX$, languages que j'utilise sur ce site afin de rédiger et de présenter mes articles.
+<br />Tout d'abord, j'utilise la bibliothèque JavaScript [ShowDownJS](http://showdownjs.com/) afin de convertir automatiquement le contenu écrit en Markdown en language HTML.
+<br />Pour ce qui est des équations, j'utilise un interpréteur $\LaTeX$ pour présenter les équations et formules mathématiques. Cet interpréteur s'appelle [MathJax](https://www.mathjax.org/).
+
+
+
+
 # Les différents raccourcis Markdown #
 <p style="margin-top: -55px;"></p>
 ## Insertion de code ##
@@ -94,3 +103,34 @@ $ \LaTeX \text{équation} $
 $$ \LaTeX \text{équation sur plusieurs lignes} $$
 ```
 Pour avoir plus d'information sur les différentes balises utilisées en $\LaTeX$, consultez [ce lien](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
+
+
+
+# L'insertion de code avec HighlightJs #
+La librairie [HighlightJS](https://highlightjs.org/) permet d'insérer du code formatté sur ce site.
+<br />Pour insérer du code, vous pouvez rentrer le code suivant, avec le nom du langage en paramètre. Par exemple, voici la façon d'insérer du code Javascript et de l'afficher.
+```
+<pre>
+	<code style="javascript">
+		function test() {
+			console.log("test");
+		}
+	</code>
+</pre>
+```
+<br />
+<br />Si vous souhaitez ajouter du code HTML, vous devez remplacer les caractères `<` et `>` respectivement par `&lt;` et `&gt;` comme dans le code ci-dessous.
+```
+<pre>
+	<code style="javascript">
+		&lt;html&gt;
+			&lt;head&gt;
+				&lt;p&gt;Texte&lt;/p&gt;
+			&lt;/head&gt;
+
+			&lt;head&gt;
+			&lt;/body&gt;
+		&lt;/html&gt;
+	</code>
+</pre>
+```
