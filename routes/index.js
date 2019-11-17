@@ -88,7 +88,7 @@ router
     }))
 
     .get('/article', async (req, res) => {
-        let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title);
+        let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title, m.users.isConnected(req.cookies));
 
         if(!req.query.uuid || !req.query.title || !articleExists) {
             res.render('pages/articles/article_not_found', {
