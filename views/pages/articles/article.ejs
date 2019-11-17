@@ -11,7 +11,13 @@
 			<script type="text/javascript">
 				window.onload = function() {
 					document.getElementById('container-text').innerHTML = computeText(convertFromCodeToHtml(<%- '"' + datas.content + '"' %>));
+
+					// MathJax
 					MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
+					// highlightJs
+			        hljs.initHighlighting.called = false;
+			        hljs.initHighlighting();
 				};
 			</script>
 		</header>
