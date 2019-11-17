@@ -46,9 +46,6 @@ function setAjdButton() {
 function showPostRender() {
     document.getElementById('preview-toaster-content').innerHTML = computeText(document.getElementById('content-area').value);
 
-    // highlightjs
-    hljs.initHighlighting.called = false;
-    hljs.initHighlighting();
     // MathJax
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
@@ -69,6 +66,10 @@ function showPostRender() {
 
     setTimeout(function() {
         document.getElementById('fade-in-dropper').style.opacity = 0.5;
+
+        // highlightJs
+        hljs.initHighlighting.called = false;
+        hljs.initHighlighting();
     }, 100);
 }
 
