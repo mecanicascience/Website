@@ -362,6 +362,7 @@ async function getHTMLForSuggest(s, l, uuid) {
     let arrHTML  = [];
     let postAsso = await getPosts(undefined, s, l + 1);
 
+    if(postAsso.length < 1) return [];
 
        postAsso[0].size = 2;
     if(postAsso.length == 2) postAsso[1].size = 2;
