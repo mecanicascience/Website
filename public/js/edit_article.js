@@ -46,6 +46,10 @@ function setAjdButton() {
 function showPostRender() {
     document.getElementById('preview-toaster-content').innerHTML = computeText(document.getElementById('content-area').value);
 
+    // highlightjs
+    hljs.initHighlighting.called = false;
+    hljs.initHighlighting();
+    // MathJax
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
     document.getElementById('preview-toaster-content').style.maxHeight = document.body.clientHeight - 0.1 * document.body.clientHeight + 'px';
