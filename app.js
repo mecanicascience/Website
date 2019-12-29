@@ -29,11 +29,13 @@ const m = {
 
 /* ====== UPDATE CONFIG FILES FROM LOCAL ENVIRONMENT VARIABLES ====== */
 let envV;
+let isRequireOk = true;
 try {
     envV = require('./datas/env-vars.json');
 }
 catch (e) {
-    envV = process.env;
+    envV        = process.env;
+    isRequireOk = false;
 }
 
 m.config.main_image_link = envV.FIREBASE_MAIN_IMAGE_LINK;
@@ -44,11 +46,15 @@ m.pass.password = envV.MAIN_PASSWORD;
 
 m.private_db_key.project_id           = envV.CREDENTIAL_PROJECT_ID;
 m.private_db_key.private_key_id       = envV.CREDENTIAL_PRIVATE_KEY_ID;
-m.private_db_key.private_key          = (envV.CREDENTIAL_PRIVATE_KEY + "").replace(/&_&/g, '-').replace(/\\\\n/g, '\n');
+m.private_db_key.private_key          = (envV.CREDENTIAL_PRIVATE_KEY + "").replace(/&_&/g, '-');
 m.private_db_key.client_email         = (envV.CREDENTIAL_CLIENT_EMAIL + "").replace(/&_&/g, '-');
 m.private_db_key.client_id            = envV.CREDENTIAL_CLIENT_ID;
 m.private_db_key.client_x509_cert_url = (envV.CLIENT_CERT_URL + "").replace(/&_&/g, '-');
-console.log(m.private_db_key.private_key);
+
+if(isRequireOk)
+    m.private_db_key.private_key = m.private_db_key.private_key.replace(/\\n/g, '\n');
+else
+    m.private_db_key.private_key = m.private_db_key.private_key.replace(/\\\\n/g, '\n');
 
 
 

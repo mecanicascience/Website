@@ -28,7 +28,6 @@ const mainBucket  = gcs.bucket(bucket_name);
 
 
 
-
 /**
  * Initialisation de la base de données
  */
@@ -40,6 +39,7 @@ function initializeDb() {
 
     db = firebase.firestore();
     db.settings({ timestampInSnapshots: true });
+    console.log(db);
 }
 
 
