@@ -28,18 +28,27 @@ const m = {
 
 
 /* ====== UPDATE CONFIG FILES FROM LOCAL ENVIRONMENT VARIABLES ====== */
-m.config.main_image_link    = process.env.FIREBASE_MAIN_IMAGE_LINK;
-m.config.bucket_name        = process.env.FIREBASE_BUCKET_NAME;
+let envV;
+try {
+    envV = require('./datas/env-vars.json');
+}
+catch (e) {
+    envV = process.env;
+}
 
-m.pass.username = process.env.MAIN_PASS;
-m.pass.password = process.env.MAIN_PASSWORD;
+m.config.main_image_link = envV.FIREBASE_MAIN_IMAGE_LINK;
+m.config.bucket_name     = envV.FIREBASE_BUCKET_NAME;
 
-m.private_db_key.project_id             = process.env.CREDENTIAL_PROJECT_ID;
-m.private_db_key.private_key_id         = process.env.CREDENTIAL_PRIVATE_KEY_ID;
-m.private_db_key.private_key            = (process.env.CREDENTIAL_PRIVATE_KEY + "").replace(/&_&/g, '-').replace(/\\\\n/g, '\n');
-m.private_db_key.client_email           = (process.env.CREDENTIAL_CLIENT_EMAIL + "").replace(/&_&/g, '-');
-m.private_db_key.client_id              = process.env.CREDENTIAL_CLIENT_ID;
-m.private_db_key.client_x509_cert_url   = (process.env.CLIENT_CERT_URL + "").replace(/&_&/g, '-');
+m.pass.username = envV.MAIN_PASS;
+m.pass.password = envV.MAIN_PASSWORD;
+
+m.private_db_key.project_id           = envV.CREDENTIAL_PROJECT_ID;
+m.private_db_key.private_key_id       = envV.CREDENTIAL_PRIVATE_KEY_ID;
+m.private_db_key.private_key          = (envV.CREDENTIAL_PRIVATE_KEY + "").replace(/&_&/g, '-').replace(/\\\\n/g, '\n');
+m.private_db_key.client_email         = (envV.CREDENTIAL_CLIENT_EMAIL + "").replace(/&_&/g, '-');
+m.private_db_key.client_id            = envV.CREDENTIAL_CLIENT_ID;
+m.private_db_key.client_x509_cert_url = (envV.CLIENT_CERT_URL + "").replace(/&_&/g, '-');
+console.log(m.private_db_key.private_key);
 
 
 
