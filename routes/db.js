@@ -39,7 +39,15 @@ function initializeDb() {
 
     db = firebase.firestore();
     db.settings({ timestampInSnapshots: true });
-    console.log(db);
+
+    if(db._settings.credentials.client_email == 'undefined') {
+        try {
+            db._settings.credentials.client_email = require('./../datas/env-vars.json').FIREBASE_EMAIL;
+        }
+        catch (e) {
+            console.error('Error while initialiazing DataBase :\n' + e);
+        }
+    }
 }
 
 
