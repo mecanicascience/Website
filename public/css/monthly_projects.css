@@ -1,0 +1,88 @@
+.cal-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.cal-months {
+    margin: 0 3%;
+}
+
+.cal-card {
+    flex-grow: 1;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    color: #555350;
+    line-height: 20px;
+    overflow: hidden;
+    font-family: Rubik;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 19px;
+    text-transform: uppercase;
+    letter-spacing: 0.58px;
+    margin-top: 2px;
+    text-align: center;
+    min-height: 164px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 3px 7px 0.2px rgba(0, 0, 0, 0.15);
+    margin: 26px 12px;
+    border-radius: 3%;
+}
+
+.cal-c-month {
+    margin: 16px 0 0 0;
+    font-size: 22px !important;
+    color: #fff;
+}
+
+.cal-c-desc {
+    font-weight: 500 !important;
+    font-size: 15px !important;
+    margin-top: 5px !important;
+    text-transform: none !important;
+}
+
+.cal-c-cat {
+    font-weight: 500;
+    font-style: italic;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 140%;
+    color: #515050b8;
+    text-transform: capitalize;
+    letter-spacing: 0.7px;
+    margin: 0 11px 4px 0;
+    text-align: right;
+}
+
+.cal-c-button {
+    width: 120px;
+    align-self: center;
+    margin: 20px 0 4px 11px;
+}
+
+.cal-c-button > button {
+    height: 28px !important;
+    width: 90px !important;
+}
+
+.cal-c-top-c {
+    background-color: #515050;
+    padding-bottom: 9px;
+}
+
+@media all and (max-width: 893px) {
+    .cal-c-month  { font-size: 18px !important; }
+    .cal-c-button { margin: 20px 0 4px 0; }
+    .cal-card { margin: 12px 5px; }
+}
+
+@media all and (max-width: 620px) {
+    .cal-row { flex-direction: column; }
+}

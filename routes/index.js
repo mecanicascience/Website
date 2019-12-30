@@ -44,7 +44,7 @@ router
             connected     : m.users.isConnected(req.cookies)
         });
     })
-    .post("/", async (req, res) => {
+    .post('/', async (req, res) => {
         let article = await m.articles.getArticles(req.body.q, req.query.s);
 
         res.render('pages/index', {
@@ -109,6 +109,26 @@ router
                 articles      : article
             });
         }
+    })
+
+
+    .get('/monthly_projects', async (req, res) => {
+        let year = parseInt(req.query.year);
+        let currentYear = new Date().getFullYear();
+        if(currentYear == 2019) currentYear = 2020;
+        if(req.query.year == undefined || year < 2020 || year > currentYear) {
+            res.redirect(`/monthly_projects?year=${currentYear}`);
+            return;
+        }
+
+        let datas = await m.articles.getMonthlyProjectsForYear(year);
+        res.render('pages/articles/monthly_projects', {
+            version     : m.constants.version,
+            action_link : m.articles.getActionLink(req.body.q, req.query.s),
+            connected   : m.users.isConnected(req.cookies),
+            year        : year,
+            datas       : JSON.stringify(datas)
+        });
     })
 
 

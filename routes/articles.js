@@ -218,6 +218,28 @@ async function deleteMainImage(uuid, image_name) {
 
 
 
+/** Retourne la liste des projets sous forme spécifique de l'année en paramètres */
+async function getMonthlyProjectsForYear(year) {
+    let finalArr    = {};
+    let jsonYearArr = await db.getJsonForYear(year);
+
+    if(jsonYearArr == undefined || jsonYearArr.months == undefined)
+        return finalArr;
+    else
+        jsonYearArr = jsonYearArr.months;
+
+    for (let i = 0; i < jsonYearArr.length; i++) {
+        let formatedI = "0" + (i + 1);
+        if(i + 1 >= 10)
+            formatedI = (i + 1) + "";
+
+        finalArr[formatedI] = jsonYearArr[i];
+    }
+
+    return finalArr;
+}
+
+
 
 
 
@@ -238,5 +260,6 @@ module.exports = {
     getArticlesForSuggestions : getArticlesForSuggestions,
     updateMainImage           : updateMainImage,
     deleteMainImage           : deleteMainImage,
-    getArticlesUrl            : getArticlesUrl
+    getArticlesUrl            : getArticlesUrl,
+    getMonthlyProjectsForYear : getMonthlyProjectsForYear
 };

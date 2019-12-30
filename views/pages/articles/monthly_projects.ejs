@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<%- include('../../partial/head') %>
+	</head>
+
+	<body>
+		<header>
+			<%- include('../../partial/header') %>
+
+            <script type="text/javascript">
+				let str = "<%= datas %>".replace(/&#34;/g, '\"');
+                let datas = JSON.parse(str);
+
+				function setupDatas() {
+					for (let i = 1; i <= 12; i++) {
+						let idT = "" + i;
+						if(i < 10) idT = "0" + i;
+
+						let d = datas[idT];
+						if(!d || d.id == "none" || !hasMonthPassed(i)) {
+							if(hasMonthPassed(i)) { // mois déjà passé
+								document.getElementById('card-' + idT).style = 'background-color: rgb(215, 215, 215);';
+								document.getElementById('desc-' + idT).innerHTML = '<br /><br />Pas d\'article ce mois ci.';
+								document.getElementById('link-' + idT).style = 'display: none;';
+								document.getElementById('cat-'  + idT).innerHTML = '';
+							}
+							else {
+								document.getElementById('card-' + idT).style = 'background-color: #868686;';
+								document.getElementById('desc-' + idT).innerHTML = '';
+								document.getElementById('link-' + idT).style = 'display: none;';
+								document.getElementById('cat-'  + idT).innerHTML = '';
+							}
+						}
+						else if(d.id == "article") {
+							document.getElementById('desc-' + idT).innerHTML = d.title;
+							document.getElementById('link-' + idT).onclick   = () => window.open(`${d.link}`, '_blank');
+							document.getElementById('cat-'  + idT).innerHTML = d.category;
+						}
+
+						if(document.getElementById('desc-' + idT).innerHTML.length <= 34)
+							document.getElementById('desc-' + idT).innerHTML += "<br />&nbsp;";
+					}
+				}
+
+				function hasMonthPassed(month_id) {
+					let ye = <%= year %>;
+					let gf = new Date().getFullYear();
+					if(ye != gf) {
+						if(ye > gf)
+							return false;
+						else
+							return true;
+					}
+
+					let curMonth = new Date().getMonth() + 1;
+					if(month_id > curMonth)
+						return false;
+					return true;
+				}
+
+				window.onload = setupDatas;
+            </script>
+		</header>
+
+		<main>
+            <div class="section section-2" style="margin-top: -5px;">
+				<div class="m-title">
+					<p class="m-t-title">Projets du mois</p>
+					<hr class="m-t-hr" />
+					<p class="m-t-subtitle">Année <b><%= year %></b></p>
+				</div>
+			</div>
+
+            <div class="m-content">
+                <div class="cal-months">
+                    <div class="cal-row">
+                        <div class="cal-card" id="card-01">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Janvier</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-01">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-01">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-01">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-02">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Février</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-02">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-02">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-02">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-03">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Mars</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-03">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-03">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-03">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-04">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Avril</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-04">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-04">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-04">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-05">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Mai</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-05">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-05">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-05">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cal-row">
+                        <div class="cal-card" id="card-06">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Juin</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-06">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-06">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-06">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-07">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Juillet</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-07">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-07">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-07">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-08">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Août</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-08">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-08">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-08">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-09">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Septembre</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-09">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-09">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-09">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-10">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Octobre</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-10">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-10">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-10">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cal-row">
+                        <div class="cal-card" id="card-11">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Novembre</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-11">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-11">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-11">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" id="card-12">
+                            <div class="cal-c-top-c">
+                                <div class="cal-c-month">Décembre</div>
+                            </div>
+                            <div class="cal-c-bot-c">
+                                <div class="cal-c-desc" id="desc-12">- Chargement en cours... -<br />&nbsp;</div>
+
+                                <div class="cal-c-bottom">
+                                    <div class="cal-c-button">
+                                        <button class="mdc-button mdc-button--outlined" onclick="window.open(`${'#'}`, '_blank');" id="link-12">Voir</button>
+                                    </div>
+                                    <p class="cal-c-cat" id="cat-12">chargement...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cal-card" style="box-shadow: none;">
+                        </div>
+
+                        <div class="cal-card" style="box-shadow: none;">
+                        </div>
+
+                        <div class="cal-card" style="box-shadow: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+
+		<%- include('../../partial/footer') %>
+	</body>
+</html>

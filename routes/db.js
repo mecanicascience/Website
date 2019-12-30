@@ -66,7 +66,15 @@ async function getArticleByUUID(uuid) {
 
 
 
-
+/**
+ * @param year l'année de tous les projets
+ * @return la promise
+ */
+async function getJsonForYear(year) {
+    let snapshot = await db.collection('month_projects').where('year', '==', year + '').limit(1).get();
+    if(snapshot.docs.length == 0) return {};
+    return snapshot.docs[0].data();
+}
 
 
 
@@ -502,6 +510,7 @@ async function editMainImageName(uuid, old_name, new_name) {
 
 
 
+
 /** ====== FLUX RSS ====== */
 /**
  * Retourne la liste des articles à publier dans le flux rss
@@ -536,5 +545,6 @@ module.exports = {
     setIsMainImage         : setIsMainImage,
     deleteMainImage        : deleteMainImage,
     editMainImageName      : editMainImageName,
-    getAllPostsMAIN        : getAllPostsMAIN
+    getAllPostsMAIN        : getAllPostsMAIN,
+    getJsonForYear         : getJsonForYear
 };
