@@ -204,7 +204,14 @@ hr {
 
 
 
-.m-c-button-yt { margin-top: 35px; }
+.m-c-button-yt {
+    margin-top: 35px;
+    flex-grow: 1;
+}
+.m-c-button-row {
+    display: flex;
+    flex-direction: row;
+}
 
 .mdc-button {
     background-color: #f7f7f7 !important;
