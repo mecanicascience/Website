@@ -86,6 +86,18 @@ Pour insérer une image, vous pouvez employer la même structure que pour insér
 Pour insérer une suite de touches, entrer le nom de la touche à l'intérieur d'une balise `<kbd>`.
 <br />Par exemple, `<kbd>A</kbd>` donnera <kbd>A</kbd>.
 
+## Les messages d'information, d'alerte et de warning ##
+Pour insérer un de ces messages, utilisez le code
+```
+<panel type=info/warning/danger>
+    Votre Texte
+</panel >
+```
+Pour afficher des messages de la forme suivante :
+<panel type=warning>
+    Ceci est un warning
+</panel>
+
 
 ## Autre information ##
 Si vous souhaitez plus d'information sur le formattage de texte Markdown, consultez directement la [documentation en ligne](http://www.math.harvard.edu/texman/) de l'Université d'Harvard.

@@ -35,10 +35,13 @@ body {
     flex-direction: column;
     background-color: #f5f5f5;
     overflow-x: hidden;
+    font-family: Montserrat, "Segoe UI", Arial, sans-serif !important;
 }
 
 .space-20 {
     margin: 20px;
+    font-size: 1rem;
+    line-height: 1.625rem;
 }
 
 
