@@ -3,7 +3,7 @@
     "main_image_link" : "SET AS ENVIRONMENT VARIABLE",
     "is_https"        : true,
     "site"            : "mecanicascience.herokuapp.com",
-    "version"         : "1.3.0",
+    "version"         : "2.1.0",
     "local_port"      : 8080,
     "cache_time"      : 600000,
     "bucket_name"     : "SET AS ENVIRONMENT VARIABLE"
