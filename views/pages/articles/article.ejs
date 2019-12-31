@@ -55,7 +55,7 @@
 							</div>
 
                             <div class="m-c-col">
-								<p class="m-b-desc">Publié le <%= datas.formatted_date %></p>
+								<p class="m-b-desc">Publié le <%= datas.formatted_dates.replace(/\/.*\//, '/' + ((parseInt(datas.formatted_dates.split('/')[1]) + 1) > 9 ? (parseInt(datas.formatted_dates.split('/')[1]) + 1) + "" : "0" + (parseInt(datas.formatted_dates.split('/')[1]) + 1)) + '/') %></p>
                                 <p class="m-b-cat" style="flex-direction: column;">- Catégorie <%= datas.formatted_category %> -</p>
 							</div>
 						</div>
