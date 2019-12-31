@@ -101,6 +101,7 @@ router
             let datas = m.articles.getArticleDatas(articleExists);
             let article = await m.articles.getArticlesForSuggestions(datas.category_id, 3, datas.uuid);
             try {
+                console.log(datas.formatted_dates);
                 datas.formatted_dates = datas.formatted_dates.replace(/\/.*\//, '/' + (
                     (parseInt(datas.formatted_dates.split('/')[1]) + 1) > 9 ?
                     (parseInt(datas.formatted_dates.split('/')[1]) + 1) + "" :
