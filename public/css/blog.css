@@ -297,3 +297,7 @@ hr {
 .m-c-logo:hover {
     height: 160px;
 }
+
+.container-text {
+    line-height: 26px;
+}
