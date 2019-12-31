@@ -48,14 +48,14 @@
 }
 
 
-#container-text > p > a, #preview-toaster-content > p > a {
+#container-text > p > a, #container-text > div > p > a, #preview-toaster-content > p > a {
     position: relative;
     text-decoration: none !important;
     color: #4899b0;
     align-content: center;
 }
 
-#container-text > p > a:before, #preview-toaster-content > p > a:before {
+#container-text > p > a:before, #container-text > div > p > a:before, #preview-toaster-content > p > a:before {
     content: "";
     position: absolute;
     width: 100%;
@@ -68,7 +68,7 @@
     transition: all 0.3s ease-in-out 0s;
 }
 
-#container-text > p > a:hover:before, #preview-toaster-content > p > a:hover:before {
+#container-text > p > a:hover:before, #container-text > div > p > a:hover:before, #preview-toaster-content > p > a:hover:before {
     visibility: visible;
     transform: scaleX(1);
 }
