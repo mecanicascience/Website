@@ -100,16 +100,11 @@ router
         else {
             let datas = m.articles.getArticleDatas(articleExists);
             let article = await m.articles.getArticlesForSuggestions(datas.category_id, 3, datas.uuid);
-            console.log(datas, datas.formatted_dates);
-            try {
-
-                datas.formatted_dates = datas.formatted_dates.replace(/\/.*\//, '/' + (
-                    (parseInt(datas.formatted_dates.split('/')[1]) + 1) > 9 ?
-                    (parseInt(datas.formatted_dates.split('/')[1]) + 1) + "" :
-                    "0" + (parseInt(datas.formatted_dates.split('/')[1]) + 1)) + '/'
-                );
-            }
-            catch(e) { "OOPS" }
+            datas.formatted_date = datas.formatted_date.replace(/\/.*\//, '/' + (
+                (parseInt(datas.formatted_date.split('/')[1]) + 1) > 9 ?
+                (parseInt(datas.formatted_date.split('/')[1]) + 1) + "" :
+                "0" + (parseInt(datas.formatted_date.split('/')[1]) + 1)) + '/'
+            );
 
             res.render('pages/articles/article', {
                 version       : m.constants.version,
