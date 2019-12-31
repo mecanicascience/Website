@@ -9,7 +9,7 @@
 			<%- include('../../partial/header') %>
 
             <script type="text/javascript">
-				let str = "<%= datas %>".replace(/&#34;/g, '\"');
+				let str = "<%= datas %>".replace(/&#34;/g, '\"').replace(/&amp;/g, '&');
                 let datas = JSON.parse(str);
 
 				function setupDatas() {
