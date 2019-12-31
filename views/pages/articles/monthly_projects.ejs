@@ -45,7 +45,7 @@
 
 				function hasMonthPassed(month_id) {
 					let ye = <%= year %>;
-					let gf = new Date().getFullYear() + 1;
+					let gf = new Date().getFullYear();
 					if(ye != gf) {
 						if(ye > gf)
 							return false;
