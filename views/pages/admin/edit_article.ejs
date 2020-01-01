@@ -472,7 +472,7 @@
 						<label class="cat-title">Contenu du post <span id="cat-title-span">(pas de dernière sauvegarde)</span> :</label>
 						<a class="badge badge-secondary" onclick="showPostRender()" style="cursor: pointer; color: #fdf9f9;">Rendu du post</a>
 						<a class="badge badge-secondary" onclick="showShortcuts()" style="cursor: pointer; color: #fdf9f9;">Différents raccourcis</a>
-						<a class="badge badge-secondary" onclick="document.location.href = '/article?title=<%= datas.short_title %>&uuid=<%= datas.uuid %>'" style="cursor: pointer; color: #fdf9f9;">Consulter la page de l'article</a>
+						<a class="badge badge-secondary" onclick="window.open('/article?title=<%= datas.short_title %>&uuid=<%= datas.uuid %>', '_blank')" style="cursor: pointer; color: #fdf9f9;">Consulter la page de l'article</a>
 						<a class="badge badge-secondary" onclick="changeSaveButtonAuto(!autosave)" style="cursor: pointer; color: #fdf9f9; margin-left: 15px;" id="auto-save-button">Chargement en cours...</a>
 						<textarea style="overflow:hidden" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}" class="form-control" aria-label="content-area" id="content-area" placeholder="Contenu du post" value="Chargement en cours..."></textarea>
 					</div>
