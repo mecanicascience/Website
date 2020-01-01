@@ -229,7 +229,8 @@ router
             req.body.title,
             req.body.uuid,
             req.body.visible,
-            req.body.image_exists
+            req.body.image_exists,
+            req.body.author
         );
 
 

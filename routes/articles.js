@@ -158,12 +158,12 @@ async function createNewArticle() {
 }
 
 /* Modification d'un article */
-async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists) {
+async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists, author) {
     if(
         isNaN(pref_size) || isNaN(uuid) || (visible != 'true' && visible != 'false')
     ) return false;
 
-    let answer = await db.editArticle(category_id, content, date, description, image_credits, image_name, parseInt(pref_size), short_title, title, parseInt(uuid), (visible == 'true' ? true : false), (image_exists == 'true' ? true : false));
+    let answer = await db.editArticle(category_id, content, date, description, image_credits, image_name, parseInt(pref_size), short_title, title, parseInt(uuid), (visible == 'true' ? true : false), (image_exists == 'true' ? true : false), author);
     return answer;
 }
 

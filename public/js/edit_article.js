@@ -177,7 +177,7 @@ const MAX_SHORT_TITLE_LENGTH = 130;
 let lastTitle = '';
 function setLastTitle(title) { lastTitle = title; }
 
-function checkSucess(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, button_id, image_exists, lastImageName) {
+function checkSucess(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, button_id, image_exists, lastImageName, author) {
     let shouldRedirect = false;
     if(title != lastTitle) {
         shouldRedirect = true;
@@ -185,11 +185,11 @@ function checkSucess(category_id, content, date, description, image_credits, ima
         if(short_title[short_title.length - 1] == '_') short_title = short_title.substring(0, short_title.length - 1);
     }
 
-    postNewDatas(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, lastTitle, shouldRedirect, button_id, image_exists, lastImageName);
+    postNewDatas(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, lastTitle, shouldRedirect, button_id, image_exists, lastImageName, author);
 }
 
 
-function postNewDatas(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, lastTitle, shouldRedirect, button_id, image_exists, lastImageName) {
+function postNewDatas(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, lastTitle, shouldRedirect, button_id, image_exists, lastImageName, author) {
     let xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
@@ -209,7 +209,7 @@ function postNewDatas(category_id, content, date, description, image_credits, im
 
     xhttp.open("POST", "/admin/update", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`category_id=${category_id}&content=${content}&date=${date}&description=${description}&image_credits=${image_credits}&image_name=${image_name}&pref_size=${pref_size}&short_title=${short_title}&title=${title}&uuid=${uuid}&visible=${visible}&image_exists=${image_exists}&lastImageName=${lastImageName}`);
+    xhttp.send(`category_id=${category_id}&content=${content}&date=${date}&description=${description}&image_credits=${image_credits}&image_name=${image_name}&pref_size=${pref_size}&short_title=${short_title}&title=${title}&uuid=${uuid}&visible=${visible}&image_exists=${image_exists}&lastImageName=${lastImageName}&author=${author}`);
 }
 
 

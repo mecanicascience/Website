@@ -172,3 +172,15 @@ code {
     overflow: hidden;
     border: none;
 }
+
+
+.credits-d {
+    margin: 41px 0 0 0;
+    color: #000000bf;
+    font-size: 15px;
+}
+
+.credits-p {
+    text-align: right;
+    margin: -5px 0 0 0;
+}

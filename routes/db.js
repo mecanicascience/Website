@@ -328,8 +328,8 @@ async function generateNewUUID() {
  * Edition d'un nouvel article
  * @return true si l'article a bien été édité
  */
-async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists) {
-    let datas = { category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists };
+async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists, author) {
+    let datas = { category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists, author };
     let dateFormatted;
 
 

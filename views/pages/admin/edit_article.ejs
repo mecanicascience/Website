@@ -46,6 +46,7 @@
 
 				// image main
 				document.getElementById('image-credits').value = <%- '"' + datas.image_credits + '"' %>;
+				document.getElementById('article-author').value = <%- '"' + datas.author + '"' %>;
 
 				document.getElementById('image-name').value = <%- '"' + datas.image_name.split('.')[0] + '"' %>;
 				document.getElementById('image-extension').value = <%- '"' + datas.image_name.split('.')[1] + '"' %>;
@@ -126,7 +127,8 @@
 					document.getElementById('publish-status').checked,
 					button_id,
 					<%- datas.image_exists %>,
-					<%- '"' + datas.image_name + '"' %>
+					<%- '"' + datas.image_name + '"' %>,
+					document.getElementById('article-author').value
 				);
 			}
 		</script>
@@ -341,6 +343,17 @@
 									</div>
 
 									<input style="color: #606060 !important; border-radius: 0 !important;" type="text" class="form-control" placeholder="Crédits" id="image-credits">
+								<span style="text-align: left; margin: 0 5px;"></span></p>
+							</div>
+
+							<div class="m-c-col" style="display: flex; margin-top: 18px;">
+                                <p class="m-b-cat">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Auteur de l'article :</span>
+										<span class="input-group-text" style="color: #0000006b; background-color: #00000008;">&#64;MecanicaScience - Ecrit par </span>
+									</div>
+
+									<input style="color: #606060 !important; border-radius: 0 !important;" type="text" class="form-control" placeholder="Auteur" id="article-author">
 								<span style="text-align: left; margin: 0 5px;"></span></p>
 							</div>
 
