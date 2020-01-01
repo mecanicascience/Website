@@ -1,4 +1,15 @@
 {
-    "username" : "SET AS ENVIRONMENT VARIABLE",
-    "password" : "SET AS ENVIRONMENT VARIABLE"
+    "users" : [
+    	{
+    		"username"    : "SET AS ENVIRONMENT VARIABLE",
+    		"password"    : "SET AS ENVIRONMENT VARIABLE",
+    		"permissions" : "SET AS ENVIRONMENT VARIABLE",
+    		"_COMMENT" : "permissions : 100 = everything, 50 = no edit allowed, 0 = none (connection refused)"
+    	},
+    	{
+    		"username"    : "SET AS ENVIRONMENT VARIABLE",
+    		"password"    : "SET AS ENVIRONMENT VARIABLE",
+    		"permissions" : "SET AS ENVIRONMENT VARIABLE"
+    	}
+    ]
 }

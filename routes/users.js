@@ -5,10 +5,14 @@ const crypto   = require('crypto');
 
 /** Retourne true si l'utilisateur a le cookie de connection */
 function isConnected(req) {
-    if(
-           req.admin_username && req.admin_username != '' && req.admin_username == passFile.username
-        && req.admin_password && req.admin_password != '' && req.admin_password == passFile.password
-    ) return true;
+    if(!req.admin_username || req.admin_username == '' || !req.admin_password || req.admin_password == '')
+        return false;
+
+    for (let i = 0; i < passFile.users.length; i++) {
+        let u = passFile.users[i];
+        if(u.permissions != 0 && u.username == req.admin_username && u.password == req.admin_password)
+            return true;
+    }
 
     return false;
 }
@@ -18,14 +22,17 @@ function isConnected(req) {
 function connectUser(username, password, res) {
     let encrypted_pass = crypto.createHash('md5').update(password).digest('hex');
 
-    if(
-           username && username       == passFile.username
-        && password && encrypted_pass == passFile.password
-    ) {
-        res.cookie('admin_username', username      , { maxAge: config.session_max_age, httpOnly: false });
-        res.cookie('admin_password', encrypted_pass, { maxAge: config.session_max_age, httpOnly: false });
+    if(!username || username == '' || !password || password == '')
+        return false;
 
-        return true;
+    for (let i = 0; i < passFile.users.length; i++) {
+        let u = passFile.users[i];
+        if(u.permissions != 0 && u.username == username && u.password == encrypted_pass) {
+            res.cookie('admin_username', username      , { maxAge: config.session_max_age, httpOnly: false });
+            res.cookie('admin_password', encrypted_pass, { maxAge: config.session_max_age, httpOnly: false });
+
+            return true;
+        }
     }
 
     return false;
