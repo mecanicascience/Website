@@ -51,10 +51,25 @@ function deconnectUser(req, res) {
     return false;
 }
 
+/** Teste si l'utilisateur est connecté et retourne son niveau de permission. Sinon retourne 0 */
+function getPermission(req) {
+    if(!req.admin_username || req.admin_username == '' || !req.admin_password || req.admin_password == '')
+        return 0;
+
+    for (let i = 0; i < passFile.users.length; i++) {
+        let u = passFile.users[i];
+        if(u.permissions != 0 && u.username == req.admin_username && u.password == req.admin_password)
+            return u.permissions;
+    }
+
+    return 0;
+}
+
 
 
 module.exports = {
     isConnected   : isConnected,
     connectUser   : connectUser,
-    deconnectUser : deconnectUser
+    deconnectUser : deconnectUser,
+    getPermission : getPermission
 };

@@ -166,7 +166,7 @@ router
     })
 
     .get('/admin/create_article', async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -209,7 +209,7 @@ router
     })
 
     .post("/admin/update", async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -246,7 +246,7 @@ router
 
 
     .get('/admin/delete', async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -265,7 +265,7 @@ router
 
 
     .post("/admin/update/main_image", upload.single('image'), async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -278,7 +278,7 @@ router
     })
 
     .post("/admin/delete/main_image", upload.single('i'), async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }

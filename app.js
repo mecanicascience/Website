@@ -18,7 +18,6 @@ const m = {
     users          : require('./routes/users'),
     articles       : require('./routes/articles')
 };
-console.log(require('crypto').createHash('md5').update('mecanicascience_guest').digest('hex'));
 
 
 
