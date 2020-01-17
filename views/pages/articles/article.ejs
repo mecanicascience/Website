@@ -48,7 +48,7 @@
 										</figure>
 
 										<script>
-											document.getElementById('figcaption').innerHTML = computeText('&copy; <%= datas.image_credits %>');
+											document.getElementById('figcaption').innerHTML = computeText('Image &copy;<%= datas.image_credits %>');
 										</script>
 									<% } %>
 								<% } %>
@@ -57,6 +57,7 @@
                             <div class="m-c-col">
 								<p class="m-b-desc">Publié le <%= datas.formatted_date %></p>
                                 <p class="m-b-cat" style="flex-direction: column;">- Catégorie <%= datas.formatted_category %> -</p>
+								<p class="m-b-author" style="flex-direction: column;">Ecrit par <b><%= datas.author %></b>.</p>
 							</div>
 						</div>
 
@@ -100,19 +101,6 @@
 					<%- articles.length > 0 ? articles.shift() : '' %>
 				</div>
             </div>
-
-
-
-			<!-- <div class="section section-1">
-                <p class="s-c-title">Commentaires</p>
-
-                <hr />
-
-				<div class="container category">
-					Provisoire
-				</div>
-            </div> -->
-
 
 
 		<%- include('../../partial/footer') %>

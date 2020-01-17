@@ -38,6 +38,12 @@
     flex-grow: 1;
 }
 
+.m-b-author {
+    opacity: 0.9 !important;
+    text-transform: none !important;
+    font-weight: 400 !important;
+}
+
 #categorie-select {
     width: inherit;
     margin: 0 5px;
