@@ -151,9 +151,11 @@ app
         errorCode     : 404,
         errorMessage  : 'La page n\'a pas été trouvée',
         link          : m.path.join(__dirname, "views/"),
-        version       : VERSION,
-        action_link   : '/',
-        connected     : m.users.isConnected(req.cookies)
+        main : {
+            version     : VERSION,
+            action_link : '/',
+            connected   : m.users.isConnected(req.cookies)
+        }
     }));
 
 

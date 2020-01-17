@@ -15,6 +15,8 @@ const m = {
     multer      : require('multer')
 };
 
+
+
 const router = m.express.Router();
 const storage = m.multer.diskStorage({
     destination: function(req, file, cb) {
@@ -37,22 +39,18 @@ router
         let article = await m.articles.getArticles(req.body.q, req.query.s);
 
         res.render('pages/index', {
-            version       : m.constants.version,
+            main          : getMainInfos(req),
             articles      : article,
-            query_message : m.articles.getLabel     (req.body.q, req.query.s, article.length),
-            action_link   : m.articles.getActionLink(req.body.q, req.query.s),
-            connected     : m.users.isConnected(req.cookies)
+            query_message : m.articles.getLabel     (req.body.q, req.query.s, article.length)
         });
     })
     .post('/', async (req, res) => {
         let article = await m.articles.getArticles(req.body.q, req.query.s);
 
         res.render('pages/index', {
-            version       : m.constants.version,
+            main          : getMainInfos(req),
             articles      : article,
-            query_message : m.articles.getLabel     (req.body.q, req.query.s, article.length),
-            action_link   : m.articles.getActionLink(req.body.q, req.query.s),
-            connected     : m.users.isConnected(req.cookies)
+            query_message : m.articles.getLabel     (req.body.q, req.query.s, article.length)
         });
     })
 
@@ -71,32 +69,15 @@ router
 
 
     // à propos du site
-    .get('/about', (req, res) => res.render('pages/description/about', {
-        version     : m.constants.version,
-        action_link : m.articles.getActionLink(req.body.q, req.query.s),
-        connected   : m.users.isConnected(req.cookies)
-    }))
-    .get('/contact', (req, res) => res.render('pages/description/contact', {
-        version     : m.constants.version,
-        action_link : m.articles.getActionLink(req.body.q, req.query.s),
-        connected   : m.users.isConnected(req.cookies)
-    }))
-    .get('/legal', (req, res) => res.render('pages/description/legal', {
-        version     : m.constants.version,
-        action_link : m.articles.getActionLink(req.body.q, req.query.s),
-        connected   : m.users.isConnected(req.cookies)
-    }))
+    .get('/about',   (req, res) => res.render('pages/description/about',   { main : getMainInfos(req) }))
+    .get('/contact', (req, res) => res.render('pages/description/contact', { main : getMainInfos(req) }))
+    .get('/legal',   (req, res) => res.render('pages/description/legal',   { main : getMainInfos(req) }))
 
     .get('/article', async (req, res) => {
         let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title, m.users.isConnected(req.cookies));
 
-        if(!req.query.uuid || !req.query.title || !articleExists) {
-            res.render('pages/articles/article_not_found', {
-                version     : m.constants.version,
-                action_link : m.articles.getActionLink(req.body.q, req.query.s),
-                connected   : m.users.isConnected(req.cookies)
-            });
-        }
+        if(!req.query.uuid || !req.query.title || !articleExists)
+            res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
         else {
             let datas = m.articles.getArticleDatas(articleExists);
             let article = await m.articles.getArticlesForSuggestions(datas.category_id, 3, datas.uuid);
@@ -107,11 +88,9 @@ router
             );
 
             res.render('pages/articles/article', {
-                version       : m.constants.version,
-                action_link   : m.articles.getActionLink(req.body.q, req.query.s),
-                datas         : datas,
-                connected     : m.users.isConnected(req.cookies),
-                articles      : article
+                main      : getMainInfos(req),
+                datas     : datas,
+                articles  : article
             });
         }
     })
@@ -128,11 +107,9 @@ router
 
         let datas = await m.articles.getMonthlyProjectsForYear(year);
         res.render('pages/articles/monthly_projects', {
-            version     : m.constants.version,
-            action_link : m.articles.getActionLink(req.body.q, req.query.s),
-            connected   : m.users.isConnected(req.cookies),
-            year        : year,
-            datas       : JSON.stringify(datas)
+            main  : getMainInfos(req),
+            year  : year,
+            datas : JSON.stringify(datas)
         });
     })
 
@@ -142,10 +119,8 @@ router
     .get('/admin', async (req, res) => {
         if(!m.users.isConnected(req.cookies)) {
             res.render('pages/admin/connection', {
-                version      : m.constants.version,
-                action_link  : m.articles.getActionLink(req.body.q, req.query.s),
-                connected    : false,
-                code         : (req.query.code  ? req.query.code  : false)
+                main : getMainInfos(req),
+                code : (req.query.code  ? req.query.code  : false)
             });
             return;
         }
@@ -154,14 +129,12 @@ router
         let article = await m.articles.getArticles(undefined, undefined, parseInt(req.query.l), true, true);
 
         res.render('pages/admin/articles_interface', {
-            version      : m.constants.version,
-            action_link  : m.articles.getActionLink(req.body.q, req.query.s),
-            articles     : article,
-            post_count   : (req.query.l     ? req.query.l     : 20),
-            code         : (req.query.code  ? req.query.code  : false),
-            new_title    : (req.query.title ? req.query.title : null),
-            new_uuid     : (req.query.uuid  ? req.query.uuid  : null),
-            connected    : m.users.isConnected(req.cookies)
+            main        : getMainInfos(req),
+            articles    : article,
+            post_count  : (req.query.l     ? req.query.l     : 20),
+            code        : (req.query.code  ? req.query.code  : false),
+            new_title   : (req.query.title ? req.query.title : null),
+            new_uuid    : (req.query.uuid  ? req.query.uuid  : null)
         });
     })
 
@@ -188,22 +161,15 @@ router
 
         let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title, true);
 
-        if(!req.query.uuid || !req.query.title || !articleExists) {
-            res.render('pages/articles/article_not_found', {
-                version     : m.constants.version,
-                action_link : m.articles.getActionLink(req.body.q, req.query.s),
-                connected   : m.users.isConnected(req.cookies)
-            });
-        }
+        if(!req.query.uuid || !req.query.title || !articleExists)
+            res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
         else {
             res.render('pages/admin/edit_article', {
-                version         : m.constants.version,
-                action_link     : m.articles.getActionLink(req.body.q, req.query.s),
+                main            : getMainInfos(req),
                 datas           : m.articles.getArticleDatas(articleExists),
-                connected       : m.users.isConnected(req.cookies),
                 action_function : req.query.action_function,
                 image_error     : req.query.image_error,
-                firebase_link : process.env.FIREBASE_BLOG_LINK
+                firebase_link   : process.env.FIREBASE_BLOG_LINK
             });
         }
     })
@@ -317,10 +283,20 @@ router
         if(answer) res.redirect('/admin?code=6');
         else       res.redirect('/admin?code=7');
     })
+;
 
 
 
+const WEBSITE_URL = (m.config.is_https ? "https://" : "http://") + m.config.site;
 
+function getMainInfos(req) {
+    return {
+        version     : m.constants.version,
+        action_link : m.articles.getActionLink(req.body.q, req.query.s),
+        connected   : m.users.isConnected(req.cookies),
+        website_url : WEBSITE_URL
+    };
+}
 
 
 
