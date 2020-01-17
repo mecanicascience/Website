@@ -1,7 +1,97 @@
 // RENDU DU CODE
 let converter = new showdown.Converter();
 function computeText(rawText) {
-    return converter.makeHtml(handleBalises(rawText));
+    let textToConvert = rawText;
+    textToConvert = addSummary(textToConvert);
+    textToConvert = handleBalises(textToConvert);
+
+    return converter.makeHtml(textToConvert);
+}
+
+
+
+function addOptionalInitialSpace(rawText) {
+    if(rawText.substring(0, 1) == '#' || rawText.substring(1, 2) == '#')
+        rawText = '<p style="margin-top: -100px;"></p>' + rawText;
+    return rawText;
+}
+
+
+
+function addSummary(rawText) {
+    let formattedTextTmp = rawText.replace(/```([^\]]+?)```/g, '').replace(/``([^\]]+?)``/g, '').replace(/`([^\]]+?)`/g, '');
+
+    // CREATES STRUCTURE
+    let struct = [];
+    while(formattedTextTmp.search(/(^)\# .*\#/m) != -1) {
+        let h1Title = formattedTextTmp.split(/\#/)[1].split(/\#/)[0];
+        if(h1Title != "" && h1Title.length > 0) {
+            struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '') });
+            formattedTextTmp = formattedTextTmp.replace(/(^)\# .*\#/m, '');
+
+            while(formattedTextTmp.split(/(^)\# /m)[0] != undefined && formattedTextTmp.split(/(^)\# /m)[0].search(/(^)\#\# .*\#\#/m) != -1) {
+                let h2Title = formattedTextTmp.split(/(^)\# /m)[0].split(/\#\#/)[1].split(/\#\#/)[0];
+
+                if(h2Title != "" && h2Title.length > 0) {
+                    struct[struct.length - 1].content.push({
+                        title: h2Title,
+                        content: [],
+                        shortName: h2Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
+                    });
+                    formattedTextTmp = formattedTextTmp.replace(/(^)\#\# .*\#\#/m, '');
+                }
+
+
+                while(
+                    formattedTextTmp.split(/(^)\# /m)[0].split(/(^)\#\# /m)[0] != undefined
+                    && formattedTextTmp.split(/(^)\# /m)[0].split(/(^)\#\# /m)[0].search(/(^)\#\#\# .*\#\#\#/m) != -1
+                ) {
+                    let h3Title = formattedTextTmp.split(/(^)\# /m)[0].split(/(^)\#\# /m)[0].split(/\#\#\#/)[1];
+
+                    if(h3Title != "" && h3Title.length > 0) {
+                        struct[struct.length - 1].content[struct[struct.length - 1].content.length - 1].content.push({
+                            title: h3Title,
+                            content: [],
+                            shortName: h3Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
+                        });
+                        formattedTextTmp = formattedTextTmp.replace(/(^)\#\#\# .*\#\#\#/m, '');
+                    }
+                }
+            }
+        }
+    }
+
+    // STRUCTURE => HTML
+    let addedHTML = "";
+
+    if(struct.length != 0) {
+        addedHTML = '<p style="margin-top: -100px;"></p>';
+        addedHTML += '<h1 id="summary">Sommaire</h1>';
+        addedHTML += '<ul>';
+        for (let h1 = 0; h1 < struct.length; h1++) {
+            addedHTML += `<div><li><a href="#${struct[h1].shortName}">${struct[h1].title}</a></li>`;
+
+            for (let h2 = 0; h2 < struct[h1].content.length; h2++) {
+                if(h2 == 0) addedHTML += '<div><ul>';
+                addedHTML += `<li><a href="#${struct[h1].content[h2].shortName}">${struct[h1].content[h2].title}</a></li>`;
+
+                for (let h3 = 0; h3 < struct[h1].content[h2].content.length; h3++) {
+                    if(h3 == 0) addedHTML += '<ul>';
+
+                    addedHTML += `<li><a href="#${struct[h1].content[h2].content[h3].shortName}">${struct[h1].content[h2].content[h3].title}</a></li>`;
+
+                    if(h3 == struct[h1].content[h2].content.length - 1) addedHTML += '</ul>';
+                }
+
+                if(h2 == struct[h1].content.length - 1) addedHTML += '</ul></div>';
+            }
+
+            addedHTML += '</div>';
+        }
+        addedHTML += '</ul><p style="margin-top: 90px;"></p>';
+    }
+
+    return addedHTML + '\n' + rawText;
 }
 
 
