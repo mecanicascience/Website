@@ -239,6 +239,7 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
     html += post.title;
     html += '</a></p><p class="b-t-date">';
     html += 'Le ' + ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + (d2 + 1) : (d2 + 1)) + '/' + (date ? date.getFullYear() : '0000');
+    html += ' par <b>' + (post.author.split(' ')[0] + ' ' + post.author.split(' ')[1].split('')[0] + '.') + '</b>';
     html += '</p></div></div>';
 
 
