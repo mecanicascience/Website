@@ -164,12 +164,21 @@ router
         if(!req.query.uuid || !req.query.title || !articleExists)
             res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
         else {
+            let envV = null;
+            try {
+                envV = require('./../datas/env-vars.json');
+            }
+            catch (e) {
+                envV        = process.env;
+                isRequireOk = false;
+            }
+
             res.render('pages/admin/edit_article', {
                 main            : getMainInfos(req),
                 datas           : m.articles.getArticleDatas(articleExists),
                 action_function : req.query.action_function,
                 image_error     : req.query.image_error,
-                firebase_link   : process.env.FIREBASE_BLOG_LINK
+                firebase_link   : envV.FIREBASE_BLOG_LINK
             });
         }
     })
