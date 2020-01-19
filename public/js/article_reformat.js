@@ -27,7 +27,7 @@ function addSummary(rawText) {
         let h1Title = formattedTextTmp.split(/\#/)[1].split(/\#/)[0];
         if(h1Title != "" && h1Title.length > 0) {
             if(h1Title.split('')[1] == '!') {
-                rawText = rawText.replace(h1Title, h1Title.substring(1, h1Title.length));
+                rawText = rawText.replace(h1Title, h1Title.substring(0, 1) + h1Title.substring(2, h1Title.length));
                 h1Title = '';
             }
             struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '') });
@@ -39,7 +39,7 @@ function addSummary(rawText) {
 
                 if(h2Title != "" && h2Title.length > 0) {
                     if(h2Title.split('')[1] == '!') {
-                        rawText = rawText.replace(h2Title, h2Title.substring(1, h2Title.length));
+                        rawText = rawText.replace(h2Title, h2Title.substring(0, 1) + h2Title.substring(2, h2Title.length));
                         h2Title = '';
                     }
                     struct[struct.length - 1].content.push({
@@ -59,7 +59,7 @@ function addSummary(rawText) {
 
                     if(h3Title != "" && h3Title.length > 0) {
                         if(h3Title.split('')[1] == '!') {
-                            rawText = rawText.replace(h3Title, h3Title.substring(1, h3Title.length));
+                            rawText = rawText.replace(h3Title, h3Title.substring(0, 1) + h3Title.substring(2, h3Title.length));
                             h3Title = '';
                         }
                         struct[struct.length - 1].content[struct[struct.length - 1].content.length - 1].content.push({
