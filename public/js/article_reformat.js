@@ -26,18 +26,20 @@ function addSummary(rawText) {
     while(formattedTextTmp.search(/(^)\# .*\#/m) != -1) {
         let h1Title = formattedTextTmp.split(/\#/)[1].split(/\#/)[0];
         if(h1Title != "" && h1Title.length > 0) {
-            struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '') });
+            if(h1Title.split('')[0] == '!' || h1Title.split('')[1] == '!')
+                struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '') });
             formattedTextTmp = formattedTextTmp.replace(/(^)\# .*\#/m, '');
 
             while(formattedTextTmp.split(/(^)\# /m)[0] != undefined && formattedTextTmp.split(/(^)\# /m)[0].search(/(^)\#\# .*\#\#/m) != -1) {
                 let h2Title = formattedTextTmp.split(/(^)\# /m)[0].split(/\#\#/)[1].split(/\#\#/)[0];
 
                 if(h2Title != "" && h2Title.length > 0) {
-                    struct[struct.length - 1].content.push({
-                        title: h2Title,
-                        content: [],
-                        shortName: h2Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
-                    });
+                    if(h2Title.split('')[0] == '!' || h2Title.split('')[1] == '!')
+                        struct[struct.length - 1].content.push({
+                            title: h2Title,
+                            content: [],
+                            shortName: h2Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
+                        });
                     formattedTextTmp = formattedTextTmp.replace(/(^)\#\# .*\#\#/m, '');
                 }
 
@@ -49,11 +51,12 @@ function addSummary(rawText) {
                     let h3Title = formattedTextTmp.split(/(^)\# /m)[0].split(/(^)\#\# /m)[0].split(/\#\#\#/)[1];
 
                     if(h3Title != "" && h3Title.length > 0) {
-                        struct[struct.length - 1].content[struct[struct.length - 1].content.length - 1].content.push({
-                            title: h3Title,
-                            content: [],
-                            shortName: h3Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
-                        });
+                        if(h3Title.split('')[0] == '!' || h3Title.split('')[1] == '!')
+                            struct[struct.length - 1].content[struct[struct.length - 1].content.length - 1].content.push({
+                                title: h3Title,
+                                content: [],
+                                shortName: h3Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
+                            });
                         formattedTextTmp = formattedTextTmp.replace(/(^)\#\#\# .*\#\#\#/m, '');
                     }
                 }
