@@ -26,8 +26,10 @@ function addSummary(rawText) {
     while(formattedTextTmp.search(/(^)\# .*\#/m) != -1) {
         let h1Title = formattedTextTmp.split(/\#/)[1].split(/\#/)[0];
         if(h1Title != "" && h1Title.length > 0) {
-            if(h1Title.split('')[0] == '!' || h1Title.split('')[1] == '!')
+            if(h1Title.split('')[1] == '!') {
+                rawText = rawText.replace(h1Title, h1Title.substring(1, h1Title.length));
                 h1Title = '';
+            }
             struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '') });
 
             formattedTextTmp = formattedTextTmp.replace(/(^)\# .*\#/m, '');
@@ -36,8 +38,10 @@ function addSummary(rawText) {
                 let h2Title = formattedTextTmp.split(/(^)\# /m)[0].split(/\#\#/)[1].split(/\#\#/)[0];
 
                 if(h2Title != "" && h2Title.length > 0) {
-                    if(h2Title.split('')[0] == '!' || h2Title.split('')[1] == '!')
+                    if(h2Title.split('')[1] == '!') {
+                        rawText = rawText.replace(h2Title, h2Title.substring(1, h2Title.length));
                         h2Title = '';
+                    }
                     struct[struct.length - 1].content.push({
                         title: h2Title,
                         content: [],
@@ -54,8 +58,10 @@ function addSummary(rawText) {
                     let h3Title = formattedTextTmp.split(/(^)\# /m)[0].split(/(^)\#\# /m)[0].split(/\#\#\#/)[1];
 
                     if(h3Title != "" && h3Title.length > 0) {
-                        if(h3Title.split('')[0] == '!' || h3Title.split('')[1] == '!')
+                        if(h3Title.split('')[1] == '!') {
+                            rawText = rawText.replace(h3Title, h3Title.substring(1, h3Title.length));
                             h3Title = '';
+                        }
                         struct[struct.length - 1].content[struct[struct.length - 1].content.length - 1].content.push({
                             title: h3Title,
                             content: [],
