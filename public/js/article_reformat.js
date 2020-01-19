@@ -142,7 +142,7 @@ function getPanelHtml(type) {
 function getIframeHTML(src, link) {
     let id = Math.round(Math.random() * 1000000000000);
     let html = `<div class="custom-code-d" style="margin: -17px 0 21px 0;">`
-        + `<iframe sandbox src="${link}" class="code-iframe-i" id="${id}"></iframe>`
+        + `<iframe src="${link}" class="code-iframe-i" id="${id}"></iframe>`
         + `<div class="custom-code-buttons" style="text-align: center;">`
             + `<button style="margin-right: 5px;" type="button" onclick="window.open('${src}', '_blank');" class="btn btn-outline-secondary">Voir le code source</button>`
             + `<button type="button" onclick="document.getElementById('${id}').src='${link}'" class="btn btn-outline-danger">Remettre à zéro</button>`
