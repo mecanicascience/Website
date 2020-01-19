@@ -27,7 +27,9 @@ function addSummary(rawText) {
         let h1Title = formattedTextTmp.split(/\#/)[1].split(/\#/)[0];
         if(h1Title != "" && h1Title.length > 0) {
             if(h1Title.split('')[0] == '!' || h1Title.split('')[1] == '!')
-                struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '') });
+                h1Title = '';
+            struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '') });
+
             formattedTextTmp = formattedTextTmp.replace(/(^)\# .*\#/m, '');
 
             while(formattedTextTmp.split(/(^)\# /m)[0] != undefined && formattedTextTmp.split(/(^)\# /m)[0].search(/(^)\#\# .*\#\#/m) != -1) {
@@ -35,11 +37,12 @@ function addSummary(rawText) {
 
                 if(h2Title != "" && h2Title.length > 0) {
                     if(h2Title.split('')[0] == '!' || h2Title.split('')[1] == '!')
-                        struct[struct.length - 1].content.push({
-                            title: h2Title,
-                            content: [],
-                            shortName: h2Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
-                        });
+                        h2Title = '';
+                    struct[struct.length - 1].content.push({
+                        title: h2Title,
+                        content: [],
+                        shortName: h2Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
+                    });
                     formattedTextTmp = formattedTextTmp.replace(/(^)\#\# .*\#\#/m, '');
                 }
 
@@ -52,11 +55,12 @@ function addSummary(rawText) {
 
                     if(h3Title != "" && h3Title.length > 0) {
                         if(h3Title.split('')[0] == '!' || h3Title.split('')[1] == '!')
-                            struct[struct.length - 1].content[struct[struct.length - 1].content.length - 1].content.push({
-                                title: h3Title,
-                                content: [],
-                                shortName: h3Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
-                            });
+                            h3Title = '';
+                        struct[struct.length - 1].content[struct[struct.length - 1].content.length - 1].content.push({
+                            title: h3Title,
+                            content: [],
+                            shortName: h3Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
+                        });
                         formattedTextTmp = formattedTextTmp.replace(/(^)\#\#\# .*\#\#\#/m, '');
                     }
                 }
@@ -72,16 +76,19 @@ function addSummary(rawText) {
         addedHTML += '<h1 id="summary">Sommaire</h1>';
         addedHTML += '<ul>';
         for (let h1 = 0; h1 < struct.length; h1++) {
-            addedHTML += `<div><li><a href="#${struct[h1].shortName}">${struct[h1].title}</a></li>`;
+            if(struct[h1].title != '')
+                addedHTML += `<div><li><a href="#${struct[h1].shortName}">${struct[h1].title}</a></li>`;
 
             for (let h2 = 0; h2 < struct[h1].content.length; h2++) {
                 if(h2 == 0) addedHTML += '<div><ul>';
-                addedHTML += `<li><a href="#${struct[h1].content[h2].shortName}">${struct[h1].content[h2].title}</a></li>`;
+                if(struct[h1].content[h2].title != '')
+                    addedHTML += `<li><a href="#${struct[h1].content[h2].shortName}">${struct[h1].content[h2].title}</a></li>`;
 
                 for (let h3 = 0; h3 < struct[h1].content[h2].content.length; h3++) {
                     if(h3 == 0) addedHTML += '<ul>';
 
-                    addedHTML += `<li><a href="#${struct[h1].content[h2].content[h3].shortName}">${struct[h1].content[h2].content[h3].title}</a></li>`;
+                    if(struct[h1].content[h2].content[h3].title != '')
+                        addedHTML += `<li><a href="#${struct[h1].content[h2].content[h3].shortName}">${struct[h1].content[h2].content[h3].title}</a></li>`;
 
                     if(h3 == struct[h1].content[h2].content.length - 1) addedHTML += '</ul>';
                 }
