@@ -60,7 +60,7 @@ router
         res.redirect('/feed/actualites.xml');
     })
     .get('/feed/actualites.xml', async (req, res) => {
-        let rss = await m.gen_xml.generateRSS((m.config.is_https ? "https://" : "http://") + m.config.site);
+        let rss = await m.gen_xml.generateRSS((m.config.is_https ? "https://" : "http://") + m.config.site, m.config.main_image_link);
 
         res.setHeader('Content-Type', 'application/rss+xml');
         res.end(rss);
@@ -88,9 +88,10 @@ router
             );
 
             res.render('pages/articles/article', {
-                main      : getMainInfos(req),
-                datas     : datas,
-                articles  : article
+                main          : getMainInfos(req),
+                datas         : datas,
+                articles      : article,
+                fb_image_link : m.config.main_image_link
             });
         }
     })

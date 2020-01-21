@@ -7,7 +7,7 @@ const db         = require('./db');
  * Génère le fichier RSS des derniers articles
  * @param website_url URL du site (avec le https / http)
  */
-async function generateRSS(website_url) {
+async function generateRSS(website_url, blogLink) {
     let obj = {
         rss: {
             '@version': '2.0',
@@ -23,9 +23,9 @@ async function generateRSS(website_url) {
                     '@type': 'application/rss+xml'
                 },
 
-                description: { '#text': 'Blog de Maxime Dherbécourt' },
+                description: { '#text': 'Blog de MecanicaScience' },
                 language: { '#text': 'fr-FR' },
-                copyright: { '#text': 'Copyright Maxime Dherbécourt. Tous droits réservés.' },
+                copyright: { '#text': 'Copyright MecanicaScience. Tous droits réservés.' },
                 author: { '#text': 'mecanicaytb@gmail.com (MecanicaScience)' },
 
                 managingEditor: { '#text': 'mecanicaytb@gmail.com (MecanicaScience)' },
@@ -53,7 +53,7 @@ async function generateRSS(website_url) {
         if(date) date = d.date.toDate();
 
         let item = {
-            author: { '#text' : 'mecanicaytb@gmail.com (MecanicaScience)' },
+            author: { '#text' : d.author },
             title: { '#text' : '<![CDATA[' + d.title + ']]>' },
             description: { '#text' : '<![CDATA[' + d.description + ']]>' },
             pubDate: { '#text' : '<![CDATA[' + date + ']]>' },
@@ -67,7 +67,7 @@ async function generateRSS(website_url) {
                 '#text' : '<![CDATA[' + website_url + '/article?title=' + d.short_title + '&uuid=' + d.uuid + ']]>',
             },
             enclosure: {
-                '@url': website_url + '/imgs/blog/' + d.image_name,
+                '@url': blogLink + d.uuid + '_' + d.image_name + '?alt=media',
                 '@type': 'image/jpg'
             }
         };

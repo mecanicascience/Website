@@ -47,11 +47,11 @@ m.pass.users[1].username    = envV.MAIN_USERNAME_1;
 m.pass.users[1].password    = envV.MAIN_PASSWORD_1;
 m.pass.users[1].permissions = envV.MAIN_PERMISSIONS_1;
 
-m.private_db_key.project_id           = envV.CREDENTIAL_PROJECT_ID;
-m.private_db_key.private_key_id       = envV.CREDENTIAL_PRIVATE_KEY_ID;
+m.private_db_key.project_id           =  envV.CREDENTIAL_PROJECT_ID;
+m.private_db_key.private_key_id       =  envV.CREDENTIAL_PRIVATE_KEY_ID;
 m.private_db_key.private_key          = (envV.CREDENTIAL_PRIVATE_KEY + "").replace(/&_&/g, '-');
 m.private_db_key.client_email         = (envV.CREDENTIAL_CLIENT_EMAIL + "").replace(/&_&/g, '-');
-m.private_db_key.client_id            = envV.CREDENTIAL_CLIENT_ID;
+m.private_db_key.client_id            =  envV.CREDENTIAL_CLIENT_ID;
 m.private_db_key.client_x509_cert_url = (envV.CLIENT_CERT_URL + "").replace(/&_&/g, '-');
 
 if(isRequireOk)
