@@ -2,10 +2,109 @@
 let converter = new showdown.Converter();
 function computeText(rawText) {
     let textToConvert = rawText;
+    textToConvert = removeTextInEquations(textToConvert);
     textToConvert = addSummary(textToConvert);
     textToConvert = handleBalises(textToConvert);
 
-    return converter.makeHtml(textToConvert);
+    let htmlTxt = converter.makeHtml(textToConvert);
+    return putTextInEquations(htmlTxt);
+}
+
+
+
+let arrDoubleDoll = [];
+let arrSimpleDoll = [];
+function removeTextInEquations(txt) {
+    return txt; // TEMPORARY
+    let modifiedTxt = txt;
+    let opened = false;
+    let mode = 0; // 0 = dbl / 1 = simple
+
+    let idDbl = 0;
+    let idSpl = 0;
+
+    for (let i = 0; i < modifiedTxt.length; i++) {
+        if(modifiedTxt[i] == '$') {
+            if(modifiedTxt[i+1] == '$') {
+                modifiedTxt = replaceAtCustom(modifiedTxt, i, '▒▒');
+                mode = 0;
+                if(opened == true)
+                    idDbl++;
+                i++;
+            }
+            else {
+                modifiedTxt = replaceAtCustom(modifiedTxt, i, '▓');
+                mode = 1;
+                if(opened == true)
+                    idSpl++;
+            }
+            opened = !opened;
+
+            continue;
+        }
+
+        if(opened == true) {
+            if(mode == 0) {
+                if(arrDoubleDoll[idDbl] == undefined)
+                    arrDoubleDoll[idDbl] = '';
+                arrDoubleDoll[idDbl] += modifiedTxt[i];
+            }
+            else {
+                if(arrSimpleDoll[idSpl] == undefined)
+                    arrSimpleDoll[idSpl] = '';
+                arrSimpleDoll[idSpl] += modifiedTxt[i];
+            }
+            modifiedTxt = replaceAtCustom(modifiedTxt, i, '░');
+        }
+    }
+    return modifiedTxt;
+}
+
+function putTextInEquations(txt) {
+    return txt; // TEMPORARY
+    let modifiedTxt = txt;
+    let opened = false;
+    let mode = 0; // 0 = dbl / 1 = simple
+
+    let idDbl = 0;
+    let idSpl = 0;
+    let idCurrent = 0;
+
+    for (let i = 0; i < modifiedTxt.length; i++) {
+        if(modifiedTxt[i] == '▒') {
+            idCurrent = 0;
+            modifiedTxt = replaceAtCustom(modifiedTxt, i, '$$');
+            mode = 0;
+            if(opened == true)
+                idDbl++;
+            i++;
+            opened = !opened;
+            console.log(modifiedTxt);
+            continue;
+        }
+        if(modifiedTxt[i] == '▓') {
+            idCurrent = 0;
+            modifiedTxt = replaceAtCustom(modifiedTxt, i, '$');
+            mode = 1;
+            if(opened == true)
+                idSpl++;
+            i++;
+            opened = !opened;
+            continue;
+        }
+
+        if(opened == true) {
+            if(mode == 0)
+                modifiedTxt = replaceAtCustom(modifiedTxt, i, '0');
+            else
+                modifiedTxt = replaceAtCustom(modifiedTxt, i, '0');
+        }
+    }
+    return modifiedTxt;
+}
+
+function replaceAtCustom(str, index, replacement) {
+    return str.substr(0, index) + replacement+ str.substr(index + replacement.length);
 }
 
 
