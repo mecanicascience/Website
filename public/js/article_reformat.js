@@ -15,7 +15,6 @@ function computeText(rawText) {
 let arrDoubleDoll = [];
 let arrSimpleDoll = [];
 function removeTextInEquations(txt) {
-    return txt; // TEMPORARY
     let modifiedTxt = txt;
     let opened = false;
     let mode = 0; // 0 = dbl / 1 = simple
@@ -61,7 +60,6 @@ function removeTextInEquations(txt) {
 }
 
 function putTextInEquations(txt) {
-    return txt; // TEMPORARY
     let modifiedTxt = txt;
     let opened = false;
     let mode = 0; // 0 = dbl / 1 = simple
@@ -79,7 +77,6 @@ function putTextInEquations(txt) {
                 idDbl++;
             i++;
             opened = !opened;
-            console.log(modifiedTxt);
             continue;
         }
         if(modifiedTxt[i] == '▓') {
@@ -88,16 +85,16 @@ function putTextInEquations(txt) {
             mode = 1;
             if(opened == true)
                 idSpl++;
-            i++;
             opened = !opened;
             continue;
         }
 
         if(opened == true) {
             if(mode == 0)
-                modifiedTxt = replaceAtCustom(modifiedTxt, i, '0');
+                modifiedTxt = replaceAtCustom(modifiedTxt, i, arrDoubleDoll[idDbl][idCurrent]);
             else
-                modifiedTxt = replaceAtCustom(modifiedTxt, i, '0');
+                modifiedTxt = replaceAtCustom(modifiedTxt, i, arrSimpleDoll[idSpl][idCurrent]);
+            idCurrent++;
         }
     }
     return modifiedTxt;
