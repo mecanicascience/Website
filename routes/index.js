@@ -69,9 +69,9 @@ router
 
 
     // à propos du site
-    .get('/about',   (req, res) => res.render('pages/description/about',   { main : getMainInfos(req) }))
-    .get('/contact', (req, res) => res.render('pages/description/contact', { main : getMainInfos(req) }))
-    .get('/legal',   (req, res) => res.render('pages/description/legal',   { main : getMainInfos(req) }))
+    .get('/about',   (req, res) => res.render('pages/description/about',   { main : getMainInfos(req, 'A propos du site') }))
+    .get('/contact', (req, res) => res.render('pages/description/contact', { main : getMainInfos(req, 'Contact') }))
+    .get('/legal',   (req, res) => res.render('pages/description/legal',   { main : getMainInfos(req, 'Mentions légales') }))
 
     .get(/articleview/g, async (req, res) => {
         let url = req.originalUrl.split('&'); // format article/ARTICLE_TITLE&articleview&ID
@@ -94,7 +94,7 @@ router
             );
 
             res.render('pages/articles/article', {
-                main          : getMainInfos(req, datas.title + ' - ' + 'Blog de MecanicaScience'),
+                main          : getMainInfos(req, datas.title),
                 datas         : datas,
                 articles      : article,
                 fb_image_link : m.config.main_image_link
@@ -114,7 +114,7 @@ router
 
         let datas = await m.articles.getMonthlyProjectsForYear(year);
         res.render('pages/articles/monthly_projects', {
-            main  : getMainInfos(req),
+            main  : getMainInfos(req, 'Projet du mois'),
             year  : year,
             datas : JSON.stringify(datas)
         });
@@ -126,7 +126,7 @@ router
     .get('/admin', async (req, res) => {
         if(!m.users.isConnected(req.cookies)) {
             res.render('pages/admin/connection', {
-                main : getMainInfos(req),
+                main : getMainInfos(req, 'Connection admin'),
                 code : (req.query.code  ? req.query.code  : false)
             });
             return;
@@ -136,7 +136,7 @@ router
         let article = await m.articles.getArticles(undefined, undefined, parseInt(req.query.l), true, true);
 
         res.render('pages/admin/articles_interface', {
-            main        : getMainInfos(req),
+            main        : getMainInfos(req, 'Interface admin'),
             articles    : article,
             post_count  : (req.query.l     ? req.query.l     : 20),
             code        : (req.query.code  ? req.query.code  : false),
@@ -181,7 +181,7 @@ router
             }
 
             res.render('pages/admin/edit_article', {
-                main            : getMainInfos(req),
+                main            : getMainInfos(req, 'Edition de l\'article'),
                 datas           : m.articles.getArticleDatas(articleExists),
                 action_function : req.query.action_function,
                 image_error     : req.query.image_error,
@@ -308,6 +308,8 @@ const WEBSITE_URL = (m.config.is_https ? "https://" : "http://") + m.config.site
 function getMainInfos(req, title) {
     if(title == undefined)
         title = 'Blog de MecanicaScience';
+    else
+        title += '- Blog de MecanicaScience';
 
     return {
         version       : m.constants.version,
