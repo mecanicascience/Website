@@ -1,7 +1,7 @@
 // RENDU DU CODE
 let converter = new showdown.Converter();
 function computeText(rawText) {
-    let textToConvert = rawText;
+    let textToConvert = rawText.replace(/\\v\{/g, '\\overrightarrow{');
     textToConvert = removeTextInEquations(textToConvert);
     textToConvert = addSummary(textToConvert);
     textToConvert = handleBalises(textToConvert);
