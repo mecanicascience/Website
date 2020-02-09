@@ -60,11 +60,11 @@ async function generateRSS(website_url, blogLink) {
 
             category: { '#text' : formateCategory(d.category_id) },
 
-            link: { '#text' : '<![CDATA[' + website_url + '/article?title=' + d.short_title + '&uuid=' + d.uuid+ ']]>' },
+            link: { '#text' : '<![CDATA[' + website_url + '/article/' + d.short_title + '&articleview&' + d.uuid+ ']]>' },
 
             guid: {
                 '@isPermaLink' : 'true',
-                '#text' : '<![CDATA[' + website_url + '/article?title=' + d.short_title + '&uuid=' + d.uuid + ']]>',
+                '#text' : '<![CDATA[' + website_url + '/article/' + d.short_title + '&articleview&' + d.uuid + ']]>',
             },
             enclosure: {
                 '@url': blogLink + d.uuid + '_' + d.image_name + '?alt=media',

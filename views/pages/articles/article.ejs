@@ -10,6 +10,8 @@
 
 			<script type="text/javascript">
 				window.onload = function() {
+					document.getElementById('gn-menu').onclick = () => window.location.href = '/';
+
 					document.getElementById('container-text').innerHTML = computeText(convertFromCodeToHtml(<%- '"' + datas.content + '"' %>));
 
 					// MathJax

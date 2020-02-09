@@ -73,10 +73,16 @@ router
     .get('/contact', (req, res) => res.render('pages/description/contact', { main : getMainInfos(req) }))
     .get('/legal',   (req, res) => res.render('pages/description/legal',   { main : getMainInfos(req) }))
 
-    .get('/article', async (req, res) => {
-        let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title, m.users.isConnected(req.cookies));
+    .get(/articleview/g, async (req, res) => {
+        let url = req.originalUrl.split('&'); // format article/ARTICLE_TITLE&articleview&ID
+        if(url.length != 3 || url[1] != 'articleview' || url[0] == undefined || url[0].split('/').length != 3) {
+            res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
+            return;
+        }
+        url[0] = decodeURI(url[0].split('/')[2]);
 
-        if(!req.query.uuid || !req.query.title || !articleExists)
+        let articleExists = await m.articles.articleExistsAndVisible(url[2], url[0], m.users.isConnected(req.cookies));
+        if(url[2] == undefined || !url[0] || !articleExists)
             res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
         else {
             let datas = m.articles.getArticleDatas(articleExists);

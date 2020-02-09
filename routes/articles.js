@@ -48,7 +48,7 @@ async function getArticlesUrl(main_url) {
     let arr = [];
 
     for (let i = 0; i < html_array.length; i++)
-        arr.push({ url: main_url + '/article?title=' + html_array[i].post.short_title + '&uuid=' + html_array[i].post.uuid });
+        arr.push({ url: main_url + '/article/' + html_array[i].post.short_title + '&articleview&' + html_array[i].post.uuid });
 
     return arr;
 }

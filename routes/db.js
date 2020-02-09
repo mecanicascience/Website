@@ -232,8 +232,8 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
     html += articles.getLabelLong(post.category_id);
     html += '</p><p class="b-t-dec"><a href="';
 
-    if(is_admin_link) html += '/admin/edit?title=' + post.short_title + '&uuid=' + post.uuid;
-    else              html += '/article?title='    + post.short_title + '&uuid=' + post.uuid;
+    if(is_admin_link) html += '/admin/edit?title=' + post.short_title + '&uuid='        + post.uuid;
+    else              html += '/article/'          + post.short_title + '&articleview&' + post.uuid;
 
     html += '">';
     html += post.title;
