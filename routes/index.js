@@ -309,7 +309,7 @@ function getMainInfos(req, title) {
     if(title == undefined)
         title = 'Blog de MecanicaScience';
     else
-        title += '- Blog de MecanicaScience';
+        title += ' - Blog de MecanicaScience';
 
     return {
         version       : m.constants.version,
