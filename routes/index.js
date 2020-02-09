@@ -114,7 +114,7 @@ router
 
         let datas = await m.articles.getMonthlyProjectsForYear(year);
         res.render('pages/articles/monthly_projects', {
-            main  : getMainInfos(req, 'Projet du mois'),
+            main  : getMainInfos(req, 'Projets du mois'),
             year  : year,
             datas : JSON.stringify(datas)
         });
