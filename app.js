@@ -152,9 +152,10 @@ app
         errorMessage  : 'La page n\'a pas été trouvée',
         link          : m.path.join(__dirname, "views/"),
         main : {
-            version     : VERSION,
-            action_link : '/',
-            connected   : m.users.isConnected(req.cookies)
+            version       : VERSION,
+            action_link   : '/',
+            connected     : m.users.isConnected(req.cookies),
+            website_title : 'Erreur 404 - MecanicaScience'
         }
     }));
 

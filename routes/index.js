@@ -94,7 +94,7 @@ router
             );
 
             res.render('pages/articles/article', {
-                main          : getMainInfos(req),
+                main          : getMainInfos(req, datas.title + ' - ' + 'Blog de MecanicaScience'),
                 datas         : datas,
                 articles      : article,
                 fb_image_link : m.config.main_image_link
@@ -305,12 +305,16 @@ router
 
 const WEBSITE_URL = (m.config.is_https ? "https://" : "http://") + m.config.site;
 
-function getMainInfos(req) {
+function getMainInfos(req, title) {
+    if(title == undefined)
+        title = 'Blog de MecanicaScience';
+
     return {
-        version     : m.constants.version,
-        action_link : m.articles.getActionLink(req.body.q, req.query.s),
-        connected   : m.users.isConnected(req.cookies),
-        website_url : WEBSITE_URL
+        version       : m.constants.version,
+        action_link   : m.articles.getActionLink(req.body.q, req.query.s),
+        connected     : m.users.isConnected(req.cookies),
+        website_url   : WEBSITE_URL,
+        website_title : title
     };
 }
 
