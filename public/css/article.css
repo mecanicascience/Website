@@ -158,14 +158,27 @@ h3 {
 
 pre {
     background-color: #0000000b !important;
-    margin: 0 12px !important;
+    margin: 18px 15px !important;
+    border-radius: 22px;
 }
 
 code {
-    background-color: rgba(29, 31, 32, 0.03) !important;
+    background-color: none; /* rgba(29, 31, 32, 0.03) !important */
+    background: none !important;
     color: #000c !important;
     margin-left: 3px !important;
     margin-right: 3px !important;
+    overflow: auto !important;
+    width: max-content !important;
+}
+
+button {
+    margin-top: 3px;
+}
+
+.hljs {
+    font-size: 14px !important;
+    margin-bottom: 0px !important;
 }
 
 
