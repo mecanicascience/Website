@@ -161,7 +161,7 @@ function addSummary(rawText) {
                         struct[struct.length - 1].content[struct[struct.length - 1].content.length - 1].content.push({
                             title: h3Title,
                             content: [],
-                            shortName: h3Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
+                            shortName: h3Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!-]/g, '')
                         });
                         formattedTextTmp = formattedTextTmp.replace(/(^)\#\#\# .*\#\#\#/m, '');
                     }
