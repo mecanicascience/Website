@@ -25,7 +25,13 @@
 				};
 
 				function initMathJax() {
-					MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+					MathJax.Hub.Queue(["Typeset", MathJax.Hub], reloadAllVisualisations);
+				}
+
+				function reloadAllVisualisations() {
+					let el = document.getElementsByTagName('iframe');
+					for (let i = 0; i < el.length; i++)
+						el[i].src=el[i].src;
 				}
 			</script>
 		</header>
