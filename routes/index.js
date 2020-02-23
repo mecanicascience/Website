@@ -276,7 +276,6 @@ router
 
 
     .post('/admin/connect', (req, res) => {
-        console.log(req.cookies, req.body);
         if(m.users.isConnected(req.cookies)) {
             res.redirect('/admin');
             return;
