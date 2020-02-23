@@ -126,7 +126,7 @@ function addSummary(rawText) {
                 rawText = rawText.replace(h1Title, h1Title.substring(0, 1) + h1Title.substring(2, h1Title.length));
                 h1Title = '';
             }
-            struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '') });
+            struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!-]/g, '') });
 
             formattedTextTmp = formattedTextTmp.replace(/(^)\# .*\#/m, '');
 
@@ -141,7 +141,7 @@ function addSummary(rawText) {
                     struct[struct.length - 1].content.push({
                         title: h2Title,
                         content: [],
-                        shortName: h2Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!]/g, '')
+                        shortName: h2Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!-]/g, '')
                     });
                     formattedTextTmp = formattedTextTmp.replace(/(^)\#\# .*\#\#/m, '');
                 }
