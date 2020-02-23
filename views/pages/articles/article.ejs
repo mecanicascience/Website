@@ -15,12 +15,18 @@
 					document.getElementById('container-text').innerHTML = computeText(convertFromCodeToHtml(<%- '"' + datas.content + '"' %>));
 
 					// MathJax
-					MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+					try {
+						initMathJax();
+					} catch(e) { window.setTimeout(initMathJax, 1000); };
 
 					// highlightJs
 			        hljs.initHighlighting.called = false;
 			        hljs.initHighlighting();
 				};
+
+				function initMathJax() {
+					MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+				}
 			</script>
 		</header>
 
