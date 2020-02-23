@@ -106,7 +106,6 @@ router
     .get('/monthly_projects', async (req, res) => {
         let year = parseInt(req.query.year);
         let currentYear = new Date().getFullYear();
-        if(currentYear == 2019) currentYear = 2020;
         if(req.query.year == undefined || year < 2020 || year > currentYear) {
             res.redirect(`/monthly_projects?year=${currentYear}`);
             return;
