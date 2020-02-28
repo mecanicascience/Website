@@ -153,7 +153,7 @@ async function articleExistsAndVisible(uuid, title, is_admin) {
 /* ====== CREATION ET MODIFICATION DES ARTICLES ====== */
 /* Création d'un nouvel article */
 async function createNewArticle() {
-    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null', 'null.png', 1, 'null', 'null', false, false);
+    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null', 'null.png', 1, 'null', 'null', false, false, 0, []);
     return new_article;
 }
 
@@ -239,6 +239,11 @@ async function getMonthlyProjectsForYear(year) {
     return finalArr;
 }
 
+/** Ajoute une vue sur un article pour l'ip donnée */
+async function addViewForArticle(datas, ip, isConnected) {
+    await db.addViewForArticle(datas, ip, isConnected);
+}
+
 
 
 
@@ -261,5 +266,6 @@ module.exports = {
     updateMainImage           : updateMainImage,
     deleteMainImage           : deleteMainImage,
     getArticlesUrl            : getArticlesUrl,
-    getMonthlyProjectsForYear : getMonthlyProjectsForYear
+    getMonthlyProjectsForYear : getMonthlyProjectsForYear,
+    addViewForArticle         : addViewForArticle
 };

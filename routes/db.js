@@ -288,7 +288,7 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
  * @param uuid         int       : identifiant unique du post (il est conseillé de n'entrer aucune valeur)
  * @return le nouveau post généré
  */
-async function addNewPost(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, visible, image_exists, uuid) {
+async function addNewPost(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, visible, image_exists, view_count, view_list, uuid) {
     if(!uuid) uuid = await generateNewUUID();
 
     let data = {
@@ -303,13 +303,48 @@ async function addNewPost(category_id, content, date, description, image_credits
         title         : title,
         uuid          : uuid,
         visible       : visible,
-        image_exists  : image_exists
+        image_exists  : image_exists,
+        view_count    : view_count,
+        view_list     : view_list
     };
 
     let addDoc = await db.collection('posts').add(data);
     return data;
 }
 
+/** Ajoute une vue sur un article pour l'ip donnée */
+async function addViewForArticle(dat, ip, isConnected) {
+    try {
+        let getDoc = await db.collection('posts').where('uuid', '==', dat.uuid).limit(1).get(); // doc correspondant à l'UUID
+
+        let datas = getDoc.docs[0].data();
+
+        // ip locales / de test / personnelle
+        if(ip != '::ffff:127.0.0.1' && !isConnected)
+            datas.view_count += 1;
+
+        let founded = false;
+        for (let i = 0; i < datas.view_list.length; i++) {
+            if(datas.view_list[i].view_ip == ip) {
+                founded = true;
+                datas.view_list[i].view_count += 1;
+                break;
+            }
+        }
+        if(!founded)
+            datas.view_list.push({ view_count : 1, view_ip : ip });
+
+        let id = getDoc.docs[0].id;
+
+        db.collection('posts').doc(id).set(datas);
+
+        return true;
+    }
+    catch(e) {
+        console.error('Une erreur est survenue lors de l\'ajout d\'une nouvelle vue d\'un article : \n', e);
+        return false;
+    }
+}
 
 /* ====================== */
 
@@ -348,6 +383,11 @@ async function editArticle(category_id, content, date, description, image_credit
 
     try {
         let getDoc = await db.collection('posts').where('uuid', '==', uuid).limit(1).get(); // doc correspondant à l'UUID
+
+        let d = getDoc.docs[0].data();
+        datas.view_count = d.view_count;
+        datas.view_list  = d.view_list;
+
         let id = getDoc.docs[0].id;
 
         db.collection('posts').doc(id).set(datas);
@@ -552,5 +592,6 @@ module.exports = {
     deleteMainImage        : deleteMainImage,
     editMainImageName      : editMainImageName,
     getAllPostsMAIN        : getAllPostsMAIN,
-    getJsonForYear         : getJsonForYear
+    getJsonForYear         : getJsonForYear,
+    addViewForArticle      : addViewForArticle
 };

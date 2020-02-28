@@ -81,7 +81,8 @@ router
         }
         url[0] = decodeURI(url[0].split('/')[2]);
 
-        let articleExists = await m.articles.articleExistsAndVisible(url[2], url[0], m.users.isConnected(req.cookies));
+        let isConnected = m.users.isConnected(req.cookies);
+        let articleExists = await m.articles.articleExistsAndVisible(url[2], url[0], isConnected);
         if(url[2] == undefined || !url[0] || !articleExists)
             res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
         else {
@@ -92,6 +93,8 @@ router
                 (parseInt(datas.formatted_date.split('/')[1]) + 1) + "" :
                 "0" + (parseInt(datas.formatted_date.split('/')[1]) + 1)) + '/'
             );
+
+            await m.articles.addViewForArticle(datas, req.headers['x-forwarded-for'] || req.connection.remoteAddress, isConnected);
 
             res.render('pages/articles/article', {
                 main          : getMainInfos(req, datas.title),
