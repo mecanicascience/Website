@@ -94,7 +94,11 @@ router
                 "0" + (parseInt(datas.formatted_date.split('/')[1]) + 1)) + '/'
             );
 
-            await m.articles.addViewForArticle(datas, req.headers['x-forwarded-for'] || req.connection.remoteAddress, isConnected);
+            await m.articles.addViewForArticle(
+                datas,
+                req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                isConnected || req.get('host').split(':')[0] == 'localhost'
+            );
 
             res.render('pages/articles/article', {
                 main          : getMainInfos(req, datas.title),
