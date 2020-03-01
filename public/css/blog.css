@@ -120,6 +120,15 @@
     box-shadow: 2px 2px 3px 0.2px rgba(0, 0, 0, 0.11);
 }
 
+.section-comments {
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 2px 3px 0.2px rgba(0, 0, 0, 0.14);
+    padding: 55px 0 31px 0;
+}
+
 .s-c-title {
     font-weight: 500;
     font-size: 33px !important;
@@ -300,4 +309,95 @@ hr {
 
 .container-text {
     line-height: 26px;
+}
+
+
+/* Commentaires */
+.add-c-1 {
+    display: flex;
+    padding: 0 0 5px 0;
+}
+
+.add-c-2 {
+    display: flex;
+    padding: 0 0 25px 0;
+}
+
+.add-c-1 > input, .add-c-2 > input {
+    color: #606060 !important;
+    border-radius: 0 !important;
+}
+
+.add-c-1 > label, .add-c-2 > label {
+    padding: 8px 4px 0 5px;
+    width: 106px;
+}
+
+.add-c-content > form > textarea {
+    color: #353535 !important;
+}
+
+.c-add-comment {
+    margin: 9px 16px 0 0;
+}
+
+.c-add-comment > button {
+    float: right;
+}
+
+.add-c-one {
+    transition: opacity 1.5s ease, height 1.5s ease;
+}
+
+.add-c-t-t {
+    color: #555350;
+    line-height: 24px;
+    font-family: Rubik;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
+    padding: 27px 0 5px 0;
+}
+
+.cat-comments {
+    flex-direction: column;
+}
+
+.c-comment {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 17px 6px 13px 6px;
+}
+
+.c-c-name {
+    line-height: 1.7;
+    text-transform: capitalize;
+    font-style: italic;
+    color: #444;
+    font-size: 21px;
+    font-weight: 600;
+    font-family: "Quattrocento Sans",sans-serif;
+    margin: 7px 0 0 7px;
+    display: flex;
+    max-height: 37px;
+}
+
+.c-c-date {
+    font-size: 14px;
+    font-style: italic;
+    color: #8c8887;
+    padding: 7px 0 0 8px;
+    text-transform: none;
+    font-weight: 500;
+}
+
+.c-c-comment {
+    padding: 0 0 5px 1px;
+    word-wrap: anywhere;
 }

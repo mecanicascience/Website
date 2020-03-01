@@ -288,7 +288,7 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
  * @param uuid         int       : identifiant unique du post (il est conseillé de n'entrer aucune valeur)
  * @return le nouveau post généré
  */
-async function addNewPost(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, visible, image_exists, view_count, view_list, uuid) {
+async function addNewPost(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, visible, image_exists, view_count, view_list, comments, uuid) {
     if(!uuid) uuid = await generateNewUUID();
 
     let data = {
@@ -305,7 +305,8 @@ async function addNewPost(category_id, content, date, description, image_credits
         visible       : visible,
         image_exists  : image_exists,
         view_count    : view_count,
-        view_list     : view_list
+        view_list     : view_list,
+        comments      : comments
     };
 
     let addDoc = await db.collection('posts').add(data);
@@ -349,6 +350,25 @@ async function addViewForArticle(dat, ip, isConnected) {
     }
 }
 
+/**
+  * Ajoute le commentaire fourni
+  * @return 0 si aucune erreur ou 1 s'il y a une erreur
+  */
+async function addNewComment(uuid, short_title, name, email, comment, ip) {
+    let getDoc = await db.collection('posts').where('uuid', '==', uuid).limit(1).get(); // doc correspondant à l'UUID
+    let datas = getDoc.docs[0].data();
+
+    if(datas.short_title != short_title)
+        return 1;
+
+    let da = firebase.firestore.Timestamp.fromDate(new Date());
+    datas.comments.push({ name: name, email: email, comment: comment, post_date: da, ip: ip, visible: true });
+
+    db.collection('posts').doc(getDoc.docs[0].id).set(datas);
+
+    return 0;
+}
+
 /* ====================== */
 
 
@@ -390,6 +410,7 @@ async function editArticle(category_id, content, date, description, image_credit
         let d = getDoc.docs[0].data();
         datas.view_count = d.view_count;
         datas.view_list  = d.view_list;
+        datas.comments   = d.comments;
 
         let id = getDoc.docs[0].id;
 
@@ -596,5 +617,6 @@ module.exports = {
     editMainImageName      : editMainImageName,
     getAllPostsMAIN        : getAllPostsMAIN,
     getJsonForYear         : getJsonForYear,
-    addViewForArticle      : addViewForArticle
+    addViewForArticle      : addViewForArticle,
+    addNewComment          : addNewComment
 };

@@ -153,7 +153,7 @@ async function articleExistsAndVisible(uuid, title, is_admin) {
 /* ====== CREATION ET MODIFICATION DES ARTICLES ====== */
 /* Création d'un nouvel article */
 async function createNewArticle() {
-    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null', 'null.png', 1, 'null', 'null', false, false, 0, []);
+    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null', 'null.png', 1, 'null', 'null', false, false, 0, [], []);
     return new_article;
 }
 
@@ -247,6 +247,61 @@ async function addViewForArticle(datas, ip, isConnected) {
 
 
 
+/** Ajoute un commentaire en fonction de la requête */
+async function postComment(dat, ip) {
+    if(
+           !dat['c-a-id'] || parseInt(dat['c-a-id']) < 0 || !dat['c-a-title']
+        || !dat['c-email'] || !dat['c-commentary'] || !dat['c-name']
+    ) return 1;
+
+    if(!validateEmail(dat['c-email']))
+        return 2;
+
+    if(dat['c-commentary'].length > 4000)
+        return 3;
+
+    let ans = await db.addNewComment(parseInt(dat['c-a-id']), dat['c-a-title'], dat['c-name'], dat['c-email'], dat['c-commentary'], ip);
+    return ans;
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function formatComment(comments) {
+    let arrRet = [];
+
+    for (let i in comments) {
+        let c = comments[i];
+        if(!c.visible) continue;
+
+        let date = new Date(c.post_date.toDate());
+        let d1   = date.getDate();
+        let d2   = date.getMonth();
+        let d3   = date.getHours();
+        let d4   = date.getMinutes();
+
+        let f_date =
+            'Le ' +
+            ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + d2 : d2) + '/' + date.getFullYear()
+            + ' à ' + ((d3 + '').length == 1 ? '0' + d3 : d3) + 'h' + ((d4 + '').length == 1 ? '0' + d4 : d4);
+        ;
+
+
+        arrRet.push({
+            name    : c.name,
+            comment : c.comment,
+            date    : f_date
+        });
+    }
+
+    return arrRet.reverse();
+}
+
+
+
+
 
 
 
@@ -267,5 +322,7 @@ module.exports = {
     deleteMainImage           : deleteMainImage,
     getArticlesUrl            : getArticlesUrl,
     getMonthlyProjectsForYear : getMonthlyProjectsForYear,
-    addViewForArticle         : addViewForArticle
+    addViewForArticle         : addViewForArticle,
+    postComment               : postComment,
+    formatComment             : formatComment
 };

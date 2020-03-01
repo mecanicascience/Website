@@ -22,6 +22,30 @@
 					// highlightJs
 			        hljs.initHighlighting.called = false;
 			        hljs.initHighlighting();
+
+
+					let code = <%- code %>;
+
+					if(code == '0' || code == '1' || code == '2' || code == '3' || code == '4') {
+						setTimeout(function() {
+							document.getElementById('info-toast').style.opacity = 0;
+							document.getElementById('post-comment').className = "btn btn-outline-secondary";
+						}, 4000);
+
+						document.getElementById('info-toast').style = 'height: 92.5px; width: 310px;';
+
+						     if(code == '0')  document.getElementById('toast-text').innerHTML = 'Le commentaire a bien été ajouté.';
+						else if(code == '1')  document.getElementById('toast-text').innerHTML = 'Les champs sont incomplets.';
+						else if(code == '2')  document.getElementById('toast-text').innerHTML = 'L\'email n\'est pas valide.';
+						else if(code == '3')  document.getElementById('toast-text').innerHTML = 'Le commentaire est trop grand.';
+
+						document.getElementById('info-toast').style.opacity = 1;
+
+						if(code == '0')
+							document.getElementById('post-comment').className = "btn btn-outline-success";
+						else if(code == '1' || code == '2' || code == '3')
+							document.getElementById('post-comment').className = "btn btn-outline-danger";
+					}
 				};
 
 				function initMathJax() {
@@ -33,11 +57,43 @@
 					for (let i = 0; i < el.length; i++)
 						el[i].src=el[i].src;
 				}
+
+				function commentFadeIn() {
+					document.getElementById('add-c-one').style = 'opacity: 0; height: 0; display: block;';
+
+					setTimeout(function() {
+						document.getElementById('add-c-one').style.height = '100px';
+					}, 100);
+
+					setTimeout(function() {
+						document.getElementById('add-c-one').style.opacity = '1';
+					}, 500);
+
+					document.getElementById('c-commentary').onclick = function() {};
+				}
 			</script>
 		</header>
 
 		<main>
 			<div class="section section-2" style="margin-top: -5px;">
+				<div class="toaster">
+    				<div id="info-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    					<div class="toast-header">
+    						<svg class="bd-placeholder-img rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+    							<rect width="100%" height="100%" fill="#007aff"></rect>
+    						</svg>
+    						<strong class="mr-auto">Information</strong>
+    						<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onclick="document.getElementById('info-toast').style.opacity = 0">
+    							<span aria-hidden="true">&times;</span>
+    						</button>
+    					</div>
+    					<div class="toast-body" id="toast-text">
+    						Chargement...
+    					</div>
+    				</div>
+    			</div>
+
+
 				<div class="m-title">
 					<p class="m-t-title"><%= datas.title %></p>
 					<hr class="m-t-hr" />
@@ -114,6 +170,65 @@
 					<%- articles.length > 0 ? articles.shift() : '' %>
 				</div>
             </div>
+
+			<div class="section section-comments">
+				<p class="s-c-title">Partie commentaires</p>
+
+                <hr />
+
+				<div id="comments" class="container category cat-comments">
+					<% if(comments.length == 0) { %>
+						<div class="c-comment">
+							<div class="cat-title">Pas de commentaires.</div>
+						</div>
+					<% } %>
+
+					<% for(let i = 0; i < comments.length; i++) { %>
+						<div class="c-comment">
+							<div class="c-c-name">
+								<p><%= comments[i].name %></p>
+								<div class="c-c-date">(<%= comments[i].date %>)</div>
+							</div>
+							<div class="c-c-comment"><%= comments[i].comment %></div><br />
+						</div>
+					<% } %>
+				</div>
+
+				<hr />
+
+				<div id="add-comment" class="container category" style="flex-direction: column;" id="comments">
+					<div class="add-c-title">
+						<p class="add-c-t-t">Ajouter un commentaire</p>
+					</div>
+
+					<div class="add-c-content">
+						<form action="/articleview/add_comment" method="post">
+							<div class="add-c-one" id="add-c-one" style="height: 0px; opacity: 0; display: none;">
+								<input name="c-a-id"    style="display: none;" type="text" value="<%= datas.uuid %>">
+								<input name="c-a-title" style="display: none;" type="text" value="<%= datas.short_title %>">
+
+
+								<div class="add-c-1">
+									<label class="cat-title">E-Mail :</label>
+									<input id="c-email" name="c-email" type="email" class="form-control" placeholder="(obligatoire) - Adresse strictement confidentielle" required>
+								</div>
+
+								<div class="add-c-2">
+									<label class="cat-title">Nom :</label>
+									<input id="c-name" name="c-name" type="text" class="form-control" placeholder="(obligatoire)" required>
+								</div>
+							</div>
+
+							<label class="cat-title">Commentaire (<i>max. 4000 charactères</i>) :</label>
+							<textarea id="c-commentary" onclick="commentFadeIn();" class="form-control" aria-label="commentary-area" name="c-commentary" placeholder="Entrez votre commentaire ici..." required></textarea>
+
+							<div class="c-add-comment">
+								<button type="submit" id="post-comment" class="btn btn-outline-secondary">Ajouter le commentaire</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 
 
 		<%- include('../../partial/footer') %>

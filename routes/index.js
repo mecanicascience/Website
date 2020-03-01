@@ -100,13 +100,25 @@ router
                 isConnected || req.get('host').split(':')[0] == 'localhost'
             );
 
+            let c = req.query.code;
+            if(c == undefined || c.length == 0) c = '-1';
             res.render('pages/articles/article', {
                 main          : getMainInfos(req, datas.title),
                 datas         : datas,
                 articles      : article,
-                fb_image_link : m.config.main_image_link
+                fb_image_link : m.config.main_image_link,
+                code          : c,
+                comments      : m.articles.formatComment(datas.comments)
             });
         }
+    })
+
+    .post("/articleview/add_comment", async (req, res) => {
+        let id    = req.body['c-a-id']    || -1;
+        let title = req.body['c-a-title'] || '';
+        let code  = await m.articles.postComment(req.body, req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+
+        res.redirect(`/article/${title}&articleview&${id}?code=${code}#comments`);
     })
 
 
