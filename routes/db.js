@@ -315,6 +315,9 @@ async function addNewPost(category_id, content, date, description, image_credits
 /** Ajoute une vue sur un article pour l'ip donnée */
 async function addViewForArticle(dat, ip, isConnected) {
     try {
+        if(isConnected)
+            return;
+
         let getDoc = await db.collection('posts').where('uuid', '==', dat.uuid).limit(1).get(); // doc correspondant à l'UUID
 
         let datas = getDoc.docs[0].data();
