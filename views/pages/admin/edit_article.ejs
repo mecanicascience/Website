@@ -65,7 +65,7 @@
 						document.getElementById('main-image-upload-text').innerHTML =
 							'Nom du fichier uploadé : <b>' + document.getElementById('main-image-upload-input').files[0].name
 							+ '</b><br /><br />Le fichier \''
-							+ '<i>' + <%- '"' + firebase_link + datas.uuid + '"' %> + '_<b>'
+							+ '<i>' + <%- '"' + fb_image_link + datas.uuid + '"' %> + '_<b>'
 							+ imageName + '.' + imageExtension
 							+ '</b>?alt=media</i>\' sera créé.';
 					});
@@ -309,7 +309,7 @@
 						<div class="m-c-row">
 							<div class="m-c-col">
 								<% if(datas.image_exists) { %>
-									<a><img class="m-b-image m-c-logo" src=<%= firebase_link + datas.uuid + '_' + datas.image_name + '?alt=media' %>  /></a>
+									<a><img class="m-b-image m-c-logo" src=<%= fb_image_link + datas.uuid + '_' + datas.image_name + '?alt=media' %>  /></a>
 								<% } %>
 							</div>
 
@@ -321,7 +321,7 @@
 
 										<select class="form-control" style="text-align: left; border-radius: 0 !important; color: #0000007a !important; width: 57px !important;">
 											<option value="">...</option>
-											<option value=""><%= firebase_link + datas.uuid %>_</option>
+											<option value=""><%= fb_image_link + datas.uuid %>_</option>
 										</select>
 									</div>
 
