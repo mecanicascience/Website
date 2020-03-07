@@ -401,3 +401,7 @@ hr {
     padding: 0 0 5px 1px;
     word-wrap: anywhere;
 }
+
+.mjx-mrow > a {
+    color: rgb(63, 165, 219) !important;
+}

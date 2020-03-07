@@ -1,10 +1,14 @@
 // RENDU DU CODE
 let converter = new showdown.Converter();
 function computeText(rawText) {
-    let textToConvert = rawText.replace(/\\v\{/g, '\\overrightarrow{');
+    let textToConvert = rawText
+        .replace(/\\v\{/g, '\\overrightarrow{')
+        .replace(/&#39;/g, '&&&39;');
+    ;
     textToConvert = removeTextInEquations(textToConvert);
     textToConvert = addSummary(textToConvert);
     textToConvert = handleBalises(textToConvert);
+    textToConvert = textToConvert.replace(/&&&39;/g, '\'');
 
     let htmlTxt = converter.makeHtml(textToConvert);
     return putTextInEquations(htmlTxt);
@@ -224,7 +228,6 @@ function handleBalises(rawText) {
         let link = frameDesc.split('link=\'')[1].split('\'')[0];
 
         let title1 = frameDesc.split('title=\'');
-        console.log(title1);
         let title = (title1[1] != undefined && (title1[1].split('\'')).length > 0)
             ? 'Simulation - ' + title1[1].split('\'')[0]
             : 'Simulation';
