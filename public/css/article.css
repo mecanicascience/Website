@@ -284,6 +284,34 @@ code {
     padding: 0;
 }
 
+.equa_imp {
+    border: 3px solid #C45E08;
+    border-radius: 3px;
+    padding: 7px 11px 7px 5px;
+    margin: 18px 44px 29px 44px;
+    color: #C55F09DE;
+}
+
+.equa_imp > div {
+    position: relative;
+    padding: 0px 6px 1px 6px;
+    margin: 0 0 -25px 0;
+    border-radius: 5px;
+    color: #2c5d6c;
+    background-color: #cb7228;
+    border: 2px solid #c45e08;
+    top: -18px;
+    left: 20px;
+    width: 74px;
+}
+
+.equa_imp > div > p {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 13px;
+}
+
 
 
 

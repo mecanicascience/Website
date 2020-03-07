@@ -3,7 +3,9 @@ let converter = new showdown.Converter();
 function computeText(rawText) {
     let textToConvert = rawText
         .replace(/\\v\{/g, '\\overrightarrow{')
-        .replace(/&#39;/g, '&&&39;');
+        .replace(/&#39;/g, '&&&39;')
+        .replace(/<!eq>/g, '<div class="equa_imp"><div><p>Equation</p></div>')
+        .replace(/<\/!eq>/g, '</div>')
     ;
     textToConvert = removeTextInEquations(textToConvert);
     textToConvert = addSummary(textToConvert);
