@@ -232,7 +232,7 @@ function handleBalises(rawText) {
 }
 
 function getPanelHtml(type) {
-    return `<div class="panel-m panel-${type}-m"><p>`;
+    return `<div class="panel-m panel-${type}-m"><div></div><p>`;
 }
 
 function getIframeHTML(src, link) {
