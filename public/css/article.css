@@ -10,6 +10,9 @@
 
 .m-b-image:hover { height: 290px; }
 
+img       { transition: width 1.1s ease; }
+img:hover { width : 99% !important; }
+
 .figure-caption { margin-right: 15px; }
 
 .figure-caption > p > a {
@@ -208,7 +211,14 @@ button {
     z-index: 1;
 }
 
-.panel-m > p { margin: 0 18px 9px 0; }
+.panel-m > p:hover {
+    padding-bottom: 3px;
+}
+
+.panel-m > p {
+    margin: 0 18px 9px 0;
+    transition: padding-bottom 0.4s ease;
+}
 
 .panel-m > div {
     width: 7px;
@@ -318,6 +328,14 @@ code {
     padding: 0;
     color: white;
     font-size: 13px;
+}
+
+.equa_imp > .mjx-chtml {
+    transition: font-size 0.6s ease;
+}
+
+.equa_imp > .mjx-chtml:hover {
+    font-size: calc(100% + 2px) !important;
 }
 
 
