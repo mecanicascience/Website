@@ -15,7 +15,7 @@
 .figure-caption > p > a {
     position: relative;
     text-decoration: none;
-    color: #4899b0;
+    color: rgb(6, 140, 168);
     align-content: center;
 }
 
@@ -26,7 +26,7 @@
     height: 2px;
     bottom: 0;
     left: -1.3px;
-    background-color: #4899b0;
+    background-color: rgb(6, 140, 168);
     visibility: hidden;
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0s;
@@ -51,7 +51,7 @@
 #container-text > p > a, #container-text > div > p > a, #preview-toaster-content > p > a, #container-text > ul > li > a {
     position: relative;
     text-decoration: none !important;
-    color: #4899b0;
+    color: rgb(6, 140, 168);
     align-content: center;
 }
 
@@ -62,7 +62,7 @@
     height: 2px;
     bottom: 0;
     left: -1.1px;
-    background-color: #4899b0;
+    background-color: rgb(6, 140, 168);
     visibility: hidden;
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0s;
