@@ -246,6 +246,7 @@
 @media (max-width: 420px) {
     .mdc-button { height: auto !important; }
     .m-t-title { font-size: 31px !important; }
+    .search-bar { font-size: 12px; }
     #search-form { width: 223px; }
     #navbarSupportedContent { padding-left: 0 !important; }
 }

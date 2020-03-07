@@ -14,6 +14,7 @@
     box-shadow: 2px 3px 7px 0.2px rgba(0, 0, 0, 0.15);
     margin: 8px 14px;
     border-radius: 1%;
+    margin-left: 4px;
 }
 
 .b-image-cont {
@@ -216,6 +217,7 @@ hr {
 .m-c-button-yt {
     margin-top: 35px;
     flex-grow: 1;
+    margin-left: 4px;
 }
 .m-c-button-row {
     display: flex;

@@ -10,8 +10,8 @@
 
 .m-b-image:hover { height: 290px; }
 
-img       { transition: width 1.1s ease; }
-img:hover { width : 99% !important; }
+#container-text > p > img       { transition: width 1.1s ease; }
+#container-text > p > img:hover { width : 99% !important; }
 
 .figure-caption { margin-right: 15px; }
 
@@ -121,6 +121,7 @@ img:hover { width : 99% !important; }
 
 
 h1 {
+    text-align: left;
     font-weight: 600 !important;
     font-style: normal;
     font-stretch: normal;
@@ -133,6 +134,7 @@ h1 {
 }
 
 h2 {
+    text-align: left;
     line-height: 2px !important;
     font-weight: 600 !important;
     font-style: normal;
@@ -146,6 +148,7 @@ h2 {
 }
 
 h3 {
+    text-align: left;
     font-weight: 600 !important;
     font-stretch: normal;
     font-size: 20px !important;
@@ -195,6 +198,9 @@ button {
     display: flex;
     margin: 24px 46px 28px 39px;
 }
+
+@media screen and (max-width: 500px) { .panel-m { margin: 24px 11px 28px 16px; } }
+
 .panel-info-m    { background-color: #3fa5db2e; }
 .panel-warning-m { background-color: #f395393b; }
 .panel-danger-m  { background-color: #c219362e; }
