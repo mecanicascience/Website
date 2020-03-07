@@ -121,7 +121,8 @@
 
 
 .navbar {
-    position: fixed !important;
+    /* position: fixed !important; */
+    margin-top: -51px;
     top: 0;
     width: 100%;
     padding: unset !important;
