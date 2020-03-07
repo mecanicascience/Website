@@ -190,7 +190,7 @@ button {
     padding: 10px 10px 10px 30px;
     min-height: auto;
     display: flex;
-    margin: 29px 46px 8px 39px;
+    margin: 24px 46px 28px 39px;
 }
 .panel-info-m    { background-color: #3fa5db2e; }
 .panel-warning-m { background-color: #f395393b; }
