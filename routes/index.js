@@ -203,7 +203,7 @@ router
                 datas           : m.articles.getArticleDatas(articleExists),
                 action_function : req.query.action_function,
                 image_error     : req.query.image_error,
-                firebase_link   : envV.FIREBASE_BLOG_LINK
+                fb_image_link   : m.config.main_image_link
             });
         }
     })

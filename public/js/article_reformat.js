@@ -1,10 +1,16 @@
 // RENDU DU CODE
 let converter = new showdown.Converter();
 function computeText(rawText) {
-    let textToConvert = rawText.replace(/\\v\{/g, '\\overrightarrow{');
+    let textToConvert = rawText
+        .replace(/\\v\{/g, '\\overrightarrow{')
+        .replace(/&#39;/g, '&&&39;')
+        .replace(/<!eq>/g, '<div class="equa_imp"><div><p>Equation</p></div>')
+        .replace(/<\/!eq>/g, '</div>')
+    ;
     textToConvert = removeTextInEquations(textToConvert);
     textToConvert = addSummary(textToConvert);
     textToConvert = handleBalises(textToConvert);
+    textToConvert = textToConvert.replace(/&&&39;/g, '\'');
 
     let htmlTxt = converter.makeHtml(textToConvert);
     return putTextInEquations(htmlTxt);
@@ -222,7 +228,18 @@ function handleBalises(rawText) {
         let frameDesc = formattedText.split('<embeddedFrame ')[1].split('/>')[0];
         let src = frameDesc.split('src=\'')[1].split('\'')[0];
         let link = frameDesc.split('link=\'')[1].split('\'')[0];
-        let formatedHTMLT = getIframeHTML(src, link);
+
+        let title1 = frameDesc.split('title=\'');
+        let title = (title1[1] != undefined && (title1[1].split('\'')).length > 0)
+            ? 'Simulation - ' + title1[1].split('\'')[0]
+            : 'Simulation';
+
+        let text1 = frameDesc.split('text=\'');
+        let text = (text1[1] != undefined && (text1[1].split('\'')).length > 0)
+            ? text1[1].split('\'')[0]
+            : '';
+
+        let formatedHTMLT = getIframeHTML(src, link, title, text);
 
         formattedText = formattedText.replace(/<embeddedFrame.*?\/>/, formatedHTMLT);
     }
@@ -232,18 +249,24 @@ function handleBalises(rawText) {
 }
 
 function getPanelHtml(type) {
-    return `<div class="panel-m panel-${type}-m"><p>`;
+    return `<div class="panel-m panel-${type}-m"><div></div><p>`;
 }
 
-function getIframeHTML(src, link) {
+function getIframeHTML(src, link, title, text) {
     let id = Math.round(Math.random() * 1000000000000);
-    let html = `<div class="custom-code-d" style="margin: -17px 0 21px 0;">`
+    let html = `<figure class="custom-code-d">`
+        + `<div class="custom-code-d-title">`
+            + `<p>${title}</p>`
+        + `</div>`
         + `<iframe src="${link}" class="code-iframe-i" id="${id}"></iframe>`
+        + `<div class="custom-code-d-text">`
+            + `<p>${text}</p>`
+        + `</div>`
         + `<div class="custom-code-buttons" style="text-align: center;">`
             + `<button style="margin-right: 5px;" type="button" onclick="window.open('${src}', '_blank');" class="btn btn-outline-secondary">Voir le code source</button>`
             + `<button type="button" onclick="document.getElementById('${id}').src='${link}'" class="btn btn-outline-danger">Remettre à zéro</button>`
         + `</div>`
-        + `</div>`
+        + `</figure>`
     ;
 
     return html;
