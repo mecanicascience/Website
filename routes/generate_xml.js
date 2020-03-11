@@ -26,10 +26,10 @@ async function generateRSS(website_url, blogLink) {
                 description: { '#text': 'Blog de MecanicaScience' },
                 language: { '#text': 'fr-FR' },
                 copyright: { '#text': 'Copyright MecanicaScience. Tous droits réservés.' },
-                author: { '#text': 'mecanicaytb@gmail.com (MecanicaScience)' },
+                author: { '#text': 'mecanicascience@gmail.com (MecanicaScience)' },
 
-                managingEditor: { '#text': 'mecanicaytb@gmail.com (MecanicaScience)' },
-                webMaster: { '#text': 'mecanicaytb@gmail.com (MecanicaScience)' },
+                managingEditor: { '#text': 'mecanicascience@gmail.com (MecanicaScience)' },
+                webMaster: { '#text': 'mecanicascience@gmail.com (MecanicaScience)' },
 
                 image: {
                     url: website_url + '/imgs/illustration/main_logo.png',
