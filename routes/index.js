@@ -152,6 +152,7 @@ router
 
 
         let article = await m.articles.getArticles(undefined, undefined, parseInt(req.query.l), true, true);
+        let comm = await m.articles.getEveryComments();
 
         res.render('pages/admin/articles_interface', {
             main        : getMainInfos(req, 'Interface admin'),
@@ -159,7 +160,8 @@ router
             post_count  : (req.query.l     ? req.query.l     : 20),
             code        : (req.query.code  ? req.query.code  : false),
             new_title   : (req.query.title ? req.query.title : null),
-            new_uuid    : (req.query.uuid  ? req.query.uuid  : null)
+            new_uuid    : (req.query.uuid  ? req.query.uuid  : null),
+            comments    : m.articles.formatComment(comm, true)
         });
     })
 
@@ -259,6 +261,18 @@ router
 
         if(!req.query.uuid || !req.query.title || !articleExists || !deleteArticle) res.redirect('/admin?code=3');
         else res.redirect('/admin?code=2');
+    })
+
+
+    // edition de commentaires
+    .get('/admin/toggle_comment_visibility', async (req, res) => {
+        if(!m.users.isConnected(req.cookies)) {
+            res.redirect('/admin');
+            return;
+        }
+
+        let ans = await m.articles.toggleArticleVisibility(req.query.articleID, req.query.commentID);
+        res.redirect(`/admin?code=${ans}#comments`);
     })
 
 

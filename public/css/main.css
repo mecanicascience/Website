@@ -332,3 +332,11 @@ main { margin-top: 40px; }
     letter-spacing: 1px;
     text-align: center;
 }
+
+.act-admin-b {
+    margin: 8px 0 0 22px;
+    padding: 0 2px 0 3px;
+    font-size: 13px;
+    text-transform: none;
+    height: 20px;
+}

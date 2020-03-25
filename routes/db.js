@@ -362,13 +362,62 @@ async function addNewComment(uuid, short_title, name, email, comment, ip) {
         return 1;
 
     let da = firebase.firestore.Timestamp.fromDate(new Date());
-    datas.comments.push({ name: name, email: email, comment: comment, post_date: da, ip: ip, visible: true });
+    datas.comments.push({
+        name       : name,
+        email      : email,
+        comment    : comment,
+        post_date  : da,
+        ip         : ip,
+        visible    : true,
+        admin_show : true
+    });
 
     db.collection('posts').doc(getDoc.docs[0].id).set(datas);
 
     return 0;
 }
 
+/**
+* @return an array of every comments
+*/
+async function getEveryComments() {
+    let getDoc = await db.collection('posts').get(); // doc correspondant à l'UUID
+    let comments = [];
+
+    for (let i = 0; i < getDoc.docs.length; i++) {
+        let d = getDoc.docs[i].data();
+        for (let j = 0; j < d.comments.length; j++) {
+            d.comments[j].articleID    = d.uuid + '';
+            d.comments[j].articleTitle = d.title;
+            d.comments[j].commentID    = j + '';
+            comments.push(d.comments[j]);
+        }
+    }
+
+    return comments;
+}
+
+/**
+* @return true si la visiblity de l'article a bien été toggled
+*/
+async function toggleArticleVisibility(articleID, commentID) {
+    let getDoc = await db.collection('posts').where('uuid', '==', parseInt(articleID)).limit(1).get(); // doc correspondant à l'UUID
+
+    if(getDoc.docs.length == 0)
+        return false;
+
+    let datas = getDoc.docs[0].data();
+
+    try {
+        datas.comments[parseInt(commentID)].visible = !datas.comments[parseInt(commentID)].visible;
+    } catch(e) {
+        return false;
+    }
+
+    db.collection('posts').doc(getDoc.docs[0].id).set(datas);
+
+    return true;
+}
 /* ====================== */
 
 
@@ -578,9 +627,6 @@ async function editMainImageName(uuid, old_name, new_name) {
 
 
 
-
-
-
 /** ====== FLUX RSS ====== */
 /**
  * Retourne la liste des articles à publier dans le flux rss
@@ -603,20 +649,22 @@ async function getRssArticles(limit) {
 
 /** Exports module */
 module.exports = {
-    initializeDb           : initializeDb,
-    getHTMLForAllPostsMAIN : getHTMLForAllPostsMAIN,
-    getArticleByUUID       : getArticleByUUID,
-    addNewPost             : addNewPost,
-    editArticle            : editArticle,
-    deleteArticle          : deleteArticle,
-    getRssArticles         : getRssArticles,
-    getHTMLForSuggest      : getHTMLForSuggest,
-    updateMainImage        : updateMainImage,
-    setIsMainImage         : setIsMainImage,
-    deleteMainImage        : deleteMainImage,
-    editMainImageName      : editMainImageName,
-    getAllPostsMAIN        : getAllPostsMAIN,
-    getJsonForYear         : getJsonForYear,
-    addViewForArticle      : addViewForArticle,
-    addNewComment          : addNewComment
+    initializeDb            : initializeDb,
+    getHTMLForAllPostsMAIN  : getHTMLForAllPostsMAIN,
+    getArticleByUUID        : getArticleByUUID,
+    addNewPost              : addNewPost,
+    editArticle             : editArticle,
+    deleteArticle           : deleteArticle,
+    getRssArticles          : getRssArticles,
+    getHTMLForSuggest       : getHTMLForSuggest,
+    updateMainImage         : updateMainImage,
+    setIsMainImage          : setIsMainImage,
+    deleteMainImage         : deleteMainImage,
+    editMainImageName       : editMainImageName,
+    getAllPostsMAIN         : getAllPostsMAIN,
+    getJsonForYear          : getJsonForYear,
+    addViewForArticle       : addViewForArticle,
+    addNewComment           : addNewComment,
+    getEveryComments        : getEveryComments,
+    toggleArticleVisibility : toggleArticleVisibility
 };

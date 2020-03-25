@@ -264,17 +264,24 @@ async function postComment(dat, ip) {
     return ans;
 }
 
+async function getEveryComments() {
+    let ans = await db.getEveryComments();
+    return ans;
+}
+
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
 
-function formatComment(comments) {
+function formatComment(comments, adminView = false) {
     let arrRet = [];
 
-    for (let i in comments) {
+    for (let i = 0; i < comments.length; i++) {
         let c = comments[i];
-        if(!c.visible) continue;
+
+        if(!adminView && !c.visible)
+            continue;
 
         let date = new Date(c.post_date.toDate());
         let d1   = date.getDate();
@@ -292,11 +299,26 @@ function formatComment(comments) {
         arrRet.push({
             name    : c.name,
             comment : c.comment,
-            date    : f_date
+            date    : f_date,
+            email   : c.email,
+            ip      : c.ip,
+            visible : c.visible,
+            //
+            articleTitle : c.articleTitle,
+            articleID    : c.articleID,
+            commentID    : c.commentID,
         });
     }
 
     return arrRet.reverse();
+}
+
+async function toggleArticleVisibility(articleID, commentID) {
+    let ans = await db.toggleArticleVisibility(articleID, commentID);
+    if(ans)
+        return 10;
+    else
+        return 11;
 }
 
 
@@ -324,5 +346,7 @@ module.exports = {
     getMonthlyProjectsForYear : getMonthlyProjectsForYear,
     addViewForArticle         : addViewForArticle,
     postComment               : postComment,
-    formatComment             : formatComment
+    formatComment             : formatComment,
+    getEveryComments          : getEveryComments,
+    toggleArticleVisibility   : toggleArticleVisibility
 };

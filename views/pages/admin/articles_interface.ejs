@@ -30,19 +30,22 @@
 							document.getElementById('info-toast').style.opacity = 1;
 						}
 					}
-					else if(code == '2' || code == '3' || code == '4' || code == '5' || code == '6' || code == '7') {
+					else if(code == '2' || code == '3' || code == '4' || code == '5' || code == '6' || code == '7' || code == '10' || code == '11') {
 						document.getElementById('toast-btn-1').style.opacity = 0;
 						document.getElementById('toast-btn-2').style.opacity = 0;
 						document.getElementById('info-toast').style = 'height: 92.5px;';
 
-						     if(code == '2')  document.getElementById('toast-text').innerHTML = 'L\'article à bien été supprimé.';
-						else if(code == '3')  document.getElementById('toast-text').innerHTML = 'Erreur dans la suppression.';
-						else if(code == '4')  document.getElementById('toast-text').innerHTML = 'Vous êtes bien connecté.';
-						else if(code == '5')  document.getElementById('toast-text').innerHTML = 'Nom d\'utilisateur ou mot de passe erroné.';
-						else if(code == '6')  document.getElementById('toast-text').innerHTML = 'Vous êtes bien déconnecté.';
-						else if(code == '7')  document.getElementById('toast-text').innerHTML = 'Erreur lors de la déconnexion.';
+						     if(code == '2' )  document.getElementById('toast-text').innerHTML = 'L\'article à bien été supprimé.';
+						else if(code == '3' )  document.getElementById('toast-text').innerHTML = 'Erreur dans la suppression.';
+						else if(code == '4' )  document.getElementById('toast-text').innerHTML = 'Vous êtes bien connecté.';
+						else if(code == '5' )  document.getElementById('toast-text').innerHTML = 'Username / password erroné.';
+						else if(code == '6' )  document.getElementById('toast-text').innerHTML = 'Vous êtes bien déconnecté.';
+						else if(code == '7' )  document.getElementById('toast-text').innerHTML = 'Erreur lors de la déconnexion.';
+						else if(code == '10')  document.getElementById('toast-text').innerHTML = 'Visibilité du commentaire bien changée.';
+						else if(code == '11')  document.getElementById('toast-text').innerHTML = 'Erreur : changement du commentaire.';
 
-						if(code == '5') document.getElementById('info-toast').style = 'height: 112.5px;';
+						if(code == '5' || code == '10' || code == '11')
+							document.getElementById('info-toast').style = 'height: 112.5px;';
 
 						document.getElementById('info-toast').style.opacity = 1;
 					}
@@ -110,6 +113,47 @@
                     </div>
 				</div>
 			</div>
+
+			<div class="section section-1">
+                <%- articles.shift() %>
+                <%- articles.shift() %>
+            </div>
+
+			<div class="section section-2">
+                <p class="s-c-title">Liste des derniers commentaires</p>
+
+                <hr />
+
+				<div id="comments" class="container category cat-comments">
+					<% if(comments.length == 0) { %>
+						<div class="c-comment">
+							<div class="cat-title">Pas de commentaires.</div>
+						</div>
+					<% } %>
+
+					<% for(let i = 0; i < comments.length; i++) { %>
+						<div class="c-comment">
+							<div class="c-c-name">
+								<p><%= comments[i].name %></p>
+								<div class="c-c-date">(<b><%= comments[i].date %></b> - ip : "<b><%= comments[i].ip %></b>")</div>
+								<button class="act-admin-b btn btn-outline-<%= comments[i].visible ? 'danger' : 'success' %>"
+										onclick="window.location.href = '/admin/toggle_comment_visibility?articleID=<%= comments[i].articleID %>&commentID=<%= comments[i].commentID %>';">
+									<%= !comments[i].visible ? 'Rendre visible' : 'Masquer' %>
+								</button>
+							</div>
+							<div class="c-c-date" style="margin: -5px 0 6px 0; padding: 0;">
+								Email : "<b><%= comments[i].email %></b>" - Visible pour tout le monde : "
+									<span style="color: <%= comments[i].visible ? '#519f3b' : '#9f4e3b' %> !important;"><%= comments[i].visible + '' %></span>
+								"
+							</div>
+							<div class="c-c-date" style="margin: -5px 0 6px 0; padding: 0;">
+								Titre de l'article correspondant : "<b><%= comments[i].articleTitle %></b>"
+							</div>
+							<div class="c-c-comment"><%= comments[i].comment %></div><br />
+						</div>
+					<% } %>
+				</div>
+            </div>
 
 			<div style="margin-top: 60px">
                 <% while(articles.length != 0) { %>
