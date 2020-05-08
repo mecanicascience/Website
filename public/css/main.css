@@ -24,6 +24,6 @@ skrollr-desktop body {
 
 #skrollr-body {
     height: 100%;
-    overflow: visible;
+    /* overflow: visible; */
     position: relative;
 }
