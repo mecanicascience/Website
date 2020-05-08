@@ -5,7 +5,7 @@
 	</head>
 
 	<body>
-		<header>
+		<navbar>
 			<%- include('../../partial/header') %>
 
 			<script type="text/javascript">
@@ -54,9 +54,53 @@
 				function redirectEdit()   { window.location.href = '/admin/edit?title='   + <%- '"' + new_title + '"' %> + '&uuid=' + <%- '"' + new_uuid + '"' %> }
 				function redirectDelete() { window.location.href = '/admin/delete?title=' + <%- '"' + new_title + '"' %> + '&uuid=' + <%- '"' + new_uuid + '"' %> }
 			</script>
-		</header>
+		</navbar>
 
-		<main>
+		<header id="header">
+            <div class="big-header">
+                <div class="trangles-left">
+                    <div class="triangle1 triangle"><div></div></div>
+                    <div class="triangle2 triangle"><div></div></div>
+                    <div class="triangle3 triangle"><div></div></div>
+                    <div class="triangle4 triangle"><div></div></div>
+                </div>
+
+                <div class="triangles-right">
+                    <div class="triangle5 triangle"><div></div></div>
+                    <div class="triangle6 triangle"><div></div></div>
+                    <div class="triangle7 triangle"><div></div></div>
+                    <div class="triangle8 triangle"><div></div></div>
+                </div>
+
+                <div class="b-g-main-logo" onclick="document.location.href='/'">
+                    <img src="/imgs/main_logo.png" />
+                </div>
+
+                <div class="b-g-main-text">
+                    <div class="bgm-t-1" style="text-transform: uppercase;"><%= post_count %> derniers posts</div>
+                    <div class="bgm-t-2"></div>
+                    <div class="bgm-t-3">
+                        <div class="bgm-t-3-1">
+                            Mecanica
+                        </div>
+                        <div class="bgm-t-3-2">
+                            Science
+                        </div>
+                        <div class="bgm-t-3-2">
+                            <button type="button" class="btn btn-dark" href="/" onclick="window.location.href = '/admin/create_article';">
+                                Nouvel article
+                            </button>
+
+							<button type="button" class="btn btn-outline-light new_post" href="/" onclick="document.location.href='/'">
+                                Retourner à l'accueil
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+		<article>
 			<div class="toaster">
 				<div id="info-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 					<div class="toast-header">
@@ -78,81 +122,52 @@
 				</div>
 			</div>
 
-			<div class="section section-2" style="margin-top: -5px;">
-				<div class="m-title">
-					<p class="m-t-title">Liste des <%= post_count %> derniers posts</p>
-					<hr class="m-t-hr" />
-					<p class="m-t-subtitle">Les posts sont listés par ordre décroissant dans une limite de <%= post_count %></p>
-				</div>
-
-				<div class="m-content">
-					<div class="container m-c-header">
-						<div class="m-c-row">
-						</div>
-
-						<div class="m-c-row">
-                            <div class="m-c-col">
-								<a href="/"><img class="m-c-image m-c-logo" src="/imgs/main_logo.png" /></a>
-							</div>
-						</div>
-
-						<div class="m-c-row">
-						</div>
-					</div>
-
-                    <div class="m-c-button-yt">
-                        <div class="a-inter-b-t">
-                            <p class="a-inter-b-p little-text">Entrez le nombre de résultats à afficher :</p>
-                            <input id="i-val" type="text" class="a-inter-b-i mdc-button mdc-button--outlined" onkeypress="return isNumber(event)" />
-                            <button class="btn btn-outline-success" onclick="window.location.href = '?l=' + document.getElementById('i-val').value;">Valider</button>
-                        </div>
-
-                        <div>
-                            <button class="mdc-button mdc-button--outlined" onclick="window.location.href = '/admin/create_article';">Créer un nouveau post</button>
-                        </div>
-                    </div>
-				</div>
-			</div>
-
 			<div class="section section-1">
                 <%- articles.shift() %>
                 <%- articles.shift() %>
             </div>
 
-			<div class="section section-2">
-                <p class="s-c-title">Liste des derniers commentaires</p>
+            <div class="p-presentation" style="height: inherit; margin-top: 37px;">
+                <div class="container">
+                    <div class="p-c-c">
+                        <div class="c-pres-left c-pres">
+                            <div class="cpl-title">
+                                Derniers commentaires
+                            </div>
 
-                <hr />
+							<div class="c-pres-right c-pres" id="comments">
+								<% if(comments.length == 0) { %>
+									<div class="c-comment" style="color: white;">
+										<div class="cat-title">Pas de commentaires.</div>
+									</div>
+								<% } %>
 
-				<div id="comments" class="container category cat-comments">
-					<% if(comments.length == 0) { %>
-						<div class="c-comment">
-							<div class="cat-title">Pas de commentaires.</div>
-						</div>
-					<% } %>
-
-					<% for(let i = 0; i < comments.length; i++) { %>
-						<div class="c-comment">
-							<div class="c-c-name">
-								<p><%= comments[i].name %></p>
-								<div class="c-c-date">(<b><%= comments[i].date %></b> - ip : "<b><%= comments[i].ip %></b>")</div>
-								<button class="act-admin-b btn btn-outline-<%= comments[i].visible ? 'danger' : 'success' %>"
-										onclick="window.location.href = '/admin/toggle_comment_visibility?articleID=<%= comments[i].articleID %>&commentID=<%= comments[i].commentID %>';">
-									<%= !comments[i].visible ? 'Rendre visible' : 'Masquer' %>
-								</button>
-							</div>
-							<div class="c-c-date" style="margin: -5px 0 6px 0; padding: 0;">
-								Email : "<b><%= comments[i].email %></b>" - Visible pour tout le monde : "
-									<span style="color: <%= comments[i].visible ? '#519f3b' : '#9f4e3b' %> !important;"><%= comments[i].visible + '' %></span>
-								"
-							</div>
-							<div class="c-c-date" style="margin: -5px 0 6px 0; padding: 0;">
-								Titre de l'article correspondant : "<b><%= comments[i].articleTitle %></b>"
-							</div>
-							<div class="c-c-comment"><%= comments[i].comment %></div><br />
-						</div>
-					<% } %>
-				</div>
+								<% for(let i = 0; i < comments.length; i++) { %>
+									<div class="c-comment">
+										<div class="c-c-name">
+											<p><%= comments[i].name %></p>
+											<div class="c-c-date">(<b><%= comments[i].date %></b> - ip : "<b><%= comments[i].ip %></b>")</div>
+											<button class="act-admin-b btn btn-outline-<%= comments[i].visible ? 'danger' : 'success' %>"
+													onclick="window.location.href = '/admin/toggle_comment_visibility?articleID=<%= comments[i].articleID %>&commentID=<%= comments[i].commentID %>';"
+													style="margin: 0 33px 0 37px;">
+												<%= !comments[i].visible ? 'Rendre visible' : 'Masquer' %>
+											</button>
+										</div>
+										<div class="c-c-date" style="margin: 8px 34px 9px 0; padding: 0;">
+											Email : "<b><%= comments[i].email %></b>" - Visible pour tout le monde : "
+												<span style="color: <%= comments[i].visible ? '#519f3b' : '#9f4e3b' %> !important;"><%= comments[i].visible + '' %></span>
+											"
+										</div>
+										<div class="c-c-date" style="margin: -9px 52px 5px 0; padding: 0;">
+											Titre de l'article correspondant : "<b><%= comments[i].articleTitle %></b>"
+										</div>
+										<div class="c-c-comment"><%= comments[i].comment %></div><br />
+									</div>
+								<% } %>
+	                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 			<div style="margin-top: 60px">
@@ -172,5 +187,5 @@
             </script>
 
 		<%- include('../../partial/footer') %>
-	</body>
+	</article>
 </html>

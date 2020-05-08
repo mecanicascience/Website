@@ -1,20 +1,22 @@
 .m-l-title {
     text-align: center;
-    font-weight: 550;
-    font-size: 25px !important;
     text-align: center;
     text-transform: uppercase;
-    color: #353535;
     margin: 0 0 27px 0;
     letter-spacing: 1.5px;
     text-decoration: underline;
+    font-size: 31px !important;
+    font-weight: 700;
+    color: #11163D;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
 }
 
 
 .m-l-link {
     position: relative;
     text-decoration: none;
-    color: #222;
+    color: #189649;
     align-content: center;
     font-family: sofia-pro, sans-serif;
     font-size: 16px;
@@ -22,7 +24,7 @@
 }
 
 .m-l-link:hover {
-    color: #222;
+    color: #189649;
     text-decoration: none;
 }
 
@@ -33,7 +35,7 @@
     height: 2px;
     bottom: 0;
     left: -1.3px;
-    background-color: #222;
+    background-color: #189649;
     visibility: hidden;
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0s;
@@ -46,9 +48,9 @@
 
 .m-l-title-l {
     text-align: justify;
-    font-weight: 550;
+    font-weight: 650;
     font-size: 18px !important;
-    color: #313131;
+    color: #11163D;
     margin: 58px 0 7px 20px;
     letter-spacing: 1.5px;
     text-decoration: underline;
@@ -57,3 +59,13 @@
 
 .m-l-l-light, .m-l-l-light:hover { font-family: inherit; color: #212529a6 !important; }
 .m-l-l-light:before { background-color: #212529a6 !important; }
+
+.m-l-content-t > span, .m-l-content-t > p > span, .m-l-content-t > div > span {
+    color: #FF772E;
+    font-weight: 600;
+    font-size: 17px;
+    transition: color 0.5s ease;
+}
+.m-l-content-t > span:hover, .m-l-content-t > p > span:hover, .m-l-content-t > div > span:hover {
+    color: #189649;
+}

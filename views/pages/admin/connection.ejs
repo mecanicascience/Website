@@ -5,7 +5,7 @@
 	</head>
 
 	<body>
-		<header>
+		<navbar>
 			<%- include('../../partial/header') %>
 
             <script type="text/javascript">
@@ -35,10 +35,50 @@
 					}
 				};
 			</script>
+        </navbar>
+
+		<header id="header">
+            <div class="big-header">
+                <div class="trangles-left">
+                    <div class="triangle1 triangle"><div></div></div>
+                    <div class="triangle2 triangle"><div></div></div>
+                    <div class="triangle3 triangle"><div></div></div>
+                    <div class="triangle4 triangle"><div></div></div>
+                </div>
+
+                <div class="triangles-right">
+                    <div class="triangle5 triangle"><div></div></div>
+                    <div class="triangle6 triangle"><div></div></div>
+                    <div class="triangle7 triangle"><div></div></div>
+                    <div class="triangle8 triangle"><div></div></div>
+                </div>
+
+                <div class="b-g-main-logo" onclick="document.location.href='/'">
+                    <img src="/imgs/main_logo.png" />
+                </div>
+
+                <div class="b-g-main-text">
+                    <div class="bgm-t-1" style="text-transform: uppercase;">Connexion admin</div>
+                    <div class="bgm-t-2"></div>
+                    <div class="bgm-t-3">
+                        <div class="bgm-t-3-1">
+                            Mecanica
+                        </div>
+                        <div class="bgm-t-3-2">
+                            Science
+                        </div>
+                        <div class="bgm-t-3-2">
+                            <button type="button" class="btn btn-outline-light" href="/" onclick="document.location.href='/'">
+                                Retourner à l'accueil
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
 
-        <main>
-			<div class="section section-2" style="margin-top: -5px;">
+        <article>
+			<div class="section section-2" style="margin-top: -5px; height: 324px;/*background: linear-gradient(43deg, #aa4a16, #F0712C 60%, #F0712C);*/">
                 <div class="toaster">
     				<div id="info-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     					<div class="toast-header">
@@ -60,30 +100,7 @@
     				</div>
     			</div>
 
-
-				<div class="m-title">
-					<p class="m-t-title">Connection administrateur</p>
-					<hr class="m-t-hr" />
-					<p class="m-t-subtitle">Vous devez être connecté pour accéder à cette page</p>
-				</div>
-
-				<div class="m-content">
-					<div class="container m-c-header">
-						<div class="m-c-row">
-						</div>
-
-						<div class="m-c-row">
-							<div class="m-c-col">
-								<a href="/"><img class="m-c-image m-c-logo" src="/imgs/main_logo.png" /></a>
-							</div>
-						</div>
-
-						<div class="m-c-row">
-						</div>
-					</div>
-				</div>
-
-                <div class="m-title">
+                <div class="m-title" style="margin-top: 45px;">
                     <div class="container m-c-header">
 						<div class="m-c-row">
 						</div>
@@ -110,8 +127,8 @@
 
                                 <div class="m-c-col">
                                     <div class="modal-footer">
-            							<button type="button" class="btn btn-success" data-dismiss="modal" onclick="document.getElementById('connection-form').submit()">Connexion</button>
-            							<button type="button" class="btn btn-secondary" onclick="window.location.href = '/'">Retourner à l'accueil</button>
+            							<button type="button" class="btn btn-outline-success" data-dismiss="modal" onclick="document.getElementById('connection-form').submit()">Connexion</button>
+            							<button type="button" class="btn btn-outline-dark" onclick="window.location.href = '/'">Retourner à l'accueil</button>
             						</div>
                                 </div>
                             <form>
@@ -122,7 +139,11 @@
 					</div>
                 </div>
 			</div>
+		</article>
 
 		<%- include('../../partial/footer') %>
+		<style>
+			footer { margin-top: -109px !important; }
+		</style>
 	</body>
 </html>

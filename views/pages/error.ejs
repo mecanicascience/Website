@@ -5,39 +5,50 @@
     </head>
 
     <body>
-        <header>
+        <navbar>
             <%- include(link + '/partial/header') %>
-        </header>
+        </navbar>
 
-        <main>
-            <div class="section section-2" style="margin-top: -5px;">
-                <div class="m-title">
-                    <p class="m-t-title">Erreur <%= errorCode %></p>
-                    <hr class="m-t-hr" />
-                    <p class="m-t-subtitle"><%= errorMessage %></p>
+        <header id="header">
+            <div class="big-header">
+                <div class="trangles-left">
+                    <div class="triangle1 triangle"><div></div></div>
+                    <div class="triangle2 triangle"><div></div></div>
+                    <div class="triangle3 triangle"><div></div></div>
+                    <div class="triangle4 triangle"><div></div></div>
                 </div>
 
-                <div class="m-content">
-                    <div class="container m-c-header">
-                        <div class="m-c-row">
-                        </div>
+                <div class="triangles-right">
+                    <div class="triangle5 triangle"><div></div></div>
+                    <div class="triangle6 triangle"><div></div></div>
+                    <div class="triangle7 triangle"><div></div></div>
+                    <div class="triangle8 triangle"><div></div></div>
+                </div>
 
-                        <div class="m-c-row">
-                            <div class="m-c-col">
-                                <a href="/"><img class="m-c-image m-c-logo" src="/imgs/main_logo.png" /></a>
-                            </div>
-                        </div>
+                <div class="b-g-main-logo" onclick="document.location.href='/'">
+                    <img src="/imgs/main_logo.png" />
+                </div>
 
-                        <div class="m-c-row">
+                <div class="b-g-main-text">
+                    <div class="bgm-t-1"><%= errorMessage %></div>
+                    <div class="bgm-t-2"></div>
+                    <div class="bgm-t-3">
+                        <div class="bgm-t-3-1">
+                            Erreur <%= errorCode %>
                         </div>
-                    </div>
-
-                    <div class="m-c-button-yt">
-                        <button class="mdc-button mdc-button--outlined" onclick="window.location.href = '/';">Retourner à l'accueil</button>
+                        <div class="bgm-t-3-2">
+                            <button type="button" class="btn btn-outline-light" href="/" onclick="document.location.href='/'">
+                                Retourner à l'accueil
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </header>
 
         <%- include(link + '/partial/footer') %>
+        <style>
+            footer { margin-top: -130px !important; }
+        </style>
     </body>
 </html>

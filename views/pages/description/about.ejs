@@ -5,53 +5,63 @@
 	</head>
 
 	<body>
-		<header>
+		<navbar>
 			<%- include('../../partial/header') %>
-		</header>
+		</navbar>
 
-		<main>
-			<div class="section section-2" style="margin-top: -5px;">
-				<div class="m-title">
-					<p class="m-t-title">à propos</p>
-					<hr class="m-t-hr" />
-					<p class="m-t-subtitle">Vous pouvez consulter les mentions à propos du site ci-dessous</p>
-				</div>
+		<header id="header">
+            <div class="big-header">
+                <div class="trangles-left">
+                    <div class="triangle1 triangle"><div></div></div>
+                    <div class="triangle2 triangle"><div></div></div>
+                    <div class="triangle3 triangle"><div></div></div>
+                    <div class="triangle4 triangle"><div></div></div>
+                </div>
 
-				<div class="m-content">
-					<div class="container m-c-header">
-						<div class="m-c-row">
-						</div>
+                <div class="triangles-right">
+                    <div class="triangle5 triangle"><div></div></div>
+                    <div class="triangle6 triangle"><div></div></div>
+                    <div class="triangle7 triangle"><div></div></div>
+                    <div class="triangle8 triangle"><div></div></div>
+                </div>
 
-						<div class="m-c-row">
-							<div class="m-c-col">
-								<a href="/"><img class="m-c-image m-c-logo" src="/imgs/main_logo.png" /></a>
-							</div>
-						</div>
+                <div class="b-g-main-logo" onclick="document.location.href='/'">
+                    <img src="/imgs/main_logo.png" />
+                </div>
 
-						<div class="m-c-row">
-						</div>
-					</div>
+                <div class="b-g-main-text">
+                    <div class="bgm-t-1" style="text-transform: uppercase;">à propos</div>
+                    <div class="bgm-t-2"></div>
+                    <div class="bgm-t-3">
+                        <div class="bgm-t-3-1">
+                            Mecanica
+                        </div>
+                        <div class="bgm-t-3-2">
+                            Science
+                        </div>
+                        <div class="bgm-t-3-2">
+                            <button type="button" class="btn btn-outline-light" href="/" onclick="document.location.href='/'">
+                                Retourner à l'accueil
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-					<div class="m-c-button-yt">
-						<button class="mdc-button mdc-button--outlined" onclick="window.location.href = '/';">Retourner à l'accueil</button>
-					</div>
-				</div>
-			</div>
-
+		<article>
 			<div style="margin-top: 60px">
 				<div class="container">
 					<p class="m-l-title">à propos de ce blog</p>
 
-					<p style="margin-bottom: 70px; text-align: justify;">
-						<span style="margin-left: 20px">Bonjour et bienvenue sur ce blog !</span>
-
-						<br /><br /><br />Ici, seront publiés principalement des articles concernant les vidéos de la chaîne YouTube <b>MecanicaScience</b>.
-						Ces articles viseront à expliquer les motivations derrière les vidéos, ou <b>développerons certains points</b> que volontairement non-abordés.
-						<br />Ainsi, vous trouverez des <b>démonstrations</b> mathématiques, ainsi que des <b>explications</b> plus complètes de certaines notions de physique.
+					<p class="m-l-content-t" style="margin-bottom: 20px; text-align: justify;">
+						&nbsp;&nbsp;&nbsp;&nbsp;Ici, seront publiés principalement des articles concernant les vidéos de la chaîne YouTube <span>MecanicaScience</span>.
+						Ces articles viseront à expliquer les motivations derrière les vidéos, ou <span>développerons certains points</span> que volontairement non-abordés.
+						<br />Ainsi, vous trouverez des <span>démonstrations</span> mathématiques, ainsi que des <span>explications</span> plus complètes de certaines notions de physique.
 
 						<br /><br />Les thèmes que abordés sont donc la physique, les mathématiques, et parfois de l'informatique afin de mettre en application certains points.
 
-						<br /><br />Cependant, <b>d'autres notions</b> sont aussi développés, principalement celles dont je n'ai pas envie de réaliser une vidéo dessus (<i>que ce soit à cause de
+						<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;Cependant, <span>d'autres notions</span> sont aussi développés, principalement celles dont je n'ai pas envie de réaliser une vidéo dessus (<i>que ce soit à cause de
 							contraintes de durées de vidéo, ou simplement de temps d'animation</i>), ou qui ne méritent pas toute une vidéo à leur sujet.
 							<br />Ne vous attendez donc ni à un rythme de publication régulier, ni à du contenu ne concernant exclusivement que la chaîne.
 
@@ -59,14 +69,15 @@
 
 						<br /><br />Si vous souhaitez me contacter à propos de ce blog ou de la chaîne YouTube, n'hésitez pas à
 						envoyer un mail à l'adresse mail suivante : <a class="m-l-link" href="mailto:mecanicascience@gmail.com">mecanicascience@gmail.com</a>.
-						<br />De plus, si vous avez une <b>idée de sujet</b> ou si vous souhaitez <b>collaborer</b>, n'hésitez pas à m'envoyer un mail.
+						<br />De plus, si vous avez une <span>idée de sujet</span> ou si vous souhaitez <span>collaborer</span>, n'hésitez pas à m'envoyer un mail.
 
 						<br /><br /><br />
-						<span style="margin-left: 20px">A tout de suite sur le blog !</span>
-						<br /><span style="margin-left: 24px">- <b>Maxime DHERBECOURT</b>, Créateur du site</span>
+						<div style="margin-left: 20px">A tout de suite sur le blog !</div>
+						<div style="margin-left: 24px">- <span><b>Maxime DHERBECOURT</b></span>, Créateur du site</div>
 					</p>
 				</div>
 			</div>
+		</article>
 
 		<%- include('../../partial/footer') %>
 	</body>

@@ -141,6 +141,9 @@
     box-shadow: 0 2px 3px 0.2px rgba(0, 0, 0, 0.14);
     padding: 55px 0 31px 0;
 }
+.section-comments > .category {
+    background-color: inherit;
+}
 
 .s-c-title {
     font-weight: 500;
@@ -387,13 +390,14 @@ hr {
     flex-direction: column;
     text-align: left;
     padding: 17px 6px 13px 6px;
+    align-items: center;
 }
 
 .c-c-name {
     line-height: 1.7;
     text-transform: capitalize;
     font-style: italic;
-    color: #444;
+    color: #e8e8e8;
     font-size: 21px;
     font-weight: 600;
     font-family: "Quattrocento Sans",sans-serif;
@@ -405,7 +409,7 @@ hr {
 .c-c-date {
     font-size: 14px;
     font-style: italic;
-    color: #8c8887;
+    color: #ddd;
     padding: 7px 0 0 8px;
     text-transform: none;
     font-weight: 500;
@@ -418,7 +422,12 @@ hr {
 .c-c-comment {
     padding: 0 0 5px 1px;
     word-wrap: anywhere;
+    color: white;
+    font-weight: 600;
 }
+
+@media all and (max-width: 598px) { .new_post { margin-top: -105px; } }
+@media all and (max-width: 340px) { .new_post { margin-top: -30px; } }
 
 .mjx-mrow > a {
     color: rgb(63, 165, 219) !important;
