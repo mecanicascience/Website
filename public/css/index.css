@@ -206,6 +206,7 @@
     .p-presentation {height: 771px !important; }
     .cpl-title { font-size: 30px !important; margin: 0 -15px 30px !important; }
     .social-ic-img-img { display: none; }
+    .b-g-main-logo { margin: 26px 230px 0 18%; }
 }
 @media all and (max-width: 400px) {
     .b-g-main-text { margin: 33px 0 0 52px; }

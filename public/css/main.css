@@ -28,3 +28,8 @@ skrollr-desktop body {
     overflow: visible;
     position: relative;
 }
+
+.gn-icon.d-main-dev {
+    z-index: 300;
+    position: relative;
+}
