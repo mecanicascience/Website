@@ -10,7 +10,7 @@ body {
     /* background-color: #e7e5f4; */
     background-color: white;
     z-index: 50;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 
 .articles {
@@ -24,6 +24,6 @@ skrollr-desktop body {
 
 #skrollr-body {
     height: 100%;
-    /* overflow: visible; */
+    overflow: visible;
     position: relative;
 }

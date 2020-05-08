@@ -311,7 +311,7 @@
 
 
 .c-c-img-hover .c-c-img {
-    /*overflow: hidden;*/
+    overflow: hidden;
     position: relative;
     margin: 17px 0 20px 0;
 }

@@ -98,7 +98,7 @@
 	top: 60px;
 	bottom: 0;
 	left: 0;
-	/*overflow: hidden;*/
+	overflow: hidden;
 	width: 60px;
 	border-top: 1px solid #c6d0da;
 	background: white;
@@ -112,7 +112,7 @@
 
 .gn-scroller {
 	position: absolute;
-	/*overflow-y: scroll;*/
+	overflow-y: scroll;
 	width: 370px;
 	height: 100%;
 }
@@ -129,7 +129,7 @@
 }
 
 .gn-submenu li {
-	/*overflow: hidden;*/
+	overflow: hidden;
 	height: 0;
 	-webkit-transition: height 0.3s;
 	-moz-transition: height 0.3s;
@@ -275,7 +275,7 @@ input.gn-search:focus {
 	width: 0;
 	height: 0;
 	display: block;
-	/*overflow: hidden;*/
+	overflow: hidden;
 }
 
 .gn-icon-menu::before {
