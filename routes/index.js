@@ -122,6 +122,13 @@ router
     })
 
 
+    .get('/simulations/', async (req, res) => {
+        res.render('pages/simulations/simulation_list', {
+            main  : getMainInfos(req, 'Simulations')
+        });
+    })
+
+
     .get('/monthly_projects', async (req, res) => {
         let year = parseInt(req.query.year);
         let currentYear = new Date().getFullYear();
