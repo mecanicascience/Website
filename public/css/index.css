@@ -194,6 +194,7 @@
     .triangle7 { margin: 75% 0 0 88%; }
     .b-g-main-text { margin: 33px 0 0 192px; }
     .c-item { width: 95% !important; }
+    .articles-title { font-size: 23px !important; }
 }
 @media all and (max-width: 580px) {
     .c-cat { width: 89% !important; }
