@@ -265,3 +265,7 @@
 @media (max-height: 850px) {
     .gn-menu-wrapper.gn-open-all .gn-submenu li { height: 47px; }
 }
+
+.b-g-main-logo { z-index: 10; }
+.b-g-main-text { z-index: 10; }
+.c-cat { z-index: 10; }

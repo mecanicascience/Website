@@ -10,7 +10,7 @@ body {
     /* background-color: #e7e5f4; */
     background-color: white;
     z-index: 50;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 .articles {
