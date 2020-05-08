@@ -5,7 +5,7 @@
 	</head>
 
 	<body>
-		<header>
+		<navbar>
 			<%- include('../../partial/header') %>
 
             <script type="text/javascript">
@@ -61,17 +61,49 @@
 
 				window.onload = setupDatas;
             </script>
-		</header>
+		</navbar>
 
-		<article>
-            <div class="section section-2" style="margin-top: -5px;">
-				<div class="m-title">
-					<p class="m-t-title">Projets du mois</p>
-					<hr class="m-t-hr" />
-					<p class="m-t-subtitle">Année <b><%= year %></b></p>
+		<header id="header">
+			<div class="big-header">
+				<div class="trangles-left">
+					<div class="triangle1 triangle"><div></div></div>
+					<div class="triangle2 triangle"><div></div></div>
+					<div class="triangle3 triangle"><div></div></div>
+					<div class="triangle4 triangle"><div></div></div>
+				</div>
+
+				<div class="triangles-right">
+					<div class="triangle5 triangle"><div></div></div>
+					<div class="triangle6 triangle"><div></div></div>
+					<div class="triangle7 triangle"><div></div></div>
+					<div class="triangle8 triangle"><div></div></div>
+				</div>
+
+				<div class="b-g-main-logo" onclick="document.location.href='/'">
+					<img src="/imgs/main_logo.png" />
+				</div>
+
+				<div class="b-g-main-text">
+					<div class="bgm-t-1" style="text-transform: uppercase;">Année <%= year %></div>
+					<div class="bgm-t-2"></div>
+					<div class="bgm-t-3">
+						<div class="bgm-t-3-1">
+							Projets
+						</div>
+						<div class="bgm-t-3-2">
+							du mois
+						</div>
+						<div class="bgm-t-3-2">
+							<button type="button" class="btn btn-outline-light new_post" href="/" onclick="document.location.href='/'">
+								Retourner à l'accueil
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
+		</header>
 
+		<article style="padding-top: 50px;">
             <div class="m-content">
                 <div class="cal-months">
                     <div class="cal-row">
