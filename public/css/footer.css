@@ -1,31 +1,21 @@
 /* ====== FOOTER ====== */
 /* --- Main part --- */
-.underline-eff-white > a:hover {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-
 footer {
     bottom: 0;
-    /* position: fixed; */
     width: 100%;
-    z-index: 0;
+    z-index: 0
+    color: white;
+    margin-top: 0 !important;
 }
 
 .footer-container {
-    background-color: #18181a;
     display: flex;
     flex-flow: column;
     text-align: center;
-    font-family: var(--font-family-footer);
     align-items: center;
-    margin-top: 20px;
-}
-
-.f-upper-bar {
-    width: 100%;
-    height: 35px;
+    margin-top: 107px;
+    background: linear-gradient(22deg, #03040F, #03040F 60%, #0B0F31);
+    min-height: 390px;
 }
 
 .f-item {
@@ -33,10 +23,7 @@ footer {
     justify-content: center;
     margin-top: 2px;
 }
-
-.f-first-item {
-    margin-top: 40px;
-}
+.f-first-item { margin-top: 40px; }
 
 
 /* --- Items --- */
@@ -52,7 +39,6 @@ footer {
     vertical-align: middle;
     border-radius: 50%;
     border-width: 0;
-    background-color: var(--color-footer);
 }
 
 
@@ -66,7 +52,10 @@ footer {
     font-size: 16px;
     font-weight: 600;
     line-height: 36px;
-    margin-top: 22px;
+    margin-top: -32px;
+}
+#f-email > a {
+    color: #5ED089;
 }
 
 
@@ -82,21 +71,22 @@ footer {
     line-height: 36px;
     margin: auto 22px auto 22px;
     letter-spacing: .22em;
+    color: white;
 }
 
 
 #f-copyright {
     display: flex;
-    color: var(--color-dark-gray);
     letter-spacing: 1px;
     font-size: 14px;
     font-weight: 600;
     padding-bottom: 70px;
     flex-flow: wrap;
+    color: #c8c8c8;
 }
 #f-copyright > .rules > a {
-    color: var(--color-light-gray);
     text-decoration: none;
+    color: #5ED089;
 }
 
 
@@ -125,28 +115,11 @@ footer {
 
 /* ====== UNDERLINED WHITE ====== */
 .underline-eff-white > a {
-    position: relative;
     text-decoration: none;
-    color: var(--color-white);
-    align-content: center;
+    transition: color 0.4s ease;
 }
-
-.underline-eff-white > a:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: -1.3px;
-    background-color: var(--color-white);
-    visibility: hidden;
-    transform: scaleX(0);
-    transition: all 0.3s ease-in-out 0s;
-}
-
-.underline-eff-white > a:hover:before {
-    visibility: visible;
-    transform: scaleX(1);
+.underline-eff-white > a:hover {
+    color: #FF772E;
 }
 
 .footer-link {

@@ -122,10 +122,11 @@
 
 .navbar {
     /* position: fixed !important; */
-    margin-top: -51px;
+    margin-top: 0;
     top: 0;
     width: 100%;
     padding: unset !important;
+    background-color: #060b1e !important;
 }
 
 
