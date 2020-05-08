@@ -64,9 +64,9 @@ function getLabel(q, s, l, articlesLen) {
     if(s) cat = getLabelLong(s);
 
     if(!q && !s) text.push('Affichage des derniers articles') + text.push('dans l\'ordre de dernière publication');
-    if( q && !s) text.push('Affichage des articles ') + text.push('correspondant à \'' + q + '\'');
-    if(!q &&  s) text.push('Affichage des articles de') + text.push('la catégorie ' + cat);
-    if( q &&  s) text.push('Affichage des articles de') + text.push('la catégorie ' + cat) + text.push(' correspondant à \'' + q + '\'');
+    if( q && !s) text.push('Affichage des articles ')         + text.push('correspondant à \'' + q + '\'');
+    if(!q &&  s) text.push('Affichage des articles de')       + text.push('la catégorie ' + cat);
+    if( q &&  s) text.push('Affichage des articles de')       + text.push('la catégorie ' + cat) + text.push(' correspondant à \'' + q + '\'');
 
     if(articlesLen > l) text.push('dans une limite de ' + l + ' articles maximums');
 
@@ -76,15 +76,17 @@ function getLabel(q, s, l, articlesLen) {
 // Retourne le label développé
 function getLabelLong(s) {
     switch (s) {
-        case 'info':
-            return 'informatique';
-        case 'math':
-            return 'mathématiques';
+        case 'mecanique':
+            return 'mécanique';
+        case 'electromag':
+            return 'electromagnétisme';
         case 'youtube':
             return 'vidéos youtube';
-        case 'phys':
-            return 'physique';
-        case 'other':
+        case 'optique':
+            return 'optique';
+        case 'maths':
+            return 'mathématiques';
+        case 'autre':
             return 'autres articles';
     }
 }

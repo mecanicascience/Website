@@ -339,9 +339,9 @@ const WEBSITE_URL = (m.config.is_https ? "https://" : "http://") + m.config.site
 
 function getMainInfos(req, title) {
     if(title == undefined)
-        title = 'Blog de MecanicaScience';
+        title = 'MecanicaScience - La physique par la simulation';
     else
-        title += ' - Blog de MecanicaScience';
+        title += ' - MecanicaScience - La physique par la simulation';
 
     return {
         version       : m.constants.version,

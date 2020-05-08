@@ -5,115 +5,216 @@
     </head>
 
     <body>
-        <header>
+        <navbar>
             <%- include('../partial/header') %>
+        </navbar>
+
+        <header id="header">
+            <div class="big-header">
+                <div class="trangles-left">
+                    <div class="triangle1 triangle"><div></div></div>
+                    <div class="triangle2 triangle"><div></div></div>
+                    <div class="triangle3 triangle"><div></div></div>
+                    <div class="triangle4 triangle"><div></div></div>
+                </div>
+
+                <div class="triangles-right">
+                    <div class="triangle5 triangle"><div></div></div>
+                    <div class="triangle6 triangle"><div></div></div>
+                    <div class="triangle7 triangle"><div></div></div>
+                    <div class="triangle8 triangle"><div></div></div>
+                </div>
+
+                <div class="b-g-main-logo" onclick="document.location.href='/'">
+                    <img src="imgs/main_logo.png" />
+                </div>
+
+                <div class="b-g-main-text">
+                    <div class="bgm-t-1">La physique par la</div>
+                    <div class="bgm-t-2">simulation</div>
+                    <div class="bgm-t-3">
+                        <div class="bgm-t-3-1">
+                            Mecanica
+                        </div>
+                        <div class="bgm-t-3-2">
+                            Science
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
 
-        <main>
-            <div class="section section-2" style="margin-top: -5px;">
-                <div class="m-title">
-                    <p class="m-t-title">Mecanica Science</p>
-                    <hr class="m-t-hr" />
-                    <p class="m-t-subtitle">Blog officiel de la chaîne MecanicaScience</p>
-                </div>
+        <section class="categories" id="categories">
+            <div class="parallax" style="background-image: url('/imgs/illustration/electric_field.png');"></div>
 
-                <div class="m-content">
-                    <div class="container m-c-header">
-                        <div class="m-c-row" id="m-c-row-cat">
-                            <div class="m-c-col">
-                                <i class="m-c-icon fas fa-flask fa-3x fa-darker"></i>
-                            </div>
-
-                            <div class="m-c-col">
-                                <p style="margin-top: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De la physique&nbsp;&nbsp;&nbsp;</p>
+            <div class="container">
+                <div class="c-cat">
+                    <div class="c-cat-c">
+                        <div class="c-c-img-hover">
+                            <div class="c-c-img">
+                                <img src="imgs/illustration/github-logo.png" />
                             </div>
                         </div>
 
-                        <div class="m-c-row">
-                            <div class="m-c-col">
-                                <a href="/"><img class="m-c-image m-c-logo" src="/imgs/illustration/main_logo.png" /></a>
-                            </div>
+                        <p class="c-c-title">Articles</p>
+                        <p class="c-c-text"  data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1">
+                            Articles de <span>vulgarisation</span> scientifique sur de nombreux sujets comme la <span>physique</span>, les <span>mathématiques</span> tous accompagnés d'infographies et de visualisations.
+                        </p>
 
-                            <div class="m-c-col m-c-cate">
-                                <p style="margin-top: 5px; line-height: 25px; font-size: 16px;">
-                                    <% for(let i = 0; i < query_message.length; i++) { %>
-                                        <%= query_message[i] %><br />
-                                    <% } %>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="m-c-row" id="m-c-row-cat">
-                            <div class="m-c-col">
-                                <i class="m-c-icon fas fa-calculator fa-3x fa-darker"></i>
-                            </div>
-
-                            <div class="m-c-col">
-                                <p>Des mathématiques<br />et de l'informatique</p>
-                            </div>
+                        <div class="c-c-button" data-300-bottom-top="transform: translateY(100px); opacity: 0" data-300-center-top="transform: translateY(0px); opacity: 1">
+                            <a href="#articles">
+                                <button>Derniers articles</button>
+                            </a>
                         </div>
                     </div>
+                </div>
 
-                    <div class="m-c-button-row">
-                        <div class="m-c-button-yt">
-                            <button class="mdc-button mdc-button--outlined" onclick="window.open('https://www.youtube.com/c/MecanicaScience', '_blank');">Voir sur Youtube&nbsp;<i class="fab fa-youtube fa-1x"></i></button>
+                <div class="c-cat">
+                    <div class="c-cat-c">
+                        <div class="c-c-img-hover">
+                            <div class="c-c-img">
+                                <img src="imgs/illustration/github-logo.png" />
+                            </div>
                         </div>
 
-                        <div class="m-c-button-yt">
-                            <button class="mdc-button mdc-button--outlined" onclick="window.location.href = '/monthly_projects';">Projets du mois&nbsp;<i class="fas fa-calendar-week fa-1x"></i></button>
+                        <p class="c-c-title">Simulations</p>
+                        <p class="c-c-text"  data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1">
+                            Liste des simulations du site, permettant de <span>visualiser</span> et de mieux comprendre certains <span>phénomènes physiques</span> théoriques et parfois abstraits grâce à des <span>contenus interactifs</span>.
+                        </p>
+
+                        <div class="c-c-button" data-300-bottom-top="transform: translateY(100px); opacity: 0" data-300-center-top="transform: translateY(0px); opacity: 1">
+                            <a href="#simulations">
+                                <button>Liste des simulations</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c-cat">
+                    <div class="c-cat-c">
+                        <div class="c-c-img-hover">
+                            <div class="c-c-img">
+                                <img src="imgs/illustration/github-logo.png" />
+                            </div>
+                        </div>
+
+                        <p class="c-c-title">Projets du mois</p>
+                        <p class="c-c-text" data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1">
+                            Tous les <span>deux mois</span>, un projet est publié. Il est généralement accompagné d'une ou plusieurs <span>simulations</span> afin de mieux comprendre les notions souhaitées.
+                        </p>
+
+                        <div class="c-c-button" data-300-bottom-top="transform: translateY(100px); opacity: 0" data-300-center-top="transform: translateY(0px); opacity: 1">
+                            <a href="/monthly_projects">
+                                <button>Derniers projets</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="presentation" id="presentation">
+            <div class="p-presentation">
+                <div class="container">
+                    <div class="p-c-c">
+                        <div class="c-pres-left c-pres">
+                            <div class="cpl-title">
+                                Présentation
+                            </div>
+
+                            <div class="cpl-links">
+                                <div class="cpl-l-m cpl-l-m-2">
+                                    <p>Liens pratiques</p>
+                                </div>
+
+                                <div class="cpl-l-m cpl-l-m-1">
+                                    <div class="cpl-l-el">
+                                        <a href="https://twitter.com/MecanicaSci" title="Twitter"  data-100-bottom-center="transform: rotate(-90deg); opacity: 0" data-100-center-center="transform: rotate(0); opacity: 1">
+                                            <img class="social-ic-img-t" src="/imgs/illustration/twitter-logo.png" alt="twitter">
+                                            <div class="social-ic-img-img"></div>
+                                        </a>
+                                    </div>
+                                    <div class="cpl-l-el">
+                                        <a href="https://www.youtube.com/c/MecanicaScience" title="YouTube"  data-100-bottom-center="transform: rotate(-90deg); opacity: 0" data-100-center-center="transform: rotate(0); opacity: 1">
+                                            <img class="social-ic-img-t" src="/imgs/illustration/youtube-logo.png" alt="youtube">
+                                            <div class="social-ic-img-img"></div>
+                                        </a>
+                                    </div>
+                                    <div class="cpl-l-el">
+                                        <a href="https://utip.io/MecanicaScience" title="Utip" data-100-bottom-center="transform: rotate(-90deg); opacity: 0" data-100-center-center="transform: rotate(0); opacity: 1">
+                                            <img class="social-ic-img-t" src="/imgs/illustration/utip-logo.png" alt="utip">
+                                            <div class="social-ic-img-img"></div>
+                                        </a>
+                                    </div>
+                                    <div class="cpl-l-el">
+                                        <a href="https://github.com/mecanicascience" title="Github" data-100-bottom-center="transform: rotate(-90deg); opacity: 0" data-100-center-center="transform: rotate(0); opacity: 1">
+                                            <img class="social-ic-img-t" src="/imgs/illustration/github-logo.png" alt="github">
+                                            <div class="social-ic-img-img"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="c-pres-right c-pres">
+                            <div class="c-p-r-c"  data-200-center-top="transform: scale(0.7); opacity: 0" data-200-center-center="transform: scale(1); opacity: 1" style="text-align: justify;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ne vous êtes-vous jamais demandé <span>comment fonctionne notre monde</span> : du mouvement des <span>fluides</span> et des <span>ondes</span>, à la trajectoire d'un <span>ballon de basket</span>, en passant par la formation des <span>galaxies</span> et de notre propre <span>Système Solaire</span> !
+                                <div></div><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;Sur ce site WEB, mon but est de vous expliquer certains <span>concepts physiques du monde de tous les jours</span>, de les décrire sous forme d'<span>équations mathématiques</span> de divers niveaux de difficulté, puis de construire des <span>visualisations</span> afin de mieux concevoir ces idées parfois abstraites.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="p-categories">
+                <div class="p-c-cat-1 p-c-cat">
+                    <p>Liste des catégories</p>
+                    <hr />
+                </div>
 
+                <div class="p-c-cat-2 p-c-cat">
+                    <div class="p-c-item">
+                        <a class="p-c-i-a" href="/#articles"><i class="fas fa-globe-europe fa-3x" aria-hidden="true"></i></a>
+                        <a href="/#articles">Tout voir</a>
+                    </div>
 
-            <div class="section section-1">
+                    <div class="p-c-item">
+                        <a class="p-c-i-a" href="/?s=mecanique#articles"><i class="fas fa-rocket fa-3x" aria-hidden="true"></i></a>
+                        <a href="/?s=mecanique#articles">Mécanique</a>
+                    </div>
+
+                    <div class="p-c-item">
+                        <a class="p-c-i-a" href="/?s=electromag#articles"><i class="fas fa-magnet fa-3x" aria-hidden="true"></i></a>
+                        <a href="/?s=electromag#articles">électromagnétisme</a>
+                    </div>
+
+                    <div class="p-c-item">
+                        <a class="p-c-i-a" href="/?s=optique#articles"><i class="fas fa-wave-square fa-3x" aria-hidden="true"></i></a>
+                        <a href="/?s=optique#articles">Optique</a>
+                    </div>
+
+                    <div class="p-c-item">
+                        <a class="p-c-i-a" href="/?s=maths#articles"><i class="fas fa-calculator fa-3x" aria-hidden="true"></i></a>
+                        <a href="/?s=maths#articles">Mathématiques</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="articles" id="articles">
+            <div class="articles-title">
+                <p>
+                    <% for(let i = 0; i < query_message.length; i++) { %>
+                        <%= query_message[i] %><br />
+                    <% } %>
+                </p>
+            </div>
+
+            <% while(articles.length != 0) { %>
                 <%- articles.shift() %>
-                <%- articles.shift() %>
-            </div>
-
-
-            <div class="section section-2">
-                <p class="s-c-title">Les thèmes</p>
-
-                <hr />
-
-                <div class="s-c-category">
-                    <div class="s-c-c-item">
-                        <a href="/?s=info"><i class="fas fa-desktop fa-3x fa-darker"></i></a>
-                        <a href="/?s=info">Informatique</a>
-                    </div>
-
-                    <div class="s-c-c-item">
-                        <a href="/?s=math"><i class="fas fa-calculator fa-3x fa-darker"></i></a>
-                        <a href="/?s=math">Mathématiques</a>
-                    </div>
-
-                    <div class="s-c-c-item">
-                        <a href="/?s=youtube"><i class="fab fa-youtube fa-3x fa-darker"></i></a>
-                        <a href="/?s=youtube">Vidéos YouTube</a>
-                    </div>
-
-                    <div class="s-c-c-item">
-                        <a href="/?s=phys"><i class="fas fa-space-shuttle fa-3x fa-darker"></i></a>
-                        <a href="/?s=phys">Physique</a>
-                    </div>
-
-                    <div class="s-c-c-item">
-                        <a href="/?s=other"><i class="fas fa-folder fa-3x fa-darker"></i></a>
-                        <a href="/?s=other">Autre</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="section section-1">
-                <% while(articles.length != 0) { %>
-                    <%- articles.shift() %>
-                <% } %>
-            </div>
-        </main>
+            <% } %>
+        </section>
 
         <%- include('../partial/footer') %>
     </body>
