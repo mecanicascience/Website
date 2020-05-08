@@ -11,6 +11,7 @@ body {
     background-color: white;
     z-index: 50;
     overflow-x: hidden;
+    overflow-y: scroll !important;
 }
 
 .articles {
