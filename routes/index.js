@@ -133,6 +133,7 @@ router
     })
 
     .get(/simulations/g, async (req, res) => {
+        let isConnected = m.users.isConnected(req.cookies);
         let url = req.originalUrl.split('&'); // format article/ARTICLE_TITLE&simulationview&type&ID
         if(url.length != 4 || url[1] != 'simulationview' || url[0] == undefined || url[0].split('/').length != 3) {
             res.render('pages/simulations/simulation_not_found', { main : getMainInfos(req, 'Erreur 404') });
@@ -140,16 +141,15 @@ router
         }
         url[0] = decodeURI(url[0].split('/')[2]);
 
-        let isConnected = m.users.isConnected(req.cookies);
         let simulationExists = await m.articles.simulationExistsAndVisible(parseInt(url[3]), url[2], url[0], isConnected);
         if(url[3] == undefined || !url[2] || !url[0] || !simulationExists)
              res.render('pages/simulations/simulation_not_found', { main : getMainInfos(req, 'Erreur 404') });
         else {
-            let datas = m.articles.getSimulationDatas(simulationExists);
-            console.log(datas);
+            let datas = await m.articles.getSimulationDatas(simulationExists);
             res.render('pages/simulations/simulation', {
                 main          : getMainInfos(req, datas.title),
-                datas         : datas
+                datas         : datas,
+                isConnected   : isConnected
             });
         }
     })

@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fr">
     <head>
-        <meta charset="utf-8">
-        <title></title>
+        <%- include('../../partial/head') %>
     </head>
-    <body>
-        Page en cours de création.
+
+    <body style="background-color: black;">
+        <navbar>
+            <%- include('../../partial/header') %>
+        </navbar>
+
+        <section class="image_main" id="main" style="text-align: center;">
+            <div class="s-sim-text">
+                <p class="s-si-title">
+                    <%= datas.title %>
+                    <% if(!datas.visible) { %>
+                        <label class="s-si-title-label">Simulation non-publiée</label>
+                    <% } %>
+                </p>
+                <p class="s-si-description"><%= datas.description %></p>
+                <p class="s-si-date">Le <b><%= datas.formatted_date %></b> par <b><%= datas.author %></b></p>
+                <p class="s-si-category">Catégorie <%= datas.formatted_type %></p>
+            </div>
+
+            <img
+                src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= datas.uuid %>_<%= datas.short_title %>.png?alt=media"
+                style="height: 100%;" />
+
+            <div class="s-si-links">
+                <div class="s-si-links-1">
+                    <div class="s-si-links-1-el s-si-links-1-el-1">
+                        <button type="button" class="btn btn-outline-light" href="<%= datas.links.simulation %>" onclick="document.location.href='<%= datas.links.simulation %>'">
+                            Voir la simulation
+                        </button>
+                    </div>
+
+                    <% if(datas.links.source != "null" && datas.links.source != "" && datas.links.source != undefined) { %>
+                    <div class="s-si-links-1-el">
+                        <button type="button" class="btn btn-outline-light" href="<%= datas.links.source %>" onclick="document.location.href='<%= datas.links.source %>'">
+                            Code source
+                        </button>
+                    </div>
+                    <% } %>
+                </div>
+
+                <% if(parseInt(datas.links.article) != -1 && (datas.links.article.visible || (!datas.links.article.visible && isConnected))) { %>
+                <div class="s-si-links-2">
+                    <p class="s-si-links-2-p-1-e">Article correspondant</p>
+                    <p class="s-si-links-2-p-2-e"><%= datas.links.article.title %></p>
+                    <button type="button" class="btn btn-outline-light" href="/article/<%= datas.links.article.short_title %>&articleview&<%= datas.links.article.uuid %>" onclick="document.location.href='/article/<%= datas.links.article.short_title %>&articleview&<%= datas.links.article.uuid %>'">
+                        Voir l'article correspondant
+                    </button>
+                </div>
+                <% } %>
+            </div>
+        </section>
+
+        <%- include('../../partial/footer') %>
     </body>
 </html>
