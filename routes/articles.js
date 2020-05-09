@@ -266,16 +266,26 @@ async function postComment(dat, ip) {
     return ans;
 }
 
+/** @return a list of every comments */
 async function getEveryComments() {
     let ans = await db.getEveryComments();
     return ans;
 }
 
+/**
+* @param email
+* @return true if the email is valid
+*/
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
 
+/**
+* @param comment User comments
+* @param adminView Is the user an administrator
+* @return a formated list of the comments
+*/
 function formatComment(comments, adminView = false) {
     let arrRet = [];
 
@@ -315,6 +325,9 @@ function formatComment(comments, adminView = false) {
     return arrRet.reverse();
 }
 
+/**
+* Changes the visibility of an article
+*/
 async function toggleArticleVisibility(articleID, commentID) {
     let ans = await db.toggleArticleVisibility(articleID, commentID);
     if(ans)
@@ -327,28 +340,83 @@ async function toggleArticleVisibility(articleID, commentID) {
 
 
 
+/** @return a list of every simulations */
+async function getSimulations(isConnected) {
+    let ans = await db.getSimulations(isConnected);
+    return ans;
+}
+
+/**
+  * @param uuid     uuid de la simulation
+  * @param type     catégorie de la simulation
+  * @param title    titre short de la simulation
+  * @param is_admin true si l'utilisateur est administrateur
+  * @return false si la simulation n'existe pas (ou n'est pas visible) ou l'article
+  */
+async function simulationExistsAndVisible(uuid, type, title, is_admin) {
+    let simulationList = await db.getSimulationByUUID(uuid);
+
+    if(simulationList.docs.length != 1) return false;
+    else {
+        let simulation = simulationList.docs[0].data();
+        if(simulation.type == type && simulation.short_title == title && ((simulation.visible && !is_admin) || is_admin))
+            return simulation;
+        else
+            return false;
+    }
+    return false;
+}
+
+/**
+  * @param simulation
+  * @return the simulation datas if the simulation exists
+  */
+async function getSimulationDatas(simulation) {
+    simulation.formatted_type = getLabelLong(simulation.type);
+
+    if(!simulation.date) {
+        simulation.formatted_date = '\'pas de date spécifiée\'';
+        return simulation;
+    }
+
+    let date = new Date(simulation.date.toDate());
+    let d1   = date.getDate();
+    let d2   = date.getMonth();
+
+    simulation.formatted_date = ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + d2 : d2) + '/' + date.getFullYear();
+
+    return simulation;
+}
+
+
+
+
+
 
 
 
 /* ====== SERVER ====== */
 module.exports = {
-    getArticles               : getArticles,
-    getLabel                  : getLabel,
-    getActionLink             : getActionLink,
-    getLabelLong              : getLabelLong,
-    getArticleDatas           : getArticleDatas,
-    articleExistsAndVisible   : articleExistsAndVisible,
-    createNewArticle          : createNewArticle,
-    editArticle               : editArticle,
-    deleteArticle             : deleteArticle,
-    getArticlesForSuggestions : getArticlesForSuggestions,
-    updateMainImage           : updateMainImage,
-    deleteMainImage           : deleteMainImage,
-    getArticlesUrl            : getArticlesUrl,
-    getMonthlyProjectsForYear : getMonthlyProjectsForYear,
-    addViewForArticle         : addViewForArticle,
-    postComment               : postComment,
-    formatComment             : formatComment,
-    getEveryComments          : getEveryComments,
-    toggleArticleVisibility   : toggleArticleVisibility
+    getArticles                : getArticles,
+    getLabel                   : getLabel,
+    getActionLink              : getActionLink,
+    getLabelLong               : getLabelLong,
+    getArticleDatas            : getArticleDatas,
+    articleExistsAndVisible    : articleExistsAndVisible,
+    createNewArticle           : createNewArticle,
+    editArticle                : editArticle,
+    deleteArticle              : deleteArticle,
+    getArticlesForSuggestions  : getArticlesForSuggestions,
+    updateMainImage            : updateMainImage,
+    deleteMainImage            : deleteMainImage,
+    getArticlesUrl             : getArticlesUrl,
+    getMonthlyProjectsForYear  : getMonthlyProjectsForYear,
+    addViewForArticle          : addViewForArticle,
+    postComment                : postComment,
+    formatComment              : formatComment,
+    getEveryComments           : getEveryComments,
+    toggleArticleVisibility    : toggleArticleVisibility,
+    getSimulations             : getSimulations,
+    simulationExistsAndVisible : simulationExistsAndVisible,
+    getSimulationDatas         : getSimulationDatas
 };

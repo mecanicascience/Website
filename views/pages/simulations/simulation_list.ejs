@@ -2,6 +2,25 @@
 <html lang="fr">
 	<head>
 		<%- include('../../partial/head') %>
+
+		<style>
+			.bgm-t-3-2 { font-size: 76px; }
+			@media all and (max-width: 1138px) { .bgm-t-3 { margin-left: -100px !important; } }
+			@media all and (max-width: 890px) { .b-g-main-text { margin: 18px 0 0 248px; } }
+			@media all and (max-width: 650px) { .b-g-main-text { margin: 18px 0 0 154px; } }
+			@media all and (max-width: 530px) {
+				.bgm-t-3-2 { font-size: 51px; }
+				.bgm-t-3-2 { margin: -30px 0 0 26px; }
+			}
+			@media all and (max-width: 356px) {
+				.b-g-main-text { margin: 18px 0 0 117px; }
+				.bgm-t-1       { margin-left: -62px; }
+				.bgm-t-3-2 {
+					margin: -17px 0 0 26px;
+					font-size: 43px;
+				}
+			}
+		</style>
 	</head>
 
 	<body>
@@ -52,7 +71,74 @@
 		<article>
 			<div style="margin-top: 60px">
 				<div class="container">
+					<div class="c-sim-cat">
+						<p>Mécanique</p>
+						<div class="c-sim-cat-m">
+							<% for(let i = 0; i < simulations.mecanique.length; i++) { %>
+								<div class="c-sim-cat-el">
+									<img
+										class="c-sim-cat-img"
+										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations.mecanique[i].uuid %>_<%= simulations.mecanique[i].short_title %>.png?alt=media"
+										onclick="document.location.href='/simulations/<%= simulations.mecanique[i].short_title %>&simulationview&mecanique&<%= simulations.mecanique[i].uuid %>'"
+										style="cursor: pointer;" >
+									<a href="/simulations/<%= simulations.mecanique[i].short_title %>&simulationview&mecanique&<%= simulations.mecanique[i].uuid %>">
+										<%= simulations.mecanique[i].title %>
+									</a>
+								</div>
+				            <% } %>
+							<% if(simulations.mecanique.length == 0) { %>
+								<div style="background-color: transparent; border: unset;" class="c-sim-cat-el">
+									<p>Pas encore de simulations dans ce domaine.</p>
+								</div>
+							<% } %>
+						</div>
+					</div>
 
+					<div class="c-sim-cat">
+						<p>Electromagnétisme</p>
+						<div class="c-sim-cat-m">
+							<% for(let i = 0; i < simulations.electromag.length; i++) { %>
+								<div class="c-sim-cat-el">
+									<img
+										class="c-sim-cat-img"
+										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations.electromag[i].uuid %>_<%= simulations.electromag[i].short_title %>.png?alt=media"
+										onclick="document.location.href='/simulations/<%= simulations.electromag[i].short_title %>&simulationview&electromag&<%= simulations.electromag[i].uuid %>'"
+										style="cursor: pointer;" >
+									<a href="/simulations/<%= simulations.electromag[i].short_title %>&simulationview&electromag&<%= simulations.electromag[i].uuid %>">
+										<%= simulations.electromag[i].title %>
+									</a>
+								</div>
+				            <% } %>
+							<% if(simulations.electromag.length == 0) { %>
+								<div style="background-color: transparent; border: unset;" class="c-sim-cat-el">
+									<p>Pas encore de simulations dans ce domaine.</p>
+								</div>
+							<% } %>
+						</div>
+					</div>
+
+					<div class="c-sim-cat">
+						<p>Optique</p>
+						<div class="c-sim-cat-m">
+							<% for(let i = 0; i < simulations.optique.length; i++) { %>
+								<div class="c-sim-cat-el">
+									<img
+										class="c-sim-cat-img"
+										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations.optique[i].uuid %>_<%= simulations.optique[i].short_title %>.png?alt=media"
+										onclick="document.location.href='/simulations/<%= simulations.optique[i].short_title %>&simulationview&optique&<%= simulations.optique[i].uuid %>'"
+										style="cursor: pointer;" >
+									<a href="/simulations/<%= simulations.optique[i].short_title %>&simulationview&optique&<%= simulations.optique[i].uuid %>">
+										<%= simulations.optique[i].title %>
+									</a>
+								</div>
+				            <% } %>
+							<% if(simulations.optique.length == 0) { %>
+								<div style="background-color: transparent; border: unset;" class="c-sim-cat-el">
+									<p>Pas encore de simulations dans ce domaine.</p>
+								</div>
+							<% } %>
+						</div>
+					</div>
 				</div>
 			</div>
 		</article>

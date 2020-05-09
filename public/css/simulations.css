@@ -1,0 +1,64 @@
+.c-sim-cat-m {
+    display: flex;
+}
+
+.c-sim-cat {
+    padding: 8px 35px 29px 35px;
+    margin: 94px 0 0 0;
+    border-radius: 7px;
+    box-shadow: 3px 4px 4px 0.2px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(49deg, #03040F, #1B1F4A 67%, #141A51, #0B0F31);
+    color: #d7d7d7;
+}
+
+.c-sim-cat > p {
+    font-size: 26px;
+    font-weight: 500;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    margin: 3px 34px 25px;
+    text-transform: uppercase;
+    box-shadow: 2px 3px 7px 0.2px rgba(0, 0, 0, 0.08);
+    width: max-content;
+    padding: 3px 18px 3px 19px;
+    /*background-color: #F0712C;*/
+    text-decoration: underline;
+    border-radius: 2px;
+}
+
+.c-sim-cat-el {
+    margin: 0 25px 0 0;
+    border: 2px solid black;
+    padding: 7px 9px 0 9px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #eae6e6e8;
+    display: flex;
+    flex-direction: column;
+}
+
+.c-sim-cat-el > a {
+    color: #166634;
+    text-align: center;
+    margin: 10px 0 15px 0;
+    transition: text-decoration 0.5s ease;
+    text-decoration: none;
+    font-weight: 600;
+}
+.c-sim-cat-el > a:hover {
+    text-decoration: underline;
+}
+
+
+.c-sim-cat-el > img {
+    height: 110px;
+    border: 5px solid #03040F;
+    border-radius: 5px;
+    min-width: 100px;
+    filter: grayscale(0.6);
+    transition: filter 0.4s ease, height 0.3s ease;
+}
+.c-sim-cat-el > img:hover {
+    height: 190px;
+    filter: grayscale(0);
+}

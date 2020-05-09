@@ -620,7 +620,77 @@ async function editMainImageName(uuid, old_name, new_name) {
 
 
 
+/** ============ SIMULATIONS ============ */
+/**
+* @return a list of every simulations
+*/
+async function getSimulations(isConnected) {
+    let simulations = { mecanique : [], electromag : [], optique : [], youtube : [], maths : [], autre : [] };
+    let snapshot    = await db.collection('simulations').get();
 
+    snapshot.docs.forEach(doc => {
+        let d = doc.data();
+
+        if(d.visible || (!d.visible && isConnected)) {
+            let date = new Date(d.date.toDate());
+            let d1   = date.getDate();
+            let d2   = date.getMonth();
+            d.date =
+                  'Le ' + ((d1 + '').length == 1 ? '0' + d1 : d1) + '/'
+                + ((d2 + '').length == 1 ? '0' + (d2 + 1) : (d2 + 1)) + '/'
+                + (date ? date.getFullYear() : '0000');
+
+            if(d.type == 'mecanique')
+                simulations.mecanique.push(d);
+            else if(d.type == 'electromag')
+                simulations.electromag.push(d);
+            else if(d.type == 'optique')
+                simulations.optique.push(d);
+            else if(d.type == 'youtube')
+                simulations.youtube.push(d);
+            else if(d.type == 'maths')
+                simulations.maths.push(d);
+            else if(d.type == 'autre')
+                simulations.autre.push(d);
+        }
+    });
+
+    for (let i = 0; i < simulations.mecanique.length ; i++)
+        simulations.mecanique[i]   = await getSimulationsExec(i, simulations.mecanique);
+    for (let i = 0; i < simulations.electromag.length; i++)
+        simulations.electromag[i] = await getSimulationsExec(i, simulations.electromag);
+    for (let i = 0; i < simulations.optique.length   ; i++)
+        simulations.optique[i]    = await getSimulationsExec(i, simulations.optique);
+    for (let i = 0; i < simulations.youtube.length   ; i++)
+        simulations.youtube[i]    = await getSimulationsExec(i, simulations.youtube);
+    for (let i = 0; i < simulations.maths.length   ; i++)
+        simulations.maths[i]      = await getSimulationsExec(i, simulations.maths);
+    for (let i = 0; i < simulations.autre.length   ; i++)
+        simulations.autre[i]      = await getSimulationsExec(i, simulations.autre);
+
+    return simulations;
+}
+
+async function getSimulationsExec(i, arr) {
+    let v = parseInt(arr[i].links.article);
+    let articleList;
+    if(v >= 0) {
+        articleList = await getArticleByUUID(v);
+        if(articleList.docs.length != 1)
+            arr[i].links.article = articleList.docs[0].data();
+    }
+
+    return arr[i];
+}
+
+/**
+ * @param uuid uuid de la simulation recherchée
+ * @return la promise
+ */
+async function getSimulationByUUID(uuid) {
+    return await db.collection('simulations').where('uuid', '==', parseInt(uuid)).get();
+}
+/* ======================================= */
 
 
 
@@ -637,7 +707,6 @@ async function getRssArticles(limit) {
     let snapshot = await db.collection('posts').orderBy('uuid', 'desc').where('visible', '==', true).limit(limit).get();
     return snapshot.docs;
 }
-
 /* ====================== */
 
 
@@ -666,5 +735,7 @@ module.exports = {
     addViewForArticle       : addViewForArticle,
     addNewComment           : addNewComment,
     getEveryComments        : getEveryComments,
-    toggleArticleVisibility : toggleArticleVisibility
+    toggleArticleVisibility : toggleArticleVisibility,
+    getSimulations          : getSimulations,
+    getSimulationByUUID     : getSimulationByUUID
 };
