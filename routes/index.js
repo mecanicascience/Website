@@ -132,7 +132,7 @@ router
         });
     })
 
-    .get(/simulations/g, async (req, res) => {
+    .get(/simulation_view/g, async (req, res) => {
         let isConnected = m.users.isConnected(req.cookies);
         let url = req.originalUrl.split('&'); // format article/ARTICLE_TITLE&simulationview&type&ID
         if(url.length != 4 || url[1] != 'simulationview' || url[0] == undefined || url[0].split('/').length != 3) {
