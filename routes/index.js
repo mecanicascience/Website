@@ -132,9 +132,9 @@ router
         });
     })
 
-    .get(/simulation_view/g, async (req, res) => {
+    .get(/simulationview/g, async (req, res) => {
         let isConnected = m.users.isConnected(req.cookies);
-        let url = req.originalUrl.split('&'); // format article/ARTICLE_TITLE&simulationview&type&ID
+        let url = req.originalUrl.split('&'); // format simulationview/SIMULATION_TITLE&simulationview&type&ID
         if(url.length != 4 || url[1] != 'simulationview' || url[0] == undefined || url[0].split('/').length != 3) {
             res.render('pages/simulations/simulation_not_found', { main : getMainInfos(req, 'Erreur 404') });
             return;
