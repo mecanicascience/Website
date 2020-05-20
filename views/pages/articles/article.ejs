@@ -11,8 +11,8 @@
 			<script type="text/javascript">
 				window.onload = function() {
 					document.getElementById('gn-menu').onclick = () => window.location.href = '/';
-
-					document.getElementById('container-text').innerHTML = computeText(convertFromCodeToHtml(<%- '"' + datas.content + '"' %>));
+					let t = '# DummyTitle0101 #\n' + convertFromCodeToHtml(<%- '"' + datas.content + '"' %>);
+					document.getElementById('container-text').innerHTML = computeText(t); //  + '# dummy_first_title #'
 
 					// MathJax
 					try {

@@ -17,7 +17,10 @@ function computeText(rawText) {
         .replace(/<h1/g, '</div><div class="part_title"><h1')
         .replace(/<\/div><h1/, '<div class="part_title"><h1')
         .replace(/<\/h1>/g, '</h1></div><div class="container">')
+        .replace('<div class="part_title"><h1 id="dummytitle0101">DummyTitle0101</h1></div>', '<div style="margin-top: 100px;"></div>')
+        .replace('<div class="accordionContent" id="heading0"><div class="accordionContentHeadL" style="margin-left: 18px;"><a href="#dummytitle0101"> DummyTitle0101 </a></div><div class="accordionContentHeadR"></div></div>', '')
     ;
+
     return putTextInEquations(htmlTxt);
 }
 
@@ -187,16 +190,33 @@ function addSummary(rawText) {
     let addedHTML = "";
 
     if(struct.length != 0) {
-        addedHTML = '<p style="margin-top: -100px;"></p>';
-        addedHTML += '<ul>';
+        addedHTML += '<p style="margin-top: -70px;"></p>';
+        // addedHTML += '<hr />';
+        addedHTML += '<div class="accordion summary-ul" id="summaryAccordion">';
         for (let h1 = 0; h1 < struct.length; h1++) {
-            if(struct[h1].title != '')
-                addedHTML += `<div><li><a href="#${struct[h1].shortName}">${struct[h1].title}</a></li>`;
+            if(struct[h1].title != '') {
+                if(h1 != 0)
+                    addedHTML += `<hr class="accordionHr" />`
+                addedHTML += `<div class="accordionSumMain">`;
+                addedHTML   += `<div class="accordionContent" id="heading${h1}">`;
+                if(h1 == 0)
+                    addedHTML       += `<div class="accordionContentHeadL" style="margin-left: 18px;"><a href="#${struct[h1].shortName}">${struct[h1].title}</a></div>`
+                else
+                    addedHTML       += `<div class="accordionContentHeadL"><a href="#${struct[h1].shortName}">${struct[h1].title}</a></div>`
+                addedHTML       += `<div class="accordionContentHeadR">`
+                if(struct[h1].content.length > 0) {
+                addedHTML          += `<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${h1}" aria-expanded="true" aria-controls="collapse${h1}">+</button>`;
+                }
+                addedHTML       += `</div>`;
+                addedHTML   += `</div>`;
+                addedHTML   += `<div id="collapse${h1}" class="collapse" aria-labelledby="heading${h1}" data-parent="#summaryAccordion">`;
+            }
 
             for (let h2 = 0; h2 < struct[h1].content.length; h2++) {
-                if(h2 == 0) addedHTML += '<div><ul>';
-                if(struct[h1].content[h2].title != '')
+                //if(h2 == 0) addedHTML += '<div><ul>';
+                if(struct[h1].content[h2].title != '') {
                     addedHTML += `<li><a href="#${struct[h1].content[h2].shortName}">${struct[h1].content[h2].title}</a></li>`;
+                }
 
                 for (let h3 = 0; h3 < struct[h1].content[h2].content.length; h3++) {
                     if(h3 == 0) addedHTML += '<ul>';
@@ -215,7 +235,7 @@ function addSummary(rawText) {
         addedHTML += '</ul><p style="margin-top: 90px;"></p>';
     }
 
-    return addedHTML + '\n' + rawText;
+    return addedHTML + '</div>\n' + rawText;
 }
 
 

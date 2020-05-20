@@ -50,6 +50,89 @@
     letter-spacing: 3px;
 }
 
+.accordionSumMain {
+    background-color: black;
+    padding-left: 18px;
+    transition: * 0.5s ease;
+    padding: 1px 18px;
+}
+
+.summary-ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    list-style: none;
+}
+
+.accordionContentHeadL {
+    font-size: 28px;
+    margin: auto auto 10px auto;
+}
+
+.accordionContentHeadL > a {
+    color: white;
+    font-style: unset;
+    text-decoration: none;
+}
+.accordionSumMain > div > li > a {
+    color: #e1e1e1;
+    font-style: unset;
+    text-decoration: none;
+}
+.accordionSumMain > div > ul > li > a {
+    color: #c4c2c2;
+    font-style: unset;
+    text-decoration: none;
+}
+.accordionContentHeadL > a:hover {
+    font-style: unset !important;
+}
+
+.accordionContentHeadR {
+    text-align: right;
+}
+
+.accordionHr {
+    background-color: white;
+    border-radius: 30px;
+}
+
+.accordionContentHeadR > button {
+    color: white;
+    font-size: 21px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 0.5s ease;
+}
+.accordionContentHeadR > button:hover {
+    text-decoration: none;
+    color: #cacaca;
+}
+.accordionContentHeadR > button:focus {
+    text-decoration: none;
+}
+
+.accordionContent {
+    display: flex;
+    background-color: black;
+}
+
+.accordionContent > div {
+    flex-grow: 1;
+}
+
+.summary-ul > div > li, .collapse > ul > li, .collapsing > ul > li {
+    list-style: none;
+}
+
+.collapse > li, .collapsing > li {
+    margin-left: 30px;
+}
+
+.collapse > ul > li, .collapsing > ul > li {
+    margin-left: 26px;
+}
+
 
 #container-text > p > a, #container-text > div > p > a, #preview-toaster-content > p > a, #container-text > ul > li > a,
 #container-text > div > p > a, #container-text > div > div > p > a, #container-text > div > ul > li > a {
@@ -149,7 +232,7 @@ h1 {
 .part_title {
     padding: 0 0 17px 0;
     background-color: #03040F;
-    margin: 170px 0 28px 0;
+    margin: 330px 0 28px 0;
 }
 .part_title > h1 {
     color: white !important;
@@ -378,6 +461,7 @@ code {
     margin: 41px 0 0 0;
     color: #000000bf;
     font-size: 15px;
+    margin-right: 54px;
 }
 
 .credits-p {
