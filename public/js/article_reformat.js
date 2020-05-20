@@ -19,6 +19,8 @@ function computeText(rawText) {
         .replace(/<\/h1>/g, '</h1></div><div class="container">')
         .replace('<div class="part_title"><h1 id="dummytitle0101">DummyTitle0101</h1></div>', '<div style="margin-top: 100px;"></div>')
         .replace('<div class="accordionContent" id="heading0"><div class="accordionContentHeadL" style="margin-left: 18px;"><a href="#dummytitle0101"> DummyTitle0101 </a></div><div class="accordionContentHeadR"></div></div>', '')
+        .replace(/<div class="container">\n<h2/g, '<div class="container"><h2 class="h2-0"')
+        .replace('<div style="margin-top: 100px;"></div>', '</div><div style="margin-top: 100px;"></div>')
     ;
 
     return putTextInEquations(htmlTxt);
@@ -266,8 +268,7 @@ function handleBalises(rawText) {
             : '';
 
         let formatedHTMLT = getIframeHTML(src, link, title, text);
-
-        formattedText = formattedText.replace(/<embeddedFrame.*?\/>/, formatedHTMLT);
+        formattedText = formattedText.replace(/<embeddedFrame.*?\/>/, '<div class="iframe-main"><div class="container" style="margin-top: -39px;">' + formatedHTMLT + '</div></div>');
     }
 
 

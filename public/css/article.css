@@ -168,6 +168,7 @@
 #container-text > ul > div > div > ul > li > a,
 #container-text > ul > div > div > ul > ul > li > a,
 #container-text > div > ul > div > li > a,
+#container-text > div > ul > li > a,
 #container-text > div > ul > div > div > ul > li > a,
 #container-text > div > ul > div > div > ul > ul > li > a {
     position: relative;
@@ -179,6 +180,7 @@
 #container-text > ul > div > div > ul > li > a:before,
 #container-text > ul > div > div > ul > ul > li > a:before,
 #container-text > div > ul > div > li > a:before,
+#container-text > div > ul > li > a:before,
 #container-text > div > ul > div > div > ul > li > a:before,
 #container-text > div > ul > div > div > ul > ul > li > a:before {
     content: "";
@@ -196,6 +198,7 @@
 #container-text > ul > div > div > ul > li > a:hover:before,
 #container-text > ul > div > div > ul > ul > li > a:hover:before,
 #container-text > div > ul > div > li > a:hover:before,
+#container-text > div > ul > li > a:hover:before,
 #container-text > div > ul > div > div > ul > li > a:hover:before,
 #container-text > div > ul > div > div > ul > ul > li > a:hover:before {
     visibility: visible;
@@ -249,12 +252,16 @@ h2 {
     font-weight: 600 !important;
     font-style: normal;
     font-stretch: normal;
-    font-size: 22px !important;
     letter-spacing: 0.7px;
     margin-left: 10px !important;
-    padding: 55px 0 2px 0;
-    color: #0096b5 !important;
+    color: #20C961 !important;
+    font-size: 27px !important;
     line-height: 1.1 !important;
+    padding-top: 168px;
+    padding-bottom: 12px;
+}
+.h2-0 {
+    padding-top: 0;
 }
 
 h3 {
@@ -367,13 +374,17 @@ code {
 }
 
 
+.iframe-main {
+    background-color: #010104;
+    margin: 98px 0 24px 0;
+}
 .custom-code-d {
     position: relative;
     padding: 0 0 14px 0;
     margin: 37px -15px 8px -15px;
-    border: 3px solid #189649;
+    /* border: 3px solid #189649; */
     border-radius: 3px;
-    background-color: white;
+    background-color: #010104;
 }
 
 .custom-code-d-title {
@@ -383,7 +394,7 @@ code {
     padding: 1px 6px 1px 6px;
     margin: 0;
     border-radius: 2px;
-    color: #189649;
+    color: white;
     background-color: #189649;
     border: 2px solid #189649;
 }
@@ -396,11 +407,11 @@ code {
 }
 
 .custom-code-d-text {
-    border: 1px solid #189649;
+    /* border: 1px solid #189649; */
     margin: -6px -1px 11px -1px;
     padding: 13px 14px 7px 20px;
     font-size: 15px;
-    color: black;
+    color: white;
     text-align: center;
     border-bottom-width: 0px;
 }
