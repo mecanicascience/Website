@@ -265,7 +265,9 @@ router
             req.body.uuid,
             req.body.visible,
             req.body.image_exists,
-            req.body.author
+            req.body.author,
+            req.body.image_is_simulation,
+            req.body.image_simulation
         );
 
 

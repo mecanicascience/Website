@@ -155,17 +155,17 @@ async function articleExistsAndVisible(uuid, title, is_admin) {
 /* ====== CREATION ET MODIFICATION DES ARTICLES ====== */
 /* Création d'un nouvel article */
 async function createNewArticle() {
-    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null', 'null.png', 1, 'null', 'null', false, false, 0, [], []);
+    let new_article = await db.addNewPost('null', 'null', null, 'null', 'null', 'null.png', 1, 'null', 'null', false, false, 0, [], [], false, 'null');
     return new_article;
 }
 
 /* Modification d'un article */
-async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists, author) {
+async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists, author, image_is_simulation, image_simulation) {
     if(
         isNaN(pref_size) || isNaN(uuid) || (visible != 'true' && visible != 'false')
     ) return false;
 
-    let answer = await db.editArticle(category_id, content, date, description, image_credits, image_name, parseInt(pref_size), short_title, title, parseInt(uuid), (visible == 'true' ? true : false), (image_exists == 'true' ? true : false), author);
+    let answer = await db.editArticle(category_id, content, date, description, image_credits, image_name, parseInt(pref_size), short_title, title, parseInt(uuid), (visible == 'true' ? true : false), (image_exists == 'true' ? true : false), (image_is_simulation == 'true' ? true : false), image_simulation, author);
     return answer;
 }
 

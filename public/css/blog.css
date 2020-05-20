@@ -131,6 +131,7 @@
     flex-direction: column;
     text-align: center;
     box-shadow: 2px 2px 3px 0.2px rgba(0, 0, 0, 0.11);
+    padding-bottom: 73px;
 }
 
 .section-comments {
@@ -257,19 +258,32 @@ hr {
 
 
 
+
+.head-title {
+    border: none;
+    overflow: hidden !important;
+    width: 100%;
+    height: 610px;
+    position: absolute;
+    left: 0;
+    margin: -17px 0 0 0;
+}
+
 .m-title {
     display: flex;
     flex-direction: column;
+    z-index: 10;
 }
 
 .m-t-title {
-    font-weight: 550;
-    font-size: 43px !important;
-    text-align: center;
+    color: white !important;
+    font-size: 47px !important;
     text-transform: uppercase;
-    color: #484848;
+    font-weight: 800 !important;
+    font-family: 'Railway', 'Montserrat', Arial;
+    text-align: center;
     margin: 14px 0 2px 0;
-    letter-spacing: 1.5px;
+    letter-spacing: 2.5px;
 }
 
 .m-t-hr {
@@ -280,14 +294,15 @@ hr {
 }
 
 .m-t-subtitle {
-    font-weight: 100;
+    color: #b0b0b0 !important;
     font-size: 17px !important;
+    text-transform: uppercase;
+    font-weight: 200 !important;
+    font-family: 'Railway', 'Montserrat', Arial;
     text-align: center;
-    color: #6c6b6beb;
+    margin: 14px 0 2px 0;
     letter-spacing: 2.5px;
     font-style: italic;
-    text-transform: uppercase;
-    margin-bottom: 36px;
 }
 
 .m-c-icon {
@@ -299,7 +314,7 @@ hr {
 }
 
 .m-c-col > p {
-    color: #555350;
+    color: white;
     line-height: 20px;
     overflow: hidden;
     font-family: Rubik;
@@ -311,6 +326,10 @@ hr {
     letter-spacing: 1px;
     margin-top: 2px;
     text-align: center;
+}
+
+.m-b-desc, .m-b-cat {
+    position: relative;
 }
 
 

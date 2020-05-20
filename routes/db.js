@@ -219,9 +219,9 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
 
     html += '<div class="b-image-cont">';
 
-    if(post.image_exists) {
+    if(post.image.exists) {
         html += '<img class="b-img" src="' + config.main_image_link;
-        html += post.uuid + '_' + post.image_name + '?alt=media';
+        html += post.uuid + '_' + post.image.name + '?alt=media';
         html += '" />';
     }
     else {
@@ -288,7 +288,7 @@ function getHTMLForPostMAIN(post, size, articles, is_admin_link) {
  * @param uuid         int       : identifiant unique du post (il est conseillé de n'entrer aucune valeur)
  * @return le nouveau post généré
  */
-async function addNewPost(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, visible, image_exists, view_count, view_list, comments, uuid) {
+async function addNewPost(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, visible, image_exists, view_count, view_list, comments, image_is_simulation, image_simulation, uuid) {
     if(!uuid) uuid = await generateNewUUID();
 
     let data = {
@@ -296,14 +296,18 @@ async function addNewPost(category_id, content, date, description, image_credits
         content       : content,
         date          : date,
         description   : description,
-        image_credits : image_credits,
-        image_name    : image_name,
+        image         : {
+            credits       : image_credits,
+            name          : image_name,
+            exists        : image_exists,
+            is_simulation : image_is_simulation,
+            simulation    : image_simulation
+        },
         pref_size     : pref_size,
         short_title   : short_title,
         title         : title,
         uuid          : uuid,
         visible       : visible,
-        image_exists  : image_exists,
         view_count    : view_count,
         view_list     : view_list,
         comments      : comments
@@ -441,8 +445,15 @@ async function generateNewUUID() {
  * Edition d'un nouvel article
  * @return true si l'article a bien été édité
  */
-async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists, author) {
-    let datas = { category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists, author };
+async function editArticle(category_id, content, date, description, image_credits, image_name, pref_size, short_title, title, uuid, visible, image_exists, image_is_simulation, image_simulation, author) {
+    let datas = { category_id, content, date, description, pref_size, short_title, title, uuid, visible, author };
+    datas.image = {
+        credits       : image_credits,
+        name          : image_name,
+        exists        : image_exists,
+        is_simulation : image_is_simulation,
+        simulation    : image_simulation
+    };
     let dateFormatted;
 
 
@@ -591,7 +602,10 @@ async function setIsMainImage(uuid, bool) {
         let getDoc = await db.collection('posts').where('uuid', '==', parseInt(uuid)).limit(1).get(); // doc correspondant à l'UUID
         let id = getDoc.docs[0].id;
 
-        await db.collection('posts').doc(id).update({ image_exists : bool });
+        let eIm = getDoc.docs[0].image;
+        eIm.exist = bool;
+
+        await db.collection('posts').doc(id).update({ image : eIm });
         return true;
     }
     catch(e) {

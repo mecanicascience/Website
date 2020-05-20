@@ -13,6 +13,11 @@ function computeText(rawText) {
     textToConvert = textToConvert.replace(/&&&39;/g, '\'');
 
     let htmlTxt = converter.makeHtml(textToConvert);
+    htmlTxt = htmlTxt
+        .replace(/<h1/g, '</div><div class="part_title"><h1')
+        .replace(/<\/div><h1/, '<div class="part_title"><h1')
+        .replace(/<\/h1>/g, '</h1></div><div class="container">')
+    ;
     return putTextInEquations(htmlTxt);
 }
 
@@ -124,14 +129,16 @@ function addSummary(rawText) {
     let formattedTextTmp = rawText.replace(/```([^\]]+?)```/g, '').replace(/``([^\]]+?)``/g, '').replace(/`([^\]]+?)`/g, '');
 
     // CREATES STRUCTURE
+    let i = 0;
     let struct = [];
     while(formattedTextTmp.search(/(^)\# .*\#/m) != -1) {
         let h1Title = formattedTextTmp.split(/\#/)[1].split(/\#/)[0];
         if(h1Title != "" && h1Title.length > 0) {
             if(h1Title.split('')[1] == '!') {
-                rawText = rawText.replace(h1Title, h1Title.substring(0, 1) + h1Title.substring(2, h1Title.length));
+                rawText = rawText.replace(h1Title,  h1Title.substring(0, 1) + h1Title.substring(2, h1Title.length));
                 h1Title = '';
             }
+
             struct.push({ title: h1Title, content: [], shortName: h1Title.replace(/ /g, '').toLowerCase().replace(/[\.àéèüûôö:'"?!-]/g, '') });
 
             formattedTextTmp = formattedTextTmp.replace(/(^)\# .*\#/m, '');
@@ -181,7 +188,6 @@ function addSummary(rawText) {
 
     if(struct.length != 0) {
         addedHTML = '<p style="margin-top: -100px;"></p>';
-        addedHTML += '<h1 id="summary">Sommaire</h1>';
         addedHTML += '<ul>';
         for (let h1 = 0; h1 < struct.length; h1++) {
             if(struct[h1].title != '')

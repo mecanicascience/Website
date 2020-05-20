@@ -4,8 +4,8 @@
 		<%- include('../../partial/head') %>
 
 		<script type="text/javascript">
-			let imageName = <%- '"' + datas.image_name.split('.')[0] + '"' %>;
-			let imageExtension = <%- '"' + datas.image_name.split('.')[1] + '"' %>;
+			let imageName = <%- '"' + datas.image.name.split('.')[0] + '"' %>;
+			let imageExtension = <%- '"' + datas.image.name.split('.')[1] + '"' %>;
 
 
 			window.onload = function() {
@@ -45,11 +45,16 @@
 				document.getElementById('content-area').value = convertFromCodeToHtml(<%- '"' + datas.content + '"' %>);
 
 				// image main
-				document.getElementById('image-credits').value = <%- '"' + datas.image_credits + '"' %>;
+				document.getElementById('image-credits').value = <%- '"' + datas.image.credits + '"' %>;
 				document.getElementById('article-author').value = <%- '"' + datas.author + '"' %>;
 
-				document.getElementById('image-name').value = <%- '"' + datas.image_name.split('.')[0] + '"' %>;
-				document.getElementById('image-extension').value = <%- '"' + datas.image_name.split('.')[1] + '"' %>;
+				document.getElementById('image-name').value = <%- '"' + datas.image.name.split('.')[0] + '"' %>;
+				document.getElementById('image-extension').value = <%- '"' + datas.image.name.split('.')[1] + '"' %>;
+
+
+				// Simulation principale
+				document.getElementById('image-is-simulation').value = <%- '"' + datas.image.is_simulation + '"' %>;
+				document.getElementById('image-simulation').value = <%- '"' + datas.image.simulation + '"' %>;
 
 
 				// Set le dernier titre
@@ -99,7 +104,7 @@
 
 
 
-			let image_name_raw = <%- '"' + datas.image_name + '"' %>;
+			let image_name_raw = <%- '"' + datas.image.name + '"' %>;
 			function getImageName() {
 			    return image_name_raw;
 			}
@@ -126,9 +131,11 @@
 					parseInt(<%- '"' + datas.uuid + '"' %>),
 					document.getElementById('publish-status').checked,
 					button_id,
-					<%- datas.image_exists %>,
-					<%- '"' + datas.image_name + '"' %>,
-					document.getElementById('article-author').value
+					<%- datas.image.exists %>,
+					<%- '"' + datas.image.name + '"' %>,
+					document.getElementById('article-author').value,
+					document.getElementById('image-is-simulation').value,
+					document.getElementById('image-simulation').value
 				);
 			}
 		</script>
@@ -207,7 +214,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<% if(datas.image_exists) { %>
+						<% if(datas.image.exists) { %>
 							<form enctype="multipart/form-data" action="/admin/delete/main_image" method="post" id="main-image-delete-form">
 								<div class="modal-body" id="main-image-toaster-content">
 									<div class="m-content">
@@ -217,16 +224,16 @@
 
 												<div class="m-c-row" style="max-width: 32%;">
 													<div class="card">
-														<img style="max-height: 212px;" src=<%= fb_image_link + '' + datas.uuid + '_' + datas.image_name + '?alt=media' %> class="card-img-top">
+														<img style="max-height: 212px;" src=<%= fb_image_link + '' + datas.uuid + '_' + datas.image.name + '?alt=media' %> class="card-img-top">
 														<div class="card-body">
 															<h5 class="card-title">Image de l'article</h5>
 															<p class="card-text">
-																Cliquez sur <a href=<%= fb_image_link + '' + datas.uuid + '_' + datas.image_name + '?alt=media' %>>ce lien</a> pour consulter l'image.
+																Cliquez sur <a href=<%= fb_image_link + '' + datas.uuid + '_' + datas.image.name + '?alt=media' %>>ce lien</a> pour consulter l'image.
 																<br />Pour pouvoir modifier l'image, vous devez tout d'abord supprimer celle actuelle.
 															</p>
 														</div>
 
-														<input type="text" id="image_name-input" name="image_name" style="display: none;" value=<%- '"' + datas.image_name + '"' %>>
+														<input type="text" id="image_name-input" name="image_name" style="display: none;" value=<%- '"' + datas.image.name + '"' %>>
 														<input type="text" id="uuid-input" name="uuid" style="display: none;" value=<%- '"' + datas.uuid + '"' %>>
 														<input type="text" id="title-input" name="title" style="display: none;" value=<%- '"' + datas.short_title + '"' %>>
 													</div>
@@ -263,7 +270,7 @@
 														<label for="main-image-upload-input" class="btn btn-info">Sélectionner des images à uploader (PNG, JPG)</label>
 														<input type="file" id="main-image-upload-input" name="image" accept=".jpg, .png" style="opacity: 0;">
 
-														<input type="text" id="image_name-input" name="image_name" style="display: none;" value=<%- '"' + datas.image_name + '"' %>>
+														<input type="text" id="image_name-input" name="image_name" style="display: none;" value=<%- '"' + datas.image.name + '"' %>>
 														<input type="text" id="uuid-input" name="uuid" style="display: none;" value=<%- '"' + datas.uuid + '"' %>>
 														<input type="text" id="title-input" name="title" style="display: none;" value=<%- '"' + datas.short_title + '"' %>>
 													</div>
@@ -309,7 +316,7 @@
 						<div class="m-c-row">
 							<div class="m-c-col">
 								<% if(datas.image_exists) { %>
-									<a><img class="m-b-image m-c-logo" src=<%= fb_image_link + datas.uuid + '_' + datas.image_name + '?alt=media' %>  /></a>
+									<a><img class="m-b-image m-c-logo" src=<%= fb_image_link + datas.uuid + '_' + datas.image.name + '?alt=media' %>  /></a>
 								<% } %>
 							</div>
 
@@ -331,7 +338,8 @@
 										<option value="png">.png</option>
 										<option value="jpg">.jpg</option>
 									</select>
-								<span style="text-align: left; margin: 0 5px;"></span></p>
+									<span style="text-align: left; margin: 0 5px;"></span>
+								</p>
 							</div>
 
 							<div class="m-c-col" style="display: flex; margin-top: 18px;">
@@ -345,6 +353,35 @@
 								<span style="text-align: left; margin: 0 5px;"></span></p>
 							</div>
 
+							<hr style="margin: 21px 0 2px 0 !important; width: 120%; align-self: center; border-color: #0000000f !important;" />
+
+
+							<div class="m-c-col" style="display: flex; margin-top: 18px;">
+								<p class="m-b-cat">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Possède une simulation :</span>
+									</div>
+									<select class="form-control" id="image-is-simulation" style="text-align: left; border-radius: 0 !important; color: #0000007a !important;">
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+									<span style="text-align: left; margin: 0 5px;"></span>
+								</p>
+							</div>
+
+							<div class="m-c-col" style="display: flex; margin-top: 18px;">
+								<p class="m-b-cat">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Lien de la simulation :</span>
+									</div>
+									<input style="color: #606060 !important; border-radius: 0 !important;" type="text" class="form-control" placeholder="Lien" id="image-simulation">
+									<span style="text-align: left; margin: 0 5px;"></span>
+								</p>
+							</div>
+
+							<hr style="margin: 21px 0 2px 0 !important; width: 120%; align-self: center; border-color: #0000000f !important;" />
+
+
 							<div class="m-c-col" style="display: flex; margin-top: 18px;">
                                 <p class="m-b-cat">
 									<div class="input-group-prepend">
@@ -353,7 +390,8 @@
 									</div>
 
 									<input style="color: #606060 !important; border-radius: 0 !important;" type="text" class="form-control" placeholder="Auteur" id="article-author">
-								<span style="text-align: left; margin: 0 5px;"></span></p>
+									<span style="text-align: left; margin: 0 5px;"></span>
+								</p>
 							</div>
 
 
@@ -369,7 +407,8 @@
 										<option value="size_1">1</option>
 										<option value="size_2">2</option>
 									</select>
-								<span style="text-align: left; margin: 0 5px;"></span></p>
+									<span style="text-align: left; margin: 0 5px;"></span>
+								</p>
 							</div>
 
 
@@ -386,7 +425,8 @@
 										<option value="maths">Mathématiques</option>
 										<option value="autre">Autre</option>
 									</select>
-								<span style="text-align: left; margin: 0 5px;"></span></p>
+									<span style="text-align: left; margin: 0 5px;"></span>
+								</p>
 							</div>
 						</div>
 
