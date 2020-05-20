@@ -363,17 +363,17 @@ code {
     height: 320px;
     overflow: hidden;
     border: none;
-    border-radius: 7px;
+    border-radius: 0px;
 }
 
 
 .custom-code-d {
     position: relative;
     padding: 0 0 14px 0;
-    margin: 32px 21px 38px 21px;
-    border: 3px solid #068ca8;
+    margin: 37px -15px 8px -15px;
+    border: 3px solid #189649;
     border-radius: 3px;
-    background-color: #060b15d9;
+    background-color: white;
 }
 
 .custom-code-d-title {
@@ -382,10 +382,10 @@ code {
     left: 28px;
     padding: 1px 6px 1px 6px;
     margin: 0;
-    border-radius: 5px;
-    color: #2c5d6c;
-    background-color: #068ca8;
-    border: 2px solid #085768;
+    border-radius: 2px;
+    color: #189649;
+    background-color: #189649;
+    border: 2px solid #189649;
 }
 
 .custom-code-d-title > p {
@@ -396,11 +396,11 @@ code {
 }
 
 .custom-code-d-text {
-    border: 1px solid #068ca8;
+    border: 1px solid #189649;
     margin: -6px -1px 11px -1px;
     padding: 13px 14px 7px 20px;
     font-size: 15px;
-    color: #fff;
+    color: black;
     text-align: center;
     border-bottom-width: 0px;
 }
