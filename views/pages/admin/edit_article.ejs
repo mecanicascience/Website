@@ -509,7 +509,7 @@
 				<div class="container" style="margin-top: 70px;">
 					<div class="m-c-col" style="flex-grow: 1;">
 						<label class="cat-title">Contenu du post <span id="cat-title-span">(pas de dernière sauvegarde)</span> :</label>
-						<a class="badge badge-primary" onclick="window.open('/article/<%= datas.short_title %>&articleview&<%= datas.uuid %>', '_blank')" style="cursor: pointer; color: #fdf9f9;">Consulter la page de l'article</a>
+						<a class="badge badge-primary" onclick='window.open("/article/<%= datas.short_title %>&articleview&<%= datas.uuid %>", "_blank")' style="cursor: pointer; color: #fdf9f9;">Consulter la page de l'article</a>
 						<!--<a class="badge badge-secondary" onclick="showPostRender()" style="cursor: pointer; color: #fdf9f9;">Rendu du post</a>-->
 						<a class="badge badge-secondary" onclick="showShortcuts()" style="cursor: pointer; color: #fdf9f9;">Différents raccourcis</a>
 						<a class="badge badge-secondary" onclick="changeSaveButtonAuto(!autosave)" style="cursor: pointer; color: #fdf9f9; margin-left: 15px;" id="auto-save-button">Chargement en cours...</a>
