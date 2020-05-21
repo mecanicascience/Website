@@ -65,6 +65,8 @@
 
 .s-si-links-1 {
     display: flex;
+    position: relative;
+    z-index: 20;
 }
 
 .s-si-links-1-el-1 {
@@ -77,6 +79,8 @@
 
 .s-si-links-2 {
     margin: 47px 0 0 0;
+    position: relative;
+    z-index: 10;
 }
 
 .image_main > img {
@@ -84,7 +88,7 @@
     max-width: 100%;
     margin-top: -68px;
     height: 100%;
-    z-index: -1;
+    z-index: 1 !important;
     position: relative;
 }
 
