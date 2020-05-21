@@ -268,7 +268,7 @@ function handleBalises(rawText) {
             : '';
 
         let height1 = frameDesc.split('height=\'');
-        let height = (text1[1] != undefined && (height1[1].split('\'')).length > 0)
+        let height = (height1[1] != undefined && (height1[1].split('\'')).length > 0)
             ? height1[1].split('\'')[0] + 'px'
             : '320px';
 
