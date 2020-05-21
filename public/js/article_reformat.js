@@ -267,7 +267,12 @@ function handleBalises(rawText) {
             ? text1[1].split('\'')[0]
             : '';
 
-        let formatedHTMLT = getIframeHTML(src, link, title, text);
+        let height1 = frameDesc.split('height=\'');
+        let height = (text1[1] != undefined && (height1[1].split('\'')).length > 0)
+            ? height1[1].split('\'')[0] + 'px'
+            : '320px';
+
+        let formatedHTMLT = getIframeHTML(src, link, title, text, height);
         formattedText = formattedText.replace(/<embeddedFrame.*?\/>/, '<div class="iframe-main"><div class="container" style="margin-top: -39px;">' + formatedHTMLT + '</div></div>');
     }
 
@@ -279,13 +284,13 @@ function getPanelHtml(type) {
     return `<div class="panel-m panel-${type}-m"><div></div><p>`;
 }
 
-function getIframeHTML(src, link, title, text) {
+function getIframeHTML(src, link, title, text, height) {
     let id = Math.round(Math.random() * 1000000000000);
     let html = `<figure class="custom-code-d">`
         + `<div class="custom-code-d-title">`
             + `<p>${title}</p>`
         + `</div>`
-        + `<iframe src="${link}" class="code-iframe-i" id="${id}"></iframe>`
+        + `<iframe src="${link}" class="code-iframe-i" id="${id}" style="height:${height};"></iframe>`
         + `<div class="custom-code-d-text">`
             + `<p>${text}</p>`
         + `</div>`
