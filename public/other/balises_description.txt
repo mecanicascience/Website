@@ -1,5 +1,3 @@
-<p style="margin-top: -100px;"></p>
-# Introduction #
 Bienvenue dans ce premier *réel* article de blog.
 <br /><br />Ce post est destiné à présenter le principe de la rédaction en utilisant Markdown ainsi que $\LaTeX$, languages que j'utilise sur ce site afin de rédiger et de présenter mes articles.
 <br />Tout d'abord, j'utilise la bibliothèque JavaScript [ShowDownJS](http://showdownjs.com/) afin de convertir automatiquement le contenu écrit en Markdown en language HTML.
