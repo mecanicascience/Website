@@ -1,6 +1,6 @@
 const constants = {
     is_https : true,
-    site     : 'mecanicascience.herokuapp.com',
+    site     : 'mecanicascience.fr',
     version  : '3.3.0'
 };
 
