@@ -2,7 +2,7 @@
     "session_max_age" : 259200000,
     "main_image_link" : "SET AS ENVIRONMENT VARIABLE",
     "is_https"        : true,
-    "site"            : "mecanicascience.fr",
+    "site"            : "www.mecanicascience.fr",
     "version"         : "4.0.0",
     "local_port"      : 8080,
     "cache_time"      : 600000,
