@@ -2,8 +2,8 @@
     "session_max_age" : 259200000,
     "main_image_link" : "SET AS ENVIRONMENT VARIABLE",
     "is_https"        : true,
-    "site"            : "mecanicascience.herokuapp.com",
-    "version"         : "3.3.0",
+    "site"            : "mecanicascience.fr",
+    "version"         : "4.0.0",
     "local_port"      : 8080,
     "cache_time"      : 600000,
     "bucket_name"     : "SET AS ENVIRONMENT VARIABLE"
