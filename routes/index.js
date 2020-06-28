@@ -232,8 +232,8 @@ router
             return;
         }
 
-
         let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title, true);
+        let perm = await m.users.getPermission(req.cookies);
 
         if(!req.query.uuid || !req.query.title || !articleExists)
             res.render('pages/articles/article_not_found', { main : await getMainInfos(req) });
@@ -247,19 +247,26 @@ router
                 isRequireOk = false;
             }
 
+            let canEditArt = false;
+            let d = m.articles.getArticleDatas(articleExists);
+            console.log(req.query.author, req.cookies.admin_name);
+            if(perm == 100 || d.author == req.cookies.admin_name)
+                canEditArt = true;
+
             res.render('pages/admin/edit_article', {
                 main            : await getMainInfos(req, 'Edition de l\'article'),
-                datas           : m.articles.getArticleDatas(articleExists),
+                datas           : d,
                 action_function : req.query.action_function,
                 image_error     : req.query.image_error,
-                permissions     : await m.users.getPermission(req.cookies),
-                fb_image_link   : m.config.main_image_link
+                permissions     : perm,
+                fb_image_link   : m.config.main_image_link,
+                can_edit_art    : canEditArt
             });
         }
     })
 
     .post("/admin/update", async (req, res) => {
-        if(!(await m.users.isConnected(req.cookies)) || await m.users.getPermission(req.cookies) != 100) {
+        if(!(await m.users.isConnected(req.cookies)) || await m.users.getPermission(req.cookies) < 50) {
             res.redirect('/admin');
             return;
         }

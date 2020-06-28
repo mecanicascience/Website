@@ -42,6 +42,7 @@ async function connectUser(username, password, res) {
         return false;
 
     res.cookie('admin_uuid'    , d.uuid        , { maxAge: config.session_max_age, httpOnly: false });
+    res.cookie('admin_name'    , d.name        , { maxAge: config.session_max_age, httpOnly: false });
     res.cookie('admin_username', username      , { maxAge: config.session_max_age, httpOnly: false });
     res.cookie('admin_password', encrypted_pass, { maxAge: config.session_max_age, httpOnly: false });
 
@@ -54,6 +55,7 @@ function deconnectUser(req, res) {
     if(req.cookies.admin_username && req.cookies.admin_password) {
         res.cookie('admin_uuid'    , '', { maxAge: config.session_max_age, httpOnly: false });
         res.cookie('admin_username', '', { maxAge: config.session_max_age, httpOnly: false });
+        res.cookie('admin_name',     '', { maxAge: config.session_max_age, httpOnly: false });
         res.cookie('admin_password', '', { maxAge: config.session_max_age, httpOnly: false });
 
         return true;

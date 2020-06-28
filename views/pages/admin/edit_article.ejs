@@ -3,6 +3,7 @@
 	<head>
 		<%- include('../../partial/head') %>
 
+		<% if(can_edit_art) { %>
 		<script type="text/javascript">
 			let imageName = <%- '"' + datas.image.name.split('.')[0] + '"' %>;
 			let imageExtension = <%- '"' + datas.image.name.split('.')[1] + '"' %>;
@@ -139,11 +140,14 @@
 				);
 			}
 		</script>
+		<% } %>
 	</head>
 
 	<body>
 		<header>
 			<%- include('../../partial/header') %>
+
+			<% if(can_edit_art) { %>
 
 			<div class="toaster">
 				<div id="info-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="height: 91.5px; z-index: 100000;">
@@ -384,12 +388,15 @@
 
 							<div class="m-c-col" style="display: flex; margin-top: 18px;">
                                 <p class="m-b-cat">
-									<div class="input-group-prepend">
+									<div class="input-group-prepend" style="display: none">
 										<span class="input-group-text">Auteur de l'article :</span>
 										<span class="input-group-text" style="color: #0000006b; background-color: #00000008;">&copy;MecanicaScience - Ecrit par </span>
 									</div>
-
-									<input style="color: #606060 !important; border-radius: 0 !important;" type="text" class="form-control" placeholder="Auteur" id="article-author">
+									<% if(permissions == 100) { %>
+										<input style="color: #606060 !important; border-radius: 0 !important;" type="text" class="form-control" placeholder="Auteur" id="article-author">
+									<% } else { %>
+										<input style="color: #606060 !important; border-radius: 0 !important; display: none;" type="text" class="form-control" placeholder="Auteur" id="article-author">
+									<% } %>
 									<span style="text-align: left; margin: 0 5px;"></span>
 								</p>
 							</div>
@@ -484,11 +491,13 @@
 									<button type="button" id="add-other-images" class="btn btn-outline-primary" onclick="" disabled>Images secondaires</button>
 								</div>
 
-								<% if(permissions == 100) { %>
-									<div class="m-c-col" style="flex-grow: 1; margin-top: 15px;">
+								<div class="m-c-col" style="flex-grow: 1; margin-top: 15px;">
+									<% if(permissions == 100) { %>
 										<button type="button" id="delete-article" class="btn btn-outline-danger" onclick="deleteArticle()">Supprimer l'article</button>
-									</div>
-								<% } %>
+									<% } else { %>
+										<button type="button" id="delete-article" class="btn btn-outline-danger" onclick="deleteArticle()" style="display: none;">Supprimer l'article</button>
+									<% } %>
+								</div>
 							</div>
 						</div>
 
@@ -538,6 +547,28 @@
 
 			<div class="modal-backdrop fade show" id="fade-in-dropper" style="display: none;"></div>
 		</article>
+		<% } else { %>
+			<article>
+				<div class="section section-2" style="margin-top: -5px;">
+					<div class="m-title">
+						<p class="m-t-title">Edition d'article</p>
+						<hr class="m-t-hr" />
+						<p class="m-t-subtitle">Vous pouvez uniquement consulter cet article</p>
+					</div>
+				</div>
+			</article>
+
+			<div style="margin-top: 60px" class="main-contenu">
+				<div class="container">
+					<button type="button" class="btn btn-outline-dark" onclick="window.location.href = '/admin'">Retourner à l'accueil admin</button>
+					<button type="button" class="btn btn-outline-success" onclick='window.location.href = ("/article/<%= datas.short_title %>&articleview&<%= datas.uuid %>")'>Consulter l'article</button>
+				</div>
+
+				<p style="margin-bottom: 300px;"></p>
+			</div>
+		<% } %>
+
+
 
 		<%- include('../../partial/footer') %>
 	</body>
