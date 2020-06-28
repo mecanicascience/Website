@@ -249,7 +249,6 @@ router
 
             let canEditArt = false;
             let d = m.articles.getArticleDatas(articleExists);
-            console.log(req.query.author, req.cookies.admin_name);
             if(perm == 100 || d.author == req.cookies.admin_name)
                 canEditArt = true;
 
