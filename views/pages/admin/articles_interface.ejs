@@ -87,9 +87,11 @@
                             Science
                         </div>
                         <div class="bgm-t-3-2">
-                            <button type="button" class="btn btn-dark" href="/" onclick="window.location.href = '/admin/create_article';">
-                                Nouvel article
-                            </button>
+							<% if(permissions == 100) { %>
+	                            <button type="button" class="btn btn-dark" href="/" onclick="window.location.href = '/admin/create_article';">
+	                                Nouvel article
+	                            </button>
+							<% } %>
 
 							<button type="button" class="btn btn-outline-light new_post" href="/" onclick="document.location.href='/'">
                                 Retourner à l'accueil
@@ -147,11 +149,13 @@
 										<div class="c-c-name">
 											<p><%= comments[i].name %></p>
 											<div class="c-c-date">(<b><%= comments[i].date %></b> - ip : "<b><%= comments[i].ip %></b>")</div>
-											<button class="act-admin-b btn btn-outline-<%= comments[i].visible ? 'danger' : 'success' %>"
-													onclick="window.location.href = '/admin/toggle_comment_visibility?articleID=<%= comments[i].articleID %>&commentID=<%= comments[i].commentID %>';"
-													style="margin: 0 33px 0 37px;">
-												<%= !comments[i].visible ? 'Rendre visible' : 'Masquer' %>
-											</button>
+											<% if(permissions == 100) { %>
+												<button class="act-admin-b btn btn-outline-<%= comments[i].visible ? 'danger' : 'success' %>"
+														onclick="window.location.href = '/admin/toggle_comment_visibility?articleID=<%= comments[i].articleID %>&commentID=<%= comments[i].commentID %>';"
+														style="margin: 0 33px 0 37px;">
+													<%= !comments[i].visible ? 'Rendre visible' : 'Masquer' %>
+												</button>
+											<% } %>
 										</div>
 										<div class="c-c-date" style="margin: 8px 34px 9px 0; padding: 0;">
 											Email : "<b><%= comments[i].email %></b>" - Visible pour tout le monde : "

@@ -484,9 +484,11 @@
 									<button type="button" id="add-other-images" class="btn btn-outline-primary" onclick="" disabled>Images secondaires</button>
 								</div>
 
-								<div class="m-c-col" style="flex-grow: 1; margin-top: 15px;">
-									<button type="button" id="delete-article" class="btn btn-outline-danger" onclick="deleteArticle()">Supprimer l'article</button>
-								</div>
+								<% if(permissions == 100) { %>
+									<div class="m-c-col" style="flex-grow: 1; margin-top: 15px;">
+										<button type="button" id="delete-article" class="btn btn-outline-danger" onclick="deleteArticle()">Supprimer l'article</button>
+									</div>
+								<% } %>
 							</div>
 						</div>
 

@@ -194,6 +194,7 @@ router
             code        : (req.query.code  ? req.query.code  : false),
             new_title   : (req.query.title ? req.query.title : null),
             new_uuid    : (req.query.uuid  ? req.query.uuid  : null),
+            permissions : await m.users.getPermission(req.cookies),
             comments    : m.articles.formatComment(comm, true)
         });
     })
@@ -238,6 +239,7 @@ router
                 datas           : m.articles.getArticleDatas(articleExists),
                 action_function : req.query.action_function,
                 image_error     : req.query.image_error,
+                permissions     : await m.users.getPermission(req.cookies),
                 fb_image_link   : m.config.main_image_link
             });
         }
