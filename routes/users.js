@@ -28,7 +28,7 @@ async function isConnected(req) {
 
 /** Retourne true si l'utilisateur est connecté */
 async function connectUser(username, password, res) {
-    let encrypted_pass = crypto.createHash('md5').update(password).digest('hex');
+    let encrypted_pass = hashPassword(password);
 
     if(!username || username == '' || !password || password == '')
         return false;
@@ -81,10 +81,17 @@ async function getPermission(req) {
 }
 
 
+/** @return the hashedString */
+function hashPassword(text) {
+    return crypto.createHash('md5').update(text).digest('hex');
+}
+
+
 
 module.exports = {
     isConnected   : isConnected,
     connectUser   : connectUser,
     deconnectUser : deconnectUser,
-    getPermission : getPermission
+    getPermission : getPermission,
+    hashPassword  : hashPassword
 };

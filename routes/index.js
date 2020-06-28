@@ -211,6 +211,19 @@ router
     })
 
 
+    // hash passwords (pass : MecanicaHashPass)
+    .get('/admin/hash_password', async (req, res) => {
+        res.render('pages/admin/hash_password', { main : await getMainInfos(req, 'Hash de mots de passe'), code : req.query.code, hash : req.query.hash });
+    })
+    .post('/admin/hash_password', async (req, res) => {
+        if(!req.body.password || !req.body.verif_code || req.body.verif_code != 'MecanicaHashPass') {
+            res.redirect('/admin/hash_password?code=2#form_hash');
+        }
+        else {
+            res.redirect(`/admin/hash_password?hash=${m.users.hashPassword(req.body.password)}&code=1#form_hash`);
+        }
+    })
+
 
     // edition de posts
     .get('/admin/edit', async (req, res) => {
