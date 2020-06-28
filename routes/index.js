@@ -39,7 +39,7 @@ router
         let article = await m.articles.getArticles(req.body.q, req.query.s);
 
         res.render('pages/index', {
-            main          : getMainInfos(req),
+            main          : (await getMainInfos(req)),
             articles      : article,
             query_message : m.articles.getLabel     (req.body.q, req.query.s, article.length)
         });
@@ -48,7 +48,7 @@ router
         let article = await m.articles.getArticles(req.body.q, req.query.s);
 
         res.render('pages/index', {
-            main          : getMainInfos(req),
+            main          : (await getMainInfos(req)),
             articles      : article,
             query_message : m.articles.getLabel     (req.body.q, req.query.s, article.length)
         });
@@ -69,22 +69,22 @@ router
 
 
     // à propos du site
-    .get('/about',   (req, res) => res.render('pages/description/about',   { main : getMainInfos(req, 'A propos du site') }))
-    .get('/contact', (req, res) => res.render('pages/description/contact', { main : getMainInfos(req, 'Contact') }))
-    .get('/legal',   (req, res) => res.render('pages/description/legal',   { main : getMainInfos(req, 'Mentions légales') }))
+    .get('/about',   async (req, res) => res.render('pages/description/about',   { main : (await getMainInfos(req, 'A propos du site')) }))
+    .get('/contact', async (req, res) => res.render('pages/description/contact', { main : (await getMainInfos(req, 'Contact')) }))
+    .get('/legal',   async (req, res) => res.render('pages/description/legal',   { main : (await getMainInfos(req, 'Mentions légales')) }))
 
     .get(/articleview/g, async (req, res) => {
         let url = req.originalUrl.split('&'); // format article/ARTICLE_TITLE&articleview&ID
         if(url.length != 3 || url[1] != 'articleview' || url[0] == undefined || url[0].split('/').length != 3) {
-            res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
+            res.render('pages/articles/article_not_found', { main : await getMainInfos(req) });
             return;
         }
         url[0] = decodeURI(url[0].split('/')[2]);
 
-        let isConnected = m.users.isConnected(req.cookies);
+        let isConnected = await m.users.isConnected(req.cookies);
         let articleExists = await m.articles.articleExistsAndVisible(url[2], url[0], isConnected);
         if(url[2] == undefined || !url[0] || !articleExists)
-            res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
+            res.render('pages/articles/article_not_found', { main : await getMainInfos(req) });
         else {
             let datas = m.articles.getArticleDatas(articleExists);
             let article = await m.articles.getArticlesForSuggestions(datas.category_id, 3, datas.uuid);
@@ -103,7 +103,7 @@ router
             let c = req.query.code;
             if(c == undefined || c.length == 0) c = '-1';
             res.render('pages/articles/article', {
-                main          : getMainInfos(req, datas.title),
+                main          : await getMainInfos(req, datas.title),
                 datas         : datas,
                 articles      : article,
                 fb_image_link : m.config.main_image_link,
@@ -123,31 +123,31 @@ router
 
 
     .get('/simulations/list/', async (req, res) => {
-        let isConnected = m.users.isConnected(req.cookies);
+        let isConnected = await m.users.isConnected(req.cookies);
         let simulations = await m.articles.getSimulations(isConnected);
 
         res.render('pages/simulations/simulation_list', {
-            main        : getMainInfos(req, 'Simulations'),
+            main        : await getMainInfos(req, 'Simulations'),
             simulations : simulations
         });
     })
 
     .get(/simulationview/g, async (req, res) => {
-        let isConnected = m.users.isConnected(req.cookies);
+        let isConnected = await m.users.isConnected(req.cookies);
         let url = req.originalUrl.split('&'); // format simulationview/SIMULATION_TITLE&simulationview&type&ID
         if(url.length != 4 || url[1] != 'simulationview' || url[0] == undefined || url[0].split('/').length != 3) {
-            res.render('pages/simulations/simulation_not_found', { main : getMainInfos(req, 'Erreur 404') });
+            res.render('pages/simulations/simulation_not_found', { main : await getMainInfos(req, 'Erreur 404') });
             return;
         }
         url[0] = decodeURI(url[0].split('/')[2]);
 
         let simulationExists = await m.articles.simulationExistsAndVisible(parseInt(url[3]), url[2], url[0], isConnected);
         if(url[3] == undefined || !url[2] || !url[0] || !simulationExists)
-             res.render('pages/simulations/simulation_not_found', { main : getMainInfos(req, 'Erreur 404') });
+             res.render('pages/simulations/simulation_not_found', { main : await getMainInfos(req, 'Erreur 404') });
         else {
             let datas = await m.articles.getSimulationDatas(simulationExists);
             res.render('pages/simulations/simulation', {
-                main          : getMainInfos(req, datas.title),
+                main          : await getMainInfos(req, datas.title),
                 datas         : datas,
                 isConnected   : isConnected
             });
@@ -165,7 +165,7 @@ router
 
         let datas = await m.articles.getMonthlyProjectsForYear(year);
         res.render('pages/articles/monthly_projects', {
-            main  : getMainInfos(req, 'Projets du mois'),
+            main  : await getMainInfos(req, 'Projets du mois'),
             year  : year,
             datas : JSON.stringify(datas)
         });
@@ -175,9 +175,9 @@ router
 
     // partie admin
     .get('/admin', async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!(await m.users.isConnected(req.cookies))) {
             res.render('pages/admin/connection', {
-                main : getMainInfos(req, 'Connection admin'),
+                main : await getMainInfos(req, 'Connection admin'),
                 code : (req.query.code  ? req.query.code  : false)
             });
             return;
@@ -188,7 +188,7 @@ router
         let comm = await m.articles.getEveryComments();
 
         res.render('pages/admin/articles_interface', {
-            main        : getMainInfos(req, 'Interface admin'),
+            main        : await getMainInfos(req, 'Interface admin'),
             articles    : article,
             post_count  : (req.query.l     ? req.query.l     : 20),
             code        : (req.query.code  ? req.query.code  : false),
@@ -199,7 +199,7 @@ router
     })
 
     .get('/admin/create_article', async (req, res) => {
-        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
+        if(!(await m.users.isConnected(req.cookies)) || await m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -213,7 +213,7 @@ router
 
     // edition de posts
     .get('/admin/edit', async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!(await m.users.isConnected(req.cookies))) {
             res.redirect('/admin');
             return;
         }
@@ -222,7 +222,7 @@ router
         let articleExists = await m.articles.articleExistsAndVisible(req.query.uuid, req.query.title, true);
 
         if(!req.query.uuid || !req.query.title || !articleExists)
-            res.render('pages/articles/article_not_found', { main : getMainInfos(req) });
+            res.render('pages/articles/article_not_found', { main : await getMainInfos(req) });
         else {
             let envV = null;
             try {
@@ -234,7 +234,7 @@ router
             }
 
             res.render('pages/admin/edit_article', {
-                main            : getMainInfos(req, 'Edition de l\'article'),
+                main            : await getMainInfos(req, 'Edition de l\'article'),
                 datas           : m.articles.getArticleDatas(articleExists),
                 action_function : req.query.action_function,
                 image_error     : req.query.image_error,
@@ -244,7 +244,7 @@ router
     })
 
     .post("/admin/update", async (req, res) => {
-        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
+        if(!(await m.users.isConnected(req.cookies)) || await m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -283,7 +283,7 @@ router
 
 
     .get('/admin/delete', async (req, res) => {
-        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
+        if(!(await m.users.isConnected(req.cookies)) || await m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -301,7 +301,7 @@ router
 
     // edition de commentaires
     .get('/admin/toggle_comment_visibility', async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!(await m.users.isConnected(req.cookies))) {
             res.redirect('/admin');
             return;
         }
@@ -314,7 +314,7 @@ router
 
 
     .post("/admin/update/main_image", upload.single('image'), async (req, res) => {
-        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
+        if(!(await m.users.isConnected(req.cookies)) || await m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -327,7 +327,7 @@ router
     })
 
     .post("/admin/delete/main_image", upload.single('i'), async (req, res) => {
-        if(!m.users.isConnected(req.cookies) || m.users.getPermission(req.cookies) != 100) {
+        if(!(await m.users.isConnected(req.cookies)) || await m.users.getPermission(req.cookies) != 100) {
             res.redirect('/admin');
             return;
         }
@@ -343,20 +343,20 @@ router
 
 
 
-    .post('/admin/connect', (req, res) => {
-        if(m.users.isConnected(req.cookies)) {
+    .post('/admin/connect', async (req, res) => {
+        if(await m.users.isConnected(req.cookies)) {
             res.redirect('/admin');
             return;
         }
 
-        let answer = m.users.connectUser(req.body.username, req.body.password, res, req);
+        let answer = await m.users.connectUser(req.body.username, req.body.password, res, req);
 
         if(answer) res.redirect('/admin?code=4');
         else       res.redirect('/admin?code=5');
     })
 
     .get('/admin/deconnexion', async (req, res) => {
-        if(!m.users.isConnected(req.cookies)) {
+        if(!(await m.users.isConnected(req.cookies))) {
             res.redirect('/admin');
             return;
         }
@@ -372,7 +372,7 @@ router
 
 const WEBSITE_URL = (m.config.is_https ? "https://" : "http://") + m.config.site;
 
-function getMainInfos(req, title) {
+async function getMainInfos(req, title) {
     if(title == undefined)
         title = 'MecanicaScience - La physique par la simulation';
     else
@@ -381,7 +381,7 @@ function getMainInfos(req, title) {
     return {
         version       : m.constants.version,
         action_link   : m.articles.getActionLink(req.body.q, req.query.s),
-        connected     : m.users.isConnected(req.cookies),
+        connected     : await m.users.isConnected(req.cookies),
         website_url   : WEBSITE_URL,
         website_title : title
     };

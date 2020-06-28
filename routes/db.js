@@ -710,6 +710,18 @@ async function getSimulationByUUID(uuid) {
 
 
 
+/** ======= USERS ======= */
+async function getUserByUsername(username) {
+    return await db
+        .collection('users')
+        .where('username', '==', username)
+        .get();
+}
+/* ====================== */
+
+
+
+
 
 /** ====== FLUX RSS ====== */
 /**
@@ -751,5 +763,6 @@ module.exports = {
     getEveryComments        : getEveryComments,
     toggleArticleVisibility : toggleArticleVisibility,
     getSimulations          : getSimulations,
-    getSimulationByUUID     : getSimulationByUUID
+    getSimulationByUUID     : getSimulationByUUID,
+    getUserByUsername       : getUserByUsername
 };

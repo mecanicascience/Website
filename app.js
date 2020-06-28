@@ -12,7 +12,6 @@ const m = {
     body_parser    : require('body-parser'),
     config         : require('./datas/config.json'),
     private_db_key : require('./datas/private-db-key.json'),
-    pass           : require('./datas/pass.json'),
     db             : require('./routes/db'),
     cookie_parser  : require('cookie-parser'),
     users          : require('./routes/users'),
@@ -38,13 +37,6 @@ catch (e) {
 
 m.config.main_image_link = envV.FIREBASE_MAIN_IMAGE_LINK;
 m.config.bucket_name     = envV.FIREBASE_BUCKET_NAME;
-
-m.pass.users[0].username    = envV.MAIN_USERNAME_0;
-m.pass.users[0].password    = envV.MAIN_PASSWORD_0;
-m.pass.users[0].permissions = envV.MAIN_PERMISSIONS_0;
-m.pass.users[1].username    = envV.MAIN_USERNAME_1;
-m.pass.users[1].password    = envV.MAIN_PASSWORD_1;
-m.pass.users[1].permissions = envV.MAIN_PERMISSIONS_1;
 
 m.private_db_key.project_id           =  envV.CREDENTIAL_PROJECT_ID;
 m.private_db_key.private_key_id       =  envV.CREDENTIAL_PRIVATE_KEY_ID;

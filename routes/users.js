@@ -1,47 +1,58 @@
-const passFile = require('./../datas/pass.json');
 const config   = require('./../datas/config.json');
 const crypto   = require('crypto');
+const db       = require('./db');
+
+// ====== PERMISSIONS ======
+// permissions : 100 = everything, 50 = no edit allowed, 0 = none (connection refused)
 
 
 /** Retourne true si l'utilisateur a le cookie de connection */
-function isConnected(req) {
-    if(!req.admin_username || req.admin_username == '' || !req.admin_password || req.admin_password == '')
+async function isConnected(req) {
+    if(
+           !req.admin_uuid     || req.admin_uuid == ''
+        || !req.admin_username || req.admin_username == ''
+        || !req.admin_password || req.admin_password == ''
+    ) return false;
+
+    let user = await db.getUserByUsername(req.admin_username);
+    if(!user || !user.docs[0])
         return false;
 
-    for (let i = 0; i < passFile.users.length; i++) {
-        let u = passFile.users[i];
-        if(u.permissions != 0 && u.username == req.admin_username && u.password == req.admin_password)
-            return true;
-    }
+    let d = user.docs[0].data();
+    if (d.password == req.admin_password && d.permissions > 0 && d.uuid == req.admin_uuid)
+        return true;
 
     return false;
 }
 
 
 /** Retourne true si l'utilisateur est connecté */
-function connectUser(username, password, res) {
+async function connectUser(username, password, res) {
     let encrypted_pass = crypto.createHash('md5').update(password).digest('hex');
 
     if(!username || username == '' || !password || password == '')
         return false;
 
-    for (let i = 0; i < passFile.users.length; i++) {
-        let u = passFile.users[i];
-        if(u.permissions != 0 && u.username == username && u.password == encrypted_pass) {
-            res.cookie('admin_username', username      , { maxAge: config.session_max_age, httpOnly: false });
-            res.cookie('admin_password', encrypted_pass, { maxAge: config.session_max_age, httpOnly: false });
+    let user = await db.getUserByUsername(username);
+    if(!user || !user.docs[0])
+        return false;
 
-            return true;
-        }
-    }
+    let d = user.docs[0].data();
+    if(d.password != encrypted_pass || d.permissions <= 0)
+        return false;
 
-    return false;
+    res.cookie('admin_uuid'    , d.uuid        , { maxAge: config.session_max_age, httpOnly: false });
+    res.cookie('admin_username', username      , { maxAge: config.session_max_age, httpOnly: false });
+    res.cookie('admin_password', encrypted_pass, { maxAge: config.session_max_age, httpOnly: false });
+
+    return true;
 }
 
 
 /** Retourne true si l'utilisateur est déconnecté */
 function deconnectUser(req, res) {
     if(req.cookies.admin_username && req.cookies.admin_password) {
+        res.cookie('admin_uuid'    , '', { maxAge: config.session_max_age, httpOnly: false });
         res.cookie('admin_username', '', { maxAge: config.session_max_age, httpOnly: false });
         res.cookie('admin_password', '', { maxAge: config.session_max_age, httpOnly: false });
 
@@ -52,17 +63,21 @@ function deconnectUser(req, res) {
 }
 
 /** Teste si l'utilisateur est connecté et retourne son niveau de permission. Sinon retourne 0 */
-function getPermission(req) {
-    if(!req.admin_username || req.admin_username == '' || !req.admin_password || req.admin_password == '')
+async function getPermission(req) {
+    if(
+           !req.admin_uuid     || req.admin_uuid == ''
+        || !req.admin_username || req.admin_username == ''
+        || !req.admin_password || req.admin_password == ''
+    ) return 0;
+
+    let user = await db.getUserByUsername(req.admin_username);
+    if(!user || !user.docs[0])
         return 0;
 
-    for (let i = 0; i < passFile.users.length; i++) {
-        let u = passFile.users[i];
-        if(u.permissions != 0 && u.username == req.admin_username && u.password == req.admin_password)
-            return u.permissions;
-    }
-
-    return 0;
+    let d = user.docs[0].data();
+    if(d.password != req.admin_password)
+        return 0;
+    return d.permissions;
 }
 
 
