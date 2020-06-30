@@ -2,6 +2,7 @@
 let converter = new showdown.Converter();
 function computeText(rawText) {
     let textToConvert = rawText
+        .replace(/<tab>/g, '&ensp;&ensp;&ensp;')
         .replace(/\\v\{/g, '\\overrightarrow{')
         .replace(/&#39;/g, '&&&39;')
         .replace(/<!eq>/g, '<div class="equa_imp"><div><p>Equation</p></div>')
