@@ -10,7 +10,11 @@
 
 .m-b-image:hover { height: 290px; }
 
-#container-text > div > p > img, #container-text > p > img       { transition: width 1.1s ease; }
+#container-text > div > img, #container-text > div > div > img, #container-text > div > p > img, #container-text > p > img {
+    transition: width 1.1s ease;
+    max-width: 100%;
+    height: auto;
+}
 #container-text > div > p > img:hover, #container-text > p > img:hover { width : 99% !important; }
 
 .figure-caption { margin-right: 15px; }
