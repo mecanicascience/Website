@@ -4,18 +4,19 @@
 
 /* ====== DEPENDENCIES ====== */
 const m = {
-    express        : require('express'),
-    routes         : require('./routes/index'),
-    sitemap        : require('sitemap'),
-    os             : require('os'),
-    path           : require('path'),
-    body_parser    : require('body-parser'),
-    config         : require('./datas/config.json'),
-    private_db_key : require('./datas/private-db-key.json'),
-    db             : require('./routes/db'),
-    cookie_parser  : require('cookie-parser'),
-    users          : require('./routes/users'),
-    articles       : require('./routes/articles')
+    express           : require('express'),
+    routes            : require('./routes/index'),
+    sitemap           : require('sitemap'),
+    os                : require('os'),
+    path              : require('path'),
+    body_parser       : require('body-parser'),
+    config            : require('./datas/config.json'),
+    private_db_key    : require('./datas/private-db-key.json'),
+    db                : require('./routes/db'),
+    cookie_parser     : require('cookie-parser'),
+    users             : require('./routes/users'),
+    articles          : require('./routes/articles'),
+    private_msapi_key : require('./datas/private-msapi-key.json')
 };
 
 
@@ -45,11 +46,13 @@ m.private_db_key.client_email         = (envV.CREDENTIAL_CLIENT_EMAIL + "").repl
 m.private_db_key.client_id            =  envV.CREDENTIAL_CLIENT_ID;
 m.private_db_key.client_x509_cert_url = (envV.CLIENT_CERT_URL + "").replace(/&_&/g, '-');
 
+m.private_msapi_key.uuid = parseInt(envV.PRIVATE_MSAPI_UUID);
+m.private_msapi_key.key = envV.PRIVATE_MSAPI_KEY;
+
 if(isRequireOk)
     m.private_db_key.private_key = m.private_db_key.private_key.replace(/\\n/g, '\n');
 else
     m.private_db_key.private_key = m.private_db_key.private_key.replace(/\\\\n/g, '\n');
-
 
 
 
