@@ -416,7 +416,7 @@ hr {
     line-height: 1.7;
     text-transform: capitalize;
     font-style: italic;
-    color: #e8e8e8;
+    color: #5f5e5e;
     font-size: 21px;
     font-weight: 600;
     font-family: "Quattrocento Sans",sans-serif;
@@ -428,7 +428,7 @@ hr {
 .c-c-date {
     font-size: 14px;
     font-style: italic;
-    color: #ddd;
+    color: #737171;
     padding: 7px 0 0 8px;
     text-transform: none;
     font-weight: 500;
@@ -441,7 +441,7 @@ hr {
 .c-c-comment {
     padding: 0 0 5px 1px;
     word-wrap: anywhere;
-    color: white;
+    color: #4c4c4c;
     font-weight: 600;
 }
 
