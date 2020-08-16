@@ -262,8 +262,8 @@ async function postComment(dat, ip) {
     if(dat['c-commentary'].length > 4000)
         return 3;
 
-    let ans = await db.addNewComment(parseInt(dat['c-a-id']), dat['c-a-title'], dat['c-name'], dat['c-email'], dat['c-commentary'], ip);
-    return ans;
+    let err = await db.addNewComment(parseInt(dat['c-a-id']), dat['c-a-title'], dat['c-name'], dat['c-email'], dat['c-commentary'], ip, this);
+    return err;
 }
 
 /** @return a list of every comments */

@@ -8,7 +8,8 @@ const fs             = require("fs");
 const path           = require('path');
 const mime           = require('mime');
 const {Storage}      = require('@google-cloud/storage');
-const { promisify }  = require('util')
+const { promisify }  = require('util');
+const msapi          = require('./apihandler');
 
 let db;
 
@@ -358,7 +359,7 @@ async function addViewForArticle(dat, ip, isConnected) {
   * Ajoute le commentaire fourni
   * @return 0 si aucune erreur ou 1 s'il y a une erreur
   */
-async function addNewComment(uuid, short_title, name, email, comment, ip) {
+async function addNewComment(uuid, short_title, name, email, comment, ip, articles) {
     let getDoc = await db.collection('posts').where('uuid', '==', uuid).limit(1).get(); // doc correspondant à l'UUID
     let datas = getDoc.docs[0].data();
 
@@ -377,6 +378,44 @@ async function addNewComment(uuid, short_title, name, email, comment, ip) {
     });
 
     db.collection('posts').doc(getDoc.docs[0].id).set(datas);
+
+    // Send notification of new comment
+    let d1, d2;
+    let postDate = new Date(da.toDate());
+    d1   = postDate.getDate();
+    d2   = postDate.getMonth();
+    let postDateHTML = ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + (d2 + 1) : (d2 + 1)) + '/' + (postDate ? postDate.getFullYear() : '0000');
+
+    let articleDate = new Date(datas.date.toDate());
+    d1   = articleDate.getDate();
+    d2   = articleDate.getMonth();
+    let articleDateHTML = ((d1 + '').length == 1 ? '0' + d1 : d1) + '/' + ((d2 + '').length == 1 ? '0' + (d2 + 1) : (d2 + 1)) + '/' + (articleDate ? articleDate.getFullYear() : '0000');
+
+
+    msapi.sendMessage('user_posted_comment', {
+        notification : {
+            title : "Nouveau commentaire",
+            description : `Un commentaire de ${name} vient d'être posté à propos de l'article ${datas.title}.`
+        },
+        payload : {
+            user : {
+                name  : name,
+                email : email,
+                ip    : ip
+            },
+            comment : {
+                content   : comment,
+                post_date : postDateHTML
+            },
+            article : {
+                title       : datas.title,
+                description : datas.description,
+                author      : datas.author,
+                category    : articles.getLabelLong(datas.category_id),
+                date        : articleDateHTML
+            }
+        }
+    });
 
     return 0;
 }
