@@ -395,7 +395,7 @@ async function addNewComment(uuid, short_title, name, email, comment, ip, articl
     msapi.sendMessage('user_posted_comment', {
         notification : {
             title : "Nouveau commentaire",
-            description : `Un commentaire de ${name} vient d'être posté à propos de l'article ${datas.title}.`
+            body  : `Un commentaire de '${name}' vient d'être posté à propos de l'article '${datas.title}'.`
         },
         payload : {
             user : {

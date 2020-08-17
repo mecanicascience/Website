@@ -35,7 +35,13 @@ function sendMessage(label, datas, onSuccess = defaultRequestSuccess, onFailure 
 
 
 function sendRequest(dest, datas, onSuccess, onFailure) {
+    datas.identification = {
+        tag    : 'mecanica_science_website',
+        uuid   : m.msapi.uuid,
+        apikey : encodeURIComponent(m.msapi.key)
+    };
     datas.dummyEndData = '############################################################';
+
     let postData = JSON.stringify(datas);
     let options = {
         hostname : baseAPIURL,
