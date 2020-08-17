@@ -1,11 +1,15 @@
 /*
  *  HANDLE THE MSAPI
  */
+const debug = false;
+const debugText = false;
+
 const m = {
     msapi       : require('./../datas/private-msapi-key.json'),
-    https       : require('https')
-}
-const baseAPIURL = 'msapi.mecanicascience.fr';
+    https       : debug ? require('http') : require('https')
+};
+const baseAPIURL = debug ? 'localhost' : 'msapi.mecanicascience.fr';
+
 
 
 function sendMessage(label, datas, onSuccess = defaultRequestSuccess, onFailure = defaultRequestFailure) {
@@ -52,6 +56,8 @@ function sendRequest(dest, datas, onSuccess, onFailure) {
             'Content-Length' : postData.length
         }
     };
+    if (debug)
+        options.port = 8081;
 
     let req = m.https
         .request(options, defaultRequestSuccess)
@@ -67,8 +73,10 @@ function sendRequest(dest, datas, onSuccess, onFailure) {
 function defaultRequestSuccess(res) {
     let data = '';
 
-    // console.log('Status Code :', res.statusCode);
-    // console.log('Headers :', res.headers);
+    if (debugText) {
+        console.log('Status Code :', res.statusCode);
+        console.log('Headers :', res.headers);
+    }
 
     // Chunk of data recieved
     res.on('data', (chunk) => {
@@ -77,13 +85,15 @@ function defaultRequestSuccess(res) {
 
     // Whole response received
     res.on('end', () => {
-        // console.log(data);
+        if (debugText)
+            console.log(data);
     });
 }
 
 
 function defaultRequestFailure(err) {
-    // console.error(err.message);
+    if (debugText)
+        console.error(err.message);
 }
 
 
