@@ -35,14 +35,14 @@
             <div class="s-si-links">
                 <div class="s-si-links-1">
                     <div class="s-si-links-1-el s-si-links-1-el-1">
-                        <button type="button" class="btn btn-outline-light" href="<%= datas.links.simulation %>" onclick="document.location.href='<%= datas.links.simulation %>'">
+                        <button type="button" class="btn btn-light" href="<%= datas.links.simulation %>" onclick="document.location.href='<%= datas.links.simulation %>'">
                             Voir la simulation
                         </button>
                     </div>
 
                     <% if(datas.links.source != "null" && datas.links.source != "" && datas.links.source != undefined) { %>
                     <div class="s-si-links-1-el">
-                        <button type="button" class="btn btn-outline-light" href="<%= datas.links.source %>" onclick="document.location.href='<%= datas.links.source %>'">
+                        <button type="button" class="btn btn-light" href="<%= datas.links.source %>" onclick="document.location.href='<%= datas.links.source %>'">
                             Code source
                         </button>
                     </div>
@@ -53,7 +53,7 @@
                 <div class="s-si-links-2">
                     <p class="s-si-links-2-p-1-e">Article correspondant</p>
                     <p class="s-si-links-2-p-2-e"><%= datas.links.article.title %></p>
-                    <button type="button" class="btn btn-outline-light" href="/article/<%= datas.links.article.short_title %>&articleview&<%= datas.links.article.uuid %>" onclick="document.location.href='/article/<%= datas.links.article.short_title %>&articleview&<%= datas.links.article.uuid %>'">
+                    <button type="button" class="btn btn-light" href="/article/<%= datas.links.article.short_title %>&articleview&<%= datas.links.article.uuid %>" onclick="document.location.href='/article/<%= datas.links.article.short_title %>&articleview&<%= datas.links.article.uuid %>'">
                         Voir l'article correspondant
                     </button>
                 </div>
