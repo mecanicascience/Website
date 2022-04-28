@@ -99,7 +99,7 @@ app
 
 let sitemap;
 app
-    .get("/sitemap.xml",async  function(req, res) {
+    .get("/sitemap.xml",async function(req, res) {
         if(!sitemap) {
             let sitemap_url = await m.articles.getArticlesUrl(HTTP_OR_S + SITE);
             sitemap_url.unshift({ url: HTTP_OR_S + SITE });
