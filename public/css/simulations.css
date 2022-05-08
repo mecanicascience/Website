@@ -218,12 +218,24 @@
     margin-top: -20px;
 }
 
-.sim-t-title {
+.sim-t-title > a {
     font-size: 28px;
     margin: -7px 0 0 12px;
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     color: white;
+    align-content: center;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
+    text-decoration: none !important;
+}
+
+.sim-t-title > a:hover,
+.sim-t-title > a:focus {
+    background-size: 100% 2px;
 }
 
 .sim-t-text {
@@ -242,7 +254,7 @@
     flex-direction: row;
     color: #4CB574;
     width: fit-content;
-    margin: -1px 0 0 35px;
+    margin: 6px 0 0 35px;
     z-index: 1;
     font-size: 22px;
 }

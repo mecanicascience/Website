@@ -76,7 +76,7 @@
 							<div class="simulation">
 								<div class="sim-text sim-t-left">
 									<div class="sim-t-label"><%= simulations[i].dateYear %> • <%= simulations[i].label %></div>
-									<div class="sim-t-title"><%= simulations[i].title %></div>
+									<div class="sim-t-title"><a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><%= simulations[i].title %></a></div>
 									<div class="sim-t-text"><%= simulations[i].short_description %></div>
 									<div class="sim-t-link">
 										<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><i class="fa fa-play"></i> Simulation</a>
@@ -101,16 +101,16 @@
 										<%= simulations[i].dateYear %> • <%= simulations[i].label %>
 									</div>
 									<div class="sim-t-title">
-										<%= simulations[i].title %>
+										<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>">
+											<%= simulations[i].title %>
+										</a>
 									</div>
 									<div class="sim-t-text">
 										<%= simulations[i].short_description %>
 									</div>
 									<div class="sim-t-link">
-										<a href="/simulationview/<%= simulations[i].short_title %>&simulationview&<%= simulations[i].uuid %>"><i
-												class="fa fa-play"></i> Simulation</a>
-										<span style="padding-right:10px;"></span><span style="font-size: 20px;">•</span><span
-											style="padding-right:10px;"></span>
+										<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><i class="fa fa-play"></i> Simulation</a>
+										<span style="padding-right:10px;"></span><span style="font-size: 20px;">•</span><span style="padding-right:10px;"></span>
 										<a href="<%= simulations[i].links.source %>"><i class="fa fa-github"></i> Source</a>
 									</div>
 								</div>
