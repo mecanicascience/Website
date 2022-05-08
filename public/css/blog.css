@@ -1,7 +1,6 @@
 /* === Main === */
 .category {
     display: flex;
-    background-color: #e3e0f4;
 }
 
 .c-large-2 { flex-grow: 2; }
@@ -42,7 +41,6 @@
 .articles-title {
     font-size: 33px;
     padding: 98px 0 16px 0;
-    background-color: #e3e0f4;
 }
 
 

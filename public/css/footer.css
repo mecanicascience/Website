@@ -3,7 +3,7 @@
 footer {
     bottom: 0;
     width: 100%;
-    z-index: 0
+    z-index: 0;
     color: white;
     margin-top: 0 !important;
 }
@@ -119,7 +119,7 @@ footer {
     transition: color 0.4s ease;
 }
 .underline-eff-white > a:hover {
-    color: #FF772E;
+    color: #5ED089;
 }
 
 .footer-link {

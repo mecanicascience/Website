@@ -170,7 +170,7 @@
     .c-p-r-c { margin-top: -4px !important; }
     .p-presentation {
         margin-top: 10px;
-        height: 644px !important;
+        height: 100% !important;
     }
     .p-c-cat-2 { flex-direction: column; padding: 20px 0px !important; }
     .p-c-item { padding-bottom: 20px; }
@@ -398,7 +398,8 @@
     box-shadow: 0px -5px 3px 1px rgba(0,0,0,0.4);
     border-radius: 3px;
     background: linear-gradient(49deg, #03040F, #1B1F4A 67%, #141A51, #0B0F31);
-    height: 379px;
+    height: 100%;
+    padding-bottom: 20px;
 }
 .p-c-c { display: flex; }
 .c-pres {
@@ -494,14 +495,14 @@
 
 
 .c-p-r-c {
-    height: 198px;
+    height: 100%;
     border-radius: 5px;
     color: white;
     text-align: justify;
     margin-top: 16px;
 }
 .c-p-r-c > span {
-    color: #FF772E;
+    color: white;
     font-weight: 600;
     font-size: 17px;
     transition: color 0.5s ease;
@@ -551,8 +552,8 @@
 
 .p-c-cat-2 {
     display: flex;
-    padding: 20px 150px;
-    background: linear-gradient(#FF7024, #F0712C 60%, #F0712C);
+    padding: 30px 150px 20px;
+    background: #216f3f;
     font-size: 15px;
 }
 
