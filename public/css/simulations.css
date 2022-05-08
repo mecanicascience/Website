@@ -282,9 +282,9 @@
     background-size: 100% 2px;
 }
 
-@media all and (max-width: 994px) {
-    .simulation { flex-direction: column; margin: 0 0 170px 0; }
-    .sim-t-right { margin-top: -59px; margin-left: 7px !important; }
-    .sim-t-left { margin-bottom: -250px; margin-left: 7px !important; }
-    .sim-content { margin-top: -44px; align-self: center; }
+@media all and (max-width: 770px) {
+    .sim-right { flex-direction: column; }
+    .sim-left { flex-direction: column-reverse; }
+    .sim-t-right { margin-left: 7px !important; }
+    .sim-content { align-self: center; margin-bottom: -98px; }
 }

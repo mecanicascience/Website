@@ -73,7 +73,7 @@
 				<div class="container">
 					<% for (let i = 0; i < simulations.length; i++) { %>
 						<% if (i % 2 == 0) { %>
-							<div class="simulation">
+							<div class="simulation sim-left">
 								<div class="sim-text sim-t-left">
 									<div class="sim-t-label"><%= simulations[i].dateYear %> • <%= simulations[i].label %></div>
 									<div class="sim-t-title"><a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><%= simulations[i].title %></a></div>
@@ -85,13 +85,13 @@
 									</div>
 								</div>
 
-								<div class="sim-content">
+								<div class="sim-content sim-c-left">
 									<img src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations[i].uuid %>_<%= simulations[i].short_title %>.png?alt=media" />
 								</div>
 							</div>
 						<% } else { %>
-							<div class="simulation">
-								<div class="sim-content">
+							<div class="simulation sim-right">
+								<div class="sim-content sim-c-right">
 									<img
 										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations[i].uuid %>_<%= simulations[i].short_title %>.png?alt=media" />
 								</div>
