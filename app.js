@@ -100,16 +100,17 @@ app
 let sitemap;
 app
     .get("/sitemap.xml",async function(req, res) {
-        if(!sitemap) {
-            let sitemap_url = await m.articles.getArticlesUrl(HTTP_OR_S + SITE);
-            sitemap_url.unshift({ url: HTTP_OR_S + SITE });
+        let sitemap_url = await m.articles.getArticlesUrl(HTTP_OR_S + SITE);
+        sitemap_url.unshift({ url: HTTP_OR_S + SITE });
 
-            sitemap = m.sitemap.createSitemap({
-                hostname: HOST_NAME,
-                cacheTime: m.config.cache_time,
-                urls: sitemap_url
-            });
-        }
+        let sitemap_url_simulations = await m.articles.getSimulationsURL(HTTP_OR_S + SITE);
+        sitemap_url_simulations.unshift({ url: HTTP_OR_S + SITE });
+
+        sitemap = m.sitemap.createSitemap({
+            hostname: HOST_NAME,
+            cacheTime: m.config.cache_time,
+            urls: sitemap_url.concat(sitemap_url_simulations)
+        });
         res.header("Content-Type", "application/xml");
         res.send(sitemap.toString());
     })
@@ -127,31 +128,37 @@ app
         extended: true
     }))
 
-    .use(m.cookie_parser())
+    .use(m.cookie_parser());
 
 
 
 
     // == Files ==
 app
-    .use('/', m.routes);
+    .use('/', m.routes.router)
 
 
 
 
     // == Errors ==
-app
-    .use((req, res, next) => res.status(404).render('pages/error', {
-        errorCode     : 404,
-        errorMessage  : 'La page n\'a pas été trouvée',
-        link          : m.path.join(__dirname, "views/"),
-        main : {
-            version       : VERSION,
-            action_link   : '/',
-            connected     : m.users.isConnected(req.cookies),
-            website_title : 'Erreur 404 - MecanicaScience'
-        }
-    }));
+    .use((req, res, next) => {
+        if (req.originalUrl.split("/")[1] == "simulationview")
+            m.routes.renderSimulationView(req, res);
+        else if (req.originalUrl.split("/")[1] == "article")
+            m.routes.renderArticle(req, res);
+        else
+            res.status(404).render('pages/error', {
+                errorCode     : 404,
+                errorMessage  : 'La page n\'a pas été trouvée',
+                link          : m.path.join(__dirname, "views/"),
+                main : {
+                    version       : VERSION,
+                    action_link   : '/',
+                    connected     : m.users.isConnected(req.cookies),
+                    website_title : 'Erreur 404 - MecanicaScience'
+                }
+            }
+    )});
 
 
 

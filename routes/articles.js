@@ -348,18 +348,17 @@ async function getSimulations(isConnected) {
 
 /**
   * @param uuid     uuid de la simulation
-  * @param type     catégorie de la simulation
   * @param title    titre short de la simulation
   * @param is_admin true si l'utilisateur est administrateur
   * @return false si la simulation n'existe pas (ou n'est pas visible) ou l'article
   */
-async function simulationExistsAndVisible(uuid, type, title, is_admin) {
+async function simulationExistsAndVisible(uuid, title, is_admin) {
     let simulationList = await db.getSimulationByUUID(uuid);
 
     if(simulationList.docs.length != 1) return false;
     else {
         let simulation = simulationList.docs[0].data();
-        if(simulation.type == type && simulation.short_title == title && ((simulation.visible && !is_admin) || is_admin))
+        if(simulation.short_title == title && ((simulation.visible && !is_admin) || is_admin))
             return simulation;
         else
             return false;
@@ -392,6 +391,17 @@ async function getSimulationDatas(simulation) {
     return simulation;
 }
 
+/** Retourne l'URL de toutes les simulations pour le sitemap */
+async function getSimulationsURL(main_url) {
+    let sim = await db.getSimulations(false);
+    let arr = [];
+
+    for (let i = 0; i < sim.length; i++)
+        arr.push({ url: main_url + '/simulationview/' + sim[i].uuid + '&' + sim[i].short_title });
+
+    return arr;
+}
+
 
 
 
@@ -422,5 +432,6 @@ module.exports = {
     toggleArticleVisibility    : toggleArticleVisibility,
     getSimulations             : getSimulations,
     simulationExistsAndVisible : simulationExistsAndVisible,
-    getSimulationDatas         : getSimulationDatas
+    getSimulationDatas         : getSimulationDatas,
+    getSimulationsURL          : getSimulationsURL
 };

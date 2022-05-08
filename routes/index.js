@@ -74,43 +74,7 @@ router
     .get('/legal',   async (req, res) => res.render('pages/description/legal',   { main : (await getMainInfos(req, 'Mentions légales')) }))
 
     .get(/articleview/g, async (req, res) => {
-        let url = req.originalUrl.split('&'); // format article/ARTICLE_TITLE&articleview&ID
-        if(url.length != 3 || url[1] != 'articleview' || url[0] == undefined || url[0].split('/').length != 3) {
-            res.render('pages/articles/article_not_found', { main : await getMainInfos(req) });
-            return;
-        }
-        url[0] = decodeURI(url[0].split('/')[2]);
-
-        let isConnected = await m.users.isConnected(req.cookies);
-        let articleExists = await m.articles.articleExistsAndVisible(url[2], url[0], isConnected);
-        if(url[2] == undefined || !url[0] || !articleExists)
-            res.render('pages/articles/article_not_found', { main : await getMainInfos(req) });
-        else {
-            let datas = m.articles.getArticleDatas(articleExists);
-            let article = await m.articles.getArticlesForSuggestions(datas.category_id, 3, datas.uuid);
-            datas.formatted_date = datas.formatted_date.replace(/\/.*\//, '/' + (
-                (parseInt(datas.formatted_date.split('/')[1]) + 1) > 9 ?
-                (parseInt(datas.formatted_date.split('/')[1]) + 1) + "" :
-                "0" + (parseInt(datas.formatted_date.split('/')[1]) + 1)) + '/'
-            );
-
-            await m.articles.addViewForArticle(
-                datas,
-                req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-                isConnected || req.get('host').split(':')[0] == 'localhost'
-            );
-
-            let c = req.query.code;
-            if(c == undefined || c.length == 0) c = '-1';
-            res.render('pages/articles/article', {
-                main          : await getMainInfos(req, datas.title),
-                datas         : datas,
-                articles      : article,
-                fb_image_link : m.config.main_image_link,
-                code          : c,
-                comments      : m.articles.formatComment(datas.comments)
-            });
-        }
+        renderArticle(req, res);
     })
 
     .post("/articleview/add_comment", async (req, res) => {
@@ -133,25 +97,7 @@ router
     })
 
     .get(/simulationview/g, async (req, res) => {
-        let isConnected = await m.users.isConnected(req.cookies);
-        let url = req.originalUrl.split('&'); // format simulationview/SIMULATION_TITLE&simulationview&type&ID
-        if(url.length != 4 || url[1] != 'simulationview' || url[0] == undefined || url[0].split('/').length != 3) {
-            res.render('pages/simulations/simulation_not_found', { main : await getMainInfos(req, 'Erreur 404') });
-            return;
-        }
-        url[0] = decodeURI(url[0].split('/')[2]);
-
-        let simulationExists = await m.articles.simulationExistsAndVisible(parseInt(url[3]), url[2], url[0], isConnected);
-        if(url[3] == undefined || !url[2] || !url[0] || !simulationExists)
-             res.render('pages/simulations/simulation_not_found', { main : await getMainInfos(req, 'Erreur 404') });
-        else {
-            let datas = await m.articles.getSimulationDatas(simulationExists);
-            res.render('pages/simulations/simulation', {
-                main          : await getMainInfos(req, datas.title),
-                datas         : datas,
-                isConnected   : isConnected
-            });
-        }
+        await renderSimulationView(req, res);
     })
 
 
@@ -409,6 +355,73 @@ async function getMainInfos(req, title) {
 }
 
 
+async function renderArticle(req, res) {
+    let url = req.originalUrl.split('&'); // format article/ARTICLE_TITLE&articleview&ID
+    if (url.length != 3 || url[1] != 'articleview' || url[0] == undefined || url[0].split('/').length != 3) {
+        res.render('pages/articles/article_not_found', { main: await getMainInfos(req) });
+        return;
+    }
+    url[0] = decodeURI(url[0].split('/')[2]);
+
+    let isConnected = await m.users.isConnected(req.cookies);
+    let articleExists = await m.articles.articleExistsAndVisible(url[2], url[0], isConnected);
+    if (url[2] == undefined || !url[0] || !articleExists)
+        res.render('pages/articles/article_not_found', { main: await getMainInfos(req) });
+    else {
+        let datas = m.articles.getArticleDatas(articleExists);
+        let article = await m.articles.getArticlesForSuggestions(datas.category_id, 3, datas.uuid);
+        datas.formatted_date = datas.formatted_date.replace(/\/.*\//, '/' + (
+            (parseInt(datas.formatted_date.split('/')[1]) + 1) > 9 ?
+                (parseInt(datas.formatted_date.split('/')[1]) + 1) + "" :
+                "0" + (parseInt(datas.formatted_date.split('/')[1]) + 1)) + '/'
+        );
+
+        await m.articles.addViewForArticle(
+            datas,
+            req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+            isConnected || req.get('host').split(':')[0] == 'localhost'
+        );
+
+        let c = req.query.code;
+        if (c == undefined || c.length == 0) c = '-1';
+        res.render('pages/articles/article', {
+            main: await getMainInfos(req, datas.title),
+            datas: datas,
+            articles: article,
+            fb_image_link: m.config.main_image_link,
+            code: c,
+            comments: m.articles.formatComment(datas.comments)
+        });
+    }
+}
+
+async function renderSimulationView(req, res) {
+    let isConnected = await m.users.isConnected(req.cookies);
+    let url = req.originalUrl.split('&'); // format simulationview/ID&SIMULATION_TITLE
+    if (url.length != 2 || url[0] == undefined || url[1] == undefined) {
+        res.render('pages/simulations/simulation_not_found', { main: await getMainInfos(req, 'Erreur 404') });
+        return;
+    }
+    url[0] = decodeURI(url[0].split('/')[2]);
+
+    let simulationExists = await m.articles.simulationExistsAndVisible(parseInt(url[0]), url[1], isConnected);
+    if (!simulationExists)
+        res.render('pages/simulations/simulation_not_found', { main: await getMainInfos(req, 'Erreur 404') });
+    else {
+        let datas = await m.articles.getSimulationDatas(simulationExists);
+        res.render('pages/simulations/simulation', {
+            main: await getMainInfos(req, datas.title),
+            datas: datas,
+            isConnected: isConnected
+        });
+    }
+}
+
+
 
 /* ====== SERVER ====== */
-module.exports = router;
+module.exports = {
+    router : router,
+    renderSimulationView : renderSimulationView,
+    renderArticle : renderArticle
+};

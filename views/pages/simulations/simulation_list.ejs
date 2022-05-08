@@ -68,80 +68,64 @@
             </div>
         </header>
 
-		<article>
-			<div style="margin-top: 60px">
+		<article style="background-color: rgb(41, 41, 85)">
+			<div style="padding-top: 60px; padding-bottom: 60px;">
 				<div class="container">
-					<div class="c-sim-cat">
-						<p>Mécanique</p>
-						<div class="c-sim-cat-m">
-							<% for(let i = 0; i < simulations.mecanique.length; i++) { %>
-								<div class="c-sim-cat-el">
-									<img
-										class="c-sim-cat-img"
-										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations.mecanique[i].uuid %>_<%= simulations.mecanique[i].short_title %>.png?alt=media"
-										onclick="document.location.href='/simulationview/<%= simulations.mecanique[i].short_title %>&simulationview&mecanique&<%= simulations.mecanique[i].uuid %>'"
-										style="cursor: pointer;" >
-									<a href="/simulationview/<%= simulations.mecanique[i].short_title %>&simulationview&mecanique&<%= simulations.mecanique[i].uuid %>">
-										<%= simulations.mecanique[i].title %>
-									</a>
+					<% for (let i = 0; i < simulations.length; i++) { %>
+						<% if (i % 2 == 0) { %>
+							<div class="simulation">
+								<div class="sim-text sim-t-left">
+									<div class="sim-t-label"><%= simulations[i].dateYear %> • <%= simulations[i].label %></div>
+									<div class="sim-t-title"><%= simulations[i].title %></div>
+									<div class="sim-t-text"><%= simulations[i].short_description %></div>
+									<div class="sim-t-link">
+										<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><i class="fa fa-play"></i> Simulation</a>
+										<span style="padding-right:10px;"></span><span style="font-size: 20px;">•</span><span style="padding-right:10px;"></span>
+										<a href="<%= simulations[i].links.source %>"><i class="fa fa-github"></i> Source</a>
+									</div>
 								</div>
-				            <% } %>
-							<% if(simulations.mecanique.length == 0) { %>
-								<div style="background-color: transparent; border: unset;" class="c-sim-cat-el">
-									<p>Pas encore de simulations dans ce domaine.</p>
-								</div>
-							<% } %>
-						</div>
-					</div>
 
-					<div class="c-sim-cat">
-						<p>Electromagnétisme</p>
-						<div class="c-sim-cat-m">
-							<% for(let i = 0; i < simulations.electromag.length; i++) { %>
-								<div class="c-sim-cat-el">
+								<div class="sim-content">
+									<img src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations[i].uuid %>_<%= simulations[i].short_title %>.png?alt=media" />
+								</div>
+							</div>
+						<% } else { %>
+							<div class="simulation">
+								<div class="sim-content">
 									<img
-										class="c-sim-cat-img"
-										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations.electromag[i].uuid %>_<%= simulations.electromag[i].short_title %>.png?alt=media"
-										onclick="document.location.href='/simulationview/<%= simulations.electromag[i].short_title %>&simulationview&electromag&<%= simulations.electromag[i].uuid %>'"
-										style="cursor: pointer;" >
-									<a href="/simulationview/<%= simulations.electromag[i].short_title %>&simulationview&electromag&<%= simulations.electromag[i].uuid %>">
-										<%= simulations.electromag[i].title %>
-									</a>
+										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations[i].uuid %>_<%= simulations[i].short_title %>.png?alt=media" />
 								</div>
-				            <% } %>
-							<% if(simulations.electromag.length == 0) { %>
-								<div style="background-color: transparent; border: unset;" class="c-sim-cat-el">
-									<p>Pas encore de simulations dans ce domaine.</p>
-								</div>
-							<% } %>
-						</div>
-					</div>
 
-					<div class="c-sim-cat">
-						<p>Optique</p>
-						<div class="c-sim-cat-m">
-							<% for(let i = 0; i < simulations.optique.length; i++) { %>
-								<div class="c-sim-cat-el">
-									<img
-										class="c-sim-cat-img"
-										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations.optique[i].uuid %>_<%= simulations.optique[i].short_title %>.png?alt=media"
-										onclick="document.location.href='/simulationview/<%= simulations.optique[i].short_title %>&simulationview&optique&<%= simulations.optique[i].uuid %>'"
-										style="cursor: pointer;" >
-									<a href="/simulationview/<%= simulations.optique[i].short_title %>&simulationview&optique&<%= simulations.optique[i].uuid %>">
-										<%= simulations.optique[i].title %>
-									</a>
+								<div class="sim-text sim-t-right" style="margin-left: -20px; margin-right: 0px;">
+									<div class="sim-t-label">
+										<%= simulations[i].dateYear %> • <%= simulations[i].label %>
+									</div>
+									<div class="sim-t-title">
+										<%= simulations[i].title %>
+									</div>
+									<div class="sim-t-text">
+										<%= simulations[i].short_description %>
+									</div>
+									<div class="sim-t-link">
+										<a href="/simulationview/<%= simulations[i].short_title %>&simulationview&<%= simulations[i].uuid %>"><i
+												class="fa fa-play"></i> Simulation</a>
+										<span style="padding-right:10px;"></span><span style="font-size: 20px;">•</span><span
+											style="padding-right:10px;"></span>
+										<a href="<%= simulations[i].links.source %>"><i class="fa fa-github"></i> Source</a>
+									</div>
 								</div>
-				            <% } %>
-							<% if(simulations.optique.length == 0) { %>
-								<div style="background-color: transparent; border: unset;" class="c-sim-cat-el">
-									<p>Pas encore de simulations dans ce domaine.</p>
-								</div>
-							<% } %>
-						</div>
-					</div>
+							</div>
+						<% } %>
+					<% } %>
 				</div>
 			</div>
 		</article>
+
+		<style>
+			footer > div {
+				margin-top: 0px !important;
+			}
+		</style>
 
 		<%- include('../../partial/footer') %>
 	</body>

@@ -678,8 +678,8 @@ async function editMainImageName(uuid, old_name, new_name) {
 * @return a list of every simulations
 */
 async function getSimulations(isConnected) {
-    let simulations = { mecanique : [], electromag : [], optique : [], youtube : [], maths : [], autre : [] };
-    let snapshot    = await db.collection('simulations').get();
+    let simulations = [];
+    let snapshot = await db.collection('simulations').orderBy("date", "desc").get();
 
     snapshot.docs.forEach(doc => {
         let d = doc.data();
@@ -688,38 +688,14 @@ async function getSimulations(isConnected) {
             let date = new Date(d.date.toDate());
             let d1   = date.getDate();
             let d2   = date.getMonth();
-            d.date =
+            d.dateYear = date.getFullYear();
+            d.dateFormatted =
                   'Le ' + ((d1 + '').length == 1 ? '0' + d1 : d1) + '/'
                 + ((d2 + '').length == 1 ? '0' + (d2 + 1) : (d2 + 1)) + '/'
                 + (date ? date.getFullYear() : '0000');
-
-            if(d.type == 'mecanique')
-                simulations.mecanique.push(d);
-            else if(d.type == 'electromag')
-                simulations.electromag.push(d);
-            else if(d.type == 'optique')
-                simulations.optique.push(d);
-            else if(d.type == 'youtube')
-                simulations.youtube.push(d);
-            else if(d.type == 'maths')
-                simulations.maths.push(d);
-            else if(d.type == 'autre')
-                simulations.autre.push(d);
+            simulations.push(d);
         }
     });
-
-    for (let i = 0; i < simulations.mecanique.length ; i++)
-        simulations.mecanique[i]   = await getSimulationsExec(i, simulations.mecanique);
-    for (let i = 0; i < simulations.electromag.length; i++)
-        simulations.electromag[i] = await getSimulationsExec(i, simulations.electromag);
-    for (let i = 0; i < simulations.optique.length   ; i++)
-        simulations.optique[i]    = await getSimulationsExec(i, simulations.optique);
-    for (let i = 0; i < simulations.youtube.length   ; i++)
-        simulations.youtube[i]    = await getSimulationsExec(i, simulations.youtube);
-    for (let i = 0; i < simulations.maths.length   ; i++)
-        simulations.maths[i]      = await getSimulationsExec(i, simulations.maths);
-    for (let i = 0; i < simulations.autre.length   ; i++)
-        simulations.autre[i]      = await getSimulationsExec(i, simulations.autre);
 
     return simulations;
 }
