@@ -73,7 +73,11 @@
 				<div class="container">
 					<% for (let i = 0; i < simulations.length; i++) { %>
 						<% if (i % 2 == 0) { %>
-							<div class="simulation sim-left">
+							<% if (i == 0) { %>
+								<div class="simulation sim-left" style="margin-top: -138px;">
+							<% } else { %>
+								<div class="simulation sim-left">
+							<% } %>
 								<div class="sim-text sim-t-left">
 									<div class="sim-t-label"><%= simulations[i].dateYear %> • <%= simulations[i].label %></div>
 									<div class="sim-t-title"><a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><%= simulations[i].title %></a></div>
