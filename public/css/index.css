@@ -172,7 +172,7 @@
         margin-top: 10px;
         height: 100% !important;
     }
-    .p-c-cat-2 { flex-direction: column; padding: 20px 0px !important; }
+    .p-c-cat-2 { flex-direction: column; padding: 20px 0px !important; display: none !important; }
     .p-c-item { padding-bottom: 20px; }
     .social-ic-img-img {
         width: 59px !important;

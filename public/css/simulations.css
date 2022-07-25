@@ -288,3 +288,13 @@
     .sim-t-right { margin-left: 7px !important; }
     .sim-content { align-self: center; margin-bottom: -98px; }
 }
+
+iframe {
+    border: none;
+}
+
+hr {
+    border: 0.4px solid #e8e8e8 !important;
+    width: 100%;
+    text-align: center;
+}

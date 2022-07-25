@@ -23,42 +23,43 @@
                         <label class="s-si-title-label">Simulation non-publiée</label>
                     <% } %>
                 </p>
-                <p class="s-si-description"><%= datas.description %></p>
-                <p class="s-si-date">Le <b><%= datas.formatted_date %></b> par <b><%= datas.author %></b></p>
-                <p class="s-si-category">Catégorie <%= datas.formatted_type %></p>
+                <p class="s-si-date"><i>(Le <%= datas.formatted_date %>)</i></p>
+                <p class="s-si-category">Catégorie <%= datas.label %></p>
             </div>
 
-            <img
-                src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= datas.uuid %>_<%= datas.short_title %>.png?alt=media"
-                style="height: unset; z-index: 20;" />
 
-            <div class="s-si-links">
-                <div class="s-si-links-1">
-                    <div class="s-si-links-1-el s-si-links-1-el-1">
-                        <button type="button" class="btn btn-light" href="<%= datas.links.simulation %>" onclick="document.location.href='<%= datas.links.simulation %>'">
-                            Voir la simulation
-                        </button>
-                    </div>
-
-                    <% if(datas.links.source != "null" && datas.links.source != "" && datas.links.source != undefined) { %>
-                    <div class="s-si-links-1-el">
-                        <button type="button" class="btn btn-light" href="<%= datas.links.source %>" onclick="document.location.href='<%= datas.links.source %>'">
-                            Code source
-                        </button>
-                    </div>
-                    <% } %>
-                </div>
-
-                <% if(parseInt(datas.links.article) != -1 && (datas.links.article.visible || (!datas.links.article.visible && isConnected))) { %>
-                <div class="s-si-links-2">
-                    <p class="s-si-links-2-p-1-e">Article correspondant</p>
-                    <p class="s-si-links-2-p-2-e"><%= datas.links.article.title %></p>
-                    <button type="button" class="btn btn-light" href="/article/<%= datas.links.article.short_title %>&articleview&<%= datas.links.article.uuid %>" onclick="document.location.href='/article/<%= datas.links.article.short_title %>&articleview&<%= datas.links.article.uuid %>'">
-                        Voir l'article correspondant
-                    </button>
-                </div>
-                <% } %>
+            <hr style="margin: 27px 0 0px 0 !important;" />
+            <div class="im-simulation">
+                <iframe id="simIframe" scrolling="no"></iframe>
             </div>
+            <hr style="margin: -14px 0 27px 0 !important;" />
+
+
+            <script type="application/javascript">
+                function updateIframeThenLoad() {
+                    updateIframe();
+
+                    let iFrame = parent.document.getElementById('simIframe');
+                    iFrame.src = "<%= datas.links.simulation %>";
+                }
+
+                function updateIframe() {
+                    let iFrame = parent.document.getElementById('simIframe');
+
+                    // Reset iframe
+                    iFrame.style.height = 0;
+                    iFrame.style.width = 0;
+
+                    // Resize
+                    iFrame.style.height = document.body.clientHeight * 0.95 + 'px';
+                    iFrame.style.width = document.body.clientWidth * 0.95 + 'px';
+
+                    //iFrame.contentWindow.location.reload(true);
+                }
+                
+                window.onload = updateIframeThenLoad;
+                window.onresize = updateIframe;
+            </script>
         </section>
 
         <%- include('../../partial/footer') %>
