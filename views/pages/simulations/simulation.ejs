@@ -28,11 +28,27 @@
             </div>
 
 
-            <hr style="margin: 27px 0 0px 0 !important;" />
             <div class="im-simulation">
                 <iframe id="simIframe" scrolling="no"></iframe>
             </div>
-            <hr style="margin: -14px 0 27px 0 !important;" />
+
+            <div class="s-si-links" style="margin-top: 20px;">
+                <div class="s-si-links-1">
+                    <div class="s-si-links-1-el s-si-links-1-el-1">
+                        <button type="button" class="btn btn-light" href="<%= datas.links.simulation %>" onclick="document.location.href='<%= datas.links.simulation %>'">
+                            Plein écran
+                        </button>
+                    </div>
+
+                    <% if(datas.links.source != "null" && datas.links.source != "" && datas.links.source != undefined) { %>
+                    <div class="s-si-links-1-el">
+                        <button type="button" class="btn btn-light" href="<%= datas.links.source %>" onclick="document.location.href='<%= datas.links.source %>'">
+                            Code source
+                        </button>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
 
 
             <script type="application/javascript">
