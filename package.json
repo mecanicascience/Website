@@ -27,7 +27,7 @@
     "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.19",
     "request": "^2.88.0"
   }
 }
