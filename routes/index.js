@@ -69,9 +69,9 @@ router
 
 
     // à propos du site
-    .get('/about',   async (req, res) => res.render('pages/description/about',   { main : (await getMainInfos(req, 'A propos du site')) }))
+    .get('/about',   async (req, res) => res.render('pages/description/about',   { main : (await getMainInfos(req, 'About')) }))
     .get('/contact', async (req, res) => res.render('pages/description/contact', { main : (await getMainInfos(req, 'Contact')) }))
-    .get('/legal',   async (req, res) => res.render('pages/description/legal',   { main : (await getMainInfos(req, 'Mentions légales')) }))
+    .get('/legal',   async (req, res) => res.render('pages/description/legal',   { main : (await getMainInfos(req, 'Legal Mentions')) }))
 
     .get(/articleview/g, async (req, res) => {
         renderArticle(req, res);
@@ -111,7 +111,7 @@ router
 
         let datas = await m.articles.getMonthlyProjectsForYear(year);
         res.render('pages/articles/monthly_projects', {
-            main  : await getMainInfos(req, 'Projets du mois'),
+            main  : await getMainInfos(req, 'Monthly Projects'),
             year  : year,
             datas : JSON.stringify(datas)
         });
@@ -123,7 +123,7 @@ router
     .get('/admin', async (req, res) => {
         if(!(await m.users.isConnected(req.cookies))) {
             res.render('pages/admin/connection', {
-                main : await getMainInfos(req, 'Connection admin'),
+                main : await getMainInfos(req, 'Admin log in'),
                 code : (req.query.code  ? req.query.code  : false)
             });
             return;
@@ -134,7 +134,7 @@ router
         let comm = await m.articles.getEveryComments();
 
         res.render('pages/admin/articles_interface', {
-            main        : await getMainInfos(req, 'Interface admin'),
+            main        : await getMainInfos(req, 'Admin Interface'),
             articles    : article,
             post_count  : (req.query.l     ? req.query.l     : 20),
             code        : (req.query.code  ? req.query.code  : false),
@@ -159,7 +159,7 @@ router
 
     // hash passwords (pass : MecanicaHashPass)
     .get('/admin/hash_password', async (req, res) => {
-        res.render('pages/admin/hash_password', { main : await getMainInfos(req, 'Hash de mots de passe'), code : req.query.code, hash : req.query.hash });
+        res.render('pages/admin/hash_password', { main : await getMainInfos(req, 'Password hashes'), code : req.query.code, hash : req.query.hash });
     })
     .post('/admin/hash_password', async (req, res) => {
         if(!req.body.password || !req.body.verif_code || req.body.verif_code != 'MecanicaHashPass') {
@@ -199,7 +199,7 @@ router
                 canEditArt = true;
 
             res.render('pages/admin/edit_article', {
-                main            : await getMainInfos(req, 'Edition de l\'article'),
+                main            : await getMainInfos(req, 'Edit article'),
                 datas           : d,
                 action_function : req.query.action_function,
                 image_error     : req.query.image_error,
@@ -341,9 +341,9 @@ const WEBSITE_URL = (m.config.is_https ? "https://" : "http://") + m.config.site
 
 async function getMainInfos(req, title) {
     if(title == undefined)
-        title = 'MecanicaScience - La physique par la simulation';
+        title = 'MecanicaScience - Physics by simulation';
     else
-        title += ' - MecanicaScience - La physique par la simulation';
+        title += ' - MecanicaScience - Physics by simulation';
 
     return {
         version       : m.constants.version,
@@ -399,18 +399,18 @@ async function renderSimulationView(req, res) {
     let isConnected = await m.users.isConnected(req.cookies);
     let url = req.originalUrl.split('&'); // format simulationview/ID&SIMULATION_TITLE
     if (url.length != 2 || url[0] == undefined || url[1] == undefined) {
-        res.render('pages/simulations/simulation_not_found', { main: await getMainInfos(req, 'Erreur 404') });
+        res.render('pages/simulations/simulation_not_found', { main: await getMainInfos(req, 'Error 404') });
         return;
     }
     url[0] = decodeURI(url[0].split('/')[2]);
 
     let simulationExists = await m.articles.simulationExistsAndVisible(parseInt(url[0]), url[1], isConnected);
     if (!simulationExists)
-        res.render('pages/simulations/simulation_not_found', { main: await getMainInfos(req, 'Erreur 404') });
+        res.render('pages/simulations/simulation_not_found', { main: await getMainInfos(req, 'Error 404') });
     else {
         let datas = await m.articles.getSimulationDatas(simulationExists);
         res.render('pages/simulations/simulation', {
-            main: await getMainInfos(req, datas.title),
+            main: await getMainInfos(req, datas.title_en),
             datas: datas,
             isConnected: isConnected
         });
