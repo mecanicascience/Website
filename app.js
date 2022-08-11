@@ -25,7 +25,7 @@ const i18n = new m.i18n.I18n({
     locales: ['en', 'fr'],
     directory: m.path.join(__dirname, 'locales'),
     defaultLocale: 'en',
-    queryParameter: 'lang'
+    cookie: 'weblang'
 });
 
 
@@ -136,10 +136,9 @@ app
     .use(m.body_parser.urlencoded({
         extended: true
     }))
-    
-    .use(i18n.init)
 
-    .use(m.cookie_parser());
+    .use(m.cookie_parser())
+    .use(i18n.init);
 
 
 

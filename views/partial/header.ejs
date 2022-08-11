@@ -78,46 +78,26 @@
 		<ul class="navbar-nav mr-auto"></ul>
 
 		<ul class="navbar-nav" id="navbar-items-right">
-			<li class="nav-item" style="opacity: 0;">
-				<a class="nav-link" href="https://www.youtube.com/c/MecanicaScience">
-					<i class="fa">
-						<i class="im im-youtube"></i>
-					</i>Youtube
+			<li class="nav-item">
+				<a class="nav-link">
+					<img alt="English" class="countryFlag" src="/imgs/GB.svg" onclick="changeLanguage('en')" style="cursor: pointer;" />
 				</a>
 			</li>
 
-			<li class="nav-item" style="opacity: 0;">
-				<a class="nav-link" href="https://utip.io/MecanicaScience">
-					<i class="fa">
-						<i class="im im-coin"></i>
-						<span class="badge badge-info" tmp="<!-- badge-success -->">!</span>
-					</i>Utip
-				</a>
-			</li>
-
-			<li class="nav-item" style="opacity: 0;">
-				<a class="nav-link" href="https://twitter.com/MecanicaSci">
-					<i class="fa">
-						<i class="im im-twitter"></i>
-					</i>Twitter
-				</a>
-			</li>
-
-			<li class="nav-item" style="opacity: 0;">
-				<a class="nav-link" href="https://github.com/mecanicascience">
-					<i class="fa">
-						<i class="im im-github"></i>
-					</i>Github
-				</a>
-			</li>
-
-			<li class="nav-item" style="opacity: 0;">
-				<a class="nav-link" href="/contact">
-					<i class="fa">
-						<i class="im im-mail"></i>
-					</i>Contact
+			<li class="nav-item">
+				<a class="nav-link">
+					<img alt="France" class="countryFlag" src="/imgs/FR.svg" onclick="changeLanguage('fr')" style="cursor: pointer;" />
 				</a>
 			</li>
 		</ul>
 	</div>
+
+	<script>
+		function changeLanguage(lang) {
+			let date = new Date();
+			date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
+			document.cookie = "weblang" + "=" + lang + "; expires=" + date.toUTCString() + "; path=/";
+			location.reload();
+		}
+	</script>
 </nav>

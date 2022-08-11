@@ -597,3 +597,15 @@
     text-align: center;
     font-size: 30px;
 }
+
+.countryFlag {
+    width: 40px;
+    margin-left: -17px;
+    margin-bottom: -4px;
+    filter: grayscale(0.2);
+    transition: filter 0.2s ease-in-out, width 0.2s ease-in-out;
+}
+.countryFlag:hover {
+    width: 47px;
+    filter: grayscale(1.0);
+}

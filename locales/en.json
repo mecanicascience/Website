@@ -47,5 +47,10 @@
 	"Email adress": "Email adress",
 	"_sim1": "List of",
 	"_sim2": "simulations",
-	"Simulation not found": "Simulation not found"
+	"Simulation not found": "Simulation not found",
+	"Administrator": "Administrator",
+	"Log out": "Log out",
+	"Error": "Error",
+	"Full screen": "Full screen",
+	"Source code": "Source code"
 }

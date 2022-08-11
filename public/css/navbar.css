@@ -237,7 +237,7 @@
 
 @media (max-width: 1000px) {
     #navbarSupportedContent { height: 86px; }
-    #navbar-items-right { display: none; }
+    /* #navbar-items-right { display: none; } */
 }
 
 @media (max-width: 750px) {
