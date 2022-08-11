@@ -372,10 +372,6 @@ async function simulationExistsAndVisible(uuid, title, is_admin) {
   */
 async function getSimulationDatas(simulation) {
     simulation.formatted_type = getLabelLong(simulation.type);
-    if(parseInt(simulation.links.article) >= 0) {
-        simulation.links.article = await db.getArticleByUUID(parseInt(simulation.links.article));
-        simulation.links.article = simulation.links.article.docs[0].data();
-    }
 
     if(!simulation.date) {
         simulation.formatted_date = '\'pas de date spécifiée\'';

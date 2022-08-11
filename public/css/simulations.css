@@ -209,6 +209,7 @@
     border-radius: 15px;
     width: calc(clamp(400px, 40vw, 600px) * 1.05);
     height: fit-content;
+    filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.3));
 }
 
 .sim-t-label {
@@ -233,10 +234,10 @@
     text-decoration: none !important;
 }
 
-.sim-t-title > a:hover,
+/* .sim-t-title > a:hover,
 .sim-t-title > a:focus {
     background-size: 100% 2px;
-}
+} */
 
 .sim-t-text {
     background-color: white;
@@ -259,7 +260,17 @@
     font-size: 22px;
 }
 
-.sim-t-link > a {
+.sim-t-dot {
+    margin: -2px -1px 0 -1px;
+    font-size: 28px;
+    color: #388957;
+}
+
+.sim-t-link > span > i {
+    font-size: 20px;
+}
+
+.sim-t-link > span > a {
     color: #4CB574;
     font-size: 18px;
     cursor: pointer;
@@ -267,19 +278,20 @@
     background-image: linear-gradient(currentColor, currentColor);
     background-position: 0% 100%;
     background-repeat: no-repeat;
-    background-size: 0% 2px;
+    background-size: 0% 2.5px;
     transition: background-size .3s;
     text-decoration: none !important;
+    padding-bottom: 3px;
 }
 
-.sim-t-link > a > label {
+.sim-t-link > span > a > label {
     color: #4CB574;
     font-size: 18px;
 }
 
-.sim-t-link > a:hover,
-.sim-t-link > a:focus {
-    background-size: 100% 2px;
+.sim-t-link > span > a:hover,
+.sim-t-link > span > a:focus {
+    background-size: 100% 2.5px;
 }
 
 @media all and (max-width: 770px) {

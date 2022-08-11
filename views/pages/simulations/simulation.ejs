@@ -35,14 +35,14 @@
             <div class="s-si-links" style="margin-top: 20px;">
                 <div class="s-si-links-1">
                     <div class="s-si-links-1-el s-si-links-1-el-1">
-                        <button type="button" class="btn btn-light" href="<%= datas.links.simulation %>" onclick="document.location.href='<%= datas.links.simulation %>'">
+                        <button type="button" class="btn btn-light" href="<%= datas.simulation %>" onclick="document.location.href='<%= datas.simulation %>'">
                             Plein écran
                         </button>
                     </div>
 
-                    <% if(datas.links.source != "null" && datas.links.source != "" && datas.links.source != undefined) { %>
+                    <% if(datas.source != "null" && datas.source != "" && datas.source != undefined) { %>
                     <div class="s-si-links-1-el">
-                        <button type="button" class="btn btn-light" href="<%= datas.links.source %>" onclick="document.location.href='<%= datas.links.source %>'">
+                        <button type="button" class="btn btn-light" href="<%= datas.source %>" onclick="document.location.href='<%= datas.source %>'">
                             Code source
                         </button>
                     </div>
@@ -56,7 +56,7 @@
                     updateIframe();
 
                     let iFrame = parent.document.getElementById('simIframe');
-                    iFrame.src = "<%= datas.links.simulation %>";
+                    iFrame.src = "<%= datas.simulation %>";
                 }
 
                 function updateIframe() {

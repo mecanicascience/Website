@@ -17,8 +17,15 @@
     border-radius: 100%;
     z-index: 50;
 }
-.b-g-main-logo > img { height: 355px; transition: all 0.3s ease; }
-.b-g-main-logo > img:hover { height: 387px; }
+.b-g-main-logo > img {
+    height: 355px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.b-g-main-logo > img:hover {
+    height: 387px;
+    transform: rotate(20deg);
+}
 
 
 
@@ -311,7 +318,6 @@
 }
 
 
-
 .c-c-img-hover .c-c-img {
     overflow: hidden;
     position: relative;
@@ -350,7 +356,6 @@
 }
 
 .c-c-text > span {
-    color: #FF772E;
     font-weight: 600;
     font-size: 17px;
     transition: color 0.2s ease;
@@ -358,7 +363,7 @@
 .c-c-text > span:hover { color: #189649; }
 
 .c-c-button {
-    background-color: #FF772E;
+    background-color: #189649;
     margin-top: 42px;
     width: 100%;
     height: 60px;
@@ -383,7 +388,7 @@
 }
 
 .c-c-button > a > button:hover {
-    background-color: #189649;
+    background-color: #127036;
 }
 
 
