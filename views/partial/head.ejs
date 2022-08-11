@@ -1,13 +1,3 @@
-<!-- Google Analytics V3 -->
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144935138-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-
-  gtag('config', 'UA-144935138-2');
-</script> -->
-
 <!-- Google Analytics V4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3FKJL2M8X"></script>
 <script>
@@ -21,9 +11,14 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"      content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description"   content="Blog de vulgarisation" />
-<meta name="keywords"      content="mecanicascience science vulgarisation physique mathematiques maths informatique simulation youtube" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<% if (getLocale() == "fr") { %>
+    <meta name="description" content="Blog de vulgarisation" />
+    <meta name="keywords"    content="mecanicascience science vulgarisation physique mathematiques maths informatique simulation youtube" />
+<% } else { %>
+    <meta name="description" content="Science popularization blog" />
+    <meta name="keywords"    content="mecanicascience science vulgarisation physics mathematics maths informatic simulation youtube" />
+<% } %>
 <meta name="Resource-type" content="Document" />
 
 

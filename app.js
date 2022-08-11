@@ -16,8 +16,17 @@ const m = {
     cookie_parser     : require('cookie-parser'),
     users             : require('./routes/users'),
     articles          : require('./routes/articles'),
-    private_msapi_key : require('./datas/private-msapi-key.json')
+    private_msapi_key : require('./datas/private-msapi-key.json'),
+    i18n              : require('i18n')
 };
+
+// Translation module
+const i18n = new m.i18n.I18n({
+    locales: ['en', 'fr'],
+    directory: m.path.join(__dirname, 'locales'),
+    defaultLocale: 'en',
+    queryParameter: 'lang'
+});
 
 
 
@@ -127,6 +136,8 @@ app
     .use(m.body_parser.urlencoded({
         extended: true
     }))
+    
+    .use(i18n.init)
 
     .use(m.cookie_parser());
 

@@ -16,16 +16,31 @@
         </navbar>
 
         <section class="image_main" id="main" style="text-align: center;">
-            <div class="s-sim-text">
-                <p class="s-si-title">
-                    <%= datas.title %>
-                    <% if(!datas.visible) { %>
-                        <label class="s-si-title-label">Simulation non-publiée</label>
-                    <% } %>
-                </p>
-                <p class="s-si-date"><i>(Le <%= datas.formatted_date %>)</i></p>
-                <p class="s-si-category">Catégorie <%= datas.label %></p>
-            </div>
+            <% if (getLocale()=="fr" ) { %>
+                <div class="s-sim-text">
+                    <p class="s-si-title">
+                        <%= datas.title %>
+                        <% if(!datas.visible) { %>
+                            <label class="s-si-title-label">Simulation non-publiée</label>
+                        <% } %>
+                    </p>
+                    <p class="s-si-date"><i>(Le <%= datas.formatted_date %>)</i></p>
+                    <p class="s-si-category">Catégorie <%= datas.label %>
+                    </p>
+                </div>
+            <% } else { %>
+                <div class="s-sim-text">
+                    <p class="s-si-title">
+                        <%= datas.title_en %>
+                        <% if(!datas.visible) { %>
+                            <label class="s-si-title-label">Simulation not published</label>
+                        <% } %>
+                    </p>
+                    <p class="s-si-date"><i>(The <%= datas.formatted_date %>)</i></p>
+                    <p class="s-si-category">Category <%= datas.label_en %>
+                    </p>
+                </div>
+            <% } %>
 
 
             <div class="im-simulation">
@@ -36,14 +51,14 @@
                 <div class="s-si-links-1">
                     <div class="s-si-links-1-el s-si-links-1-el-1">
                         <button type="button" class="btn btn-light" href="<%= datas.simulation %>" onclick="document.location.href='<%= datas.simulation %>'">
-                            Plein écran
+                            <%= __('Full screen') %>
                         </button>
                     </div>
 
                     <% if(datas.source != "null" && datas.source != "" && datas.source != undefined) { %>
                     <div class="s-si-links-1-el">
                         <button type="button" class="btn btn-light" href="<%= datas.source %>" onclick="document.location.href='<%= datas.source %>'">
-                            Code source
+                            <%= __('Source code') %>
                         </button>
                     </div>
                     <% } %>

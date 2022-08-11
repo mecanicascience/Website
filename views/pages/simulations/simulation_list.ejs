@@ -53,14 +53,14 @@
                     <div class="bgm-t-2"></div>
                     <div class="bgm-t-3">
                         <div class="bgm-t-3-1">
-                            Liste des
+                            <%= __('_sim1') %>
                         </div>
                         <div class="bgm-t-3-2">
-                            simulations
+                            <%= __('_sim2') %>
                         </div>
                         <div class="bgm-t-3-2">
                             <button type="button" class="btn btn-outline-light" href="/" onclick="document.location.href='/'">
-                                Retourner à l'accueil
+								<%= __('Back to home') %>
                             </button>
                         </div>
                     </div>
@@ -79,9 +79,10 @@
 								<div class="simulation sim-left">
 							<% } %>
 								<div class="sim-text sim-t-left">
-									<div class="sim-t-label"><%= simulations[i].dateYear %> • <%= simulations[i].label %></div>
-									<div class="sim-t-title"><a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><%= simulations[i].title %></a></div>
-									<div class="sim-t-text"><%= simulations[i].description %></div>
+									<div class="sim-t-label"><%= simulations[i].dateYear %> • <% if (getLocale()=="fr" ) { %><%= simulations[i].label %><% } else { %><%= simulations[i].label_en %><% } %>
+									</div>
+									<div class="sim-t-title"><a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><% if (getLocale()=="fr" ) { %><%= simulations[i].title %><% } else { %><%= simulations[i].title_en %><% } %></a></div>
+									<div class="sim-t-text"><% if (getLocale()=="fr" ) { %><%= simulations[i].description %><% } else { %><%= simulations[i].description_en %><% } %></div>
 									<div class="sim-t-link">
 										<span><i class="fa fa-play"></i>
 											<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"> Simulation</a>
@@ -106,15 +107,15 @@
 
 								<div class="sim-text sim-t-right" style="margin-left: -20px; margin-right: 0px;">
 									<div class="sim-t-label">
-										<%= simulations[i].dateYear %> • <%= simulations[i].label %>
+										<%= simulations[i].dateYear %> • <% if (getLocale()=="fr" ) { %><%= simulations[i].label %><% } else { %><%= simulations[i].label_en %><% } %>
 									</div>
 									<div class="sim-t-title">
 										<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>">
-											<%= simulations[i].title %>
+											<% if (getLocale()=="fr" ) { %><%= simulations[i].title %><% } else { %><%= simulations[i].title_en %><% } %>
 										</a>
 									</div>
 									<div class="sim-t-text">
-										<%= simulations[i].description %>
+										<% if (getLocale()=="fr" ) { %><%= simulations[i].description %><% } else { %><%= simulations[i].description_en %><% } %>
 									</div>
 									<div class="sim-t-link">
 										<span><i class="fa fa-play"></i>

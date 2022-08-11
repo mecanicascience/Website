@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<% if (getLocale()=="fr" ) { %>
+    <html lang="fr">
+<% } else { %>
+    <html lang="en">
+<% } %>
     <head>
         <%- include('../partial/head') %>
     </head>
@@ -30,7 +34,7 @@
                 </div>
 
                 <div class="b-g-main-text">
-                    <div class="bgm-t-1">La physique par la</div>
+                    <div class="bgm-t-1"><%= __('Physics by') %></div>
                     <div class="bgm-t-2">simulation</div>
                     <div class="bgm-t-3">
                         <div class="bgm-t-3-1">
@@ -58,12 +62,13 @@
 
                         <p class="c-c-title">Articles</p>
                         <p class="c-c-text"  data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1">
-                            Articles de <span>vulgarisation</span> scientifique sur de nombreux sujets comme la <span>physique</span>, les <span>mathématiques</span> tous accompagnés d'infographies et de visualisations.
+                            <%= __('_articles0') %> <span><%=__('_articles1') %></span> <%= __('_articles2') %><span> <%= __('_articles3') %></span>, <%= __('_articles4') %> <span><%= __('_articles5') %></span>
+                        <%= __('_articles6') %>
                         </p>
 
                         <div class="c-c-button" data-300-bottom-top="transform: translateY(100px); opacity: 0" data-300-center-top="transform: translateY(0px); opacity: 1">
                             <a href="/#articles">
-                                <button>Derniers articles</button>
+                                <button><%= __('Last articles') %></button>
                             </a>
                         </div>
                     </div>
@@ -79,37 +84,16 @@
 
                         <p class="c-c-title">Simulations</p>
                         <p class="c-c-text"  data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1">
-                            Liste des simulations du site, permettant de <span>visualiser</span> et de mieux comprendre certains <span>phénomènes physiques</span> théoriques et parfois abstraits grâce à des <span>contenus interactifs</span>.
+                            <%= __('_simulations0') %> <span><%= __('_simulations1') %></span> <%= __('_simulations2') %> <span><%= __('_simulations3') %></span> <%= __('_simulations4') %> <span><%= __('_simulations5') %></span>.
                         </p>
 
                         <div class="c-c-button" data-300-bottom-top="transform: translateY(100px); opacity: 0" data-300-center-top="transform: translateY(0px); opacity: 1">
                             <a href="/simulations/list/">
-                                <button>Liste des simulations</button>
+                                <button><%= __('Simulations list') %></button>
                             </a>
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="c-cat">
-                    <div class="c-cat-c">
-                        <div class="c-c-img-hover">
-                            <div class="c-c-img">
-                                <img src="imgs/illustration/home_monthly_projects.png" />
-                            </div>
-                        </div>
-
-                        <p class="c-c-title">Projets du mois</p>
-                        <p class="c-c-text" data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1">
-                            Tous les <span>deux mois</span>, un projet est publié. Il est généralement accompagné d'une ou plusieurs <span>simulations</span> afin de mieux comprendre les notions souhaitées.
-                        </p>
-
-                        <div class="c-c-button" data-300-bottom-top="transform: translateY(100px); opacity: 0" data-300-center-top="transform: translateY(0px); opacity: 1">
-                            <a href="/monthly_projects/">
-                                <button>Derniers projets</button>
-                            </a>
-                        </div>
-                    </div>
-                </div> -->
 
                 <div class="c-cat">
                     <div class="c-cat-c">
@@ -119,14 +103,14 @@
                             </div>
                         </div>
 
-                        <p class="c-c-title">Chaine YouTube</p>
+                        <p class="c-c-title"><%= __('Youtube Channel') %></p>
                         <p class="c-c-text" data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1">
-                            Vous pouvez consulter la <span>chaine YouTube MecanicaScience</span> pour mieux comprendre certains phénomènes physiques, mathématiques ou informatiques sous forme d'<span>animations</span>.
+                            <%= __('_youtube0') %> <span><%= __('_youtube1') %></span> <%= __('_youtube2') %> <span><%= __('_youtube3') %></span>.
                         </p>
 
                         <div class="c-c-button" data-300-bottom-top="transform: translateY(100px); opacity: 0" data-300-center-top="transform: translateY(0px); opacity: 1">
                             <a href="https://www.youtube.com/c/MecanicaScience/">
-                                <button>Consulter la chaîne</button>
+                                <button><%= __('See channel') %></button>
                             </a>
                         </div>
                     </div>
@@ -140,12 +124,12 @@
                     <div class="p-c-c">
                         <div class="c-pres-left c-pres">
                             <div class="cpl-title">
-                                Présentation
+                                <%= __('Presentation') %>
                             </div>
 
                             <div class="cpl-links">
                                 <div class="cpl-l-m cpl-l-m-2">
-                                    <p>Liens pratiques</p>
+                                    <p><%= __('Usefull links') %></p>
                                 </div>
 
                                 <div class="cpl-l-m cpl-l-m-1">
@@ -173,9 +157,9 @@
 
                         <div class="c-pres-right c-pres">
                             <div class="c-p-r-c"  data-200-center-top="transform: scale(0.7); opacity: 0" data-200-center-center="transform: scale(1); opacity: 1" style="text-align: justify;">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ne vous êtes-vous jamais demandé <span>comment fonctionne notre monde</span> : du mouvement des <span>fluides</span> et des <span>ondes</span>, à la trajectoire d'un <span>ballon de basket</span>, en passant par la formation des <span>galaxies</span> et de notre propre <span>Système Solaire</span> !
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= __('accueil_p11') %> <span><%= __('accueil_p12') %></span> <%= __('accueil_p13') %>
                                 <div></div><br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;Sur ce site WEB, mon but est de vous expliquer certains <span>concepts physiques du monde de tous les jours</span>, de les décrire sous forme d'<span>équations mathématiques</span> de divers niveaux de difficulté, puis de construire des <span>visualisations</span> afin de mieux concevoir ces idées parfois abstraites.
+                                &nbsp;&nbsp;&nbsp;&nbsp;<%= __('accueil_p21') %> <span><%= __('accueil_p22') %></span><%= __('accueil_p23') %>
                             </div>
                         </div>
                     </div>
@@ -185,18 +169,18 @@
             <div class="p-categories">
                 <div class="p-c-cat-2 p-c-cat">
                     <div class="p-c-item">
-                        <a class="p-c-i-a" href="/#articles"><i class="fas fa-globe-europe fa-3x" aria-hidden="true"></i></a>
-                        <a href="/#articles">Tout voir</a>
+                        <a class="p-c-i-a" href="#articles"><i class="fas fa-globe-europe fa-3x" aria-hidden="true"></i></a>
+                        <a href="/#articles"><%= __('See all') %></a>
                     </div>
 
                     <div class="p-c-item">
-                        <a class="p-c-i-a" href="/?s=mecanique#articles"><i class="fas fa-rocket fa-3x" aria-hidden="true"></i></a>
-                        <a href="/?s=mecanique#articles">Mécanique</a>
+                        <a class="p-c-i-a" href="?s=mecanique#articles"><i class="fas fa-rocket fa-3x" aria-hidden="true"></i></a>
+                        <a href="/?s=mecanique#articles"><%= __('Mechanics') %></a>
                     </div>
 
                     <div class="p-c-item">
-                        <a class="p-c-i-a" href="/?s=maths#articles"><i class="fas fa-calculator fa-3x" aria-hidden="true"></i></a>
-                        <a href="/?s=maths#articles">Mathématiques</a>
+                        <a class="p-c-i-a" href="?s=maths#articles"><i class="fas fa-calculator fa-3x" aria-hidden="true"></i></a>
+                        <a href="/?s=maths#articles"><%= __('Mathematics') %></a>
                     </div>
                 </div>
             </div>

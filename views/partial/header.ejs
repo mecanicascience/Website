@@ -24,42 +24,42 @@
 			<nav class="gn-menu-wrapper">
 				<div class="gn-scroller">
 					<ul class="gn-menu">
-						<li><a class="gn-icon d-main-dev" href="/"><i class="menu-icon fas fa-home"></i>Accueil</a></li>
+						<li><a class="gn-icon d-main-dev" href="/"><i class="menu-icon fas fa-home"></i><%= __('Home') %></a></li>
 
 						<li>
 							<!-- <a class="gn-icon d-main-dev" href="/monthly_projects/"><i class="menu-icon fas fa-calendar-week" style="padding-left: 2px;"></i>Projets du mois</a> -->
-							<a class="gn-icon d-main-dev" href="/simulations/list/"><i class="menu-icon fas fa-server" style="padding-left: 2px;"></i>Liste des simulations</a>
+							<a class="gn-icon d-main-dev" href="/simulations/list/"><i class="menu-icon fas fa-server" style="padding-left: 2px;"></i><%= __('Simulations list') %></a>
 
 							<a class="gn-icon d-main-dev" href="/#articles"><i class="menu-icon fas fa-newspaper"></i>Articles</a>
 
 							<ul class="gn-submenu">
-								<li class="d-li-dev"><a class="gn-icon" href="/#articles" onclick="setTimeout(() => { location.reload(); }, 200); document.location.href = '/#articles';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-globe-europe d-icon-dev"></i>Tout voir</a></li>
-								<li class="d-li-dev"><a class="gn-icon" href="/?s=mecanique#articles" onclick="setTimeout(() => { location.reload(); }, 200); document.location.href = '/?s=mecanique#articles';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-rocket d-icon-dev"></i>Mécanique</a></li>
-								<li class="d-li-dev"><a class="gn-icon" href="/?s=maths#articles" onclick="setTimeout(() => { location.reload(); }, 200); document.location.href = '/?s=maths#articles';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-calculator d-icon-dev"></i>Mathématiques</a></li>
-								<li class="d-li-dev"><a class="gn-icon" href="/?s=autre#articles" onclick="setTimeout(() => { location.reload(); }, 200); document.location.href = '/?s=autre#articles';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-folder d-icon-dev"></i>Autre</a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/#articles" onclick="setTimeout(() => { location.reload(); }, 200); document.location.href = '/#articles';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-globe-europe d-icon-dev"></i><%= __('See all') %></a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=mecanique#articles" onclick="setTimeout(() => { location.reload(); }, 200); document.location.href = '/?s=mecanique#articles';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-rocket d-icon-dev"></i><%= __('Mechanics') %></a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=maths#articles" onclick="setTimeout(() => { location.reload(); }, 200); document.location.href = '/?s=maths#articles';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-calculator d-icon-dev"></i><%= __('Mathematics') %></a></li>
+								<li class="d-li-dev"><a class="gn-icon" href="/?s=autre#articles" onclick="setTimeout(() => { location.reload(); }, 200); document.location.href = '/?s=autre#articles';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-folder d-icon-dev"></i><%= __('Other') %></a></li>
 							</ul>
 						</li>
 
 						<li>
-							<a class="gn-icon d-main-dev"><i class="menu-icon fas fa-map"></i>Plan du site</a>
+							<a class="gn-icon d-main-dev"><i class="menu-icon fas fa-map"></i><%= __('Website') %></a>
 
 							<ul class="gn-submenu">
-								<li class="d-li-dev"><a class="gn-icon" href="/about">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-search d-icon-dev"></i>A propos</a></li>
-								<li class="d-li-dev"><a class="gn-icon" href="/legal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-question-circle d-icon-dev"></i>Mentions légales</a></li>
+								<!-- <li class="d-li-dev"><a class="gn-icon" href="/about">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-search d-icon-dev"></i><%= __('About') %></a></li> -->
+								<li class="d-li-dev"><a class="gn-icon" href="/legal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-question-circle d-icon-dev"></i><%= __('Legal Mentions') %></a></li>
 								<li class="d-li-dev"><a class="gn-icon" href="/contact">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-address-card d-icon-dev"></i>Contact</a></li>
 							</ul>
 						</li>
 
 						<li>
 							<% if(main != undefined && main.connected) { %>
-								<a class="gn-icon d-main-dev" href="/admin"><i class="menu-icon fas fa-lock-open"></i>Administrateur</a>
+								<a class="gn-icon d-main-dev" href="/admin"><i class="menu-icon fas fa-lock-open"></i><%= __('Administrator') %></a>
 
 								<ul class="gn-submenu">
-									<li class="d-li-dev"><a class="gn-icon" href="/admin">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-cog d-icon-dev"></i>Panel administrateur</a></li>
-									<li class="d-li-dev"><a class="gn-icon" href="/admin/deconnexion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-sign-out-alt d-icon-dev"></i>Déconnexion</a></li>
+									<li class="d-li-dev"><a class="gn-icon" href="/admin">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-cog d-icon-dev"></i><%= __('Administrator panel') %></a></li>
+									<li class="d-li-dev"><a class="gn-icon" href="/admin/deconnexion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fas fa-sign-out-alt d-icon-dev"></i><%= __('Log out') %></a></li>
 								</ul>
 							<% } else { %>
-								<a class="gn-icon d-main-dev" href="/admin"><i class="menu-icon fas fa-lock"></i>Panel administrateur</a>
+								<a class="gn-icon d-main-dev" href="/admin"><i class="menu-icon fas fa-lock"></i><%= __('Administrator panel') %></a>
 							<% } %>
 						</li>
 					</ul>
