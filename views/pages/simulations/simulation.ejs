@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<% if (getLocale()=="fr" ) { %>
+    <html lang="fr">
+<% } else { %>
+    <html lang="en">
+<% } %>
     <head>
         <%- include('../../partial/head') %>
 
