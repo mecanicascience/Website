@@ -310,3 +310,60 @@ hr {
     width: 100%;
     text-align: center;
 }
+
+.bgm-t-3-2 {
+    font-size: 76px;
+}
+
+@media all and (max-width: 1138px) {
+    .bgm-t-3 {
+        margin-left: -100px !important;
+    }
+}
+
+@media all and (max-width: 890px) {
+    .b-g-main-text {
+        margin: 18px 0 0 248px;
+    }
+}
+
+@media all and (max-width: 650px) {
+    .b-g-main-text {
+        margin: 18px 0 0 154px;
+    }
+}
+
+@media all and (max-width: 530px) {
+    .bgm-t-3-2 {
+        font-size: 51px;
+    }
+
+    .bgm-t-3-2 {
+        margin: -30px 0 0 26px;
+    }
+}
+
+@media all and (max-width: 356px) {
+    .b-g-main-text {
+        margin: 18px 0 0 117px;
+    }
+
+    .bgm-t-1 {
+        margin-left: -62px;
+    }
+
+    .bgm-t-3-2 {
+        margin: -17px 0 0 26px;
+        font-size: 43px;
+    }
+}
+
+.sim-t-text > c {
+    font-weight: 600;
+    font-size: 17px;
+    transition: color 0.2s ease;
+}
+
+.sim-t-text > c:hover {
+    color: #189649;
+}

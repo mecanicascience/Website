@@ -7,24 +7,23 @@
 	<head>
 		<%- include('../../partial/head') %>
 
-		<style>
-			.bgm-t-3-2 { font-size: 76px; }
-			@media all and (max-width: 1138px) { .bgm-t-3 { margin-left: -100px !important; } }
-			@media all and (max-width: 890px) { .b-g-main-text { margin: 18px 0 0 248px; } }
-			@media all and (max-width: 650px) { .b-g-main-text { margin: 18px 0 0 154px; } }
-			@media all and (max-width: 530px) {
-				.bgm-t-3-2 { font-size: 51px; }
-				.bgm-t-3-2 { margin: -30px 0 0 26px; }
+		<script>
+			function htmlDecode(input) {
+				let doc = new DOMParser().parseFromString(input, "text/html");
+				return doc.documentElement.textContent;
 			}
-			@media all and (max-width: 356px) {
-				.b-g-main-text { margin: 18px 0 0 117px; }
-				.bgm-t-1       { margin-left: -62px; }
-				.bgm-t-3-2 {
-					margin: -17px 0 0 26px;
-					font-size: 43px;
-				}
-			}
-		</style>
+
+			addEventListener('load', () => {
+				<% for (let i = 0; i < simulations.length; i++) { %>
+					<% if (getLocale() == "fr") { %>
+						console.log("<%= simulations[i].description %>");
+						document.getElementById('simulation-<%= i %>-desc').innerHTML = htmlDecode("<%= simulations[i].description %>");
+					<% } else { %>
+						document.getElementById('simulation-<%= i %>-desc').innerHTML = htmlDecode("<%= simulations[i].description_en %>");
+					<% } %>
+				<% } %>
+			});
+		</script>
 	</head>
 
 	<body>
@@ -78,15 +77,14 @@
 					<% for (let i = 0; i < simulations.length; i++) { %>
 						<% if (i % 2 == 0) { %>
 							<% if (i == 0) { %>
-								<div class="simulation sim-left" style="margin-top: -138px;">
+							<div class="simulation sim-left" style="margin-top: -138px;">
 							<% } else { %>
-								<div class="simulation sim-left">
+							<div class="simulation sim-left">
 							<% } %>
 								<div class="sim-text sim-t-left">
-									<div class="sim-t-label"><%= simulations[i].dateYear %> • <% if (getLocale()=="fr" ) { %><%= simulations[i].label %><% } else { %><%= simulations[i].label_en %><% } %>
-									</div>
+									<div class="sim-t-label"><%= simulations[i].dateYear %> • <% if (getLocale()=="fr" ) { %><%= simulations[i].label %><% } else { %><%= simulations[i].label_en %><% } %></div>
 									<div class="sim-t-title"><a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><% if (getLocale()=="fr" ) { %><%= simulations[i].title %><% } else { %><%= simulations[i].title_en %><% } %></a></div>
-									<div class="sim-t-text"><% if (getLocale()=="fr" ) { %><%= simulations[i].description %><% } else { %><%= simulations[i].description_en %><% } %></div>
+									<div class="sim-t-text" id="simulation-<%= i %>-desc"><br /><br /><br /></div>
 									<div class="sim-t-link">
 										<span><i class="fa fa-play"></i>
 											<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"> Simulation</a>
@@ -103,24 +101,16 @@
 								</div>
 							</div>
 						<% } else { %>
-							<div class="simulation sim-right">
+							<div class="simulation sim-right" id="simulation-<%= i %>">
 								<div class="sim-content sim-c-right">
 									<img
 										src="https://firebasestorage.googleapis.com/v0/b/mecanicascience.appspot.com/o/simulations%2F<%= simulations[i].uuid %>_<%= simulations[i].short_title %>.png?alt=media" />
 								</div>
 
 								<div class="sim-text sim-t-right" style="margin-left: -20px; margin-right: 0px;">
-									<div class="sim-t-label">
-										<%= simulations[i].dateYear %> • <% if (getLocale()=="fr" ) { %><%= simulations[i].label %><% } else { %><%= simulations[i].label_en %><% } %>
-									</div>
-									<div class="sim-t-title">
-										<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>">
-											<% if (getLocale()=="fr" ) { %><%= simulations[i].title %><% } else { %><%= simulations[i].title_en %><% } %>
-										</a>
-									</div>
-									<div class="sim-t-text">
-										<% if (getLocale()=="fr" ) { %><%= simulations[i].description %><% } else { %><%= simulations[i].description_en %><% } %>
-									</div>
+									<div class="sim-t-label"><%= simulations[i].dateYear %> • <% if (getLocale()=="fr" ) { %><%= simulations[i].label %><% } else { %><%= simulations[i].label_en %><% } %></div>
+									<div class="sim-t-title"><a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>"><% if (getLocale()=="fr" ) { %><%= simulations[i].title %><% } else { %><%= simulations[i].title_en %><% } %></a></div>
+									<div class="sim-t-text" id="simulation-<%= i %>-desc"><br /><br /><br /></div>
 									<div class="sim-t-link">
 										<span><i class="fa fa-play"></i>
 											<a href="/simulationview/<%= simulations[i].uuid %>&<%= simulations[i].short_title %>">Simulation</a>
