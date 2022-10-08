@@ -16,7 +16,6 @@
 			addEventListener('load', () => {
 				<% for (let i = 0; i < simulations.length; i++) { %>
 					<% if (getLocale() == "fr") { %>
-						console.log("<%= simulations[i].description %>");
 						document.getElementById('simulation-<%= i %>-desc').innerHTML = htmlDecode("<%= simulations[i].description %>");
 					<% } else { %>
 						document.getElementById('simulation-<%= i %>-desc').innerHTML = htmlDecode("<%= simulations[i].description_en %>");
