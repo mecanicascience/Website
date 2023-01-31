@@ -1,9 +1,11 @@
-# Site WEB MecanicaScience
-## Présentation
-Ne vous êtes-vous jamais demandé comment fonctionne notre monde : du mouvement des fluides et des ondes, à la trajectoire d'un ballon de basket, en passant par la formation des galaxies et de notre propre Système Solaire !
+<p align="center">
+    <img src="public/imgs/main_logo.png" height="400" alt="logo"/>
+</p>
 
-Sur ce site WEB, mon but est de vous expliquer certains concepts physiques du monde de tous les jours, de les décrire sous forme d'équations mathématiques de divers niveaux de difficulté, puis de construire des visualisations afin de mieux concevoir ces idées parfois abstraites.
+# MecanicaScience
+The Website can found at [https://www.mecanicascience.fr/](https://mecanicascience.fr/).
 
-## Liens pratiques
-Vous retrouverez le site WEB à l'adresse suivante : [https://www.mecanicascience.fr/](https://mecanicascience.herokuapp.com/).
-Pour me contacter, vous pouvez envoyer un mail à [mecanicascience@gmail.com](mailto:mecanicascience@gmail.com).
+## Presentation
+Did you ever ask yourself how does the world works : from the mouvement of fluids and waves, to a basket ball trajectory, through the formation of galaxies and our own Solar System. On this Website, my goal is to explain to you some physics concepts of the everyday world, to describe them through mathematics equations of several difficulty levels, then to construct some visualisations to better understand theses abstract ideas.
+
+To contact me, you can send an email at [mecanicascience@gmail.com](mailto:mecanicascience@gmail.com).
