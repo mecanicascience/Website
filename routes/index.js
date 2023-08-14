@@ -12,7 +12,8 @@ const m = {
     users       : require('./users'),
     gen_xml     : require('./generate_xml'),
     config      : require('./../datas/config.json'),
-    multer      : require('multer')
+    multer      : require('multer'),
+    path        : require('path'),
 };
 
 
@@ -83,6 +84,10 @@ router
         let code  = await m.articles.postComment(req.body, req.headers['x-forwarded-for'] || req.connection.remoteAddress);
 
         res.redirect(`/article/${title}&articleview&${id}?code=${code}#comments`);
+    })
+
+    .get('/articles/exploring_general_relativity_part_1', async (req, res) => {
+        res.sendFile(m.path.join(__dirname + '/../views/pages/articles/exploring_general_relativity_part_1.html'));
     })
 
 

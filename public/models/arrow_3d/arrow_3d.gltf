@@ -1,0 +1,348 @@
+{
+    "asset": {
+        "generator": "FBX2glTF v0.9.7",
+        "version": "2.0"
+    },
+    "scene": 0,
+    "extensionsUsed": [
+        "KHR_lights_punctual"
+    ],
+    "buffers": [
+        {
+            "byteLength": 2532,
+            "uri": "buffer.bin"
+        }
+    ],
+    "bufferViews": [
+        {
+            "buffer": 0,
+            "byteLength": 60,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        {
+            "buffer": 0,
+            "byteLength": 288,
+            "byteOffset": 60,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteLength": 288,
+            "byteOffset": 348,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteLength": 192,
+            "byteOffset": 636,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteLength": 168,
+            "byteOffset": 828,
+            "target": 34963
+        },
+        {
+            "buffer": 0,
+            "byteLength": 576,
+            "byteOffset": 996,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteLength": 576,
+            "byteOffset": 1572,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteLength": 384,
+            "byteOffset": 2148,
+            "target": 34962
+        }
+    ],
+    "scenes": [
+        {
+            "name": "Root Scene",
+            "nodes": [
+                0
+            ]
+        }
+    ],
+    "accessors": [
+        {
+            "componentType": 5123,
+            "type": "SCALAR",
+            "count": 30,
+            "bufferView": 0,
+            "byteOffset": 0
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC3",
+            "count": 24,
+            "bufferView": 1,
+            "byteOffset": 0,
+            "min": [
+                -0.010480192489922,
+                -0.0101861376315355,
+                -0.00999804679304361
+            ],
+            "max": [
+                0.010480192489922,
+                0.0101861376315355,
+                0.00999999977648258
+            ]
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC3",
+            "count": 24,
+            "bufferView": 2,
+            "byteOffset": 0
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC2",
+            "count": 24,
+            "bufferView": 3,
+            "byteOffset": 0
+        },
+        {
+            "componentType": 5123,
+            "type": "SCALAR",
+            "count": 84,
+            "bufferView": 4,
+            "byteOffset": 0
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC3",
+            "count": 48,
+            "bufferView": 5,
+            "byteOffset": 0,
+            "min": [
+                -0.00999999977648258,
+                -0.00999999977648258,
+                -0.00999999977648258
+            ],
+            "max": [
+                0.00999999977648258,
+                0.00999999977648258,
+                0.00999999977648258
+            ]
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC3",
+            "count": 48,
+            "bufferView": 6,
+            "byteOffset": 0
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC2",
+            "count": 48,
+            "bufferView": 7,
+            "byteOffset": 0
+        }
+    ],
+    "samplers": [
+        {}
+    ],
+    "materials": [
+        {
+            "name": "Material.002",
+            "alphaMode": "OPAQUE",
+            "extras": {
+                "fromFBX": {
+                    "shadingModel": "Phong",
+                    "isTruePBR": false
+                }
+            },
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.00589787168428302,
+                    0.00587357999756932,
+                    0.0063701756298542,
+                    1.0
+                ],
+                "metallicFactor": 0.400000005960464,
+                "roughnessFactor": 0.272165536880493
+            }
+        }
+    ],
+    "meshes": [
+        {
+            "name": "Cone",
+            "primitives": [
+                {
+                    "material": 0,
+                    "mode": 4,
+                    "attributes": {
+                        "NORMAL": 2,
+                        "POSITION": 1,
+                        "TEXCOORD_0": 3
+                    },
+                    "indices": 0
+                }
+            ]
+        },
+        {
+            "name": "Cylinder",
+            "primitives": [
+                {
+                    "material": 0,
+                    "mode": 4,
+                    "attributes": {
+                        "NORMAL": 6,
+                        "POSITION": 5,
+                        "TEXCOORD_0": 7
+                    },
+                    "indices": 4
+                }
+            ]
+        }
+    ],
+    "cameras": [
+        {
+            "name": "",
+            "type": "perspective",
+            "perspective": {
+                "znear": 10.0,
+                "zfar": 10000.0,
+                "aspectRatio": 1.5,
+                "yfov": 0.471089959144592
+            }
+        }
+    ],
+    "nodes": [
+        {
+            "name": "RootNode",
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "children": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        {
+            "name": "Light",
+            "translation": [
+                4.07624530792236,
+                5.90386199951172,
+                -1.00545394420624
+            ],
+            "rotation": [
+                0.169075757265091,
+                0.755880355834961,
+                -0.272171378135681,
+                0.570947468280792
+            ],
+            "scale": [
+                100.000007629395,
+                100.0,
+                100.0
+            ],
+            "extensions": {
+                "KHR_lights_punctual": {
+                    "light": 0
+                }
+            }
+        },
+        {
+            "name": "Camera",
+            "translation": [
+                7.35889148712158,
+                4.95830917358398,
+                6.92579078674316
+            ],
+            "rotation": [
+                -0.209972962737083,
+                0.385779857635498,
+                0.0906284600496292,
+                0.89379620552063
+            ],
+            "scale": [
+                100.0,
+                100.000007629395,
+                99.9999923706055
+            ],
+            "camera": 0
+        },
+        {
+            "name": "Cone",
+            "translation": [
+                0.0,
+                9.40519523620605,
+                0.0
+            ],
+            "rotation": [
+                -0.707106828689575,
+                0.0,
+                0.0,
+                0.707106709480286
+            ],
+            "scale": [
+                201.340347290039,
+                201.340347290039,
+                201.340347290039
+            ],
+            "mesh": 0
+        },
+        {
+            "name": "Cylinder",
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                -0.707106828689575,
+                0.0,
+                0.0,
+                0.707106709480286
+            ],
+            "scale": [
+                100.0,
+                100.0,
+                753.528076171875
+            ],
+            "mesh": 1
+        }
+    ],
+    "extensions": {
+        "KHR_lights_punctual": {
+            "lights": [
+                {
+                    "name": "",
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "intensity": 1000.0,
+                    "type": "point"
+                }
+            ]
+        }
+    }
+}
