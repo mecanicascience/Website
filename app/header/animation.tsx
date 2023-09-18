@@ -4,7 +4,6 @@ import styles from './animation.module.css'
 import { useCallback, useEffect, useMemo } from "react";
 import React from "react";
 import Canvas from '../api/canvas/canvas';
-import logger from '../api/logger/logger';
 
 class Simulation {
     // Particles properties

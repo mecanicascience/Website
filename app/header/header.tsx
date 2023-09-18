@@ -2,8 +2,7 @@
 
 import styles from './header.module.css';
 import Image from 'next/image';
-import logo from '../../public/images/logo.png';
-import { montserrat } from '../layout';
+import { montserrat } from '../fonts';
 
 /**
  * Header component
@@ -16,7 +15,7 @@ export default function Header(props: { children?: React.ReactNode }) {
             <div className={styles.container}>
                 <div className={styles.content + ' ' + montserrat}>
                     <div className={styles.logo}>
-                        <Image src={logo} alt="MecanicaScience logo" height={350} priority />
+                        <Image src='/images/logo.png' alt="MecanicaScience logo" height={350} width={350} priority />
                     </div>
                     
                     <div className={styles.text}>

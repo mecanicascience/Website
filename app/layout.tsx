@@ -1,18 +1,6 @@
 import type { Metadata } from 'next'
 import styles from './layout.module.css'
-import { Montserrat, Raleway } from 'next/font/google'
-
-export const montserrat = Montserrat({
-    subsets: ['latin'],
-    display: 'swap',
-    weight: ['300', '800']
-})
-
-export const raleway = Raleway({
-    subsets: ['latin'],
-    display: 'swap',
-    weight: ['300', '800']
-})
+import { raleway } from './fonts'
 
 export const metadata: Metadata = {
     title: 'MecanicaScience',

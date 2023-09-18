@@ -13,6 +13,10 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 
     return (
         <html>
+            <head>
+                <title>Something went wrong!</title>
+            </head>
+
             <body>
                 <Header>
                     <div className={styles.content}>
