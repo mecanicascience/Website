@@ -1,34 +1,23 @@
 {
-  "name": "mecanicascience",
-  "version": "3.2.0",
-  "description": "The MecanicaScience website",
-  "main": "index.js",
-  "scripts": {
-    "watch": "nodemon ./index.js"
-  },
-  "keywords": [],
-  "author": "xam4lor",
-  "license": "ISC",
-  "engines": {
-    "node": "12.x"
-  },
-  "dependencies": {
-    "@google-cloud/storage": "^5.7.0",
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "ejs": "^3.1.8",
-    "errorhandler": "^1.5.1",
-    "express": "^4.17.1",
-    "firebase-admin": "^10.1.0",
-    "i18n": "^0.15.0",
-    "mime": "^2.4.4",
-    "minimist": "^1.2.6",
-    "multer": "^1.4.2",
-    "sitemap": "^3.2.2",
-    "xmlbuilder": "^13.0.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.19",
-    "request": "^2.88.0"
-  }
+	"name": "mecanicascience",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"watch": "next dev",
+		"build": "next build",
+		"start": "node app.js",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@types/node": "20.5.0",
+		"@types/react": "18.2.20",
+		"@types/react-dom": "18.2.7",
+		"eslint": "8.47.0",
+		"eslint-config-next": "13.4.16",
+		"next": "13.4.16",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-error-boundary": "^4.0.11",
+		"typescript": "5.1.6"
+	}
 }
