@@ -8,9 +8,10 @@
 }
 
 .animations {
-    margin: -60px 75px 0 75px;
+    margin: -60px auto 0 auto;
     z-index: 10;
     position: relative;
+    max-width: 1226px;
 }
 
 .title {
