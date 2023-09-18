@@ -1,0 +1,44 @@
+
+.action {
+    text-align: center;
+}
+
+.scroll {
+    text-decoration: none;
+    margin: 0 auto 0 auto;
+    position: absolute;
+    bottom: -100px;
+}
+@media (max-width: 890px) {
+    .scroll {
+        bottom: unset;
+        left: 40%;
+    }
+}
+
+.scroll-box {
+    width: 35px;
+}
+
+.action:hover .scroll-box {
+    animation: scroll-down 3s infinite;
+}
+
+/* Animate scroll icon */
+@keyframes scroll-down {
+    0%,
+    100% {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+
+    35% {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+
+    70% {
+        transform: translateY(-1rem);
+        opacity: 0;
+    }
+}

@@ -12,7 +12,8 @@ const nextConfig = {
             'fonts.googleapis.com',
             'firebasestorage.googleapis.com'
         ]
-    }
+    },
+    assetPrefix: "/",
 };
 
 module.exports = nextConfig

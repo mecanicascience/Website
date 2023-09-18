@@ -1,22 +1,36 @@
 'use client'
 
-import Header from './header/header'
-import { LinkButton } from './ui/button'
+import Header from './home/header/header'
+import { ClickButton, LinkButton } from './ui/buttons/button'
 import styles from './page.module.css'
-import HeaderAnimation from './header/animation'
+import HeaderAnimation from './home/header/animation'
+import ArticlesList from './home/articles/articles'
+import SimulationsList from './home/simulations/simulations'
+import Footer from './home/footer/footer'
 
 export default function Home() {
     return (
         <>
             <HeaderAnimation />
 
-            <Header>
+            <Header style={{height: '115vh'}} showScrollButton>
                 <div className={styles.buttons}>
-                    <LinkButton content='Articles' link='/articles' />
-                    <LinkButton content='Simulations' link='/simulations' padding='25' />
+                    <ClickButton content='Articles' action={() => {window.scrollTo({
+                        top: document.getElementById('articles')?.offsetTop, behavior: 'smooth'
+                    })}} />
+                    <ClickButton content='Simulations' action={() => {
+                        window.scrollTo({
+                            top: document.getElementById('simulations')?.offsetTop, behavior: 'smooth'
+                        })
+                    }} padding='25' />
                     <LinkButton content='About me' link='/about' />
                 </div>
             </Header>
+
+            <ArticlesList />
+            <SimulationsList />
+
+            <Footer />
         </>
     )
 }

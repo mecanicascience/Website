@@ -3,7 +3,7 @@
 import styles from './animation.module.css'
 import { useCallback, useEffect, useMemo } from "react";
 import React from "react";
-import Canvas from '../api/canvas/canvas';
+import Canvas from '../../api/canvas/canvas';
 
 class Simulation {
     // Particles properties
@@ -187,11 +187,12 @@ class Simulation {
 
 export default function HeaderAnimation() {
     // Get window size
+    const divRef = React.useRef<HTMLDivElement>(null);
     let [width, setWidth] = React.useState(0);
     let [height, setHeight] = React.useState(0);
     useEffect(() => {
-        setWidth(window.innerWidth);
-        setHeight(window.innerHeight);
+        setWidth(window.document.body.clientWidth);
+        setHeight(1.1 * window.innerHeight);
     }, []);
 
     // Create simulation
@@ -219,11 +220,12 @@ export default function HeaderAnimation() {
     // Get mouse position
     useEffect(() => {
         const updateMouse = (event: MouseEvent) => {
-            physics.setMouse(event.clientX, event.clientY);
+            physics.setMouse(event.clientX, event.clientY + window.scrollY);
         }
-        window.addEventListener('mousemove', updateMouse);
+        const currentDiv = document.body;
+        currentDiv?.addEventListener('mousemove', updateMouse);
         return () => {
-            window.removeEventListener('mousemove', updateMouse);
+            currentDiv?.removeEventListener('mousemove', updateMouse);
             stopCounter();
         };
     }, [physics, stopCounter]);

@@ -1,8 +1,8 @@
 'use client'
 
-import Header from './header/header'
+import Header from './home/header/header'
 import styles from './error.module.css'
-import { LinkButton } from './ui/button'
+import { LinkButton } from './ui/buttons/button'
 
 export default function NotFound() {
     return (

@@ -1,0 +1,80 @@
+.card {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+}
+
+
+.image > img {
+    border-radius: 15px;
+    width: calc(clamp(400px, 40vw, 600px) * 1.05);
+    height: fit-content;
+    filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.3));
+    max-height: 290px;
+    transition: filter 0.3s ease;
+}
+.image > img:hover {
+    filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.3)) blur(1px) brightness(0.9);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+    z-index: 2;
+}
+
+
+.text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 26px;
+    z-index: 2;
+}
+.textRight {
+    margin-left: -30px;
+    margin-right: 20px;
+}
+.textLeft {
+    margin-right: -30px;
+    margin-left: 20px;
+}
+
+
+.label {
+    color: var(--color-green);
+    font-weight: 600;
+    font-size: 15px;
+    z-index: 2;
+    text-align: right;
+    position: relative;
+    margin: -47px 16px 0 0;
+}
+.title {
+    margin: 18px 0 -11px 60px;
+    text-align: left;
+    z-index: 3;
+}
+.title > a {
+    font-size: 29px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    align-content: center;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2.5px;
+    transition: background-size .3s;
+    text-decoration: none !important;
+}
+.title > a:hover {
+    background-size: 100% 2.5px;
+}
+.descriptionText {
+    background-color: white;
+    filter: drop-shadow(6px 5px 10px rgba(0, 0, 0, 0.11));
+    border-radius: 10px;
+    padding: 19px 21px 38px 21px;
+    transition: filter 0.3s ease;
+    text-align: justify;
+    font-size: 18px;
+    color: black;
+    min-height: 57px;
+}

@@ -1,0 +1,40 @@
+.transition {
+    height: 8vw;
+    width: 100%;
+    margin: -35px 0px -4vw 0px;
+    transform: rotate(358deg) scale(1.1, 1);
+    position: relative;
+    background-color: white;
+}
+
+.animations {
+    margin: -60px 75px 0 75px;
+    z-index: 10;
+    position: relative;
+}
+
+.title {
+    text-align: center;
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #171f2d;
+    margin-top: -90px;
+    word-spacing: 10px;
+    text-transform: uppercase;
+    margin-bottom: 63px;
+}
+@media (max-width: 890px) {
+    .title {
+        margin-top: -63px;
+    }
+}
+
+.more {
+    text-align: center;
+    margin: 35px auto 80px auto;
+    font-size: 19px;
+}
+.more > a > div > span {
+    padding-top: 5px;
+}

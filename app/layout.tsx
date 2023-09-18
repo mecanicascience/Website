@@ -14,6 +14,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={raleway.className}>
+            <head>
+                <link rel="icon" type="image/ico" href="/images/favicon.ico" />
+            </head>
+
             <body className={styles.body}>{children}</body>
         </html>
     )

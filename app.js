@@ -15,13 +15,16 @@ app
     .prepare()
     .then(() => {
         console.log("Preparing to start server");
-        createServer((req, res) => {
+        const server = createServer((req, res) => {
             const parsedUrl = parse(req.url, true);
             const { pathname } = parsedUrl;
             handle(req, res, parsedUrl);
             console.log("> Pathname", pathname);
+        });
+        server.all(/^\/_next\/webpack-hmr(\/.*)?/, async (req, res) => {
+            void handle(req, res)
         })
-        .listen(port, (err) => {
+        server.listen(port, (err) => {
             if (err) throw err;
 
             console.log("Opening on port: " + port);
