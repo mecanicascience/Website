@@ -1,0 +1,70 @@
+.transition {
+    height: 8vw;
+    width: 100%;
+    margin: -35px 0px -4vw 0px;
+    transform: rotate(358deg) scale(1.1, 1);
+    position: relative;
+    background-color: #141923;
+}
+
+.content {
+    margin-top: -60px;
+    z-index: 10;
+    position: relative;
+    background-color: #141923;
+    min-height: 90px;
+    color: white;
+    padding-bottom: 35px;
+}
+
+.footerContent {
+    margin: 0 auto;
+    max-width: 1226px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+    flex-direction: column;
+}
+
+.icons > a {
+    margin: 0 5px;
+}
+
+.icons > a > img {
+    filter: invert(0.5) sepia(1) saturate(2) hue-rotate(78deg);
+    transition: all 0.2s ease-in-out;
+}
+.icons > a > img:hover {
+    filter: invert(0.5) sepia(1) saturate(3) hue-rotate(78deg);
+}
+
+.youtube > img {
+    margin-bottom: -3px;
+}
+
+.endText {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    color: white;
+}
+
+.separator {
+    margin: auto 11px;
+}
+
+.endText > p > a {
+    align-content: center;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1.5px;
+    transition: background-size .3s;
+    text-decoration: none !important;
+    color: #74ce96;
+}
+.endText > p > a:hover {
+    background-size: 100% 1.5px;
+}

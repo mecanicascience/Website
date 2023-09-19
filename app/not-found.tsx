@@ -12,7 +12,7 @@ export default function NotFound() {
             </div>
 
             <div className={styles.buttons}>
-                <LinkButton content='Go Home' link='/' />
+                <LinkButton content='Go Home' link='/' size='standard' />
             </div>
         </Header>
     )

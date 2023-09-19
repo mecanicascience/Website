@@ -25,9 +25,9 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
                     </div>
 
                     <div className={styles.buttons}>
-                        <LinkButton content='Go Home' link='/' />
+                        <LinkButton content='Go Home' link='/' size='standard' />
                         <span style={{ display: 'inline', marginLeft: '40px' }} />
-                        <ClickButton content='Try again' action={() => reset()} />
+                        <ClickButton content='Try again' action={() => reset()} size='standard' />
                     </div>
                 </Header>
             </body>
