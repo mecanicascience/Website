@@ -54,7 +54,7 @@ export default function ArticlesList() {
                 </div>
 
                 <div className={styles.more}>
-                    <LinkButton content='All Articles' link='/articles' padding='18' />
+                    <LinkButton content='All Articles' link='/articles' padding='18' size='standard' />
                 </div>
             </div>
         </section>

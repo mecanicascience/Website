@@ -11,8 +11,8 @@ import styles from './button.module.css';
  * @param props.action Action to execute when the button is clicked
  * @param props.padding Padding between the icon and the text (default: 0)
  */
-function Button(props: { content: string, link?: string, action?: any, padding?: string }) {
-    const core = <div className={styles.content}>
+function Button(props: { content: string, link?: string, action?: any, padding?: string, size: 'standard' | 'large' }) {
+    const core = <div className={styles.content + ' ' + styles['content-' + props.size]}>
         <span className={styles.circle} aria-hidden="true">
             <span className={styles.icon + " " + styles.arrow}></span>
         </span>
@@ -39,8 +39,8 @@ function Button(props: { content: string, link?: string, action?: any, padding?:
  * @param props.link Link to redirect to
  * @param props.padding Padding between the icon and the text (default: 0)
  */
-export function LinkButton(props: { content: string, link: string, padding?: string }) {
-    return <Button content={props.content} link={props.link} padding={props.padding} />
+export function LinkButton(props: { content: string, link: string, padding?: string, size: 'standard' | 'large' }) {
+    return <Button content={props.content} link={props.link} padding={props.padding} size={props.size} />
 }
 
 /**
@@ -50,6 +50,6 @@ export function LinkButton(props: { content: string, link: string, padding?: str
  * @param props.action Action to execute when the button is clicked
  * @param props.padding Padding between the icon and the text (default: 0)
  */
-export function ClickButton(props: { content: string, action: any, padding?: string }) {
-    return <Button content={props.content} action={props.action} padding={props.padding} />
+export function ClickButton(props: { content: string, action: any, padding?: string, size: 'standard' | 'large' }) {
+    return <Button content={props.content} action={props.action} padding={props.padding} size={props.size} />
 }

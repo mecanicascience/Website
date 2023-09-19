@@ -55,7 +55,7 @@ export default function SimulationsList() {
                     </div>
 
                     <div className={styles.more}>
-                        <LinkButton content='All Simulations' link='/simulations' padding='24' />
+                        <LinkButton content='All Simulations' link='/simulations' padding='24' size='large' />
                     </div>
                 </div>
             </div>

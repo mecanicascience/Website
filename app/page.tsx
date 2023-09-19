@@ -17,13 +17,13 @@ export default function Home() {
                 <div className={styles.buttons}>
                     <ClickButton content='Articles' action={() => {window.scrollTo({
                         top: document.getElementById('articles')?.offsetTop, behavior: 'smooth'
-                    })}} />
+                    })}} size='standard' />
                     <ClickButton content='Simulations' action={() => {
                         window.scrollTo({
                             top: document.getElementById('simulations')?.offsetTop, behavior: 'smooth'
                         })
-                    }} padding='25' />
-                    <LinkButton content='About me' link='/about' />
+                    }} padding='25' size='standard' />
+                    <LinkButton content='About me' link='/about' size='standard' />
                 </div>
             </Header>
 
