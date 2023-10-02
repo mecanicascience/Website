@@ -187,7 +187,6 @@ class Simulation {
 
 export default function HeaderAnimation() {
     // Get window size
-    const divRef = React.useRef<HTMLDivElement>(null);
     let [width, setWidth] = React.useState(0);
     let [height, setHeight] = React.useState(0);
     useEffect(() => {

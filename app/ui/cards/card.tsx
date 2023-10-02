@@ -1,7 +1,10 @@
+'use client'
+
 import Image from 'next/image'
 import styles from './card.module.css'
 import { raleway, montserrat } from '../../fonts';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Card component
@@ -18,22 +21,30 @@ import Link from 'next/link';
 export default function Card(props: {
     alignText: 'right' | 'left', title: string, description: string, image: string, link: string, keyword: string, year: string, color: string
 }) {
+    // Note: Hardcoded color
+    const [color, setColor] = useState(props.color);
+    useEffect(() => {
+        if (window != undefined && window.innerWidth < 1200) {
+            setColor("#21365b");
+        }
+    }, []);
+
     const image = <div className={styles.image}>
         <Image src={props.image} alt={props.title + ' illustration'} width={400} height={400} onClick={() => window.location.replace(props.link)} />
     </div>;
 
     const content = <div className={styles.text + ' ' + (props.alignText == 'right' ? styles.textRight : styles.textLeft)}>
         <div className={styles.title + ' ' + montserrat}>
-            <Link href={props.link} style={{ color: props.color }}>{props.title}</Link>
+            <Link href={props.link} style={{ color: color }}>{props.title}</Link>
         </div>
         <div className={styles.description}>
-            <p className={styles.descriptionText}>{props.description}</p>
+            <p className={styles.descriptionText} dangerouslySetInnerHTML={{ __html: props.description }}></p>
             <p className={styles.label + ' ' + raleway}>{props.year} • {props.keyword}</p>
         </div>
     </div>;
 
     return (
-        <div className={styles.card}>
+        <div className={styles.card + ' ' + (props.alignText == 'right' ? styles.cardRight : styles.cardLeft)}>
             {props.alignText == 'right' ? image : content}
             {props.alignText == 'right' ? content : image}
         </div>

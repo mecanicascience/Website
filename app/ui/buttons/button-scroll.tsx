@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './button-scroll.module.css'
 
 export default function ButtonScroll(props: {scrollId: string}) {

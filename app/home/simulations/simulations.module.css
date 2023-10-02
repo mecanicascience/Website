@@ -6,21 +6,47 @@
     height: 8vw;
     width: 100%;
     margin: -35px 0px -4vw 0px;
-    transform: rotate(358deg) scale(1.1, 1);
     position: relative;
-    background-color: #272f3d;
+}
+@media (max-width: 770px) {
+    .transition {
+        height: 11vw;
+    }
+}
+.rotationLow {
+    transform: rotate(359.2deg) scale(1.1, 1);
+}
+.rotationHigh {
+    transform: rotate(358deg) scale(1.1, 1);
 }
 
 .animationsContainer {
-    background-color: #272f3d;
     padding-bottom: 100px;
+}
+
+.transitionDark {
+    background-color: #272f3d;
+}
+.animationsContainerDark {
+    background-color: #272f3d;
+}
+
+.transitionLight {
+    background-color: white;
+}
+.animationsContainerLight {
+    background-color: white;
 }
 
 .animations {
     margin: -60px auto 0 auto;
     z-index: 10;
     position: relative;
-    max-width: 1226px;
+    max-width: 1160px;
+}
+
+.colorNote {
+    color: var(--color-green);
 }
 
 .title {
@@ -34,10 +60,26 @@
     text-transform: uppercase;
     margin-bottom: 63px;
 }
+@media (max-width: 1200px) {
+    .title {
+        margin-top: -84px;
+        margin-bottom: -17px;
+    }
+}
 @media (max-width: 890px) {
     .title {
         margin-top: -63px;
     }
+    .title > p {
+        font-size: 39px;
+    }
+}
+
+.titleLight {
+    color: #171f2d;
+}
+.titleDark {
+    color: white;
 }
 
 .more {
