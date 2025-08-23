@@ -18,3 +18,5 @@ plan.txt
 config-vars.md
 env-vars.json
 /saves
+datas/
+.next/
