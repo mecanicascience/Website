@@ -90,6 +90,10 @@ router
         res.sendFile(m.path.join(__dirname + '/../views/pages/articles/exploring_general_relativity_part_1.html'));
     })
 
+    .get('/articles/science_of_complexity', async (req, res) => {
+        res.sendFile(m.path.join(__dirname + '/../views/pages/articles/science_of_complexity.html'));
+    })
+
 
     .get('/simulations/list/', async (req, res) => {
         let isConnected = await m.users.isConnected(req.cookies);
