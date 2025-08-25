@@ -26,6 +26,9 @@ async function getArticles(q, s, l, is_admin_link, all_articles) {
     html_array.unshift(
       '<div class="container category"><div class="c-item c-large-2"><div class="b-image-cont"><img class="b-img" src="/images/general_relativity.png" /></div><div class="b-text"><p class="b-t-title">General Relativity</p><p class="b-t-dec"><a href="/articles/exploring_general_relativity_part_1">Exploring General Relativity</a></p><p class="b-t-date">The 14/08/2023 by <b>Maxime D.</b></p></div></div></div></div>'
     );
+    html_array.unshift(
+        '<div class="container category"><div class="c-item c-large-2"><div class="b-image-cont"><img class="b-img" src="/images/science_of_complexity.png" /></div><div class="b-text"><p class="b-t-title">Science of Complexity</p><p class="b-t-dec"><a href="/articles/science_of_complexity">The Science of Complexity</a></p><p class="b-t-date">The 25/08/2025 by <b>Maxime D.</b></p></div></div></div></div>'
+    );
 
     if(html_array.length == 0) {
         let cHtml = [ '<div class="container category c-large-2" style="flex-direction: column;text-align: center;"><b>Aucun article</b> ' ];
