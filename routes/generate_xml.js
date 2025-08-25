@@ -74,6 +74,41 @@ async function generateRSS(website_url, blogLink) {
 
         obj.rss.channel.item.push(item);
     });
+    let itemGeneralRelativity = {
+        author: { '#text' : 'Maxime Dherbécourt' },
+        title: { '#text' : '<![CDATA[Exploring General Relativity]]>' },
+        description: { '#text' : '<![CDATA[An article that goes through the principles of general relativity.]]>' },
+        pubDate: { '#text' : '<![CDATA[2023-08-14]]>' },
+        category: { '#text': 'Physics' },
+        link: { '#text' : '<![CDATA[https://mecanicascience.fr/articles/exploring_general_relativity_part_1]]>' },
+        guid: {
+            '@isPermaLink' : 'true',
+            '#text' : '<![CDATA[https://mecanicascience.fr/articles/exploring_general_relativity_part_1]]>',
+        },
+        enclosure: {
+            '@url': 'https://mecanicascience.fr/general_relativity.png',
+            '@type': 'image/png'
+        }
+    };
+    obj.rss.channel.item.push(itemGeneralRelativity);
+
+    let itemScienceOfComplexity = {
+        author: { '#text': 'Maxime Dherbécourt' },
+        title: { '#text' : '<![CDATA[The Science of Complexity]]>' },
+        description: { '#text' : '<![CDATA[An article about the science of complexity, going from how magnets works to how fish and fireflies synchronize.]]>' },
+        pubDate: { '#text' : '<![CDATA[2025-08-25]]>' },
+        category: { '#text' : 'Physics' },
+        link: { '#text' : '<![CDATA[https://mecanicascience.fr/articles/science_of_complexity]]>' },
+        guid: {
+            '@isPermaLink' : 'true',
+            '#text' : '<![CDATA[https://mecanicascience.fr/articles/science_of_complexity]]>',
+        },
+        enclosure: {
+            '@url': 'https://mecanicascience.fr/images/science_of_complexity.png',
+            '@type': 'image/png'
+        }
+    };
+    obj.rss.channel.item.push(itemScienceOfComplexity);
 
     let doc = xmlbuilder
         .create(obj, { encoding: 'UTF-8' })

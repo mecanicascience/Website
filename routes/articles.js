@@ -400,6 +400,8 @@ async function getSimulationsURL(main_url) {
 
     for (let i = 0; i < sim.length; i++)
         arr.push({ url: main_url + '/simulationview/' + sim[i].uuid + '&' + sim[i].short_title });
+    arr.push({ url: "https://mecanicascience.fr/articles/exploring_general_relativity_part_1" });
+    arr.push({ url: "https://mecanicascience.fr/articles/science_of_complexity" });
 
     return arr;
 }
