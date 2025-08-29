@@ -1,25 +1,27 @@
 {
-	"name": "mecanicascience",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"watch": "next dev",
-		"build": "next build",
-		"start": "node app.js",
-		"lint": "next lint"
-	},
-	"dependencies": {
-		"@types/node": "20.5.0",
-		"@types/react": "18.2.20",
-		"@types/react-dom": "18.2.7",
-		"eslint": "8.47.0",
-		"eslint-config-next": "13.4.16",
-		"next": "13.4.16",
-		"react": "18.2.0",
-		"react-dom": "18.2.0",
-		"react-error-boundary": "^4.0.11",
-		"sharp": "^0.32.5",
-		"socket.io": "^4.7.2",
-		"typescript": "5.1.6"
-	}
+  "name": "mecanicascience",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "next": "15.5.2"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.2",
+    "@eslint/eslintrc": "^3"
+  }
 }

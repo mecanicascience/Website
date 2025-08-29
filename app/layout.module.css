@@ -1,9 +1,0 @@
-.body {
-    --color-green: #4aa96e;
-    --color-background-light: #171f2d;
-    --color-background-dark: #0d0d0d;
-
-    margin: 0;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-}
